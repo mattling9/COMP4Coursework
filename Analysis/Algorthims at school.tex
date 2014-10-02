@@ -1,0 +1,94 @@
+
+%algorithms for stock control
+
+%Algorithm For Calculating Next Months Stock
+
+\begin{algorithm}[H]
+\label{fig:repeat_pseudo_example}
+    \caption{Calculating Next Months Stock}
+\begin{algorithmic}[1]
+\SET{$PreviousSales$}{$SalesMadeLastMonth$}
+\SET{$CurrentStock$}{$PreviousStock - PreviousSales$}
+\SET{$CurrentSales$}{$SalesMadeThisMonth$}
+\SET{$ProductName$}{$NameOfProduct$}
+\SET{$PredictedSales$}{$CurrentSales + (CurrentSales - PreviousSales)$}
+\If {$PredictedSales < 0$}
+\SEND{$"No\ stock\ is\ required\ this\ month$}
+\Else
+\SEND{$ You\ should\ buy\ PredictedSales)\ of\ (ProductName)\ this\ month$}
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+
+%adding a new product to the system
+
+
+\begin{algorithm}[H]
+\label{fig:repeat_pseudo_example}
+    \caption{Adding A New Product}
+\begin{algorithmic}[1]
+\SET{$ProductName$}{$NameOfProduct$}
+\SET{$ProductID$}{$Product_List[ProductID]$}
+\SEND{$"Does the product have a specific weight"$}
+\RECIEVE{$Weight?$}
+\If{$Weight = "Yes"$}
+	\SEND{$Enter The Weight Of The Product$}
+	\RECIEVE{$WeightOfProduct$}
+\SET{$ProductWeight$}{$WeightOfProduct$}
+\ENDIf
+\SET{$ProductQuantity$}{$QuantityOfProductInStock$}
+\SET{$ProductPrice$}{$PriceOfProduct$}
+\SET{$ShopQuantity$}{$QuantityInTheShop$}
+\SET{$StorageQuantity$}{$QuantityCurrentlyInStorage$}
+\SEND{$"Is The Price of the product been reduced (On Offer)"$}
+\RECIEVE{$Reduction$}
+\If {$Reduction > 0$}
+	\SET{$ProductPrice$}{$ProductPrice * (Reduction / 100)     % (Reduction / 100) turns 50% into 0.5 	
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+%Categorizing A Product
+
+\begin{algorithm}[H]
+\label{fig:repeat_pseudo_example}
+    \caption{Adding A New Product}
+\begin{algorithmic}[1]
+\SEND{$" | DOG | CAT | BIRD | EQUINE | REPTILE | OTHER"$}
+\SEND{$"Choose a Category in which the product comes under"$} 
+\RECIEVE{$Category1$}
+\If{$Category1 = "DOG"$}
+	\SEND{$" | FOOD | HEALTH CARE | STESS AND ANXIETY"$}
+	\SEND{$"Choose a Category in which the product comes under"$} 
+	\RECIEVE{$Category2$}
+	\If{$Category2 = FOOD$}
+		\SEND{$" | WET FOOD | DRY FOOD |"$}
+		\SEND{$Choose a Category in which the product comes under$}
+		\RECIEVE{$Category3$}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]}
+	\If{$Category2 = HEALTH CARE$}
+		\SEND{$" | ORAL | JOINTS | WORMING | EYE | SKIN | EAR |"$}
+		\SEND{$Choose a Category in which the product comes under$}
+		\RECIEVE{$Category3$}}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]}
+	\If{$Category = STESS AND ANXIETY$}
+		\SEND{$" | DIFFUSER | TABLETS | DROPS |"$}
+		\SEND{$Choose a Category in which the product comes under$}
+		\RECIEVE{$Category3$}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]}
+
+
+
+
+
+
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+

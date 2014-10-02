@@ -1,0 +1,133 @@
+
+	\begin{flushleft}
+There are many algorithms used in selling products and controlling the stock of the product. \par
+
+These Algorithms are used when Selling Products: \par
+
+Adding a New Product to the Total Price:
+	\end{flushleft}
+
+\begin{algorithm}[H]
+	\caption{Adding Product to Total Price}
+\begin{algorithmic}[1]
+\SET{$Done$}{$False$}
+\SET{$TotalPrice$}{$0$}
+\State
+\While{$Not Done$}
+	\SEND{$"Please\ enter\ the\ price\ of \ the\ product (0.00)"$}
+	\RECEIVE{$Price$}
+	\If{$Price == 0$}
+	\SET{$Done$}{$True$}
+	\Else
+	\SET{$TotalPricel$}{$TotalPrice + Price$}
+	\EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+	\begin{flushleft}
+Changing the quantity of the product being sold:
+	\end{flushleft}
+
+\begin{algorithm}[H]
+	\caption{Changing the Quantity}
+\begin{algorithmic}[1]
+\SET{$Done$}{$False$}
+\SEND{$"Please\ enter\ the\ quantity\ of \ the\ product (0-100)"$}
+\RECEIVE{$Quantity$}
+\If {$Quantity = 0$}
+\SET{Done$}{$True$}
+\Else
+\SET{$TotalPricel$}{$TotalPrice + (Price*Quantity)$}
+\EndIf
+\end{algorithmic}
+\end{algorithm}																												
+
+																																																										          \begin{flushleft}
+Calculating Change:
+	\end{flushleft}	
+	
+\begin{algorithm}[H]
+	\caption{Calculating Change}
+\begin{algorithmic}[1]
+\SET{$Done$}{$False$}
+\SEND{$''Please Enter Money Given'')"$}
+\RECEIVE{$MoneyGiven$}
+\If {$MoneyGiven\ <\  Price$)
+\SEND ($''More\ Money\ Please''}
+\Elsif {$MoneyGiven\ =\  Price$}
+\SEND ($''Thank\ you!''$)
+\Elsif {$MoneyGiven\ >\  Price$}
+\SET {$Change$}{$MoneyGiven - Price$}
+\SEND{$Change$)
+\EndIf
+\EndElsIf
+\EndElsif
+\end{algorithmic}
+\end{algorithm}																																																							
+
+          \begin{flushleft}
+Incrementing the Amount of times that product has been sold that month:
+	\end{flushleft}																																																																															
+																													\begin{algorithm}[H]
+	\caption{Incrementing the Amount of times that product has been sold that month}
+\begin{algorithmic}[1]
+\SEND{$''Please Enter ProductID'')"$}
+\RECEIVE{$ ProductID$}
+\SET{$ProductID.Sales$}{$ProductID.Sales += 1$}
+\end{algorithmic}
+\end{algorithm}																																																																																						\begin{flushleft}																										Calculating how much Stock should be bought for next month																
+	\end{flushleft}																																																																																																																																																																												\begin{algorithm}[H]
+\label{fig:repeat_pseudo_example}
+    \caption{Categorizing A Product}
+\begin{algorithmic}[1]
+\SEND{$" | DOG | CAT | BIRD | EQUINE | REPTILE | OTHER"$}
+\SEND{$"Choose\ a\ Category\ in\ which\ the\ product\ comes\ under"$} 
+\RECEIVE{$Category1$}
+\If{$Category1 = "DOG"$}
+	\SEND{$" | FOOD | HEALTH CARE | STESS AND ANXIETY"$}
+	\SEND{$"Choose\ a\ Category\ in\ which\ the\ product\ comes\ under"$} 
+	\RECEIVE{$Category2$}
+	\ElsIf{$Category2 = FOOD$}
+		\SEND{$" | WET FOOD | DRY FOOD |"$}
+		\SEND{$Choose\ a\ Category\ in\ which\ the\ product\ comes\ under$}
+		\RECEIVE{$Category3$}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]$}
+	\ElsIf {Category2 = HEALTH CARE}	
+		\SEND{$" | ORAL | JOINTS | WORMING | EYE | SKIN | EAR | OTHER"$}
+		\SEND{$Choose\ a\ Category\ in\ which\ the\ product\ comes\ under$}
+		\RECEIVE{$Category3$}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]$}
+	\ElsIf{Category = STESS AND ANXIETY}
+		\SEND{$" | DIFFUSER | TABLETS |  DROPS |"$}
+		\SEND{$Choose\ a\ Category\ in\ which\ the\ product\ comes\ under$}
+		\RECEIVE{$Category3$}
+		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]$}
+\EndIf
+
+\end{algorithmic}
+\end{algorithm}
+																																																																
+																																																										\begin{algorithm}[H]
+\label{fig:repeat_pseudo_example}
+	\caption{Adding Product to Total Price}
+\begin{algorithmic}[1]
+\SET{$Done$}{$False$}
+\SET{$TotalPrice$}{$0$}
+\While{$Not Done$}
+\SEND{$"Please\ enter\ the\ price\ of \ the\ product (0.00)"$}
+\RECEIVE{$Price$}
+\SEND{$"Please\ enter\ the\ quantity\ of\ the\ product\ (0-100)"$}
+\RECEIVE{$Quantity$}
+\If{$Price == 0$}
+\SET{$Done$}{$True$}
+\SET{$TotalPricel$}{$TotalPrice + Price * Quantity$}
+\EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+																																																																																																																																																																																																																																																														
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										
