@@ -18,7 +18,7 @@ Despite being a veterinary center, Beacon vets sold roughly a dozen products, su
 
 Last year Beacon Vets expanded on the range of the products they sold, providing a wide variety of foods and treatments for all sorts of animals such as dogs, cats and rabbits etc. Although Beacon Vets, greatly expanded on the products they sold, they did not change their system of keeping track of stock. The current system is a Microsoft Excel spreadsheet containing the information of the product, the selling price, the current amount in the front of store, the current amount being stored in the back of the store. This current system was useful and easy to use when handling a dozen products but has become difficult and confusing now many more products are being sold. here is the current Edexel Spreadsheet in use:\par
 
-Every time products are sold, the document is manually changed.For example if the veternary sold 1 bag of dietry dog food, the Front of house stock would go from 7 to 6. When the stock in the front of house gets low, products are moved from the back of house to the front of house for the customers to buy. when the total stock gets low, an order of that specific product is made.\par
+Every time products are sold, the document is manually changed.For example if the veternary sold 1 bag of dietry dog food, the Front of house stock would go from 7 to 6. When the stock in the front of house gets low, products are moved from storage to the front of house for the customers to buy. when the total stock gets low, an order of that specific product is made.\par
 	\end{flushleft}
 
 \subsection{Describe the problems}
@@ -52,8 +52,7 @@ The current operating system on the computer is Windows 7. The program Microsoft
 - Takes a long time to initially set up the system with all the products\par
 - Every time a product is sold its data on the system has to be changed.\par
 - There is a lot of data is needed to identify each product (Weight, 300g / 450g)\par
-- Selling a product and changing the quantity left are two different processes.\par
-- 
+- Selling a product and managing the stock are two different processes.\par
 
 \textbf{3. What data is recorded in the system?}\par
 - Product Name\par
@@ -104,11 +103,46 @@ The current operating system on the computer is Windows 7. The program Microsoft
 \subsection{The current system}
 
 \subsubsection{Data sources and destinations}
+	\begin{flushleft}
+ Currently there is only one data source in the system.  This is when data is input into the database. The data being put intot he database is the product and the relative information about the product. The relative information being stored within the database is: the product name, the Product ID, The weight / quantity / volume of the product, the price, the current amount in the store, and the current amount in storage. The Product name is used for the the identification by the customer, however one product may have different quantity or weights. The ProductID uniquely idetifies every product, meaning the same product with two different quantites (i.e500g and 750g) will be identified differently. The weight / quantity / volume is specified because a specific product may come in various quantities. There is currently only one data destination which is the data is stored inside a database. There si only one data destination because once the data is stored inside the database, it is only viewed and edited. The data in the database is never taken out, so there is only one data destination.
+
+This is the table for data sources and destinations:\par
+	\end{flushleft}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsubsection{Algorithms}
 
 	\begin{flushleft}
-There are many algorithms used in selling products and controlling the stock of the product. \par
+There are many algorithms used in the current system. the algorithms have been spilt into the algorithms used when selling a product and algorithms used when handling the stock of the products.\par
+
+ The first algorithm is used when a customer buys a product. The algorithm takes the total price so far (if the item is the first item of the list then total price = 0) and then adds the price of that  product onto the total price. the next product is added and so on until all the products that the customer wants to buy have been added and a total price has been calculated. \par
 
 	\end{flushleft}
 
@@ -133,7 +167,7 @@ There are many algorithms used in selling products and controlling the stock of 
 
 
           \begin{flushleft}
-Calculating Change:
+The second algorithm is used to calculate the change when the customer gives money for the products they are buying. If the customer gives the right amount of money then no change is needed, however if the customer gives more than the total price of the products, then the following algorithm calculate how much change they need.
 	\end{flushleft}	
 	
 \begin{algorithm}[H]
@@ -156,7 +190,6 @@ Calculating Change:
 \end{algorithmic}
 \end{algorithm}																														
 																										
-
 
 \begin{algorithm}[H]
 \label{fig:repeat_pseudo_example}
@@ -222,7 +255,7 @@ Calculating Change:
 		\RECEIVE{$Category3$}
 		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]$}
 	\ElsIf {Category2 = HEALTH CARE}	
-		\SEND{$" | ORAL | JOINTS | WORMING | EYE | SKIN | EAR |"$}
+		\SEND{$" | ORAL | JOINTS | WORMING | EYE | SKIN | EAR | OTHER"$}
 		\SEND{$Choose\ a\ Category\ in\ which\ the\ product\ comes\ under$}
 		\RECEIVE{$Category3$}
 		\SET{$ProductCategory$}{$CategoryList[Category1][Category2][Category3]$}
@@ -240,28 +273,30 @@ Calculating Change:
 \begin{algorithm}[H]
 	\caption{Moving Items From Storage to Front}
 \begin{algorithmic}[1]
+\SET{$ProductID$}{$Unique Product identification$}
 \SEND{$Please\ Enter\ Total\ Stock$}
 \RECEIVE{$TotalStock$}
 \SEND{$"Please enter the Wanted Amount in the Shop$}
-\RECEIVE{$ShopAmount$}
-\SET {MoneyGiven < Price}
-\SEND {''More Money Please''}
-\ElsIf {MoneyGiven = Price}
-\SEND{"Thank You!"}
-\ElsIf {MoneyGiven\ > Price}
-\SET {$Change$}{$MoneyGiven - Price$}
-\SEND{$Change$}
+\RECEIVE{$MinimalAmount$}
+\SEND{$Please\ enter\ the\ current\ amount\ in\ the\ shop$}
+\If{$ShopAmont <MinimalAmount$}
+\SEND {" (MinimalAmont- ShopAmount) of ProductID need to be moved from the storage to the store''}
 \EndIf
 
 \end{algorithmic}
 \end{algorithm}																														
-																																																																												\subsubsection{Data flow diagram}
+																																																										\subsubsection{Data flow diagram}
 
 \subsubsection{Input Forms, Output Forms, Report Formats}
+
+The current system only has one input form - Adding a product to the database. when a product needs to be added to the database, the product name, quantity, price and catagory needs to be know in order for it to be added. The product ID is automatically assigned to the item when it is added to the database. Because items are only added to the database and the information is only stored, viewed and edited when needed, there are currently no output forms for the data. In the new system, the client wants the stock control system and the selling process to be intergrated. When the new system is implemented then there would be one output form which would be a reciept given to the customer when they purchase a product. The reciept would contain the following information: The Name of the product, the quantity/weight/volume of the product the quantity and the price of the product. This is so the customer knows exactly what products they bought and know how much each product costs. The Product ID is not supplied on the receipt as that information is not relevent to the customer.
 
 \subsection{The proposed system}
 
 \subsubsection{Data sources and destinations}
+
+There is only one data source in the current system. Because my client wants to intergrate the selling procees into the current system, There will be three new data sources, giving four total data sources .The first data source is when a client purchases a product or many products. The Product name, weight, quantity are entered into the new system, or a search is made into the database for the product that the customer wants to buy, when all the attributes of the product match the ones of the product stored in the database, the price of that product is taken from the database and is added to the total bill. The information entered is repeated onto a reciept that is given to the customer to clarify which items they purchased. I am not storing the data for every purchase from a customer in the new system, as there is only limited storage space and storing all the data from every purchase will require an extremely large amount of storage space. The second data source is when a new product is added to the system. This data source was used in the old system. The information about the product will be stored in the database as it is used when a customer wants to purchase a product.This information is also used when the customer wants to find a product she does not know that name of.  The third data source is when the information about a product needs to be updated or edited. This new data will overide the current data stored under each product and will be held inside the database. The fourth data store, is when the stock needs to changed, when an inport of new stock comes in. This data will also be held inside the database.\par
+
 
 \subsubsection{Data flow diagram}
 
@@ -273,17 +308,62 @@ Calculating Change:
 
 \subsection{General Objectives}
 
+ \begin{flushleft}
+ \begin{itemize}
+	\item Data can be added to the database eaisly.
+	\item Data can easily be edited within the database.
+	\item Clear/ easy to understand the layout of the information
+	\item  Clear/ easy to locate a product within the database
+	\item The system to be Clear/ easy to use.
+\end{itemize}
+\end{flushleft}	
+
+
 \subsection{Specific Objectives}
+
+\begin{flushleft}
+\begin{itemize}
+	\item For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown)
+	\item For the new selling process to be fast and efficient to minimize the time customers spend in a queue.
+	\item For the current stock to automatically update when the products are bought
+	\item For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. 
+	\item For each and evry product to be catagorised for easy idenntification is the Product Name and ID is unknown.
+\end{itemize}
+\end{flushleft}
 
 \subsection{Core Objectives}
 
+\begin{flushleft}
+\begin{itemize}
+	\item For the Stock control system to be intergrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.
+	\item For the Stock to automatically update itself.
+	\item To calculate how much stock will be required for next month.
+\end{itemize}
+\end{flushleft}
+
 \subsection{Other Objectives}
+
+\begin{flushleft}
+\begin{itemize}
+	 \item allowing the Order of the products in the database to be changed.(i.e Max - Min Price, A-Z ect \ldots)
+	 \item To calculate the change when the customer gives mroe than enough money for the product they want to purchase.
+	 \item To Format a well structured receipt that is easy for the customer to read and to understand
+\end{itemize}
+\end{flushleft}
+
 
 \section{ER Diagrams and Descriptions}
 
 \subsection{ER Diagram}
 
 \subsection{Entity Descriptions}
+
+
+\begin{flushleft}
+
+Product(\underline{ProductID}, ProductName, Size, Price, Catagory)
+
+\end{flushleft}
 
 \section{Object Analysis}
 
@@ -299,22 +379,90 @@ Calculating Change:
 
 \subsection{Hardware}
 
+\begin{flushleft}
+
+Currently my client uses a lenovo Desktop Pc for the current system. The computer is also used to check emails and to check appointment times with customers. The new system will be abe to run on this machine.
+
+Computer Specifications:
+
+\begin{itemize}
+	\item{21'' LCD Monitor}
+	\item{Intel® Core™ i3-3240T processor}
+	\item{4 GB DDR3}
+	\item{1 TB HDD, 7200 rpm}
+	\item{H61 Motherboard}
+\end{itemize}
+
+The demand of the purposed system will make little to no impact on the Computers speed. The requirements for the purposed system is far less than the current hardware can provide meaning there wil be no problem running the new system on this computer. \par
+
+Although the proposed system will be able to run on this computer there are a few hardware constraints. One of which is that the fact this computer is a desktop computer. This means that my client will not be able to move this system and will have to keep the computer in one place. This is because the desktop computer does not have an internally stored battery. \par
+
+Another Hardware constraint is that the new system will have to be designed and implemented to fit the screen resolution of my clients computer. \ par
+
+\end{flushleft}
+
+
 \subsection{Software}
+
+\begin{flushleft}
+My client currently uses Microsft Excel as his sytem. Tom is happy to use any other software. Because tom takes full ownership of the computer he has no limitations on what he would like to install. for example if the computer belonged to someone else, the user of the computer would want as little changes as possible. Tom's computer currently runs Windows 7 Home Edition, which the new system will be able to run on.
+\end{flushleft}
 
 \subsection{Time}
 
+\begin{flushleft}
+My client has set no deadline or time limit for the competion of the system. The only time restriction i have on this project is the deadline set by my teacher, which is the 1st May 2015. Tom says he is happy to start using the new system when it is ready. The sooner it is finished the better.
+\end{flushleft}
+
 \subsection{User Knowledge}
 
+\begin{flushleft}
+At this current time tom does not have any qualifications in ICT and has not taken any IT courses. Despite this, Tom has a quite good knoledge when it comes computers, Gaining most of his knoledge whilst doing his Veterinary Medicine degree. He has helped devolpe webpages, and is currently helping create a new website for Beacon Vets. However Tom informed me that he would not be the ony one to be using the system, It will also be used by the receptionists when customers buy products. This means that The interface has to be simple and easy to use.
+\end{flushleft}
+
 \subsection{Access restrictions}
+
+\begin{flushleft}
+There proposed sytem should be accessible to anyone that works at beacon vets. Every employee will have full access/privileges to all of the data on the sytem. The computer will be password protected along with the system to prevent unwanted users on the computer to acess the database, and potentially erase or edit all of the data within the database. \par
+Because no data is being stored about individual people the database does nto have to follow to Data Protection Act.\par
+\end{flushleft}
 
 \section{Limitations}
 
 \subsection{Areas which will not be included in computerisation}
 
+\begin{flushleft}
+Areas that shall not be included in computerisation is the exchange of money when products are brought. Currently, The vets allows two method of payment. The two methods of payment are by cash or by Credit / Debit card. The proposed sytem will only handle information from customers that pay by cash.(i.e Calculating change ect \ldots) The proposed system will not handle data from customers who pay by card because that information is handled extrenally by an external card reader, which will be too complicated to intergrate into my new system. The process of moving products form storage to the front of the vets obviously will not be computerised. This will be done externally, and a tick box will be supplied by the system for the employee to tick when the products have been moved. The limitation with this is that the system will assume the employee has moved the correct amount of products. When adding a new product to the system the data will be input manually. Although this is not part of the system, teaching Tom how to use the new system will not be computerised. Tom would then have to use the knoledge i have taught him and teach all of the emplyees at Beacon Vets.
+\end{flushleft}
+
 \subsection{Areas considered for future computerisation}
+
+\begin{flushleft}
+An area that could be computerised is teaching tom / the emplyees, on how to use the new system. Written instructions could be processed into a document for a employee to refer to if they need to do something, but do not currently know how. This will mean that Tom will not have to take time out explaining how to use the sytem to each and every employee. He can send an email with the instructions attched to it for each of the emplyees to read and the instructions document could be easily accessable in the system if they forget / don't know how to do something. The process of moving products using a computer is not possible. The process of selling product can be computerised by creating a page on the website where customers can buy the products online. This could be possible as the location of Beacon Vets (Silloth) is a small town and is mainly only used by the local community. This is useful because it means that product deliveries can be made within a maximum of 10 miles from the store. The limitations with computerising this method is that creating a web page like this is that i do not currently have the skill sets to create a webpage like this. The webpage will have to be secure, and will have to have things such as PayPal incorperated into it. To prevent the customers from having to enter their card details in every time they make a purchase, their card details will have to be stored on the sytem. This will then mean that the system will have to abide by the data protection act, however i feel this information can be stored securely over PayPal, which will reduce the problems faced when creating the system.
+\end{flushleft}
 
 \section{Solutions}
 
 \subsection{Alternative solutions}
 
+
+
+\begin{center}
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Solution} & \textbf{Advantages} & \textbf{Disadvantages} \\ \hline
+    {Custom Spread Sheet} & {My client already uses a spreadsheet software called "Microsoft Excel",
+so no training is required.\par No new software will have to be downloaded.} & {my client uses spreadsheet software for his current system. He explains that the system is easy and simple to mange with a few products but as time went by and more products were added it because difficult, unordered and confusing.} \\ \hline
+    {Web Based Application} & {the information stored in the database can be stored in the cloud. This would reduce the file size of the system.\par The system can be accessed on more than one computer and no information has to be installed.} & {Data is not as secure if it is stored in the cloud. It is possible for someone to intrude into your database and modify the data. This would be less likely if the data was stored on a hard drive as the information could only be accessed on that one computer in which the hard drive is in.\par The system would have to constantly be online, meaning that there would have to be more security measures to prevent data theft.\par Hosting the web application will be more expensive than having a program.A lot more knowledge in building the web based system compared to using a program.\par} \\ \hline
+    {Re-organising/ re designing the current manual system} & {Would take a small amount of time to create.\par  No New software will need to be installed.\par No new skills will have to be taught to the employees.\par } & {The problem my client currently has may not be overcome.\par Very simple system that is hard to change.} \\ \hline
+    {Command-line Application} & {Easier to design and program compared to a gui application.\par often runs faster than any gui application.\par i believe less computer resources would be used compared to using a GUI application} & {Command line applications are not user friendly when sued by people with little computer knowledge.\par Many of the employees will have had little / no trainging using command line applications.\par A lot of error checking will have to be implemented so that the user does not accidently crash the application.\par commands used in using the command line application takes time to remember and takes time to learn how to use the application.} \\ \hline
+     {Python Desktop Application with a GUI} & {The application can be designed so that extremly little amounts of training are needed to use the application.\par the client can design their own layout or design.\par The data can be displayed in a organised and visally attractive way.\par The data in the application can be easily formatted / edited.} & {It takes longer to create a gui application compared to a command line application.\par a lot of time needs to be spent on finding a good layout for the system. Using a Python desktop application with a GUI will require more computer resources compared to a command line application.} \\ \hline
+\end{tabular}
+\label{tab:range_examples}
+\end{center}
+
 \subsection{Justification of chosen solution}
+
+
+
+
