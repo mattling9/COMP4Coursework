@@ -1,0 +1,235 @@
+\chapter{Design}
+
+\section{Overall System Design}
+
+\subsection{Short description of the main parts of the system}
+
+\subsection{System flowcharts showing an overview of the complete system}
+
+\section{User Interface Designs}
+
+\section{Program Structure}
+
+\subsection{Top-down design structure charts}
+
+\subsection{Algorithms in pseudo-code for each data transformation process}
+
+\subsection{Object Diagrams}
+
+\subsection{Class Definitions}
+
+\section{Prototyping}
+
+\section{Definition of Data Requirements}
+
+\subsection{Identification of all data input items}
+
+\subsection{Identification of all data output items}
+
+\subsection{Explanation of how data output items are generated}
+
+\subsection{Data Dictionary}
+
+\subsection{Identification of appropriate storage media}
+
+\section{Database Design}
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|}
+        \hline
+        \textbf{Un-normalised (UNF)}\\ \hline
+	{ProductID}\\ \hline
+	{ProductName}\\ \hline
+	{Size}\\ \hline
+	{Price}\\ \hline
+	{Catagory}\\ \hline
+	{FrontStock}\\ \hline
+	{Back Stock}\\ \hline
+	{Total Stock}\\ \hline
+	{MoneyGiven}\\ \hline
+	{TotalPrice}\\ \hline
+	{ChangeRequired}\\ \hline
+	{Change}\\ \hline
+	{MemberID}\\ \hline
+	{FirstName}\\ \hline
+	{LastName}\\ \hline
+	{AddressFirstLine}\\ \hline
+	{AddressSecondLine}\\ \hline
+	{TelephoneNumber}\\ \hline
+	{Email}\\ \hline
+	{MemberID}\\ \hline
+	{FirstName}\\ \hline
+	{LastName}\\ \hline
+	{House / Flat No.}\\ \hline
+	{Street}\\ \hline
+	{Town}\\ \hline
+	{City}\\ \hline
+	{County}\\ \hline
+	{Postcode}\\ \hline
+	{Telephone Number}\\ \hline
+	{Title}\\ \hline
+	{Member ID}\\ \hline
+	{OrderID}\\ \hline
+	{Date}\\ \hline
+	{Time}\\ \hline
+	{Quantity}\\ \hline
+	{Total Price}\\ \hline
+	{Contact Email}\\ \hline
+	{Contact Number}\\ \hline
+	{Employee ID}\\ \hline
+	{Employee FirstName}\\ \hline
+	{Employee LastName}\\ \hline
+	{Employee Password}\\ \hline
+	{Employee Email}\\ \hline
+	
+	
+	
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|p{4cm}|}
+        \hline
+	 \multicolumn{2}{|c|}{1NF} \\ \hline
+	\textbf{Repeating} & \textbf{ Non Repeating}\\ \hline
+	\textbf{ProductID}  & \textit{ProductID}\\ \hline
+	\textbf{ProductName} & {Size}\\ \hline
+	{Catagory} & {Price}\\ \hline
+	{MoneyGiven} & {Catagory}\\ \hline
+	{TotalPrice} & {FrontStock}\\ \hline
+	{ChangeRequired} & {Back Stock}\\ \hline
+	{Change} & {Total Stock}\\ \hline
+	{MemberID} & {}\\ \hline
+	{FirstName} & {}\\ \hline
+	{LastName} & {}\\ \hline
+	{House / Flat No.} & {}\\ \hline
+	{Street} & {}\\ \hline
+	{Town} & {}\\ \hline
+	{City} & {}\\ \hline
+	{County} & {}\\ \hline
+	{Postcode} & {}\\ \hline
+	{Telephone Number} & {}\\ \hline
+	{Title} & {}\\ \hline
+	{OrderID} & {}\\ \hline
+	{Date} & {}\\ \hline
+	{Time} & {}\\ \hline
+	{Quantity} & {}\\ \hline
+	{Total Price} & {}\\ \hline
+	{Contact Email} & {}\\ \hline
+	{Employee ID} & {}\\ \hline
+	{Employee FirstName} & {}\\ \hline
+	{Employee LastName} & {}\\ \hline
+	{Employee Password} & {}\\ \hline
+	{Employee Email} & {}\\ \hline
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+        \hline
+	 \multicolumn{3}{|c|}{2NF} \\ \hline
+	\textbf{Repeating} & \textbf{Non Repeating} & \textbf{Non - Repeating}\\ \hline
+	\textbf{ProductID}  & \textit{ProductID} & \textbf{ProductID}\\ \hline
+	\textbf{ProductName} & {Size} & {Front Stock}\\ \hline
+	{Catagory} & {Price} & {Back Stock}\\ \hline
+	{MoneyGiven} & {Catagory} & {Total Stock}\\ \hline
+	{TotalPrice} & {}\\ \hline
+	{ChangeRequired} & {}\\ \hline
+	{Change} & {}\\ \hline
+	{MemberID} & {}\\ \hline
+	{FirstName} & {}\\ \hline
+	{LastName} & {}\\ \hline
+	{House / Flat No.} & {}\\ \hline
+	{Street} & {}\\ \hline
+	{Town} & {}\\ \hline
+	{City} & {}\\ \hline
+	{County} & {}\\ \hline
+	{Postcode} & {}\\ \hline
+	{Telephone Number} & {}\\ \hline
+	{Title} & {}\\ \hline
+	{OrderID} & {}\\ \hline
+	{Date} & {}\\ \hline
+	{Time} & {}\\ \hline
+	{Quantity} & {}\\ \hline
+	{Total Price} & {}\\ \hline
+	{Contact Email} & {}\\ \hline
+	{Employee ID} & {}\\ \hline
+	{Employee FirstName} & {}\\ \hline
+	{Employee LastName} & {}\\ \hline
+	{Employee Password} & {}\\ \hline
+	{Employee Email} & {}\\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}p{4cm}|}
+        \hline
+	 \multicolumn{4}{|c|}{3NF} \\ \hline
+	\textbf{Repeating} & {Repeating} \textbf{Non Repeating} & \textbf{Non - Repeating}\\ \hline
+	\textbf{ProductID}  & \textbf{MemberID} & \textit{ProductID} & \textbf{ProductID}\\ \hline
+	\textbf{ProductName} & {FirstName} &{Size} & {Front Stock}\\ \hline
+	{Catagory} & {Last Name} & {Price} & {Back Stock}\\ \hline
+	{MoneyGiven} & {House No. / Flat No.} & {Catagory} & {Total Stock}\\ \hline
+	{TotalPrice} & {Street} & {}\\ \hline
+	{ChangeRequired} & {Town} & {}\\ \hline
+	{Change} & {City} & {}\\ \hline
+	{MemberID} & {County} & {}\\ \hline
+	{FirstName} & {Postcode} & {}\\ \hline
+	{LastName} & {Telephone Number} & {}\\ \hline
+	{House / Flat No.} & {Member Email} & {}\\ \hline
+	{Street} & {}\\ \hline
+	{Town} & {}\\ \hline
+	{City} & {}\\ \hline
+	{County} & {}\\ \hline
+	{Postcode} & {}\\ \hline
+	{Telephone Number} & {}\\ \hline
+	{Title} & {}\\ \hline
+	{OrderID} & {}\\ \hline
+	{Date} & {}\\ \hline
+	{Time} & {}\\ \hline
+	{Quantity} & {}\\ \hline
+	{Total Price} & {}\\ \hline
+	{Contact Email} & {}\\ \hline
+	{Employee ID} & {}\\ \hline
+	{Employee FirstName} & {}\\ \hline
+	{Employee LastName} & {}\\ \hline
+	{Employee Password} & {}\\ \hline
+	{Employee Email} & {}\\ \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Normalisation}
+
+\subsubsection{ER Diagrams}
+
+\subsubsection{Entity Descriptions}
+
+\subsubsection{1NF to 3NF}
+
+\section{Security and Integrity of the System and Data}
+
+\subsection{Security and Integrity of Data}
+
+\subsection{System Security}
+
+\section{Validation}
+
+\section{Testing}
+
+\begin{landscape}
+\subsection{Outline Plan}
+
+\begin{center}
+    \begin{tabular}{|p{2cm}|p{5cm}|p{5cm}|p{4cm}|}
+        \hline
+        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \textbf{Strategy Rationale}\\ \hline
+        Example & Example & Example & Example \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Detailed Plan}
+
+\begin{center}
+    \begin{longtable}{|p{1.5cm}|p{2.5cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        \textbf{Test Series} & \textbf{Purpose of Test} & \textbf{Test Description} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Evidence}\\ \hline
+        Example & Example & Example & Example & Example & Example & Example & Example \\ \hline
+    \end{longtable}
+\end{center}
+\end{landscape}

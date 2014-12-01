@@ -34,6 +34,130 @@
 
 \section{Database Design}
 
+\pagebreak
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|}
+        \hline
+        \textbf{Un-normalised (UNF)}\\ \hline
+	{ProductID}\\ \hline
+	{OrderID}\\ \hline
+	{ProductName}\\ \hline
+	{Size}\\ \hline
+	{Catagory}\\ \hline
+	{Price}\\ \hline
+	{LocationID}\\ \hline
+	{Location Name}\\ \hline
+	{Stock}\\ \hline
+	{Quantity}\\ \hline
+	{Date}\\ \hline
+	{Time}\\ \hline
+	{MemberID}\\ \hline
+	{Title}\\ \hline
+	{First Name}\\ \hline
+	{Last Name}\\ \hline
+	{House / Flat No.}\\ \hline
+	{Street}\\ \hline
+	{Town}\\ \hline
+	{City}\\ \hline
+	{County}\\ \hline
+	{Postcode}\\ \hline
+	{Telephone Number}\\ \hline
+	{Memebr Email}\\ \hline
+	{Employee ID}\\ \hline
+	{Employee FirstName}\\ \hline
+	{Employee LastName}\\ \hline
+	{Employee Password}\\ \hline
+	{Employee Email}\\ \hline
+   \end{tabular}
+\end{center}	
+	
+	
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|p{4cm}|}
+        \hline
+	 \multicolumn{2}{|c|}{1NF} \\ \hline
+	\textbf{Repeating} & \textbf{ Non Repeating}\\ \hline
+	\textbf{ProductID}  & \textbf{OrderID}\\ \hline
+	\textbf{OrderID} & {Date}\\ \hline
+	{Product Name} & {Time}\\ \hline
+	{Size} & {MemberID}\\ \hline
+	{Category} & {Title}\\ \hline
+	{Price} & {Member First Name}\\ \hline
+	{LocationID} & {Member Last Name}\\ \hline
+	{LocationName} & {House / Flat No.}\\ \hline
+	{Stock} & {Street}\\ \hline
+	{Quantity} & {Town}\\ \hline
+	{} & {City}\\ \hline
+	{} & {County}\\ \hline
+	{} & {Postcode}\\ \hline
+	{} & {Telephone No.}\\ \hline
+	{} & {Member Email}\\ \hline
+	{} & {Employee ID}\\ \hline
+	{} & {Employee First Name}\\ \hline
+	{} & {Employee Last Name}\\ \hline
+	{} & {Password}\\ \hline
+	{} & {Employee Email}\\ \hline
+   \end{tabular}
+\end{center}
+
+\pagebreak
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+        \hline
+	 \multicolumn{3}{|c|}{2NF} \\ \hline
+	\textbf{ProductID}  & \textbf{OrderID} & \textbf{ProductID}\\ \hline
+	\textbf{OrderID} & {Date} & {Product Name} \\ \hline
+	{Quantity} & {Time} & {Size} \\ \hline
+	{} & {MemberID} & {Category} \\ \hline
+	{} & {Title} & {Price} \\ \hline
+	{} & {First Name} & {Stock} \\ \hline
+	{} & {Last Name} & {LocationID} \\ \hline
+	{} & {House / Flat No.} & {Location Name} \\ \hline
+	{} & {Street} & {Stock} \\ \hline
+	{} & {Town} & {} \\ \hline
+	{} & {City} & {} \\ \hline
+	{} & {County} & {} \\ \hline
+	{} & {Postcode} & {} \\ \hline
+	{} & {Telephone Number} & {} \\ \hline
+	{} & {Member Email} & {} \\ \hline
+	{} & {EmployeeID} & {} \\ \hline
+	{} & {Employee First Name} & {} \\ \hline
+	{} & {Employee Last Name} & {} \\ \hline
+	{} & {Password} & {} \\ \hline
+	{} & {Employee Email} & {} \\ \hline	
+    \end{tabular}
+\end{center}
+
+\begin{flushleft}
+\begin{center}
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{2cm}|}
+        \hline
+	 \multicolumn{4}{|c|}{3NF} \\ \hline
+	\textbf{Product ID}  & \textbf{Product-Order ID} & \textbf{Order ID} & \textbf{Employee ID} \\ \hline
+	{Product Name} & \textit{ProductID} & \textit{Member ID} & {Employee First Name} \\ \hline
+	{Size} & \textit{Order ID} & \textit{Employee ID} & {Employee Last Name} \\ \hline
+	{Price} & {Quantity} & {Date} & {Password} \\ \hline
+	{Stock} & {} & {Time} & {Employee Email} \\ \hline
+	{} & {} & {} & {}\\ \hline
+	{} & {} & {} & {}\\ \hline
+	\textbf{Member ID} & \textbf{Product ID} & \textbf{Location ID} & \textbf{Category}\\ \hline
+	{Title} & \textit{Location ID} & {Location Name} & {}\\ \hline
+	{First Name} & {} & {} & {}\\ \hline
+	{Last Name} & {} & {} & {}\\ \hline
+	{House / Flat No.} & {} & {} & {}\\ \hline
+	{Street} & {} & {} & {}\\ \hline
+	{Town} & {} & {} & {}\\ \hline
+	{City} & {} & {} & {}\\ \hline
+	{County} & {} & {} & {}\\ \hline
+	{Postcode} & {} & {} & {}\\ \hline
+	{Telephone Number} & {} & {} & {}\\ \hline
+	{Memebr Email} & {} & {} & {}\\ \hline
+    \end{tabular}
+\end{center}
+\end{flushleft}
 \subsection{Normalisation}
 
 \subsubsection{ER Diagrams}
