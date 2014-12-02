@@ -4,7 +4,70 @@
 
 \subsection{Short description of the main parts of the system}
 
+\begin{itemize}
+	\item Log-In Interface
+	\begin{itemize}
+		\item The Log In interface will be very simple and will ask for The Username and Password from the employee.
+		\item There should be a button that allows the employee to reset their password if they forget it.
+		\item None of the system should be accessible on or before the log in interface as it is a security measure
+		\item The employee should be informed if they entered their username or password incorrectly
+		\item When The User enters their password, it should be displayed as stars On the Log-In Interface
+	\end{itemize}
+
+\pagebreak
+
+	\item Product Search Interface
+	\begin{itemize}
+		\item There should be a search bar where the employee can enter the name of a product and there should be a table to display any matches with the information specified in the search bar.
+		\item This search bar should be easily accessible by using a keyboard shortcut.
+		\item When using the keyboard shortcut, the application should keep the user on their current page and the search bar should open to the side of the current page instead of taking them to a new page.
+		\item Alternatively, there should be a main search page containing buttons with the different categories on so that the employee can find any products under one specific category.
+		\item Clicking on a category button should redirect the employee to another selection of buttons named by the sub categories of that category.
+		\item An image should be displayed aside from the product name so a product can be located even if the product name is not known.
+		\item There should be a list down the left hand side of the Product search interface where the Categories will be listed so the employee can alternatively click on the categories which will expand with all the sub categories until a list of products under that sub category is found. This list is used so the employee doesn’t have to keep clicking back and forth between the category and sub category buttons.
+		\item The Buttons should contain images, and should be a more simple way compared to using the list on the side of the page.
+	\end{itemize}
+
+	\item Creating a New Employee Account
+	\begin{itemize}
+		\item This feature should only be accessible on my clients (The administrators) log in.
+		\item There should be fields to enter the Employee's first name, last name and email address. The password is not required at this stage as the employee will set it later.
+		\item Once all the fields have been completed my client will be able to review the information entered and be able to edit it if necessary before finally creating the new account.
+		\item Once the employee account has been created, the employee enters their login Name and enters the password ‘password’ at the Log In Interface. They will then be re-directed to a new page where they will have to enter and re-enter their new password (verification). 
+	\end{itemize}
+
+\pagebreak
+
+	\item Adding a New Member
+	\begin{itemize}
+		\item Similar to Creating a New Employee Account, adding a new member has fields where the information is entered.
+		\item The new member can review the information before finalising it.
+		\item The address and telephone number are also entered when adding a new member.
+	\end{itemize}
+
+	\item{Adding a New Product}
+	\begin{itemize}
+		\item There will be fields where the product name, size and price are entered.
+		\item The category and sub category the product comes under will be selected in a dropdown menu for each category and sub category
+		\item The Product ID is automatically assigned to each product so this does not have to be entered
+		\item An image of the product is entered and the required file size and picture format is displayed.
+		\item A message will be displayed if the image is larger than the maximum file size or if the image is the wrong format (i.e .jpg instead of .png)
+		\item The resolution of the image will be changed when scaling the image so they’re all the same size. This means the employee doesn’t have to worry about making sure the dimension of every photo are the same.
+	\end{itemize}
+
+
+
+	\item Stock and Future Stock Prediction
+	\begin{itemize}
+		\item This page will be where the employee can view the current and predicted future stocks of each product.
+		\item A pop up window will display when the stock of a product needs to be updated.
+		\item Alternatively, the user can check which products need the stock updating on the reminders board.
+		\item Here the user will be able to view the current stock of any particular product, the stock currently in each location, and the stock from the end of each month for the last 2 months.
+	\end{itemize}
+\end{itemize}
+
 \subsection{System flowcharts showing an overview of the complete system}
+
 
 \section{User Interface Designs}
 
@@ -33,6 +96,14 @@
 \subsection{Identification of appropriate storage media}
 
 \section{Database Design}
+
+\subsection{Normalisation}
+
+\subsubsection{ER Diagrams}
+
+\subsubsection{Entity Descriptions}
+
+\subsubsection{1NF to 3NF}
 
 \pagebreak
 
@@ -158,13 +229,7 @@
     \end{tabular}
 \end{center}
 \end{flushleft}
-\subsection{Normalisation}
 
-\subsubsection{ER Diagrams}
-
-\subsubsection{Entity Descriptions}
-
-\subsubsection{1NF to 3NF}
 
 \section{Security and Integrity of the System and Data}
 
