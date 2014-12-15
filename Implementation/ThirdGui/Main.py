@@ -3,8 +3,6 @@ import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import QtGui
-from MainDisplayWidget import *
-from SQLConnection import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -13,26 +11,10 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Beacon Vets Stock Control")
         self.resize(800, 800)
-        self.icon = QIcon(QPixmap("./Logo/Logo.jpg"))
+        self.icon = QIcon(QPixmap("./Logo.jpg"))
         self.setWindowIcon(self.icon)
         self.statusBar().showMessage('Status: Idle')
         self.Settings()
-        #Stacked Layout
-        self.stackedLayout = QStackedLayout()
-        self.widget = QWidget()
-        self.widget.setLayout(self.stackedLayout)
-
-        #Connection Attribute Stores Database Connection
-        self.connection = None
-
-        #Set the central widget to the stacked layout
-        self.setCentralWidget(self.widget)
-
-        #create Widgets
-        self.ProductSearchLayout()
-
-        #Setup PyQt connections
-        self.connections()
 
     def Settings(self):
         #Adding Actions
@@ -100,40 +82,6 @@ class MainWindow(QMainWindow):
         self.setMenuBar(self.menu)
 
 
-    def initialWidget(self):
-
-        self.newDbPushButton = QPushButton("New Database")
-        self.newDbPushButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.openDbPushButton = QPushButton("Open Database")
-        self.openDbPushButton.setCursor(QCursor(Qt.PointingHandCursor))
-        
-        self.mainLayout = QHBoxLayout()
-
-        self.mainLayout.addWidget(self.newDbPushButton)
-        self.mainLayout.addWidget(self.openDbPushButton)
-        
-        
-        self.mainWidget = QWidget()
-
-        self.mainWidget.setLayout(self.mainLayout)
-
-        self.stackedLayout.addWidget(self.mainWidget)
-
-
-    def ProductSearchLayout(self):
-        self.ProductMenuWidget = ProductSearchWidget()
-        self.stackedLayout.addWidget(self.ProductMenuWidget)
-
-    def SwitchToProductSearchMenu(self):
-        self.stackedLayout.setCurrentIndex(1)
-        
-
-    
-
-
-
-
-
     #Connecting Button Clicks to Doing Something   
 
     def add_product_function(self):
@@ -190,7 +138,6 @@ class MainWindow(QMainWindow):
 def main():
     stock_control = QApplication(sys.argv) #creates new application
     main_window = MainWindow() #Creates a New instance of main window
-    self.create_layout()
     main_window.show()
     main_window.raise_()
     stock_control.exec_() 
