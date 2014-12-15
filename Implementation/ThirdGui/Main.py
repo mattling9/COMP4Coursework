@@ -3,6 +3,7 @@ import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import QtGui
+from PushButtonClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -10,11 +11,24 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Beacon Vets Stock Control")
-        self.resize(800, 800)
-        self.icon = QIcon(QPixmap("./Logo.jpg"))
+        self.resize(900, 800)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.setWindowIcon(self.icon)
         self.statusBar().showMessage('Status: Idle')
         self.Settings()
+        self.create_animal_push_button_layout()
+
+    def create_animal_push_button_layout(self):
+        self.animal_push_buttons = PushButtonLayout("Please Select a Category:", ("Dog", "Cat", "Fish", "Small pets", "Bird", "Reptile", "Equnie"))
+        #create layout to hold widgets
+        self.initial_layout = QVBoxLayout()
+        self.initial_layout.addWidget(self.animal_push_buttons)
+        self.LogOffButton = QPushButton("Log Off")
+        self.initial_layout.addWidget(self.LogOffButton)
+        self.select_animal_widget = QWidget()
+        self.select_animal_widget.setLayout(self.initial_layout)
+
+        self.setCentralWidget(self.select_animal_widget)
 
     def Settings(self):
         #Adding Actions
@@ -30,12 +44,32 @@ class MainWindow(QMainWindow):
         self.remove_an_employee = QAction("Remove Employee", self)
         self.open_a_database = QAction("Open Database", self)
         self.close_a_database = QAction("Close Database", self)
+        self.dog_food = QAction("Dog Food ", self)
+        self.dog_health_care = QAction("Dog Health Care", self)
+        self.dog_flea_and_tick = QAction("Dog Flea And Tick", self)
+        self.cat_food = QAction("Cat Food", self)
+        self.cat_health_care = QAction("Cat Health Care", self)
+        self.cat_flea_and_tick = QAction("Cat Flea and Tick", self)
+        self.fish_medication = QAction("Fish Medication", self)
+        self.live_plant_care = QAction("Live Plant Care", self)
+        self.small_pet_food = QAction("Small Pet Food", self)
+        self.small_pet_grooming = QAction("Small Pet Grooming", self)
+        self.wild_bird_food = QAction("Wild Bird Feed", self)
+        self.wild_animal_food = QAction("Wild Animal Feed", self)
+        self.bird_health_care = QAction("Bird Health Care", self)
+        self.reptile_food = QAction("Reptile Food", self)
+        self.reptile_medication = QAction("Reptile Medication", self)
+        self.equine_medication = QAction("Equine Medication", self)
+        self.horse_food = QAction("Horse Food", self)
+        self.horse_grooming = QAction("Horse Grooming", self)
 
         #Creating MenuBar
         self.menu = QMenuBar()
 
         #Creating ToolBar
-        #self.toolbar = QToolBar()       #No Toolbar needed
+        self.toolbar = QToolBar()
+        self.addToolBar(Qt.RightToolBarArea, self.toolbar)
+        #self.toolbar.setMovable(False)
 
 
         #Adding Menu to MenuBar
@@ -62,7 +96,7 @@ class MainWindow(QMainWindow):
         
 
         #Add tools to Toolbar
-        #self.addToolBar(self.toolbar)
+        self.addToolBar(self.toolbar)
         
          #Add connections to buttons
         self.add_new_product.triggered.connect(self.add_product_function)
@@ -77,6 +111,32 @@ class MainWindow(QMainWindow):
         self.remove_an_employee.triggered.connect(self.remove_an_employee_function)
         self.open_a_database.triggered.connect(self.open_database_function)
         self.close_a_database.triggered.connect(self.close_database_function)
+
+        #add toolbar to window
+        self.toolbar.addAction(self.dog_food)
+        self.toolbar.addAction(self.dog_health_care)
+        self.toolbar.addAction(self.dog_flea_and_tick)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.dog_flea_and_tick))
+        self.toolbar.addAction(self.cat_food)
+        self.toolbar.addAction(self.cat_health_care)
+        self.toolbar.addAction(self.cat_flea_and_tick)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.cat_flea_and_tick))
+        self.toolbar.addAction(self.fish_medication)
+        self.toolbar.addAction(self.live_plant_care)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.live_plant_care))
+        self.toolbar.addAction(self.small_pet_food)
+        self.toolbar.addAction(self.small_pet_grooming)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.small_pet_grooming))
+        self.toolbar.addAction(self.wild_bird_food)
+        self.toolbar.addAction(self.wild_animal_food)
+        self.toolbar.addAction(self.bird_health_care)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.bird_health_care))
+        self.toolbar.addAction(self.reptile_food)
+        self.toolbar.addAction(self.reptile_medication)
+        self.toolbar.insertSeparator(self.toolbar.addAction(self.reptile_medication))
+        self.toolbar.addAction(self.equine_medication)
+        self.toolbar.addAction(self.horse_food)
+        self.toolbar.addAction(self.horse_grooming)
 
         #Set Menu Bar
         self.setMenuBar(self.menu)
