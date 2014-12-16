@@ -23,11 +23,8 @@ class MainWindow(QMainWindow):
         #create layout to hold widgets
         self.initial_layout = QVBoxLayout()
         self.initial_layout.addWidget(self.animal_push_buttons)
-        self.LogOffButton = QPushButton("Log Off")
-        self.initial_layout.addWidget(self.LogOffButton)
         self.select_animal_widget = QWidget()
         self.select_animal_widget.setLayout(self.initial_layout)
-
         self.setCentralWidget(self.select_animal_widget)
 
     def Settings(self):

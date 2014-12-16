@@ -30,8 +30,12 @@ class PushButtonLayout(QWidget):
             button.setMaximumWidth(220)
             self.push_button_layout.addWidget(button, *position)
             count +=1
-        self.LogOffButton = QPushButton("Log Off")
 
+        self.log_off_layout = QHBoxLayout()
+        self.log_off_layout.addStretch(1)
+        log_off_button = QPushButton("Log Off")
+        self.log_off_layout.addWidget(log_off_button)
+        self.log_off_section.setLayout(log_off_button_layout)
 
         self.push_button_group_box.setLayout(self.push_button_layout)
 
@@ -39,6 +43,7 @@ class PushButtonLayout(QWidget):
 
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.push_button_group_box)
+        self.main_layout.addWidget(self.log_off_section)
 
         #set layout for this widget
         self.setLayout(self.main_layout)
