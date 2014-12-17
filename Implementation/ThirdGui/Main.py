@@ -23,6 +23,11 @@ class MainWindow(QMainWindow):
         #create layout to hold widgets
         self.initial_layout = QVBoxLayout()
         self.initial_layout.addWidget(self.animal_push_buttons)
+        self.LogOffButton = QPushButton("Log Off")
+        self.LogOffButton.setMaximumWidth(500)
+        self.LogOffButton.move(10,0)
+        self.initial_layout.addWidget(self.LogOffButton)
+                                      
         self.select_animal_widget = QWidget()
         self.select_animal_widget.setLayout(self.initial_layout)
         self.setCentralWidget(self.select_animal_widget)
@@ -115,7 +120,7 @@ class MainWindow(QMainWindow):
         self.toolbar.addAction(self.dog_flea_and_tick)
         self.toolbar.insertSeparator(self.toolbar.addAction(self.dog_flea_and_tick))
         self.toolbar.addAction(self.cat_food)
-        self.toolbar.addAction(self.cat_health_care)
+        self.toolbar.addAction(self.cat_health_care
         self.toolbar.addAction(self.cat_flea_and_tick)
         self.toolbar.insertSeparator(self.toolbar.addAction(self.cat_flea_and_tick))
         self.toolbar.addAction(self.fish_medication)
