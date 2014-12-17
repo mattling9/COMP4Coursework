@@ -2,7 +2,6 @@ import sys
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from PyQt4 import QtGui
 from PushButtonClass import *
 
 class MainWindow(QMainWindow):
@@ -120,7 +119,7 @@ class MainWindow(QMainWindow):
         self.toolbar.addAction(self.dog_flea_and_tick)
         self.toolbar.insertSeparator(self.toolbar.addAction(self.dog_flea_and_tick))
         self.toolbar.addAction(self.cat_food)
-        self.toolbar.addAction(self.cat_health_care
+        self.toolbar.addAction(self.cat_health_care)
         self.toolbar.addAction(self.cat_flea_and_tick)
         self.toolbar.insertSeparator(self.toolbar.addAction(self.cat_flea_and_tick))
         self.toolbar.addAction(self.fish_medication)
