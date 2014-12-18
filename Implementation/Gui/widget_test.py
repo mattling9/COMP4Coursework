@@ -2,7 +2,6 @@ from PyQt4 import QtGui, QtCore
 
 class Window(QtGui.QWidget):
     def __init__(self):
-        QtGui.QWidget.__init__(self)
         self.button = QtGui.QPushButton(self)
         self.button.clicked.connect(self.handleButton)
         self.button.setIcon(QtGui.QIcon('troll.png'))
