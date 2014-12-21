@@ -13,6 +13,7 @@ def ManagePostcode():
 
             
         postcode_input = input("Enter Postcode Here:")
+        postcode_input = postcode_input.upper()
         print("")
         
         Present = False

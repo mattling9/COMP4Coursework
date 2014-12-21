@@ -9,13 +9,10 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle('Image Label Test')
         self.resize(200, 200)
-        self.display_image()
-
-    def display_image(self):
         
         #creating the label and the image
         self.label = QLabel()
-        self.image = QPixmap('./images/logo.jpg')
+        self.image = QPixmap('./images/dog.png')
         self.scaled_image = self.image.scaledToWidth(500, Qt.FastTransformation)
 
 
