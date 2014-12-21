@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class AddingProductLayout(QWidget):
+class addProduct(QWidget):
     """ A representation of the Adding Product Interface"""
     def __init__(self):
         super().__init__()

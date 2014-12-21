@@ -2,7 +2,7 @@ import sys
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from PushButtonClass import *
+from ProductSearchClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -18,15 +18,14 @@ class MainWindow(QMainWindow):
         self.create_animal_push_button_layout()
 
     def create_animal_push_button_layout(self):
-        self.animal_push_buttons = PushButtonLayout("Please Select a Category:", ("Dog", "Cat", "Fish", "Small pets", "Bird", "Reptile", "Equnie"))
+        self.animal_push_buttons = searchProduct("Please Select a Category:", ("Dog", "Cat", "Fish", "Small pets", "Bird", "Reptile", "Equnie"))
         #create layout to hold widgets
         self.initial_layout = QVBoxLayout()
         self.initial_layout.addWidget(self.animal_push_buttons)
         self.LogOffButton = QPushButton("Log Off")
         self.LogOffButton.setMaximumWidth(500)
         self.LogOffButton.move(10,0)
-        self.initial_layout.addWidget(self.LogOffButton)
-                                      
+        self.initial_layout.addWidget(self.LogOffButton)                                      
         self.select_animal_widget = QWidget()
         self.select_animal_widget.setLayout(self.initial_layout)
         self.setCentralWidget(self.select_animal_widget)
