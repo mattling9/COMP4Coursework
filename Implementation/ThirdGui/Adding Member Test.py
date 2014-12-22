@@ -11,9 +11,6 @@ class MainWindow(QMainWindow):
         self.resize(400, 300)
         self.addMember()
 
-        if self.postcode_tickbox == False:
-            self.find_button.setEnabled(False)
-
     
 
     def addMember(self):
