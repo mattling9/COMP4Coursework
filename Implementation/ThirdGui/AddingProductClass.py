@@ -1,12 +1,12 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class addProduct(QWidget):
+class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
     def __init__(self):
         super().__init__()
-        self.resize(400,300)
-        addProduct()
+        self.resize(10,20)
+        self.addProduct()
 
     def addProduct(self):
         #Adding group box
@@ -24,6 +24,7 @@ class addProduct(QWidget):
         font.setPointSize(18)
         font.setBold(True)
         self.title.setFont(font)
+        self.title.setFixedHeight(30)
     
         
         #Price
@@ -78,6 +79,7 @@ class addProduct(QWidget):
         #Product Name
         self.product_name = QLineEdit()
         self.product_name.setPlaceholderText("Product Name...")
+        self.product_name.setFixedWidth(300)
 
         #Image
         self.image = QLabel()
@@ -96,6 +98,7 @@ class addProduct(QWidget):
         self.browse_layout.addWidget(self.browse)
         self.browse_layout.addWidget(self.upload)
         self.browse_widget.setLayout(self.browse_layout)
+        self.browse_widget.setFixedWidth(300)
         
         
         #Creating Layouts and Adding Widgets
@@ -136,11 +139,9 @@ class addProduct(QWidget):
         self.main_widget.setLayout(self.main_layout)
 
         self.total_layout = QVBoxLayout()
-        self.total_widget = QWidget()
         self.total_layout.addWidget(self.title)
         self.total_layout.addWidget(self.main_widget)
-        self.total_widget.setLayout(self.total_layout)
-        self.setCentralWidget(self.total_widget)
+        self.setLayout(self.total_layout)
         
 
     

@@ -1,21 +1,19 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class addEmployee(QWidget):
+class addEmployeeClass(QWidget):
     """a representation of Adding an Employee"""
-    def __init__(self):
+    def __init__(self, TitleText, ButtonText):
         super().__init__()
         self.resize(400,300)
-        addEmployee()
-
-    def addEmployee(self):
         #Title
-        self.title = QLabel("Adding New Employee")
+        self.title = QLabel(TitleText)
         self.title.setAlignment(Qt.AlignCenter)
         font = QFont()
         font.setPointSize(18)
         font.setBold(True)
         self.title.setFont(font)
+        self.title.setFixedHeight(30)
 
         #User Name
         self.user_name_widget = QWidget()
@@ -73,7 +71,7 @@ class addEmployee(QWidget):
         self.submit_button.setFixedWidth(60)
 
         #Add Account
-        self.add_account = QPushButton("Add Account")
+        self.add_account = QPushButton(ButtonText)
 
         #Creating Layouts and Adding Widgets
         self.main_layout = QGridLayout()
@@ -95,5 +93,4 @@ class addEmployee(QWidget):
         self.main_layout.addWidget(self.last_name_widget, 4,0)
         self.main_layout.addWidget(self.email_address_widget, 5,0)
         self.main_layout.addWidget(self.add_account, 6,0)
-        self.main_widget.setLayout(self.main_layout)
-        self.setCentralWidget(self.main_widget)
+        self.setLayout(self.main_layout)

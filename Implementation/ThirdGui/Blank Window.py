@@ -7,10 +7,8 @@ class MainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('Menu Button Test')
-        self.resize(200, 200)
-        
-        
+        self.setWindowTitle('Blank Window')
+        self.resize(400, 400)
         
 def main():
     app = QApplication(sys.argv)

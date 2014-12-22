@@ -1,12 +1,12 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class manageStock(QWidget):
+class manageStockClass(QWidget):
     """A representation of managing stock"""
     def __init__(self):
         super().__init__()
         self.resize(400, 300)
-        manageStock()
+        self.manageStock()
 
     def manageStock(self):
         #Title
@@ -16,6 +16,7 @@ class manageStock(QWidget):
         self.title_font.setPointSize(18)
         self.title_font.setBold(True)
         self.title.setFont(self.title_font)
+        self.title.setFixedHeight(30)
 
         #Image
         self.image = QLabel()
@@ -59,6 +60,10 @@ class manageStock(QWidget):
         self.stock_required.setAlignment(Qt.AlignCenter)
         self.stock_required.setReadOnly(True)
 
+        #re-stock Button
+        self.restock_button = QPushButton("Restock Now")
+
+
         #Done
         self.done_button = QPushButton("Done")
 
@@ -82,10 +87,11 @@ class manageStock(QWidget):
         self.location2_layout.addWidget(self.location2)
         self.location2_widget.setLayout(self.location2_layout)
 
-        self.stock_layout = QHBoxLayout()
+        self.stock_layout = QGridLayout()
         self.stock_widget = QWidget()
-        self.stock_layout.addWidget(self.stock_required_label)
-        self.stock_layout.addWidget(self.stock_required)
+        self.stock_layout.addWidget(self.stock_required_label, 0,0)
+        self.stock_layout.addWidget(self.stock_required , 0,1)
+        self.stock_layout.addWidget(self.restock_button , 1,1)
         self.stock_widget.setLayout(self.stock_layout)
 
         #Group Box
@@ -93,16 +99,14 @@ class manageStock(QWidget):
         self.group_box = QGroupBox("Current Stock")
         self.group_box_layout.addWidget(self.location1_widget)
         self.group_box_layout.addWidget(self.location2_widget)
+        self.group_box_layout.addWidget(self.stock_widget)
         self.group_box.setLayout(self.group_box_layout)
 
 
 
         self.main_layout = QVBoxLayout()
-        self.main_widget = QWidget()
         self.main_layout.addWidget(self.title)
         self.main_layout.addWidget(self.image_widget)
-        self.main_layout.addWidget(self.group_box)
-        self.main_layout.addWidget(self.stock_widget)
+        self.main_layout.addWidget(self.group_box)  
         self.main_layout.addWidget(self.done_button)
-        self.main_widget.setLayout(self.main_layout)
-        self.setCentralWidget(self.main_widget)
+        self.setLayout(self.main_layout)
