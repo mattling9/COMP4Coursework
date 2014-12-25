@@ -6,21 +6,10 @@ class manageStockClass(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(400, 300)
-        self.manageStock()
-
-    def manageStock(self):
-        #Title
-        self.title = QLabel("Stock Management")
-        self.title.setAlignment(Qt.AlignCenter)
-        self.title_font = QFont()
-        self.title_font.setPointSize(18)
-        self.title_font.setBold(True)
-        self.title.setFont(self.title_font)
-        self.title.setFixedHeight(30)
 
         #Image
         self.image = QLabel()
-        self.image_pixmap = QPixmap(".\images\dance.gif")
+        self.image_pixmap = QPixmap(".\images\Default.png")
         self.scaled_image = self.image_pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
@@ -105,7 +94,6 @@ class manageStockClass(QWidget):
 
 
         self.main_layout = QVBoxLayout()
-        self.main_layout.addWidget(self.title)
         self.main_layout.addWidget(self.image_widget)
         self.main_layout.addWidget(self.group_box)  
         self.main_layout.addWidget(self.done_button)

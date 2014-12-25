@@ -3,17 +3,9 @@ from PyQt4.QtCore import *
 
 class addEmployeeClass(QWidget):
     """a representation of Adding an Employee"""
-    def __init__(self, TitleText, ButtonText):
+    def __init__(self,ButtonText):
         super().__init__()
         self.resize(400,300)
-        #Title
-        self.title = QLabel(TitleText)
-        self.title.setAlignment(Qt.AlignCenter)
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.title.setFont(font)
-        self.title.setFixedHeight(30)
 
         #User Name
         self.user_name_widget = QWidget()
@@ -81,7 +73,6 @@ class addEmployeeClass(QWidget):
         self.info_box_layout = QVBoxLayout()
 
         
-        self.main_layout.addWidget(self.title, 0,0)
         self.info_box_layout.addWidget(self.first_name)
         self.info_box_layout.addWidget(self.last_name)
         self.info_box_layout.addWidget(self.email_address)

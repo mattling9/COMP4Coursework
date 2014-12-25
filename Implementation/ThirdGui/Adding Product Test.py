@@ -5,7 +5,7 @@ from PyQt4.QtGui import *
 
 class MainWindow(QMainWindow):
     
-    def __init__(self):
+    def __init__(self, TitleText, ButtonText):
         super().__init__()
         self.setWindowTitle("Adding Product Test")
         self.resize(400, 300)
@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         #creating the buttons
 
         #Title
-        self.title = QLabel("Adding New Product")
+        self.title = QLabel(TitleText)
         self.title.setAlignment(Qt.AlignCenter)
         font = QFont()
         font.setPointSize(18)
@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         self.location2.setPlaceholderText("Stock In Location 2...")
 
         #Done
-        self.done = QPushButton("Done")
+        self.done = QPushButton(ButtonText)
 
         #Product Name
         self.product_name = QLineEdit()

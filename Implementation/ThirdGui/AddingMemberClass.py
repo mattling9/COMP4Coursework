@@ -3,21 +3,9 @@ from PyQt4.QtCore import *
 
 class addMemberClass(QWidget):
         """a representation of Adding an Member"""
-        def __init__(self):
+        def __init__(self, ButtonText):
                 super().__init__()
                 self.resize(400,300)
-                self.addMember()
-
-        def addMember(self):
-
-                #Title
-                self.title = QLabel("Adding New Member")
-                self.title.setAlignment(Qt.AlignCenter)
-                font = QFont()
-                font.setPointSize(18)
-                font.setBold(True)
-                self.title.setFont(font)
-                self.title.setFixedHeight(30)
 
                 #Name_title
                 self.name_title = QComboBox()
@@ -130,7 +118,7 @@ class addMemberClass(QWidget):
                 self.email_widget.setLayout(self.email_layout)
 
                     #Add Member Button
-                self.add_member = QPushButton("Add Member")
+                self.add_member = QPushButton(ButtonText)
 
                     #Group Box
                 self.group_box = QGroupBox("Enter Member Information")
@@ -149,7 +137,6 @@ class addMemberClass(QWidget):
 
                 self.main_layout = QVBoxLayout()
                 self.main_widget = QWidget()
-                self.main_layout.addWidget(self.title)
                 self.group_box_layout.addWidget(self.name_widget)
                 self.group_box_layout.addWidget(self.postcode_tickbox)
                 self.group_box_layout.addWidget(self.postcode_widget)

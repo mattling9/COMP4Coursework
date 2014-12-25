@@ -3,12 +3,9 @@ from PyQt4.QtCore import *
 
 class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
-    def __init__(self):
+    def __init__(self, ButtonText):
         super().__init__()
         self.resize(10,20)
-        self.addProduct()
-
-    def addProduct(self):
         #Adding group box
         self.product_info_group_box = QGroupBox()
         self.product_info_group_box.setTitle("Enter Product Information:")
@@ -16,15 +13,6 @@ class addProductClass(QWidget):
         
 
         #creating the buttons
-
-        #Title
-        self.title = QLabel("Adding New Product")
-        self.title.setAlignment(Qt.AlignCenter)
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.title.setFont(font)
-        self.title.setFixedHeight(30)
     
         
         #Price
@@ -74,7 +62,7 @@ class addProductClass(QWidget):
         self.location2.setPlaceholderText("Stock In Location 2...")
 
         #Done
-        self.done = QPushButton("Done")
+        self.done = QPushButton(ButtonText)
 
         #Product Name
         self.product_name = QLineEdit()
@@ -83,7 +71,7 @@ class addProductClass(QWidget):
 
         #Image
         self.image = QLabel()
-        self.image_pixmap = QPixmap(".\images\Logo.jpg")
+        self.image_pixmap = QPixmap(".\images\Default.png")
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
@@ -115,7 +103,6 @@ class addProductClass(QWidget):
         self.left_widget = QWidget()
         self.left_layout = QVBoxLayout()
         self.left_layout.addWidget(self.product_info_group_box)
-        self.left_layout.addWidget(self.done)
         self.left_widget.setLayout(self.left_layout)
 
         self.image_layout = QVBoxLayout()
@@ -132,14 +119,20 @@ class addProductClass(QWidget):
 
         #main layout
 
-        self.main_layout = QHBoxLayout()
-        self.main_layout.addWidget(self.left_widget)
-        self.main_layout.addWidget(self.right_widget)
+        self.leftright_layout = QHBoxLayout()
+        self.leftright_layout.addWidget(self.left_widget)
+        self.leftright_layout.addWidget(self.right_widget)
+
+        self.leftright_widget = QWidget()
+        self.leftright_widget.setLayout(self.leftright_layout)
+
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.leftright_widget)
+        self.main_layout.addWidget(self.done)
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
 
         self.total_layout = QVBoxLayout()
-        self.total_layout.addWidget(self.title)
         self.total_layout.addWidget(self.main_widget)
         self.setLayout(self.total_layout)
         
