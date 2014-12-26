@@ -5,6 +5,7 @@ class searchProductClass(QWidget):
     """A representation of A Push Button Widget"""
     def __init__(self):
         super().__init__()
+        
         #Title
         self.title = QLabel("Product Search")
         self.title.setAlignment(Qt.AlignCenter)
@@ -35,8 +36,8 @@ class searchProductClass(QWidget):
             button = QPushButton(name)
             button.setIcon(QIcon(image_list[count]))
             button.setIconSize(QSize(220,190))
-            button.setMinimumHeight(220)
-            button.setMaximumWidth(220)
+            button.setFixedHeight(140)
+            button.setFixedWidth(140)
             self.push_button_layout.addWidget(button, *position)
             count +=1
         

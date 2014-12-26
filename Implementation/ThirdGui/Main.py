@@ -8,6 +8,7 @@ from AddingMemberClass import *
 from AddingEmployeeClass import *
 from StockManagementClass import *
 from ProductIDClass import *
+from CreatingOrderClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -15,7 +16,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Beacon Vets Stock Control")
-        self.resize(200, 200)
+        self.setFixedSize(700, 600)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.setWindowIcon(self.icon)
         self.statusBar().showMessage('Status: Idle')
@@ -26,6 +27,7 @@ class MainWindow(QMainWindow):
         self.delete_product()
         self.search_product()
         self.manage_stock()
+        self.create_order()
         self.add_member()
         self.edit_member()
         self.delete_member()
@@ -251,8 +253,19 @@ class MainWindow(QMainWindow):
         self.manage_stock_widget.setLayout(self.manage_stock_layout)
         self.setCentralWidget(self.manage_stock_widget)
         self.stacked_layout.addWidget(self.manage_stock_widget)
+
+    def create_order(self):
+        self.title = self.create_title()
+        self.title.setText("Create Order")
+        self.create_order_instance = createOrderClass()
         
-        
+        self.create_order_layout = QVBoxLayout()
+        self.create_order_layout.addWidget(self.title)
+        self.create_order_layout.addWidget(self.create_order_instance)
+        self.create_order_widget = QWidget()
+        self.create_order_widget.setLayout(self.create_order_layout)
+        self.setCentralWidget(self.create_order_widget)
+        self.stacked_layout.addWidget(self.create_order_widget)
 
         
     def Settings(self):
@@ -344,30 +357,30 @@ class MainWindow(QMainWindow):
         self.stacked_layout.setCurrentIndex(4)
 
     def product_restock_function(self):
-        self.stacked_layout.setCurrentIndex(5)
+        self.stacked_layout.setCurrentIndex(0)
 
     def create_new_order_function(self):
-        self.stacked_layout.setCurrentIndex(6)
-
-    def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(5)
 
-    def edit_member_function(self):
+    def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
+
+    def edit_member_function(self):
+        self.stacked_layout.setCurrentIndex(7)
 
 
     def remove_a_member_function(self):
-        self.stacked_layout.setCurrentIndex(7)
-
-    def add_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(8)
 
-    def edit_employee_function(self):
+    def add_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(9)
+
+    def edit_employee_function(self):
+        self.stacked_layout.setCurrentIndex(10)
     
 
     def remove_an_employee_function(self):
-        self.stacked_layout.setCurrentIndex(10)
+        self.stacked_layout.setCurrentIndex(11)
                                             
 
     def set(self):
