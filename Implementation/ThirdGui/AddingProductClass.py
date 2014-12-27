@@ -1,5 +1,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from PopUpMenuClass import *
 
 class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
@@ -63,6 +64,7 @@ class addProductClass(QWidget):
 
         #Done
         self.done = QPushButton(ButtonText)
+        self.done.clicked.connect(self.CreatePopUpWindow)
 
         #Product Name
         self.product_name = QLineEdit()
@@ -136,10 +138,37 @@ class addProductClass(QWidget):
         self.total_layout.addWidget(self.main_widget)
         self.setLayout(self.total_layout)
         
+    def CreatePopUpWindow(self):
+        self.pop_up_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.pop_up_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Are You Sure You Want To Add The Product?")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
+        self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
+        self.pop_up_instance.move(750,500)
+        self.pop_up_instance.show()
+        self.pop_up_instance.raise_()
 
+    def clicked_yes(self):
+        pass
+
+
+    def clicked_no(self):
+        self.pop_up_instance.close()
+        
     
 
-        
+    
         
         
         

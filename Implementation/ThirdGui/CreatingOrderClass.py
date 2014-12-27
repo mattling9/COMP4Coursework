@@ -1,5 +1,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from PopUpMenuClass import *
 
 class createOrderClass(QWidget):
     """A representation of creating an order"""
@@ -72,7 +73,14 @@ class createOrderClass(QWidget):
         self.price_widget.setLayout(self.price_layout)
 
         #Create Invoice Button
+        self.preview_button = QPushButton("Preview Invoice")
+        self.preview_button.clicked.connect(self.clicked)
         self.invoice_button = QPushButton("Create Invoice")
+        self.invoice_layout = QHBoxLayout()
+        self.invoice_layout.addWidget(self.preview_button)
+        self.invoice_layout.addWidget(self.invoice_button)
+        self.invoice_widget = QWidget()
+        self.invoice_widget.setLayout(self.invoice_layout)
     
 
         #order_group_box
@@ -87,7 +95,40 @@ class createOrderClass(QWidget):
         self.table_layout = QVBoxLayout()
         self.table_layout.addWidget(find_product_box)
         self.table_layout.addWidget(self.order_box)
-        self.table_layout.addWidget(self.invoice_button)
+        self.table_layout.addWidget(self.invoice_widget)
         self.table_widget = QWidget()
         self.table_widget.setFixedSize(580,500)
-        self.table_widget.setLayout(self.table_layout) 
+        self.setLayout(self.table_layout)
+
+    def clicked(self):
+        self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.pop_up_instance.setWindowIcon(self.icon)
+        self.label = QLabel()
+        self.image = QPixmap("./images/Logo.jpg")
+        self.label.setPixmap(self.image)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.addButton("Cancel", self.buttonBox.RejectRole)
+        self.buttonBox.addButton("Print", self.buttonBox.AcceptRole)
+        self.buttonBox.button(QDialogButtonBox.Print).clicked.connect(self.clicked_no)
+        self.buttons = self.buttonBox.buttons()
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
+        self.pop_up_instance.showMaximized()
+        self.pop_up_instance.raise_()
+
+    def clicked_yes(self):
+        print("Print Invoice")
+
+    def clicked_no(self):
+        self.pop_up_instance.close()
+        
+
+
+        

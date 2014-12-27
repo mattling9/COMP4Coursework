@@ -9,6 +9,7 @@ from AddingEmployeeClass import *
 from StockManagementClass import *
 from ProductIDClass import *
 from CreatingOrderClass import *
+from PopUpMenuClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -34,6 +35,7 @@ class MainWindow(QMainWindow):
         self.add_employee()
         self.edit_employee()
         self.delete_employee()
+        self.options()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
@@ -267,6 +269,17 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.create_order_widget)
         self.stacked_layout.addWidget(self.create_order_widget)
 
+    def options(self):
+        self.title = self.create_title()
+        self.title.setText("Options")
+
+        self.options_layout = QVBoxLayout()
+        self.options_widget = QWidget()
+        self.options_layout.addWidget(self.title)
+        self.options_widget.setLayout(self.options_layout)
+        self.setCentralWidget(self.options_widget)
+        self.stacked_layout.addWidget(self.options_widget)
+
         
     def Settings(self):
         #Adding Actions
@@ -283,6 +296,7 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
+        self.options_action = QAction("Options", self)
         #Creating MenuBar
         self.menu = QMenuBar()
 
@@ -312,7 +326,8 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.add_an_employee_action)
         self.employeemenu.addAction(self.edit_employee_action)
         self.employeemenu.addAction(self.remove_an_employee_action)
-        self.databasemenu = self.menu.addMenu("Options")
+        self.optionsmenu = self.menu.addMenu("Options")
+        self.optionsmenu.addAction(self.options_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
@@ -333,6 +348,7 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action.triggered.connect(self.add_an_employee_function)
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
+        self.optionsmenu.triggered.connect(self.options_function)
 
         #Set Menu Bar
         self.setMenuBar(self.menu)
@@ -381,7 +397,9 @@ class MainWindow(QMainWindow):
 
     def remove_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(11)
-                                            
+
+    def options_function(self):
+        self.stacked_layout.setCurrentIndex(12)
 
     def set(self):
         path = QFileDialog.getOpenFileName()
