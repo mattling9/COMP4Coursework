@@ -105,13 +105,6 @@ class createOrderClass(QWidget):
         self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.pop_up_instance.setWindowIcon(self.icon)
-        self.print_preview = QPrintPreviewDialog()
-        self.pop_up_instance.setCentralWidget(self.print_preview)
-
-    def create_invoice_clicked(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
         self.label = QLabel()
         self.image = QPixmap("./images/Logo.jpg")
         self.label.setPixmap(self.image)
@@ -128,6 +121,26 @@ class createOrderClass(QWidget):
         self.pop_up_widget.setLayout(self.pop_up_layout)
         self.pop_up_instance.setCentralWidget(self.pop_up_widget)
         self.pop_up_instance.showMaximized()
+        self.pop_up_instance.raise_()
+
+    def create_invoice_clicked(self):
+        self.pop_up_instance = PopUpWindow("Beacon Vets Stock Control", 900, 900)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.pop_up_instance.setWindowIcon(self.icon)
+        
+        self.label = QLabel()
+        self.image = QPixmap("./images/Logo.jpg")
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.clicked_Ok)
+        self.buttons = self.buttonBox.buttons()
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
+        self.pop_up_instance.show()
         self.pop_up_instance.raise_()
 
     

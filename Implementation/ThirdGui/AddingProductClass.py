@@ -1,3 +1,5 @@
+import shutil
+
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
@@ -80,11 +82,18 @@ class addProductClass(QWidget):
         
 
         #Browse
+        path = "./images/Default.png"
+        
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
         self.browse = QPushButton("Browse...")
+        self.browse.clicked.connect(self.get_image_path)
+        
         self.upload = QPushButton("Upload")
-        self.path = QLineEdit("/images/example.png")
+        self.upload.clicked.connect(self.update_image)
+        
+        self.path = QLineEdit(path)
+        self.path.setReadOnly(True)
         self.browse_layout.addWidget(self.path)
         self.browse_layout.addWidget(self.browse)
         self.browse_layout.addWidget(self.upload)
@@ -159,7 +168,19 @@ class addProductClass(QWidget):
         self.pop_up_instance.move(750,500)
         self.pop_up_instance.show()
         self.pop_up_instance.raise_()
-        print(self.product_name_info)
+
+    def get_image_path(self):
+        path =  QFileDialog.getOpenFileName()
+        self.path.setText(path)
+        
+
+    def update_image(self):
+        path = self.path.text()
+        new_path = "./ProductImage.jpg"
+        shutil.copy(path, new_path)
+        self.pixmap = QPixmap(path)
+        self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.image.setPixmap(self.scaled_image)
 
     def clicked_yes(self):
         pass

@@ -1,4 +1,4 @@
-import sys
+import sys, shutil
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -10,6 +10,8 @@ from StockManagementClass import *
 from ProductIDClass import *
 from CreatingOrderClass import *
 from PopUpMenuClass import *
+from DatabaseClass import *
+from SQLConnection import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -35,7 +37,7 @@ class MainWindow(QMainWindow):
         self.add_employee()
         self.edit_employee()
         self.delete_employee()
-        self.options()
+        self.database()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
@@ -82,7 +84,6 @@ class MainWindow(QMainWindow):
         self.add_product_widget.setLayout(self.add_product_layout)
         self.setCentralWidget(self.add_product_widget)
         self.stacked_layout.addWidget(self.add_product_widget)
-        return product_name_info
 
     def edit_product(self):
         self.product_found = False
@@ -273,16 +274,18 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.create_order_widget)
         self.stacked_layout.addWidget(self.create_order_widget)
 
-    def options(self):
+    def database(self):
         self.title = self.create_title()
-        self.title.setText("Options")
+        self.title.setText("Database Propities")
 
-        self.options_layout = QVBoxLayout()
-        self.options_widget = QWidget()
-        self.options_layout.addWidget(self.title)
-        self.options_widget.setLayout(self.options_layout)
-        self.setCentralWidget(self.options_widget)
-        self.stacked_layout.addWidget(self.options_widget)
+        self.database_instance = DatabaseClass()
+        self.database_layout = QVBoxLayout()
+        self.database_widget = QWidget()
+        self.database_layout.addWidget(self.title)
+        self.database_layout.addWidget(self.database_instance)
+        self.database_widget.setLayout(self.database_layout)
+        self.setCentralWidget(self.database_widget)
+        self.stacked_layout.addWidget(self.database_widget)
 
         
     def Settings(self):
@@ -300,15 +303,15 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
-        self.options_action = QAction("Options", self)
+        self.database_action = QAction("Database", self)
         self.search_product_action = QAction("Product Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
         #Creating MenuBar
         self.menu = QMenuBar()
 
         #Creating ToolBar
-        self.toolbar = QToolBar()
-        self.addToolBar(Qt.RightToolBarArea, self.toolbar)
+        #self.toolbar = QToolBar()
+        #self.addToolBar(Qt.RightToolBarArea, self.toolbar)
         #self.toolbar.setMovable(False)
 
 
@@ -333,13 +336,13 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.edit_employee_action)
         self.employeemenu.addAction(self.remove_an_employee_action)
         self.optionsmenu = self.menu.addMenu("Options")
-        self.optionsmenu.addAction(self.options_action)
+        self.optionsmenu.addAction(self.database_action)
         self.optionsmenu.addAction(self.search_product_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
         #Add tools to Toolbar
-        self.addToolBar(self.toolbar)
+        #self.addToolBar(self.toolbar)
         
          #Add connections to buttons
         self.add_product_action.triggered.connect(self.add_product_function)
@@ -355,7 +358,7 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action.triggered.connect(self.add_an_employee_function)
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
-        self.options_action.triggered.connect(self.options_function)
+        self.database_action.triggered.connect(self.database_function)
         self.search_product_action.triggered.connect(self.search_product_function)
 
         #Set Menu Bar
@@ -368,7 +371,6 @@ class MainWindow(QMainWindow):
 
     def add_product_function(self, product_name_info):
         self.stacked_layout.setCurrentIndex(0)
-        print(product_name_info)
 
     def edit_product_function(self):
         self.stacked_layout.setCurrentIndex(1)
@@ -408,7 +410,7 @@ class MainWindow(QMainWindow):
     def remove_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(11)
 
-    def options_function(self):
+    def database_function(self):
         self.stacked_layout.setCurrentIndex(12)
 
     def search_product_function(self):

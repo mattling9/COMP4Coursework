@@ -3,7 +3,7 @@ from PyQt4.QtSql import *
 
 import sqlite3
 
-class SQLConnection:
+class SQLConnection():
     
     """Handles the conncetion to the SQL database"""
     

@@ -1,5 +1,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from PopUpMenuClass import *
 
 class addEmployeeClass(QWidget):
     """a representation of Adding an Employee"""
@@ -60,10 +61,12 @@ class addEmployeeClass(QWidget):
 
         #Submit
         self.submit_button = QPushButton("Submit")
+        self.submit_button.clicked.connect(self.update_preview)
         self.submit_button.setFixedWidth(60)
 
         #Add Account
         self.add_account = QPushButton(ButtonText)
+        self.add_account.clicked.connect(self.CreatePopUpWindow)
 
         #Creating Layouts and Adding Widgets
         self.main_layout = QGridLayout()
@@ -85,3 +88,36 @@ class addEmployeeClass(QWidget):
         self.main_layout.addWidget(self.email_address_widget, 5,0)
         self.main_layout.addWidget(self.add_account, 6,0)
         self.setLayout(self.main_layout)
+
+    def update_preview(self):
+        self.first_name_output.setText(self.first_name.text())
+        self.last_name_output.setText(self.last_name.text())
+        self.email_address_output.setText(self.email_address.text())
+
+    def CreatePopUpWindow(self):
+        self.pop_up_instance = PopUpWindow("Beacon Vets Adding Employee", 300, 100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.pop_up_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Are You Sure You Want To Add The Empoyee?")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
+        self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
+        self.pop_up_instance.move(750,500)
+        self.pop_up_instance.show()
+        self.pop_up_instance.raise_()
+
+    def clicked_yes(self):
+        pass
+
+
+    def clicked_no(self):
+        self.pop_up_instance.close()
