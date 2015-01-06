@@ -17,7 +17,7 @@ class addProductClass(QWidget):
     
         
         #Price
-        self.price_button = QLineEdit()
+        self.price_button = QLineEdit("")
         self.price_button.setPlaceholderText("Price: £0.00")
 
         #Size
@@ -68,6 +68,7 @@ class addProductClass(QWidget):
 
         #Product Name
         self.product_name = QLineEdit()
+        product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
         self.product_name.setFixedWidth(300)
 
@@ -158,6 +159,7 @@ class addProductClass(QWidget):
         self.pop_up_instance.move(750,500)
         self.pop_up_instance.show()
         self.pop_up_instance.raise_()
+        print(self.product_name_info)
 
     def clicked_yes(self):
         pass

@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         self.Settings()
         self.stacked_layout = QStackedLayout()
         self.add_product()
-        self.edit_product()
+        product_name_info = self.edit_product()
         self.delete_product()
         self.search_product()
         self.manage_stock()
@@ -39,7 +39,9 @@ class MainWindow(QMainWindow):
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
-        #creating titles for each window
+        
+        
+        
 
 
     def create_title(self):
@@ -71,6 +73,7 @@ class MainWindow(QMainWindow):
         self.title = self.create_title()
         self.title.setText("Add Product ")
         self.add_product_instance = addProductClass("Add Product")
+        product_name_info = self.add_product_instance.product_name.text()
         
         self.add_product_layout = QVBoxLayout()
         self.add_product_layout.addWidget(self.title)
@@ -79,6 +82,7 @@ class MainWindow(QMainWindow):
         self.add_product_widget.setLayout(self.add_product_layout)
         self.setCentralWidget(self.add_product_widget)
         self.stacked_layout.addWidget(self.add_product_widget)
+        return product_name_info
 
     def edit_product(self):
         self.product_found = False
@@ -297,6 +301,8 @@ class MainWindow(QMainWindow):
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
         self.options_action = QAction("Options", self)
+        self.search_product_action = QAction("Product Search Window", self)
+        self.search_product_action.setShortcut("Ctrl+F")
         #Creating MenuBar
         self.menu = QMenuBar()
 
@@ -328,6 +334,7 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.remove_an_employee_action)
         self.optionsmenu = self.menu.addMenu("Options")
         self.optionsmenu.addAction(self.options_action)
+        self.optionsmenu.addAction(self.search_product_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
@@ -348,17 +355,20 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action.triggered.connect(self.add_an_employee_function)
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
-        self.optionsmenu.triggered.connect(self.options_function)
+        self.options_action.triggered.connect(self.options_function)
+        self.search_product_action.triggered.connect(self.search_product_function)
 
         #Set Menu Bar
         self.setMenuBar(self.menu)
+        
 
         
 
     #Connecting Button Clicks to Doing Something   
 
-    def add_product_function(self):
+    def add_product_function(self, product_name_info):
         self.stacked_layout.setCurrentIndex(0)
+        print(product_name_info)
 
     def edit_product_function(self):
         self.stacked_layout.setCurrentIndex(1)
@@ -400,6 +410,38 @@ class MainWindow(QMainWindow):
 
     def options_function(self):
         self.stacked_layout.setCurrentIndex(12)
+
+    def search_product_function(self):
+        self.FShortcut_instance = PopUpWindow("Find A Specific Product", 500, 200)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.FShortcut_instance.setWindowIcon(self.icon)
+        self.label = QLabel()
+        self.pixmap = QPixmap("./images/search_icon.png")
+        self.scaled_pixmap = self.pixmap.scaled(15,15, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.label.setPixmap(self.scaled_pixmap)
+
+        self.line_edit = QLineEdit()
+        self.line_edit.setPlaceholderText("Product Name, Member Name, Employee Name")
+        self.search_layout = QHBoxLayout()
+        self.search_widget = QWidget()
+        self.search_layout.addWidget(self.label)
+        self.search_layout.addWidget(self.line_edit)
+        self.search_widget.setLayout(self.search_layout)
+        self.list = QListWidget()
+        self.list.insertItem(0, "Dog Food")
+        self.list.insertItem(1, "Mark, Reed")
+        self.list.insertItem(2, "Cat Brush")
+        self.list.insertItem(3, "John, Smith")
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.search_widget)
+        self.main_layout.addWidget(self.list)
+        self.main_widget = QWidget()
+        self.main_widget.setLayout(self.main_layout)
+        self.FShortcut_instance.setCentralWidget(self.main_widget)
+        self.FShortcut_instance.move(750,200)
+        self.FShortcut_instance.show()
+        self.FShortcut_instance.raise_()
+        
 
     def set(self):
         path = QFileDialog.getOpenFileName()

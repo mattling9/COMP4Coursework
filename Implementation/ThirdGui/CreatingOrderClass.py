@@ -74,8 +74,9 @@ class createOrderClass(QWidget):
 
         #Create Invoice Button
         self.preview_button = QPushButton("Preview Invoice")
-        self.preview_button.clicked.connect(self.clicked)
+        self.preview_button.clicked.connect(self.preview_invoice_clicked)
         self.invoice_button = QPushButton("Create Invoice")
+        self.invoice_button.clicked.connect(self.create_invoice_clicked)
         self.invoice_layout = QHBoxLayout()
         self.invoice_layout.addWidget(self.preview_button)
         self.invoice_layout.addWidget(self.invoice_button)
@@ -100,7 +101,14 @@ class createOrderClass(QWidget):
         self.table_widget.setFixedSize(580,500)
         self.setLayout(self.table_layout)
 
-    def clicked(self):
+    def preview_invoice_clicked(self):
+        self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.pop_up_instance.setWindowIcon(self.icon)
+        self.print_preview = QPrintPreviewDialog()
+        self.pop_up_instance.setCentralWidget(self.print_preview)
+
+    def create_invoice_clicked(self):
         self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.pop_up_instance.setWindowIcon(self.icon)
@@ -110,9 +118,8 @@ class createOrderClass(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.addButton("Cancel", self.buttonBox.RejectRole)
-        self.buttonBox.addButton("Print", self.buttonBox.AcceptRole)
-        self.buttonBox.button(QDialogButtonBox.Print).clicked.connect(self.clicked_no)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.clicked_Ok)
         self.buttons = self.buttonBox.buttons()
         self.pop_up_layout = QVBoxLayout()
         self.pop_up_widget = QWidget()
@@ -123,10 +130,9 @@ class createOrderClass(QWidget):
         self.pop_up_instance.showMaximized()
         self.pop_up_instance.raise_()
 
-    def clicked_yes(self):
-        print("Print Invoice")
+    
 
-    def clicked_no(self):
+    def clicked_Ok(self):
         self.pop_up_instance.close()
         
 
