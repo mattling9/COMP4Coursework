@@ -176,7 +176,7 @@ class addProductClass(QWidget):
 
     def update_image(self):
         path = self.path.text()
-        new_path = "./ProductImage.jpg"
+        new_path = "./ProductImages/01.jpg"
         shutil.copy(path, new_path)
         self.pixmap = QPixmap(path)
         self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
