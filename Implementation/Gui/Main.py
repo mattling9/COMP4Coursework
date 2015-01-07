@@ -458,14 +458,6 @@ class MainWindow(QMainWindow):
             print("no db to close")
 
 
-
-
-
-
-
-
-
-
 def main():
     stock_control = QApplication(sys.argv) #creates new application
     main_window = MainWindow() #Creates a New instance of main window
