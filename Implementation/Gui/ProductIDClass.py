@@ -3,11 +3,11 @@ from PyQt4.QtCore import *
 
 class ProductIDClass(QWidget):
     """A representation of A Push Button Widget"""
-    def __init__(self):
+    def __init__(self, Label):
         super().__init__()
         self.layout = QHBoxLayout()
         self.widget = QWidget()
-        self.label = QLabel("Product ID:")
+        self.label = QLabel(Label)
         self.line_edit = QLineEdit()
         self.button = QPushButton("Find...")
         self.layout.addWidget(self.label)

@@ -1,4 +1,4 @@
-import shutil
+import shutil, re
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -19,13 +19,22 @@ class addProductClass(QWidget):
     
         
         #Price
+        self.pound = QLabel("Price: £")
         self.price_button = QLineEdit("")
+        self.price_button.textChanged.connect(self.validate_price)
         self.price_button.setPlaceholderText("Price: £0.00")
+        self.price_widget = QWidget()
+        self.price_layout = QHBoxLayout()
+        self.price_layout.addWidget(self.pound)
+        self.price_layout.addWidget(self.price_button)
+        self.price_widget.setLayout(self.price_layout)
+        
 
         #Size
         self.size_layout = QHBoxLayout()
         self.size_widget = QWidget()
         self.size_integer = QLineEdit()
+        self.size_integer.textChanged.connect(self.validate_size)
         self.size_integer.setPlaceholderText("Size: (750)")
         self.size_button = QComboBox()
         self.size_button.addItem("Kg.")
@@ -59,10 +68,12 @@ class addProductClass(QWidget):
         #Location 1
         self.location1 = QLineEdit()
         self.location1.setPlaceholderText("Stock In Location 1...")
+        self.location1.textChanged.connect(self.validate_stock1)
 
         #Location 2
         self.location2 = QLineEdit()
         self.location2.setPlaceholderText("Stock In Location 2...")
+        self.location2.textChanged.connect(self.validate_stock2)
 
         #Done
         self.done = QPushButton(ButtonText)
@@ -70,6 +81,7 @@ class addProductClass(QWidget):
 
         #Product Name
         self.product_name = QLineEdit()
+        self.product_name.textChanged.connect(self.validate_name)
         product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
         self.product_name.setFixedWidth(300)
@@ -105,7 +117,7 @@ class addProductClass(QWidget):
 
         self.input_layout = QVBoxLayout()
         self.input_widget = QWidget()
-        self.input_layout.addWidget(self.price_button)
+        self.input_layout.addWidget(self.price_widget)
         self.input_layout.addWidget(self.size_widget)
         self.input_layout.addWidget(self.category_widget)
         self.input_layout.addWidget(self.location1)
@@ -188,12 +200,62 @@ class addProductClass(QWidget):
 
     def clicked_no(self):
         self.pop_up_instance.close()
-        
-    
 
+
+    #VALIDATION
+    def validate_name(self):
+        valid = False
+        self.name = self.product_name.text()
+        if len(self.name) > 3 and len(self.name) < 32:
+            valid = True
+        
+        if valid:
+            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+        else:
+            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+
+
+    def validate_price(self):
+        valid = False
+        self.pattern = re.compile("[0-9]{1,3}.[0-9]{2}")
+        self.price = self.price_button.text()
+        valid =  self.pattern.match(self.price)
+        if valid:
+                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+        else:
+                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+        
     
+    def validate_size(self):
+        self.pattern = re.compile("[0-9]")
+        self.size = self.size_integer.text()
+        valid =  self.pattern.match(self.size)
+        if len(self.size) > 0 and len(self.size) <= 5:
+            if valid:
+                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+        else:
+            self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
         
-        
+    def validate_stock1(self):
+        self.pattern = re.compile("[0-9]")
+        self.stock = self.location1.text()
+        valid =  self.pattern.match(self.stock)
+        if len(self.stock) > 0 and len(self.stock) <= 2:
+            if valid:
+                self.location1.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+        else:
+            self.location1.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+
+    def validate_stock2(self):
+        self.pattern = re.compile("[0-9]")
+        self.stock = self.location2.text()
+        valid =  self.pattern.match(self.stock)
+        if len(self.stock) > 0 and len(self.stock) <= 2:
+            if valid:
+                self.location2.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+        else:
+            self.location2.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+
         
         
         
