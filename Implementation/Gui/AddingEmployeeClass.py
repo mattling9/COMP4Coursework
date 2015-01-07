@@ -98,7 +98,7 @@ class addEmployeeClass(QWidget):
         self.pop_up_instance = PopUpWindow("Beacon Vets Adding Employee", 300, 100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are You Sure You Want To Add The Empoyee?")
+        self.label = QLabel("Are You Sure You Want To Add The Employee?")
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)

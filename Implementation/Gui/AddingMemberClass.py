@@ -1,3 +1,5 @@
+import csv, re
+
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
@@ -32,6 +34,7 @@ class addMemberClass(QWidget):
                 #Find Button
                 self.find_button = QPushButton("Find...")
                 self.find_button.setEnabled(False)
+                self.find_button.clicked.connect(self.FindPostcode)
 
                     
                 self.postcode_tickbox.stateChanged.connect(self.change_button)
@@ -42,11 +45,14 @@ class addMemberClass(QWidget):
                 self.postcode_widget = QWidget()
                 self.postcode_label = QLabel("Postcode: ")
                 self.postcode = QLineEdit()
+                #self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
                 self.postcode.setPlaceholderText("Postcode: i.e(CB7 5LQ) ")
                 self.postcode_layout.addWidget(self.postcode_label)
                 self.postcode_layout.addWidget(self.postcode)
                 self.postcode_layout.addWidget(self.find_button)
                 self.postcode_widget.setLayout(self.postcode_layout)
+                self.postcode.textChanged.connect(self.ValidatePostcode)
+                
 
                 #County
                 self.county_layout = QHBoxLayout()
@@ -192,4 +198,29 @@ class addMemberClass(QWidget):
                 self.pop_up_instance.close()
         
 
+        def FindPostcode(self):
+                self.address_list = []
+                with open("CumbriaPostcodes.csv", "r")as postcode_file:
+                        self.postcodes = csv.reader(postcode_file)
+                        for item in self.postcodes:
+                                self.address_list.append(item)
+
+                        self.postcode_input = self.postcode.text()
+                        self.postcode_input = self.postcode_input.upper()
+                        for count in range(0, len(self.address_list)):
+                                if self.postcode_input in self.address_list[count]:
+                                        self.postcode.setText(self.address_list[count][0])
+                                        self.county.setText(self.address_list[count][2])
+                                        self.town.setText(self.address_list[count][1])
+        def ValidatePostcode(self):
+                pattern = re.compile("[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}")
+                PostCode = self.postcode.text()
+                self.postcode.setText(PostCode.upper())
+                valid =  pattern.match(PostCode.upper())
+                if valid:
+                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                else:
+                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+                        
     
+

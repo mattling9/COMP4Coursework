@@ -25,8 +25,8 @@ class DatabaseClass(QWidget):
         self.database_widget = QWidget()
         self.database_layout.addWidget(self.current_database_label, 0,0)
         self.database_layout.addWidget(self.database_path, 0,1)
-        self.database_layout.addWidget(self.open_database, 1,1)
-        self.database_layout.addWidget(self.new_database, 1,0)
+        self.database_layout.addWidget(self.open_database, 1,0)
+        #self.database_layout.addWidget(self.new_database, 1,0)
         self.database_widget.setLayout(self.database_layout)
 
         self.main_layout = QVBoxLayout()
@@ -35,9 +35,10 @@ class DatabaseClass(QWidget):
         self.setLayout(self.main_layout)
 
     def get_database(self):
-        fileName = QFileDialog.getOpenFileName()
-        self.database_path.setText(fileName)
-        self.connection = SQLConnection(fileName)
+        path = QFileDialog.getOpenFileName()
+        self.database_path.setText(path)
+        self.connection = SQLConnection(path)
+        self.open_database
         database = self.connection.open_database()
         time.sleep(0.5)
         self.CreatePopUpWindow()
