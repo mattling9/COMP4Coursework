@@ -12,6 +12,7 @@ from CreatingOrderClass import *
 from PopUpMenuClass import *
 from DatabaseClass import *
 from SQLConnection import *
+from CreatingTable import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""

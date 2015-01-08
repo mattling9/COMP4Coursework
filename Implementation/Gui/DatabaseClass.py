@@ -3,6 +3,7 @@ import shutil, time
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from SQLConnection import *
+from CreatingTable import *
 from PopUpMenuClass import *
 
 class DatabaseClass(QWidget):

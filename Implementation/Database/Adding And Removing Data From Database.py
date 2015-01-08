@@ -105,12 +105,14 @@ def addingProduct():
     name = input("Enter Product Name To Add: ")
     size = input("Enter Product Size To Add: ")
     price = input("Enter Product Price To Add (0.00): ")
-    Product = (name,size,price)
+    location1 = input("Enter Stock in location 1")
+    location2 = input("Enter Stock in location 2")
+    Product = (name,size,price,location1,location2)
     insert_product_data(Product)
 def insert_product_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Product (ProductName, Size, Price) values(?,?,?)"
+        sql = "insert into Product (ProductName, Size, Price, Location1, Location2) values(?,?,?,?,?)"
         cursor.execute(sql,values)
         db.commit()
 
@@ -167,14 +169,13 @@ def delete_member(data):
 def addingEmployee():
     EmployeeFirstName = input("Enter Employee First Name")
     EmployeeLastName = input("Enter Employee Last Name")
-    Password = input("Enter Employee Password")
     EmployeeEmail = input("Enter Employee Email")
-    Employee = (EmployeeFirstName,EmployeeLastName,Password,EmployeeEmail)
+    Employee = (EmployeeFirstName,EmployeeLastName,EmployeeEmail)
     insert_employee_data(Employee)
 def insert_employee_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Employee (EmployeeFirstName, EmployeeLastName, Password, EmployeeEmail) values(?,?,?,?)"
+        sql = "insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?)"
         cursor.execute(sql,values)
         db.commit()
 

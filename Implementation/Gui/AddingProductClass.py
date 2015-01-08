@@ -3,6 +3,7 @@ import shutil, re
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from AddingRemovingData import *
 
 class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
@@ -21,6 +22,8 @@ class addProductClass(QWidget):
         #Price
         self.pound = QLabel("Price: £")
         self.price_button = QLineEdit("")
+        self.validator = QDoubleValidator()
+        self.price_button.setValidator(self.validator)
         self.price_button.textChanged.connect(self.validate_price)
         self.price_button.setPlaceholderText("Price: £0.00")
         self.price_widget = QWidget()
@@ -34,6 +37,8 @@ class addProductClass(QWidget):
         self.size_layout = QHBoxLayout()
         self.size_widget = QWidget()
         self.size_integer = QLineEdit()
+        self.validator = QIntValidator()
+        self.size_integer.setValidator(self.validator)
         self.size_integer.textChanged.connect(self.validate_size)
         self.size_integer.setPlaceholderText("Size: (750)")
         self.size_button = QComboBox()
@@ -68,11 +73,15 @@ class addProductClass(QWidget):
         #Location 1
         self.location1 = QLineEdit()
         self.location1.setPlaceholderText("Stock In Location 1...")
+        self.validator = QIntValidator()
+        self.location1.setValidator(self.validator)
         self.location1.textChanged.connect(self.validate_stock1)
 
         #Location 2
         self.location2 = QLineEdit()
         self.location2.setPlaceholderText("Stock In Location 2...")
+        self.validator = QIntValidator()
+        self.location2.setValidator(self.validator)
         self.location2.textChanged.connect(self.validate_stock2)
 
         #Done
@@ -195,7 +204,7 @@ class addProductClass(QWidget):
         self.image.setPixmap(self.scaled_image)
 
     def clicked_yes(self):
-        pass
+        self.addingProduct(##############################################################################
 
 
     def clicked_no(self):
@@ -206,6 +215,7 @@ class addProductClass(QWidget):
     def validate_name(self):
         valid = False
         self.name = self.product_name.text()
+        self.product_name.setText(self.name.capitalize())
         if len(self.name) > 3 and len(self.name) < 32:
             valid = True
         
@@ -219,6 +229,7 @@ class addProductClass(QWidget):
         valid = False
         self.pattern = re.compile("[0-9]{1,3}.[0-9]{2}")
         self.price = self.price_button.text()
+        self.price_button.setText(self.price)
         valid =  self.pattern.match(self.price)
         if valid:
                 self.price_button.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")

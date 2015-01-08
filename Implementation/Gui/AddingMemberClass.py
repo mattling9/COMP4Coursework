@@ -227,6 +227,7 @@ class addMemberClass(QWidget):
                                         self.index = self.county.findText(self.address_list[count][2])
                                         self.county.setCurrentIndex(self.index)
                                         self.town.setText(self.address_list[count][1])
+                                        self.validate_town
 
         def get_counties(self):
                 with open("Counties.txt",mode="r",encoding="utf-8") as myFile:
@@ -287,7 +288,7 @@ class addMemberClass(QWidget):
                 self.pattern = re.compile("[A-Z]")
                 self.town.setText(self.Town.capitalize())
                 valid = self.pattern.match(self.Town.upper())
-                if len(self.Town) > 1 and len(self.Town) < 18:
+                if len(self.Town) > 3 and len(self.Town) < 32:
                         if valid:
                                 self.town.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
                 else:
@@ -299,7 +300,7 @@ class addMemberClass(QWidget):
                 self.pattern = re.compile("[A-Z]")
                 self.street.setText(self.Street.capitalize())
                 valid = self.pattern.match(self.Street.upper())
-                if len(self.Street) > 1 and len(self.Street) < 18:
+                if len(self.Street) > 3 and len(self.Street) < 18:
                         if valid:
                                 self.street.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
                 else:
@@ -311,7 +312,7 @@ class addMemberClass(QWidget):
                 self.pattern = re.compile("[0-9]{11}")
                 self.telephone_number.setText(self.Number.capitalize())
                 valid = self.pattern.match(self.Number.upper())
-                if len(self.Number) > 1 and len(self.Number) < 18:
+                if len(self.Number) > 3 and len(self.Number) < 18:
                         if valid:
                                 self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
                 else:
@@ -319,7 +320,7 @@ class addMemberClass(QWidget):
 
         def validate_email(self):
                 self.Email = self.email.text()
-                self.pattern = re.compile("[A-Z]@[A-Z]{2}")
+                self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
                 valid = self.pattern.match(self.Email.upper())
                 if valid:
                         self.email.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
