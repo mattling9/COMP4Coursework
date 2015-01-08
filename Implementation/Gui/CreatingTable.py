@@ -24,11 +24,11 @@ def create_table(db_name,table_name, sql):
 def create_product_table():
     sql = """create table Product
               (ProductID integer,
-              ProductName text,
+              ProductName string,
               Size string,
-              Price real,
-              Location1 integer,
-              Location2 integer,
+              Price string,
+              Location1 string,
+              Location2 string,
               Primary Key(ProductID))"""
     create_table(db_name, "Product", sql)
 
@@ -36,9 +36,10 @@ def create_product_table():
 def create_employee_table():
     sql = """create table Employee
               (EmployeeID integer,
+              EmployeeUserName text,
               EmployeeFirstName text,
               EmployeeLastName text,
-              EmployeeEmail float,
+              EmployeeEmail text,
               Primary Key(EmployeeID))"""
     create_table(db_name, "Employee", sql)
 

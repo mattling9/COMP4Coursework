@@ -3,6 +3,7 @@ import csv, re
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from AddingRemovingData import *
 
 class addMemberClass(QWidget):
         """a representation of Adding an Member"""
@@ -204,13 +205,48 @@ class addMemberClass(QWidget):
                 self.pop_up_instance.show()
                 self.pop_up_instance.raise_()
 
+        def AddMemberSucess(self):
+                self.add_member_instance = PopUpWindow("Beacon Vets Adding Member", 300, 100)
+                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+                self.add_member_instance.setWindowIcon(self.icon)
+                self.label = QLabel("Member Sucessfully Added!")
+                self.label.setAlignment(Qt.AlignCenter)
+                self.buttonBox = QDialogButtonBox()
+                self.buttonBox.setOrientation(Qt.Horizontal)
+                self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+                self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+                self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+                self.pop_up_layout = QVBoxLayout()
+                self.pop_up_widget = QWidget()
+                self.pop_up_layout.addWidget(self.label)
+                self.pop_up_layout.addWidget(self.buttonBox)
+                self.pop_up_widget.setLayout(self.pop_up_layout)
+                self.add_member_instance.setCentralWidget(self.pop_up_widget)
+                self.add_member_instance.move(800,450)
+                self.add_member_instance.show()
+                self.add_member_instance.raise_()
+
         def clicked_yes(self):
-                pass
+                addingMember(self.name_title.currentText(),
+                             self.first_name.text(),
+                             self.last_name.text(),
+                             self.houseno.value(),
+                             self.street.text(),
+                             self.town.text(),
+                             self.city.text(),
+                             self.county.currentText(),
+                             self.postcode.text(),
+                             self.telephone_number.text(),
+                             self.email.text())
+                self.AddMemberSucess()
 
 
         def clicked_no(self):
                 self.pop_up_instance.close()
-        
+
+        def close_pop_ups(self):
+                self.add_member_instance.close()
+                self.pop_up_instance.close()
 
         def FindPostcode(self):
                 self.address_list = []

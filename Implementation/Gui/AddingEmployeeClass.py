@@ -1,6 +1,8 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from AddingRemovingData import *
+
 
 class addEmployeeClass(QWidget):
     """a representation of Adding an Employee"""
@@ -13,7 +15,7 @@ class addEmployeeClass(QWidget):
         self.user_name_layout = QHBoxLayout()
         self.user_name_label = QLabel("Username: ")
         self.user_name_label.setFixedWidth(80)
-        self.user_name_output = QLineEdit("mling34")
+        self.user_name_output = QLineEdit("")
         self.user_name_output.setReadOnly(True)
         self.user_name_layout.addWidget(self.user_name_label)
         self.user_name_layout.addWidget(self.user_name_output)
@@ -25,9 +27,9 @@ class addEmployeeClass(QWidget):
         self.first_name_layout = QHBoxLayout()
         self.first_name_label = QLabel("First Name: ")
         self.first_name_label.setFixedWidth(80)
-        self.first_name = QLineEdit()
+        self.first_name = QLineEdit("")
         self.first_name.setPlaceholderText("First Name")
-        self.first_name_output = QLineEdit("Matt")
+        self.first_name_output = QLineEdit("")
         self.first_name_output.setReadOnly(True)
         self.first_name_layout.addWidget(self.first_name_label)
         self.first_name_layout.addWidget(self.first_name_output)
@@ -38,9 +40,9 @@ class addEmployeeClass(QWidget):
         self.last_name_layout = QHBoxLayout()
         self.last_name_label = QLabel("Last Name: ")
         self.last_name_label.setFixedWidth(80)
-        self.last_name = QLineEdit()
+        self.last_name = QLineEdit("")
         self.last_name.setPlaceholderText("Last Name")
-        self.last_name_output = QLineEdit("Ling")
+        self.last_name_output = QLineEdit("")
         self.last_name_output.setReadOnly(True)
         self.last_name_layout.addWidget(self.last_name_label)
         self.last_name_layout.addWidget(self.last_name_output)
@@ -53,11 +55,12 @@ class addEmployeeClass(QWidget):
         self.email_address_label.setFixedWidth(80)
         self.email_address = QLineEdit()
         self.email_address.setPlaceholderText("Email Address")
-        self.email_address_output = QLineEdit("mattling9@gmail.com")
+        self.email_address_output = QLineEdit("")
         self.email_address_output.setReadOnly(True)
         self.email_address_layout.addWidget(self.email_address_label)
         self.email_address_layout.addWidget(self.email_address_output)
         self.email_address_widget.setLayout(self.email_address_layout)
+        
 
         #Submit
         self.submit_button = QPushButton("Submit")
@@ -90,6 +93,14 @@ class addEmployeeClass(QWidget):
         self.setLayout(self.main_layout)
 
     def update_preview(self):
+        first_name = self.first_name.text().strip('"')
+        last_name = self.last_name.text().strip('"')
+        product_id = "11"
+        full_name_list = [first_name[:1], last_name, product_id]
+        user_name = ""
+        self.user_name = user_name.join(full_name_list)
+        print(self.user_name)
+        self.user_name_output.setText(self.user_name)
         self.first_name_output.setText(self.first_name.text())
         self.last_name_output.setText(self.last_name.text())
         self.email_address_output.setText(self.email_address.text())
@@ -115,9 +126,38 @@ class addEmployeeClass(QWidget):
         self.pop_up_instance.show()
         self.pop_up_instance.raise_()
 
+    def AddEmployeeSucess(self):
+        self.add_employee_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.add_employee_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Employee Sucessfully Added!")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.add_employee_instance.setCentralWidget(self.pop_up_widget)
+        self.add_employee_instance.move(800,450)
+        self.add_employee_instance.show()
+        self.add_employee_instance.raise_()
+
     def clicked_yes(self):
-        pass
+        addingEmployee(self.user_name,
+                       self.first_name.text(),
+                       self.last_name.text(),
+                       self.email_address.text())
+        self.AddEmployeeSucess()
 
 
     def clicked_no(self):
+        self.pop_up_instance.close()
+
+    def close_pop_ups(self):
+        self.add_employee_instance.close()
         self.pop_up_instance.close()

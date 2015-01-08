@@ -173,7 +173,7 @@ class addProductClass(QWidget):
         self.pop_up_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are You Sure You Want To Add The Product?")
+        self.label = QLabel("Are you sure you want to Add The Product?")
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -190,6 +190,27 @@ class addProductClass(QWidget):
         self.pop_up_instance.show()
         self.pop_up_instance.raise_()
 
+    def AddProductSucess(self):
+        self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.add_product_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Product Sucessfully Added!")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.add_product_instance.setCentralWidget(self.pop_up_widget)
+        self.add_product_instance.move(800,450)
+        self.add_product_instance.show()
+        self.add_product_instance.raise_()
+
     def get_image_path(self):
         path =  QFileDialog.getOpenFileName()
         self.path.setText(path)
@@ -204,10 +225,20 @@ class addProductClass(QWidget):
         self.image.setPixmap(self.scaled_image)
 
     def clicked_yes(self):
-        self.addingProduct(##############################################################################
+        self.size_list = [self.size_integer.text(), self.size_button.currentText()]
+        self.temp = ""
+        self.size_string = self.temp.join(self.size_list)
+        addingProduct(self.product_name.text(), self.size_string, self.price_button.text(), self.location1.text(), self.location2.text())
+        self.AddProductSucess()
+        
+        
 
 
     def clicked_no(self):
+        self.pop_up_instance.close()
+
+    def close_pop_ups(self):
+        self.add_product_instance.close()
         self.pop_up_instance.close()
 
 

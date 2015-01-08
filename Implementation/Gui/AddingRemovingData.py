@@ -49,13 +49,13 @@ def delete_member(data):
 
 #-----------------------------------------Employee-----------------------------------------
 
-def addingEmployee(EmployeeFirstName,EmployeeLastName,EmployeeEmail):
-    Employee = (EmployeeFirstName,EmployeeLastName,EmployeeEmail)
+def addingEmployee(EmployeeUsername,EmployeeFirstName,EmployeeLastName,EmployeeEmail):
+    Employee = (EmployeeUsername,EmployeeFirstName,EmployeeLastName,EmployeeEmail)
     insert_employee_data(Employee)
 def insert_employee_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?)"
+        sql = "insert into Employee ( EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?,?)"
         cursor.execute(sql,values)
         db.commit()
 

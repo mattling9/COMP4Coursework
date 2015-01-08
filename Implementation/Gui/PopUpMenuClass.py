@@ -6,3 +6,5 @@ class PopUpWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle(title)
         self.resize(width, height)
+
+    
