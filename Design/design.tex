@@ -445,6 +445,104 @@ Looking at Figure 2.16 we can see that our problems have been resolved. The emai
 \pagebreak
 
 
+A simple test i needed to do, was to find out how to make a button clickable or not, depending on the state of a checkbox. Below is an example of what i want to implement into my system:
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{ToggleFindBefore1.png}\hspace*{\fill}
+\end{figure}
+
+Here, the tickbox is currently not checked. When the tickbox is not checked i do not want the button to be clickable. However when the user checks the checkbox, i want the button to become clickable. This means that i am going to have to connect a method to the checkbox when it is clicked.
+\begin{python}
+self.postcode_tickbox.stateChanged.connect(self.change_button_method)
+\end{python}
+The line above runs the change_button_method whenever the the state of the checkbox is changed (whenever it is checked or unchecked.) In the change_button_method, i need to determine the current state of the checkbox, in order to know whether to change the button to clickable or not clickable.
+
+\begin{python}
+self.postcode_tickbox.checkState()
+\end{python}
+
+when run, the line above will return true if the checkbox is checked or will return false if the box is not checked. I will also need to change the button to clickable or not clickable. The code below is how to do it.
+
+\begin{python}
+self.find_button.setEnabled(False)
+\end{python}
+
+When set to False, the button is not clickable, however when set to True, the button becomes clickable. Finally i need to add an IF statement to say for example, IF the checkbox is currently checked, change the push button so it is clickable. The final working IF function is displayed below within the "change_button_method" method.
+
+\begin{python}
+def change_button(self):
+        if self.postcode_tickbox.checkState() == False:
+            self.find_button.setEnabled(False)
+        else:
+            self.find_button.setEnabled(True)
+\end{python}
+
+this now changes the state of the push button depending on whether the checkbox is checked or not. Below is evidence of the test sucessfully working:
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{ToggleFindAfter1.png}\hspace*{\fill}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{ToggleFindAfter2.png}\hspace*{\fill}
+\end{figure}
+
+The User will be able to click the checkbox if they live in Cumbria. They can then enter their postcode and click the find button. Once they click the find button i want the system to be able to find information about their location and to be able to automatically fill it in for them i.e their town, street ect. In order to do this i will need an Array of data containing The relevent information for each postcode. Creating this large array manually in Python is a bad idea as it would take an enormous amount of time and would be an incredibly tedeous process.
+
+ Instead, i did some research and found a CSV File online containing The Postcode, Latitude, Longitude, Town and County of every location in england. This file was 500Mb, which i felt was too large to store the information about every postcode in england.Therefore, i decided just to use the postcodes in Cumbria because this is where the business is situated and where the vast majority of the customers will be from. This reduced the file size to 556Kb which is a much more manageable size. I removed the columns containing the Longitude and Latitude of the location as this information will not be relevent within my system.After removing The irellivent postcodes and information the file size was reduced to 30Kb. The screenshot below shows what the CSV looks like:
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{PostcodeScreenshot.png}\hspace*{\fill}
+\end{figure}
+
+I want my system to be able to see if the postcode the user entered is in the file, and if it use, use the corresponding data to fill out the Town and County automatically. In order to use the data in the CSV file i have to import the csv module in python. Then, in order to use the data within the file i use the line:
+
+\begin{python}
+with open("CumbriaPostcodes.csv", "r")as postcode_file:
+                        self.postcodes = csv.reader(postcode_file)
+                        for item in self.postcodes:
+                                self.address_list.append(item)
+\end{python}
+
+The line above opens the CSV file. "with open("CumbriaPostcodes.csv", "r")as postcode_file:"" Tells python that it needs to open the file "CumbriaPostcodes.csv, which is the name of the file containing the postcodes and the "r" tells python that i only want to read the data from it. If i wanted to add data i could use either "a" or "w". "self.postcodes = csv.reader(postcode_file)" assigns self.postcodes to the postcode file. The data within the csv can now be used in python. I now want to Add each Address (Postcode, County and Town) to a list to create an Array. This is done simply by saying:
+\begin{python}
+ for item in self.postcodes:
+                                self.address_list.append(item)
+\end{python}
+
+This says that for every line in the csv file, add that line to the self.address_list list. Using self.postcode_entered as the variable that contains the string of the postcode the user enters, I can see if that postcode is in the file by doing:
+\begin{python}
+for count in range(0, len(self.address_list)):
+                                if self.postcode_input in self.address_list[count]:
+\end{python}
+
+The FOR loop is run once for each item in the list. In this case its 19,363 times. Then for each address, it checks whether the postcode the user entered matches the postcode for that address. If they do match i want the system to get the county and town and then insert that data to the . If the postcodes do not match, it should move to the next adress in the array. If the postcode doesn't match any of the postcodes, an appropriote message should be displayed. The following code simply Assigns the County and Town from the CSV File to the Coutny and Town Data Fields in my system:
+\begin{python}
+self.index = self.county.findText(self.address_list[count][2])
+                                        self.county.setCurrentIndex(self.index)
+                                        self.town.setText(self.address_list[count][1])
+\end{python}
+
+ self.county is a combo box containg all the counties in England. The user simply selects the county from the list. "self.index = self.county.findText(self.address_list[count][2])" Looks in the county combo box and finds the index of the County that matches the postcode, this index is then assigned to self.index.  "self.county.setCurrentIndex(self.index)" simply changes the current index of the combo box to the index of the matching county. Because self.town is a line edit, this can just be directly assigned to the town from the matching address. This is done using: "self.town.setText(self.address_list[count][1])". Below is the working example of the test working:
+
+Here we can see that 'CA7 4QT' is a legitimate postcode in the csv file.
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
+\end{figure}
+
+The postcode is then entered into the postcode field, the checkbox is ticked which enables the find button and the find button is clicked. The find button is connected to the "find_postcode_method" method. Once the button is clicked, you can see that the data fields have been changed correctly. The fields highlighted in green shows that the data is valid.
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
+\end{figure}
+
+
 \section{Definition of Data Requirements}
 
 \subsection{Identification of all data input items}

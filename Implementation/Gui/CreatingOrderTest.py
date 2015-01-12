@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         #display table
         title_list = ["Product ID","Product Name","Price","Size","Category"]
         self.display_table.setHorizontalHeaderLabels(title_list)
-
+        self.table_widget.setHorizontalHeaderLabels(title_list)
         #Finding product group box
         find_product_box = QGroupBox("Finding Product")
         find_product_layout = QVBoxLayout()

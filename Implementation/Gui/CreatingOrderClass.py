@@ -1,3 +1,4 @@
+from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
@@ -26,24 +27,28 @@ class createOrderClass(QWidget):
         self.category_widget = QWidget()
         self.category_widget.setLayout(self.category_layout)
 
-        #Product Display Table
-        self.display_table = QTableWidget()
-        self.display_table.setRowCount(7)
-        self.display_table.setColumnCount(5)
-        self.table_widget = QTableWidget()
-        self.table_widget.setRowCount(3)
-        self.table_widget.setColumnCount(5)        
+      #Product Display Table
+        self.display_table = QTableView()
+        self.display_table_layout = QVBoxLayout()
+        self.display_table_layout.addWidget(self.display_table)
+        self.display_table_widget = QWidget()
+        self.display_table_widget.setLayout(self.display_table_layout)
+        self.model = None
+        if not self.model or not isinstance(self.model, QSqlTableModel):
+            self.model = QSqlTableModel()
+        self.model.setTable("Product")
+        self.model.select()
+        self.display_table.setModel(self.model)
+        self.display_table.show()
+        
 
         #display table
-        title_list = ["Product ID","Product Name","Price","Size","Category"]
-        self.display_table.setHorizontalHeaderLabels(title_list)
-
         #Finding product group box
-        find_product_box = QGroupBox("Finding Product")
-        find_product_layout = QVBoxLayout()
-        find_product_layout.addWidget(self.category_widget)
-        find_product_layout.addWidget(self.display_table)
-        find_product_box.setLayout(find_product_layout)
+        self.find_product_box = QGroupBox("Finding Product")
+        self.find_product_layout = QVBoxLayout()
+        self.find_product_layout.addWidget(self.category_widget)
+        self.find_product_layout.addWidget(self.display_table_widget)
+        self.find_product_box.setLayout(self.find_product_layout)
 
         self.subtotal_label = QLabel("Subtotal:")
         self.subtotal_label.setAlignment(Qt.AlignRight)
@@ -87,19 +92,13 @@ class createOrderClass(QWidget):
         #order_group_box
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
-        self.order_layout.addWidget(self.table_widget)
         self.order_layout.addWidget(self.price_widget)
         self.order_box.setLayout(self.order_layout)
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.find_product_box)
+        self.main_layout.addWidget(self.order_box)
+        self.setLayout(self.main_layout)
 
-        
-
-        self.table_layout = QVBoxLayout()
-        self.table_layout.addWidget(find_product_box)
-        self.table_layout.addWidget(self.order_box)
-        self.table_layout.addWidget(self.invoice_widget)
-        self.table_widget = QWidget()
-        self.table_widget.setFixedSize(580,500)
-        self.setLayout(self.table_layout)
 
     def preview_invoice_clicked(self):
         self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
