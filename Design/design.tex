@@ -199,7 +199,14 @@ When The user has finished using the system, they can return to the Product Sear
 \hfill\includegraphics[width = 6cm]{UIDProductSeachInterfaceMenus.pdf}\hspace*{\fill}
 \end{figure}
 
-Looking at Figure 2.14 and referring back to Figure 2.13, we can see the options that appear when each tab is clicked. Each option has a symbol next to it to easily identify the option the user wants. When add new product is selected, the user is taken to the add new product interface. Deleting a Product / Member / Employee Account will ask for the ID for the item they user wants to delete, then remove all the data relating to the ID from the sytem. The Manage Stock, Add New Member and Add new Employee buttons will take the user to the corresponding interface. Clicking on The Product Restock Button Will Open up a new tab that shows all of the products that need to be re-stocked. \par
+Looking at Figure 2.14 and referring back to Figure 2.13, we can see the options that appear when each tab is clicked. Each option has a symbol next to it to easily identify the option the user wants. When add new product is selected, the user is taken to the add new product interface. Deleting a Product / Member / Employee Account will ask for the ID for the item they user wants to delete, then remove all the data relating to the ID from the sytem. The Manage Stock, Add New Member and Add new Employee buttons will take the user to the corresponding interface. To navigate between the pages, the user can will use the menu to select the page they want to go to. For example, if the user is on the Add new Product screen and wants to go to the Add new Member, They go to The Member Menu then select Add new Member. Their current page will then change to the new page they selected. An example of this is shown below:\par
+
+\begin{figure}[H]
+\caption{Right Click Options For MenuBars} \label{fig:Right Click Options For MenuBars}
+\hfill\includegraphics[width = 6cm]{ChangingInterfaceDiagram.pdf}\hspace*{\fill}
+\end{figure}
+
+\pagebreak
 
 \begin{figure}[H]
 \caption{Adding a New Product} \label{fig:Adding a New Product Interface}
@@ -280,14 +287,14 @@ I have decided that my client does not mandatory need to purchase any further ha
 
 \begin{landscape}
 \begin{figure}[H]
-\caption{Password Reset Flowchart} \label{fig:Password Reset Flowchart}
+\caption{Changing Stock Structure Chart} \label{fig:SotckStructureChart}
 \hfill\includegraphics[scale=0.65]{TDSC1.pdf}\hspace*{\fill}
 \end{figure}
 
 
 
 \begin{figure}[H]
-\caption{Password Reset Flowchart} \label{fig:Password Reset Flowchart}
+\caption{Password Reset Structure Chart} \label{fig:PasswordStructureChart}
 \hfill\includegraphics[scale=0.65]{TDSC2.pdf}\hspace*{\fill}
 \end{figure}
 \end{landscape}
@@ -471,7 +478,7 @@ self.find_button.setEnabled(False)
 When set to False, the button is not clickable, however when set to True, the button becomes clickable. Finally i need to add an IF statement to say for example, IF the checkbox is currently checked, change the push button so it is clickable. The final working IF function is displayed below within the "change_button_method" method.
 
 \begin{python}
-def change_button(self):
+def change_button_method(self):
         if self.postcode_tickbox.checkState() == False:
             self.find_button.setEnabled(False)
         else:
@@ -492,14 +499,14 @@ this now changes the state of the push button depending on whether the checkbox 
 
 The User will be able to click the checkbox if they live in Cumbria. They can then enter their postcode and click the find button. Once they click the find button i want the system to be able to find information about their location and to be able to automatically fill it in for them i.e their town, street ect. In order to do this i will need an Array of data containing The relevent information for each postcode. Creating this large array manually in Python is a bad idea as it would take an enormous amount of time and would be an incredibly tedeous process.
 
- Instead, i did some research and found a CSV File online containing The Postcode, Latitude, Longitude, Town and County of every location in england. This file was 500Mb, which i felt was too large to store the information about every postcode in england.Therefore, i decided just to use the postcodes in Cumbria because this is where the business is situated and where the vast majority of the customers will be from. This reduced the file size to 556Kb which is a much more manageable size. I removed the columns containing the Longitude and Latitude of the location as this information will not be relevent within my system.After removing The irellivent postcodes and information the file size was reduced to 30Kb. The screenshot below shows what the CSV looks like:
+ Instead, i did some research and found a CSV File online containing The Postcode, Latitude, Longitude, Town and County of every location in england. This file was 500Mb, which i felt was too large to store the information about every postcode in england.Therefore, i decided just to use the postcodes in Cumbria because this is where the business is situated and where the vast majority of the customers will be from. I removed the columns containing the Longitude and Latitude of the location as this information will not be relevent within my system.After removing The irellivent postcodes and information the file size was reduced to 556Kb. The screenshot below shows what the CSV looks like:
 
 \begin{figure}[H]
 \caption{Results From Test 2} \label{fig:Results From Test 2}
 \hfill\includegraphics[width = 15cm]{PostcodeScreenshot.png}\hspace*{\fill}
 \end{figure}
 
-I want my system to be able to see if the postcode the user entered is in the file, and if it use, use the corresponding data to fill out the Town and County automatically. In order to use the data in the CSV file i have to import the csv module in python. Then, in order to use the data within the file i use the line:
+I want my system to be able to see if the postcode the user entered is in the file, and if it use, use the corresponding data to fill out the Town and County automatically. In order to use the data in the CSV file i have to import the csv module in python. This is doen simplying by doing \begin{python} import csv \end{python} Then, in order to use the data within the file i use the line:
 
 \begin{python}
 with open("CumbriaPostcodes.csv", "r")as postcode_file:
@@ -508,7 +515,8 @@ with open("CumbriaPostcodes.csv", "r")as postcode_file:
                                 self.address_list.append(item)
 \end{python}
 
-The line above opens the CSV file. "with open("CumbriaPostcodes.csv", "r")as postcode_file:"" Tells python that it needs to open the file "CumbriaPostcodes.csv, which is the name of the file containing the postcodes and the "r" tells python that i only want to read the data from it. If i wanted to add data i could use either "a" or "w". "self.postcodes = csv.reader(postcode_file)" assigns self.postcodes to the postcode file. The data within the csv can now be used in python. I now want to Add each Address (Postcode, County and Town) to a list to create an Array. This is done simply by saying:
+The code above opens the CSV file.  \begin{python} "with open("CumbriaPostcodes.csv", "r")as postcode_file:"\end{python} Tells python that it needs to open the file "CumbriaPostcodes.csv", which is the name of the file containing the postcodes and the "r" tells python that i only want to read the data from it. If i wanted to add data i could use either "a" or "w".  \begin{python} "self.postcodes = csv.reader(postcode_file)"  \end{python} assigns self.postcodes to the postcode file. The data within the csv can now be used in python. I now want to Add each Address (Postcode, County and Town) to a list to create an Array. This is done simply by saying:
+
 \begin{python}
  for item in self.postcodes:
                                 self.address_list.append(item)
@@ -520,16 +528,18 @@ for count in range(0, len(self.address_list)):
                                 if self.postcode_input in self.address_list[count]:
 \end{python}
 
-The FOR loop is run once for each item in the list. In this case its 19,363 times. Then for each address, it checks whether the postcode the user entered matches the postcode for that address. If they do match i want the system to get the county and town and then insert that data to the . If the postcodes do not match, it should move to the next adress in the array. If the postcode doesn't match any of the postcodes, an appropriote message should be displayed. The following code simply Assigns the County and Town from the CSV File to the Coutny and Town Data Fields in my system:
+The FOR loop is run once for each item in the list. In this case its 19,363 times. Then for each address, it checks whether the postcode the user entered matches the postcode for that address. If they do match i want the system to get the county and town and then insert that data to the data fields. If the postcodes do not match, it should move to the next address in the array. If the postcode doesn't match any of the postcodes, an appropriote message should be displayed. The following code simply Assigns the County and Town from the CSV File to the County and Town Data Fields in my system if the postcodes match:
+
 \begin{python}
 self.index = self.county.findText(self.address_list[count][2])
                                         self.county.setCurrentIndex(self.index)
                                         self.town.setText(self.address_list[count][1])
 \end{python}
 
- self.county is a combo box containg all the counties in England. The user simply selects the county from the list. "self.index = self.county.findText(self.address_list[count][2])" Looks in the county combo box and finds the index of the County that matches the postcode, this index is then assigned to self.index.  "self.county.setCurrentIndex(self.index)" simply changes the current index of the combo box to the index of the matching county. Because self.town is a line edit, this can just be directly assigned to the town from the matching address. This is done using: "self.town.setText(self.address_list[count][1])". Below is the working example of the test working:
+self.county is a combo box containg all the counties in England. The user simply selects the county from the list. \begin{python}"self.index = self.county.findText(self.address_list[count][2])" Looks in the county combo box and finds the index of the County that matches the postcode, this index is then assigned to self.index.\begin{python}  "self.county.setCurrentIndex(self.index)" \end{python}simply changes the current index of the combo box to the index of the matching county. Because self.town is a line edit, this can just be directly assigned to the town from the matching address. This is done using:\begin{python}"self.town.setText(self.address_list[count][1])".\end{python} Below is the working example of the test working:
 
 Here we can see that 'CA7 4QT' is a legitimate postcode in the csv file.
+
 \begin{figure}[H]
 \caption{Results From Test 2} \label{fig:Results From Test 2}
 \hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
@@ -539,7 +549,42 @@ The postcode is then entered into the postcode field, the checkbox is ticked whi
 
 \begin{figure}[H]
 \caption{Results From Test 2} \label{fig:Results From Test 2}
-\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
+\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence2.png}\hspace*{\fill}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence3.png}\hspace*{\fill}
+\end{figure}
+
+Another test which i had to prototype was when An image is assigned to a specific product, a copy of that image is stored in my system so if the user deletes the image, there will be a copy of it that the system can use. 
+
+An easy way to make a copy of a file in python is to use the Shutil module. to use this module, i simply imported it using "import shutil". using the method "shutil.copy()" you simply enter the path in which the file comes from including the file name, and then the new path including the new name of the file. To implement this into my system, i use a Dialog box to get the image path from the user, then use the path to copy the image. because im storing all the product images in the same folder, the path the images are going to will be the same. Each image will be named as its associated products ProductID, i.e (15.jpg). Below is a working example of the code where self.path.text() is the original path of the image, supplied by the user and the new path is the folder in which the files are stored.
+
+\begin{python}
+path = self.path.text()
+new_path = "./ProductImages/01.jpg"
+shutil.copy(path, new_path)
+\end{python}
+
+The last simple thing that i wanted to prototype was to ensure the postcode is legitimate before it is added. In order for the postcode to be valid it must follow a specific pattern of letters and numbers. I used a regular expression to validate the postcode. to use regular expressions, i simply imported the regular expression module: \begin{python}"import re".\end{python} then to create a regular expression i just did:
+\begin{python}
+self.pattern = re.compile("[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}")
+\end{python}
+ The regular expression above says that the postcode must have between 1 and 2 letters between A and Z, followed by an number between 0 and 9, then followed by either a number or a letter. after this the postcode must have a space then finally must end with a number between 0 and 9 and 2 letters between A and Z.
+
+to insure the postcode was between A and Z not a and z i used \begin{python}" postcode = postcode.upper()" \end{python}. this simply capitalized all the letters in the postcode.
+
+Below is an exmaple of a valid and a non valid postcode, if the postcode is valid, the system changes the background of the line edit from white to green.
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{ValidationTest1.png}\hspace*{\fill}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Results From Test 2} \label{fig:Results From Test 2}
+\hfill\includegraphics[width = 15cm]{ValidationTest2.png\hspace*{\fill}
 \end{figure}
 
 

@@ -26,7 +26,6 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('Status: Idle')
         self.connection = SQLConnection("ProductDatabase.db")
         open_db = self.connection.open_database()
-        print(open_db)
         self.Settings()
         self.stacked_layout = QStackedLayout()
         self.add_product()
@@ -41,7 +40,6 @@ class MainWindow(QMainWindow):
         self.add_employee()
         self.edit_employee()
         self.delete_employee()
-        self.database()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
@@ -278,18 +276,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.create_order_widget)
         self.stacked_layout.addWidget(self.create_order_widget)
 
-    def database(self):
-        self.title = self.create_title()
-        self.title.setText("Database Propities")
-
-        self.database_instance = DatabaseClass()
-        self.database_layout = QVBoxLayout()
-        self.database_widget = QWidget()
-        self.database_layout.addWidget(self.title)
-        self.database_layout.addWidget(self.database_instance)
-        self.database_widget.setLayout(self.database_layout)
-        self.setCentralWidget(self.database_widget)
-        self.stacked_layout.addWidget(self.database_widget)
 
         
     def Settings(self):
@@ -307,7 +293,6 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
-        self.database_action = QAction("Database", self)
         self.search_product_action = QAction("Product Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
         #Creating MenuBar
@@ -340,7 +325,6 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.edit_employee_action)
         self.employeemenu.addAction(self.remove_an_employee_action)
         self.optionsmenu = self.menu.addMenu("Options")
-        self.optionsmenu.addAction(self.database_action)
         self.optionsmenu.addAction(self.search_product_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
@@ -362,7 +346,6 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action.triggered.connect(self.add_an_employee_function)
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
-        self.database_action.triggered.connect(self.database_function)
         self.search_product_action.triggered.connect(self.search_product_function)
 
         #Set Menu Bar
@@ -414,9 +397,6 @@ class MainWindow(QMainWindow):
     def remove_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(11)
 
-    def database_function(self):
-        self.stacked_layout.setCurrentIndex(12)
-
     def search_product_function(self):
         self.FShortcut_instance = PopUpWindow("Find A Specific Product", 500, 200)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
@@ -454,12 +434,6 @@ class MainWindow(QMainWindow):
         self.connection = SQLConnection(path)
         ok = self.connection.open_database()
         print(ok)
-
-    def close_database_function(self):
-        if self.connection:
-            self.connection.close_database()
-        else:
-            print("no db to close")
 
 
 def main():
