@@ -8,61 +8,60 @@ class createOrderClass(QWidget):
     def __init__(self):
         super().__init__()
         self.category_layout = QHBoxLayout()
-        self.category_label = QLabel("Category")
+        self.category_label = QLabel("Find Product:")
         self.category_label.setFixedWidth(70)
-        self.category1_button = QComboBox()
-        self.category2_button = QComboBox()
-        self.category1_button.addItem("Dog")
-        self.category1_button.addItem("Cat")
-        self.category1_button.addItem("Fish")
-        self.category1_button.addItem("Small Pet")
-        self.category1_button.addItem("Bird")
-        self.category1_button.addItem("Reptile")
-        self.category1_button.addItem("Equine")
-        self.category2_button.addItem("Food")
-        self.category2_button.addItem("Health Care")
+        self.category_search = QLineEdit()
         self.category_layout.addWidget(self.category_label)
-        self.category_layout.addWidget(self.category1_button)
-        self.category_layout.addWidget(self.category2_button)
+        self.category_layout.addWidget(self.category_search)
         self.category_widget = QWidget()
         self.category_widget.setLayout(self.category_layout)
 
       #Product Display Table
         self.display_table = QTableView()
+        self.display_table.setFixedHeight(150)
         self.display_table_layout = QVBoxLayout()
         self.display_table_layout.addWidget(self.display_table)
         self.display_table_widget = QWidget()
         self.display_table_widget.setLayout(self.display_table_layout)
+        
         self.model = None
         if not self.model or not isinstance(self.model, QSqlTableModel):
             self.model = QSqlTableModel()
         self.model.setTable("Product")
         self.model.select()
         self.display_table.setModel(self.model)
+        self.display_table.hideColumn(4)
+        self.display_table.hideColumn(5)
+        column_width_list = [80, 330, 110, 85, 60]
+        counter = 0
+        for item in column_width_list:
+            self.display_table.setColumnWidth(counter, item)
+            counter += 1
         self.display_table.show()
         
-
-        #display table
         #Finding product group box
         self.find_product_box = QGroupBox("Finding Product")
+        self.add_product = QPushButton("Add Product")
+        self.add_product.setFixedWidth(100)
         self.find_product_layout = QVBoxLayout()
         self.find_product_layout.addWidget(self.category_widget)
         self.find_product_layout.addWidget(self.display_table_widget)
+        self.find_product_layout.addWidget(self.add_product)
         self.find_product_box.setLayout(self.find_product_layout)
 
-        self.subtotal_label = QLabel("Subtotal:")
+        self.subtotal_label = QLabel("Subtotal: £")
         self.subtotal_label.setAlignment(Qt.AlignRight)
-        self.total_label = QLabel("Total:")
+        self.total_label = QLabel("Total: £")
         self.total_label.setAlignment(Qt.AlignRight)
-        self.tax_label = QLabel("Tax:")
+        self.tax_label = QLabel("Tax: £")
         self.tax_label.setAlignment(Qt.AlignRight)
-        self.subtotal = QLineEdit("£12.99")
+        self.subtotal = QLineEdit("0.00")
         self.subtotal.setReadOnly(True)
         self.subtotal.setFixedWidth(50)
-        self.tax = QLineEdit("£0.50")
+        self.tax = QLineEdit("0.00")
         self.tax.setReadOnly(True)
         self.tax.setFixedWidth(50)
-        self.total = QLineEdit("£13.49")
+        self.total = QLineEdit("0.00")
         self.total.setReadOnly(True)
         self.total.setFixedWidth(50)
 
@@ -92,8 +91,22 @@ class createOrderClass(QWidget):
         #order_group_box
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
+        self.current_order = QTableWidget()
+        self.current_order.setColumnCount(5)
+        #self.current_order.setFixedWidth(300)
+        self.labels = ["Product ID","Product Name","Size","Price","Quantity"]
+        self.current_order.setHorizontalHeaderLabels(self.labels)
+        column_width_list = [80, 300, 110, 85, 60]
+        counter = 0
+        for item in column_width_list:
+            self.current_order.setColumnWidth(counter, item)
+            counter += 1
+        self.order_layout.addWidget(self.current_order)
         self.order_layout.addWidget(self.price_widget)
         self.order_box.setLayout(self.order_layout)
+
+
+
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.find_product_box)
         self.main_layout.addWidget(self.order_box)
