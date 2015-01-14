@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
+        self.create_new_order_function()
         
         
         
@@ -358,44 +359,57 @@ class MainWindow(QMainWindow):
 
     def add_product_function(self, product_name_info):
         self.stacked_layout.setCurrentIndex(0)
+        self.setFixedSize(700, 600)
 
     def edit_product_function(self):
         self.stacked_layout.setCurrentIndex(1)
-        
+        self.setFixedSize(700, 600)
+
     def delete_product_function(self):
         self.stacked_layout.setCurrentIndex(2)
+        self.setFixedSize(700, 600)
 
     def find_product_function(self):
         self.stacked_layout.setCurrentIndex(3)
+        self.setFixedSize(700, 600)
 
     def manage_stock_function(self):
         self.stacked_layout.setCurrentIndex(4)
+        self.setFixedSize(700, 600)
 
     def product_restock_function(self):
         self.stacked_layout.setCurrentIndex(0)
+        self.setFixedSize(700, 600)
 
     def create_new_order_function(self):
         self.stacked_layout.setCurrentIndex(5)
+        self.setFixedSize(700, 900)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
+        self.setFixedSize(700, 600)
 
     def edit_member_function(self):
         self.stacked_layout.setCurrentIndex(7)
+        self.setFixedSize(700, 600)
 
 
     def remove_a_member_function(self):
         self.stacked_layout.setCurrentIndex(8)
+        self.setFixedSize(700, 600)
 
     def add_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(9)
+        self.setFixedSize(700, 600)
 
     def edit_employee_function(self):
         self.stacked_layout.setCurrentIndex(10)
+        self.setFixedSize(700, 600)
     
 
     def remove_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(11)
+        self.setFixedSize(700, 600)
 
     def search_product_function(self):
         self.FShortcut_instance = PopUpWindow("Find A Specific Product", 500, 200)
@@ -427,14 +441,6 @@ class MainWindow(QMainWindow):
         self.FShortcut_instance.move(750,200)
         self.FShortcut_instance.show()
         self.FShortcut_instance.raise_()
-        
-
-    def set(self):
-        path = QFileDialog.getOpenFileName()
-        self.connection = SQLConnection(path)
-        ok = self.connection.open_database()
-        print(ok)
-
 
 def main():
     stock_control = QApplication(sys.argv) #creates new application

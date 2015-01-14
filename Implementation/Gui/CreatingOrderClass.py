@@ -23,30 +23,45 @@ class createOrderClass(QWidget):
         self.display_table_layout.addWidget(self.display_table)
         self.display_table_widget = QWidget()
         self.display_table_widget.setLayout(self.display_table_layout)
-        
+        self.display_table.selectRow(1)
         self.model = None
         if not self.model or not isinstance(self.model, QSqlTableModel):
             self.model = QSqlTableModel()
+
+
         self.model.setTable("Product")
         self.model.select()
         self.display_table.setModel(self.model)
         self.display_table.hideColumn(4)
         self.display_table.hideColumn(5)
-        column_width_list = [80, 330, 110, 85, 60]
+        column_width_list = [80, 300, 90, 75]
         counter = 0
         for item in column_width_list:
             self.display_table.setColumnWidth(counter, item)
             counter += 1
+
+        
+
+        self.display_table.horizontalHeader().setStretchLastSection(True)
+        self.display_table.verticalHeader().setStretchLastSection(True)
         self.display_table.show()
         
         #Finding product group box
-        self.find_product_box = QGroupBox("Finding Product")
+
+        self.table_layout = QVBoxLayout()
+
         self.add_product = QPushButton("Add Product")
         self.add_product.setFixedWidth(100)
+        
+        self.table_layout.addWidget(self.display_table)
+        self.table_layout.addWidget(self.add_product)
+        self.table_widget = QWidget()
+        self.table_layout.setAlignment(Qt.AlignCenter)
+        self.table_widget.setLayout(self.table_layout)
+        self.find_product_box = QGroupBox("Finding Product")
         self.find_product_layout = QVBoxLayout()
         self.find_product_layout.addWidget(self.category_widget)
-        self.find_product_layout.addWidget(self.display_table_widget)
-        self.find_product_layout.addWidget(self.add_product)
+        self.find_product_layout.addWidget(self.table_widget)
         self.find_product_box.setLayout(self.find_product_layout)
 
         self.subtotal_label = QLabel("Subtotal: £")
@@ -57,13 +72,13 @@ class createOrderClass(QWidget):
         self.tax_label.setAlignment(Qt.AlignRight)
         self.subtotal = QLineEdit("0.00")
         self.subtotal.setReadOnly(True)
-        self.subtotal.setFixedWidth(50)
+        self.subtotal.setFixedWidth(65)
         self.tax = QLineEdit("0.00")
         self.tax.setReadOnly(True)
-        self.tax.setFixedWidth(50)
+        self.tax.setFixedWidth(65)
         self.total = QLineEdit("0.00")
         self.total.setReadOnly(True)
-        self.total.setFixedWidth(50)
+        self.total.setFixedWidth(65)
 
         #Subtotal, Tax and Total Prices
         self.price_layout = QGridLayout()
@@ -91,18 +106,20 @@ class createOrderClass(QWidget):
         #order_group_box
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
-        self.current_order = QTableWidget()
-        self.current_order.setColumnCount(5)
+        self.current_order = QTableWidget(5,5)
         #self.current_order.setFixedWidth(300)
         self.labels = ["Product ID","Product Name","Size","Price","Quantity"]
         self.current_order.setHorizontalHeaderLabels(self.labels)
-        column_width_list = [80, 300, 110, 85, 60]
+        column_width_list = [80, 300, 90, 75]
         counter = 0
         for item in column_width_list:
             self.current_order.setColumnWidth(counter, item)
             counter += 1
+        self.current_order.horizontalHeader().setStretchLastSection(True)
+        self.current_order.verticalHeader().setStretchLastSection(True)
         self.order_layout.addWidget(self.current_order)
         self.order_layout.addWidget(self.price_widget)
+        self.order_layout.addWidget(self.invoice_widget)
         self.order_box.setLayout(self.order_layout)
 
 
