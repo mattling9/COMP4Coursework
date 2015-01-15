@@ -11,6 +11,7 @@ from ProductIDClass import *
 from CreatingOrderClass import *
 from PopUpMenuClass import *
 from DatabaseClass import *
+from FindingPopUpClass import *
 from SQLConnection import *
 from CreatingTable import *
 
@@ -277,6 +278,11 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.create_order_widget)
         self.stacked_layout.addWidget(self.create_order_widget)
 
+    def search(self):
+        self.search_instance = SearchClass()
+        self.search_instance.move(750,300)
+        self.search_instance.show()
+        self.search_instance.raise_()
 
         
     def Settings(self):
@@ -412,35 +418,8 @@ class MainWindow(QMainWindow):
         self.setFixedSize(700, 600)
 
     def search_product_function(self):
-        self.FShortcut_instance = PopUpWindow("Find A Specific Product", 500, 200)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.FShortcut_instance.setWindowIcon(self.icon)
-        self.label = QLabel()
-        self.pixmap = QPixmap("./images/search_icon.png")
-        self.scaled_pixmap = self.pixmap.scaled(15,15, Qt.IgnoreAspectRatio, Qt.FastTransformation)
-        self.label.setPixmap(self.scaled_pixmap)
-
-        self.line_edit = QLineEdit()
-        self.line_edit.setPlaceholderText("Product Name, Member Name, Employee Name")
-        self.search_layout = QHBoxLayout()
-        self.search_widget = QWidget()
-        self.search_layout.addWidget(self.label)
-        self.search_layout.addWidget(self.line_edit)
-        self.search_widget.setLayout(self.search_layout)
-        self.list = QListWidget()
-        self.list.insertItem(0, "Dog Food")
-        self.list.insertItem(1, "Mark, Reed")
-        self.list.insertItem(2, "Cat Brush")
-        self.list.insertItem(3, "John, Smith")
-        self.main_layout = QVBoxLayout()
-        self.main_layout.addWidget(self.search_widget)
-        self.main_layout.addWidget(self.list)
-        self.main_widget = QWidget()
-        self.main_widget.setLayout(self.main_layout)
-        self.FShortcut_instance.setCentralWidget(self.main_widget)
-        self.FShortcut_instance.move(750,200)
-        self.FShortcut_instance.show()
-        self.FShortcut_instance.raise_()
+        self.search()
+            
 
 def main():
     stock_control = QApplication(sys.argv) #creates new application
