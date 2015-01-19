@@ -1,12 +1,15 @@
+import sqlite3
 from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from AddingRemovingData import *
 
 class createOrderClass(QWidget):
     """A representation of creating an order"""
     def __init__(self):
         super().__init__()
+        ProductID_list = []
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Find Product:")
         self.category_label.setFixedWidth(70)
@@ -15,15 +18,18 @@ class createOrderClass(QWidget):
         self.category_layout.addWidget(self.category_search)
         self.category_widget = QWidget()
         self.category_widget.setLayout(self.category_layout)
+        self.subtotal_price = 0.00
+        ProductList = [""]
 
       #Product Display Table
         self.display_table = QTableView()
         self.display_table.setFixedHeight(150)
         self.display_table_layout = QVBoxLayout()
         self.display_table_layout.addWidget(self.display_table)
+        self.display_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.display_table.setAlternatingRowColors(True)
         self.display_table_widget = QWidget()
         self.display_table_widget.setLayout(self.display_table_layout)
-        self.display_table.selectRow(1)
         self.model = None
         if not self.model or not isinstance(self.model, QSqlTableModel):
             self.model = QSqlTableModel()
@@ -44,6 +50,8 @@ class createOrderClass(QWidget):
 
         self.display_table.horizontalHeader().setStretchLastSection(True)
         self.display_table.verticalHeader().setStretchLastSection(True)
+        self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.display_table.doubleClicked.connect(self.clicked)
         self.display_table.show()
         
         #Finding product group box
@@ -52,6 +60,7 @@ class createOrderClass(QWidget):
 
         self.add_product = QPushButton("Add Product")
         self.add_product.setFixedWidth(100)
+        self.add_product.clicked.connect(self.clicked)
         
         self.table_layout.addWidget(self.display_table)
         self.table_layout.addWidget(self.add_product)
@@ -68,14 +77,14 @@ class createOrderClass(QWidget):
         self.subtotal_label.setAlignment(Qt.AlignRight)
         self.total_label = QLabel("Total: £")
         self.total_label.setAlignment(Qt.AlignRight)
-        self.tax_label = QLabel("Tax: £")
+        self.tax_label = QLabel("Discount: £")
         self.tax_label.setAlignment(Qt.AlignRight)
         self.subtotal = QLineEdit("0.00")
         self.subtotal.setReadOnly(True)
         self.subtotal.setFixedWidth(65)
-        self.tax = QLineEdit("0.00")
-        self.tax.setReadOnly(True)
-        self.tax.setFixedWidth(65)
+        self.discount_line_edit = QLineEdit("0.00")
+        self.discount_line_edit.setReadOnly(True)
+        self.discount_line_edit.setFixedWidth(65)
         self.total = QLineEdit("0.00")
         self.total.setReadOnly(True)
         self.total.setFixedWidth(65)
@@ -86,7 +95,7 @@ class createOrderClass(QWidget):
         self.price_layout.addWidget(self.tax_label, 1,0)
         self.price_layout.addWidget(self.total_label, 2,0)
         self.price_layout.addWidget(self.subtotal, 0,1)
-        self.price_layout.addWidget(self.tax, 1,1)
+        self.price_layout.addWidget(self.discount_line_edit, 1,1)
         self.price_layout.addWidget(self.total, 2,1)
         self.price_widget = QWidget()
         self.price_widget.setLayout(self.price_layout)
@@ -106,17 +115,20 @@ class createOrderClass(QWidget):
         #order_group_box
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
-        self.current_order = QTableWidget(5,5)
-        #self.current_order.setFixedWidth(300)
-        self.labels = ["Product ID","Product Name","Size","Price","Quantity"]
-        self.current_order.setHorizontalHeaderLabels(self.labels)
-        column_width_list = [80, 300, 90, 75]
-        counter = 0
-        for item in column_width_list:
-            self.current_order.setColumnWidth(counter, item)
-            counter += 1
+        self.current_order = QTableView()
+        self.order_model = None
+        if not self.order_model or not isinstance(self.order_model, QSqlTableModel):
+            self.order_model = QSqlTableModel()
+
+        self.order_model.setTable("ProductOrder")
+        self.order_model.select()
+        self.current_order.setModel(self.order_model)
+        self.current_order.setAlternatingRowColors(True)
+        self.current_order.hideColumn(0)
+        self.current_order.hideColumn(1)
         self.current_order.horizontalHeader().setStretchLastSection(True)
         self.current_order.verticalHeader().setStretchLastSection(True)
+        self.current_order.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.order_layout.addWidget(self.current_order)
         self.order_layout.addWidget(self.price_widget)
         self.order_layout.addWidget(self.invoice_widget)
@@ -176,7 +188,24 @@ class createOrderClass(QWidget):
 
     def clicked_Ok(self):
         self.pop_up_instance.close()
-        
 
+    def clicked(self, ProductList):
+        self.indexes = self.display_table.selectionModel().selectedRows()
+        for index in self.indexes:
+            row = index.row()
+            row += 1
 
+        price = addingProductToOrder(self, row)
+        self.subtotal_price = self.subtotal_price + price
+        self.subtotal_price = round(self.subtotal_price, 4)
+        self.discount = 0.00
+        self.discount_multiplier = (1 - self.discount)
+        self.money_off = (self.discount_multiplier * self.subtotal_price)
+        self.total_price = (self.money_off)
+
+        self.subtotal.setText(str(self.subtotal_price))
+        self.discount_line_edit.setText(str(self.discount))
+        self.total.setText(str(self.total_price))
         
+        self.order_model.select()
+            

@@ -74,8 +74,11 @@ def create_order_table():
 def create_product_order_table():
     sql = """create table ProductOrder
             (ProductOrderID integer,
-            ProductID interger,
             OrderID integer,
+            ProductID interger,
+            ProductName string,
+            Size interger,
+            Price interger,
             Quantity integer,
             Primary Key(ProductOrderID),
             foreign key(ProductID) references Product(ProductID),

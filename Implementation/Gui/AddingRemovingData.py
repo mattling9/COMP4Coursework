@@ -2,7 +2,7 @@ import sqlite3
 
 #-----------------------------------------Product-----------------------------------------
 
-def addingProduct(name,size,price,location1,location2):
+def addingProduct(name, size, price, location1, location2):
     Product = (name,size,price,location1,location2)
     insert_product_data(Product)
 def insert_product_data(values):
@@ -13,7 +13,8 @@ def insert_product_data(values):
         db.commit()
 
 
-def deletingProduct(ProductID):
+def deletingProduct():
+    ProductID = input("Enter ProductID To Delete")
     data = (ProductID,)
     delete_product(data)
 def delete_product(data):
@@ -26,7 +27,18 @@ def delete_product(data):
 #-----------------------------------------Member-----------------------------------------
 
 
-def addingMember(Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail):
+def addingMember():
+    Title = input("Enter Member Title (Mr./Mrs.): ")
+    MemberFirstName = input("Enter Member First Name")
+    MemberLastName = input("Enter Member Last Name")
+    HouseNo = int(input("Enter House No."))
+    Street = input("Enter Street Name")
+    Town = input("Enter Town: ")
+    City = input("Enter City: ")
+    County = input("Enter County: ")
+    Postcode = input("Enter Postcode: ")
+    TelephoneNo = input("Enter Telephone Number: ")
+    MemberEmail = input("Enter Member Email: ")
     Member = (Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail)
     insert_member_data(Member)
 def insert_member_data(values):
@@ -36,7 +48,8 @@ def insert_member_data(values):
         cursor.execute(sql,values)
         db.commit()
 
-def deletingMember(MemberID):
+def deletingMember():
+    MemberID = input("Enter MemberID To Delete")
     data = (MemberID,)
     delete_member(data)
 def delete_member(data):
@@ -49,17 +62,21 @@ def delete_member(data):
 
 #-----------------------------------------Employee-----------------------------------------
 
-def addingEmployee(EmployeeUsername,EmployeeFirstName,EmployeeLastName,EmployeeEmail):
-    Employee = (EmployeeUsername,EmployeeFirstName,EmployeeLastName,EmployeeEmail)
+def addingEmployee():
+    EmployeeFirstName = input("Enter Employee First Name")
+    EmployeeLastName = input("Enter Employee Last Name")
+    EmployeeEmail = input("Enter Employee Email")
+    Employee = (EmployeeFirstName,EmployeeLastName,EmployeeEmail)
     insert_employee_data(Employee)
 def insert_employee_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Employee ( EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?,?)"
+        sql = "insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?)"
         cursor.execute(sql,values)
         db.commit()
 
-def deletingEmployee(EmployeeID):
+def deletingEmployee():
+    EmployeeID = input("Enter EmployeeID To Delete")
     data = (EmployeeID,)
     delete_employee(data)
 def delete_employee(data):
@@ -71,7 +88,8 @@ def delete_employee(data):
 #-----------------------------------------Location-----------------------------------------
 
 
-def addingLocation(LocationName):
+def addingLocation():
+    LocationName = input("Enter Location Name")
     Location = (LocationName,)
     insert_location_data(Location)
 def insert_location_data(values):
@@ -83,7 +101,8 @@ def insert_location_data(values):
 
 
 
-def deletingLocation(LocationID):
+def deletingLocation():
+    LocationID = input("Enter LocationID To Delete")
     data = (LocationID,)
     delete_location(data)
 def delete_location(data):
@@ -94,4 +113,49 @@ def delete_location(data):
         db.commit()
 
 #------------------------------------------------------------------------------------------
+def addingOrder(ProductID, name, size, price, quantity):
+    order_info = (ProductID, name, size, price, quantity)
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = "insert into ProductOrder (ProductID, ProductName, Size, Price, Quantity) values(?,?,?,?,?)"
+        cursor.execute(sql, order_info)
+        db.commit()
 
+def IncrementQuantity(ProductID, quantity):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        quantity += 1
+        product_info = [quantity, ProductID]
+        sql = "Update ProductOrder Set Quantity= ? where ProductID = ?"
+        cursor.execute(sql, product_info)
+        db.commit()
+
+def addingProductToOrder(self, ProductID):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        find_cursor = db.cursor()
+        cursor.execute(" SELECT * FROM Product WHERE ProductID = ?",(ProductID,))
+        find_cursor.execute(" SELECT ProductID, Quantity FROM ProductOrder WHERE ProductID = ?",(ProductID,))
+        product = cursor.fetchall()
+        returned_product = find_cursor.fetchall()
+        MatchingProductID = returned_product
+        quantity = 1
+        if not MatchingProductID:
+            quantity = 1
+            ProductID = product[0][0]
+            name = product[0][1]
+            size = product[0][2]
+            price = product[0][3]
+            addingOrder(ProductID, name, size, price, quantity)
+            return price
+        elif ProductID == MatchingProductID[0][0]:
+            price = product[0][3]
+            quantity = MatchingProductID[0][1]
+            IncrementQuantity(ProductID, quantity)
+            return price
+
+def clearOrderTable():
+        with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            cursor.execute("DELETE FROM ProductOrder")
+        

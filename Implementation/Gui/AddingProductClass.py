@@ -300,10 +300,5 @@ class addProductClass(QWidget):
 
         
         
-        
-        
-        
-        
-        
     
     

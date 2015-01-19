@@ -139,11 +139,5 @@ ProxySpeed,ProxyType,ProxyCountry,ProxyCity) VALUES(:ip,:port,:connType,
         query.prepare(""" SELECT * FROM Product""")
         query.exec_()
         return query
-
-    def find_products_by_number(self,values):
         
-        query = QSqlQuery()
-        query.prepare(""" SELECT * FROM Product WHERE ProductID =? """)
-        query.addBindValue(values[0])
-        query.exec_()
-        return query
+

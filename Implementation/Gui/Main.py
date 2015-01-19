@@ -47,7 +47,6 @@ class MainWindow(QMainWindow):
         self.create_new_order_function()
         
         
-        
 
 
     def create_title(self):
@@ -269,7 +268,6 @@ class MainWindow(QMainWindow):
         self.title = self.create_title()
         self.title.setText("Create Order")
         self.create_order_instance = createOrderClass()
-        
         self.create_order_layout = QVBoxLayout()
         self.create_order_layout.addWidget(self.title)
         self.create_order_layout.addWidget(self.create_order_instance)
@@ -277,6 +275,8 @@ class MainWindow(QMainWindow):
         self.create_order_widget.setLayout(self.create_order_layout)
         self.setCentralWidget(self.create_order_widget)
         self.stacked_layout.addWidget(self.create_order_widget)
+        self.create_order_instance.display_table.update()
+        self.create_order_instance.current_order.update()
 
     def search(self):
         self.search_instance = SearchClass()
@@ -388,8 +388,10 @@ class MainWindow(QMainWindow):
         self.setFixedSize(700, 600)
 
     def create_new_order_function(self):
+        clearOrderTable()
+        self.create_order_instance.order_model.select()
         self.stacked_layout.setCurrentIndex(5)
-        self.setFixedSize(700, 900)
+        self.setFixedSize(700, 800)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
@@ -419,7 +421,8 @@ class MainWindow(QMainWindow):
 
     def search_product_function(self):
         self.search()
-            
+
+        
 
 def main():
     stock_control = QApplication(sys.argv) #creates new application
