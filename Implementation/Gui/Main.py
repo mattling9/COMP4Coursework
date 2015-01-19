@@ -390,6 +390,7 @@ class MainWindow(QMainWindow):
     def create_new_order_function(self):
         clearOrderTable()
         self.create_order_instance.order_model.select()
+        self.create_order_instance.model.select()
         self.stacked_layout.setCurrentIndex(5)
         self.setFixedSize(700, 800)
 

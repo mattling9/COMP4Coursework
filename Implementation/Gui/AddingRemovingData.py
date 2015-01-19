@@ -1,5 +1,7 @@
-import sqlite3
-
+import sqlite3, sys
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+from PyQt4.QtSql import *
 #-----------------------------------------Product-----------------------------------------
 
 def addingProduct(name, size, price, location1, location2):
@@ -11,6 +13,7 @@ def insert_product_data(values):
         sql = "insert into Product (ProductName, Size, Price, Location1, Location2) values(?,?,?,?,?)"
         cursor.execute(sql,values)
         db.commit()
+    self.updatedData.emit()
 
 
 def deletingProduct():
@@ -138,6 +141,7 @@ def addingProductToOrder(self, ProductID):
         find_cursor.execute(" SELECT ProductID, Quantity FROM ProductOrder WHERE ProductID = ?",(ProductID,))
         product = cursor.fetchall()
         returned_product = find_cursor.fetchall()
+        db.commit()
         MatchingProductID = returned_product
         quantity = 1
         if not MatchingProductID:
@@ -158,4 +162,58 @@ def clearOrderTable():
         with sqlite3.connect("ProductDatabase.db") as db:
             cursor = db.cursor()
             cursor.execute("DELETE FROM ProductOrder")
+
+def FindProductByName(self, ProductName):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            find_product_cursor = db.cursor()
+            find_product_cursor.execute("SELECT * FROM Product where 1=1")
+            db.commit()
+            ProductsFound = find_product_cursor.fetchall()
+            ProductList = []
+            MatchedProducts = []
+            MatchedProductsTuple = tuple(MatchedProducts)
+            print("")
+            print("")
+            for item in ProductsFound:
+                ProductList.append(item)
+            for count in range(0, len(ProductList)):
+                if ProductName in ProductList[count][1]:
+                    print(ProductList[count][0])
+                    MatchedProducts.append(ProductList[count][0])
+                else:
+                    print("no")
+            MatchedProductsTuple = tuple(MatchedProducts)
+            print("")
+            print("")
+            print("MatchedProducts:")
+            print(MatchedProducts)
+            print("")
+            print("")
+            print("MatchedProductsTuple:")
+            print(MatchedProductsTuple)
+            
+            if len(MatchedProducts) > 0:
+                #display_match_cursor = db.cursor()
+                #display_match_cursor.execute("SELECT * FROM Product where ProductID IN (?)",(MatchedProducts))
+                #ReturnedProductList = display_match_cursor.fetchall()
+                print("")
+                #print("ReturnedProductList:")
+                #print(ReturnedProductList)
+                print("")
+
+                query = QSqlQuery("SELECT * FROM Product where ProductID IN (:id)")
+                query.bindValue(":id", MatchedProductsTuple)
+                self.query_model.setQuery(query)
+                self.query_table.setModel(self.query_model)
+                self.query_table.show()
+                
+                
+            
+            else:
+                no_match_cursor = db.cursor()
+                no_match_cursor.execute("SELECT * FROM Product where ProductID = -1")
+                print("len(MatchedProducts) !> 0")
+                
+                
+
         

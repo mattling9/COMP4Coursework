@@ -54,12 +54,15 @@ class SearchClass(QMainWindow):
         if self.table_combo_box.currentIndex == 0:
             self.model.setTable("Product")
             self.model.select()
+            self.display_table.update()
         elif self.table_combo_box.currentIndex == 1:
             self.model.setTable("Member")
             self.model.select()
+            self.display_table.update()
         elif self.table_combo_box.currentIndex == 2:
             self.model.setTable("Employee")
             self.model.select()
+            self.display_table.update()
         self.model.select()
         self.display_table.setModel(self.model)
         self.display_table.hideColumn(4)

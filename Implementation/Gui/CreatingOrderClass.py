@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, sys
 from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -14,6 +14,7 @@ class createOrderClass(QWidget):
         self.category_label = QLabel("Find Product:")
         self.category_label.setFixedWidth(70)
         self.category_search = QLineEdit()
+        self.category_search.textChanged.connect(self.find_product)
         self.category_layout.addWidget(self.category_label)
         self.category_layout.addWidget(self.category_search)
         self.category_widget = QWidget()
@@ -33,8 +34,7 @@ class createOrderClass(QWidget):
         self.model = None
         if not self.model or not isinstance(self.model, QSqlTableModel):
             self.model = QSqlTableModel()
-
-
+        
         self.model.setTable("Product")
         self.model.select()
         self.display_table.setModel(self.model)
@@ -48,12 +48,16 @@ class createOrderClass(QWidget):
 
         
 
+        #self.query_table.horizontalHeader().setStretchLastSection(True)
+        #self.query_table.verticalHeader().setStretchLastSection(True)
+        #self.query_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        #self.query_table.doubleClicked.connect(self.clicked)
         self.display_table.horizontalHeader().setStretchLastSection(True)
         self.display_table.verticalHeader().setStretchLastSection(True)
         self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.display_table.doubleClicked.connect(self.clicked)
+        #self.query_table.show()
         self.display_table.show()
-        
         #Finding product group box
 
         self.table_layout = QVBoxLayout()
@@ -61,7 +65,7 @@ class createOrderClass(QWidget):
         self.add_product = QPushButton("Add Product")
         self.add_product.setFixedWidth(100)
         self.add_product.clicked.connect(self.clicked)
-        
+        #self.table_layout.addWidget(self.query_table)
         self.table_layout.addWidget(self.display_table)
         self.table_layout.addWidget(self.add_product)
         self.table_widget = QWidget()
@@ -208,4 +212,10 @@ class createOrderClass(QWidget):
         self.total.setText(str(self.total_price))
         
         self.order_model.select()
-            
+
+    def find_product(self):
+        ProductName = self.category_search.text()
+        filter_query = "ProductName like '%{0}%'".format(ProductName)
+        self.model.setFilter(filter_query)
+        self.model.select()
+        print("hello")
