@@ -131,7 +131,6 @@ class createOrderClass(QWidget):
         self.current_order.hideColumn(0)
         self.current_order.hideColumn(1)
         self.current_order.horizontalHeader().setStretchLastSection(True)
-        self.current_order.verticalHeader().setStretchLastSection(True)
         self.current_order.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.order_layout.addWidget(self.current_order)
         self.order_layout.addWidget(self.price_widget)
@@ -218,4 +217,3 @@ class createOrderClass(QWidget):
         filter_query = "ProductName like '%{0}%'".format(ProductName)
         self.model.setFilter(filter_query)
         self.model.select()
-        print("hello")

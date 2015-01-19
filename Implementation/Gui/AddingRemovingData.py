@@ -6,12 +6,10 @@ from PyQt4.QtSql import *
 
 def addingProduct(name, size, price, location1, location2):
     Product = (name,size,price,location1,location2)
-    insert_product_data(Product)
-def insert_product_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "insert into Product (ProductName, Size, Price, Location1, Location2) values(?,?,?,?,?)"
-        cursor.execute(sql,values)
+        cursor.execute(sql,Product)
         db.commit()
     self.updatedData.emit()
 
@@ -19,8 +17,6 @@ def insert_product_data(values):
 def deletingProduct():
     ProductID = input("Enter ProductID To Delete")
     data = (ProductID,)
-    delete_product(data)
-def delete_product(data):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "delete from Product where ProductID = ?"
@@ -30,32 +26,17 @@ def delete_product(data):
 #-----------------------------------------Member-----------------------------------------
 
 
-def addingMember():
-    Title = input("Enter Member Title (Mr./Mrs.): ")
-    MemberFirstName = input("Enter Member First Name")
-    MemberLastName = input("Enter Member Last Name")
-    HouseNo = int(input("Enter House No."))
-    Street = input("Enter Street Name")
-    Town = input("Enter Town: ")
-    City = input("Enter City: ")
-    County = input("Enter County: ")
-    Postcode = input("Enter Postcode: ")
-    TelephoneNo = input("Enter Telephone Number: ")
-    MemberEmail = input("Enter Member Email: ")
+def addingMember(Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail):
     Member = (Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail)
-    insert_member_data(Member)
-def insert_member_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "insert into Member (Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail) values(?,?,?,?,?,?,?,?,?,?,?)"
-        cursor.execute(sql,values)
+        cursor.execute(sql,Member)
         db.commit()
 
 def deletingMember():
     MemberID = input("Enter MemberID To Delete")
     data = (MemberID,)
-    delete_member(data)
-def delete_member(data):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "delete from Member where MemberID = ?"
@@ -65,24 +46,17 @@ def delete_member(data):
 
 #-----------------------------------------Employee-----------------------------------------
 
-def addingEmployee():
-    EmployeeFirstName = input("Enter Employee First Name")
-    EmployeeLastName = input("Enter Employee Last Name")
-    EmployeeEmail = input("Enter Employee Email")
-    Employee = (EmployeeFirstName,EmployeeLastName,EmployeeEmail)
-    insert_employee_data(Employee)
-def insert_employee_data(values):
+def addingEmployee(EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail):
+    Employee = (EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?)"
-        cursor.execute(sql,values)
+        sql = "insert into Employee (EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?,?)"
+        cursor.execute(sql,Employee)
         db.commit()
 
 def deletingEmployee():
     EmployeeID = input("Enter EmployeeID To Delete")
     data = (EmployeeID,)
-    delete_employee(data)
-def delete_employee(data):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "delete from Employee where EmployeeID = ?"
@@ -94,12 +68,10 @@ def delete_employee(data):
 def addingLocation():
     LocationName = input("Enter Location Name")
     Location = (LocationName,)
-    insert_location_data(Location)
-def insert_location_data(values):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "insert into Location (LocationName) values(?)"
-        cursor.execute(sql,values)
+        cursor.execute(sql,Location)
         db.commit()
 
 
@@ -107,8 +79,6 @@ def insert_location_data(values):
 def deletingLocation():
     LocationID = input("Enter LocationID To Delete")
     data = (LocationID,)
-    delete_location(data)
-def delete_location(data):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "delete from Location where LocationID = ?"

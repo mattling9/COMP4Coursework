@@ -227,6 +227,7 @@ class addMemberClass(QWidget):
                 self.add_member_instance.raise_()
 
         def clicked_yes(self):
+                print("before")
                 addingMember(self.name_title.currentText(),
                              self.first_name.text(),
                              self.last_name.text(),
@@ -238,6 +239,7 @@ class addMemberClass(QWidget):
                              self.postcode.text(),
                              self.telephone_number.text(),
                              self.email.text())
+                print("after")
                 self.AddMemberSucess()
 
 
