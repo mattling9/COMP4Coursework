@@ -1,4 +1,4 @@
-import sqlite3, sys
+import sqlite3, sys, datetime
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
@@ -87,6 +87,7 @@ def deletingLocation():
 
 #------------------------------------------------------------------------------------------
 def addingOrder(ProductID, name, size, price, quantity):
+    ProductOrderID = get_product_order_id()
     order_info = (ProductID, name, size, price, quantity)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
@@ -129,6 +130,7 @@ def addingProductToOrder(self, ProductID):
             return price
 
 def clearOrderTable():
+        
         with sqlite3.connect("ProductDatabase.db") as db:
             cursor = db.cursor()
             cursor.execute("DELETE FROM ProductOrder")
@@ -142,8 +144,6 @@ def FindProductByName(self, ProductName):
             ProductList = []
             MatchedProducts = []
             MatchedProductsTuple = tuple(MatchedProducts)
-            print("")
-            print("")
             for item in ProductsFound:
                 ProductList.append(item)
             for count in range(0, len(ProductList)):
@@ -151,16 +151,8 @@ def FindProductByName(self, ProductName):
                     print(ProductList[count][0])
                     MatchedProducts.append(ProductList[count][0])
                 else:
-                    print("no")
+                    pass
             MatchedProductsTuple = tuple(MatchedProducts)
-            print("")
-            print("")
-            print("MatchedProducts:")
-            print(MatchedProducts)
-            print("")
-            print("")
-            print("MatchedProductsTuple:")
-            print(MatchedProductsTuple)
             
             if len(MatchedProducts) > 0:
                 query = QSqlQuery("SELECT * FROM Product where ProductID IN (:id)")
@@ -174,10 +166,21 @@ def FindProductByName(self, ProductName):
             else:
                 no_match_cursor = db.cursor()
                 no_match_cursor.execute("SELECT * FROM Product where ProductID = -1")
-                print("len(MatchedProducts) !> 0")
 
-    
-    
+
+def get_product_order_id():
+    with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM ProductOrder")
+            items = cursor.fetchall()
+            print(items)
+    return items
+
+def createCustomerOrder():
+    date = datetime.date.today()
+    date_formatted = date.strftime("%d %m %Y")
+    print(date_formatted)
+
                 
                 
 

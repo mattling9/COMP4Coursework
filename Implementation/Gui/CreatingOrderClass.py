@@ -48,24 +48,17 @@ class createOrderClass(QWidget):
 
         
 
-        #self.query_table.horizontalHeader().setStretchLastSection(True)
-        #self.query_table.verticalHeader().setStretchLastSection(True)
-        #self.query_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        #self.query_table.doubleClicked.connect(self.clicked)
         self.display_table.horizontalHeader().setStretchLastSection(True)
         self.display_table.verticalHeader().setStretchLastSection(True)
         self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.display_table.doubleClicked.connect(self.clicked)
-        #self.query_table.show()
         self.display_table.show()
-        #Finding product group box
 
         self.table_layout = QVBoxLayout()
 
         self.add_product = QPushButton("Add Product")
         self.add_product.setFixedWidth(100)
-        self.add_product.clicked.connect(self.clicked)
-        #self.table_layout.addWidget(self.query_table)
+        self.add_product.clicked.connect(self.clicked, 0)
         self.table_layout.addWidget(self.display_table)
         self.table_layout.addWidget(self.add_product)
         self.table_widget = QWidget()
@@ -79,7 +72,8 @@ class createOrderClass(QWidget):
 
         self.member_label = QLabel("Member ID:")
         self.member_line_edit = QLineEdit()
-        self.member_button = QPushButton("Find...")
+        self.member_button = QPushButton("Enter")
+        self.member_button.clicked.connect(self.find_member_by_id)
         self.member_layout = QHBoxLayout()
         self.member_widget = QWidget()
         self.member_layout.addWidget(self.member_label)
@@ -91,13 +85,13 @@ class createOrderClass(QWidget):
         self.total_label.setAlignment(Qt.AlignRight)
         self.tax_label = QLabel("Discount: £")
         self.tax_label.setAlignment(Qt.AlignRight)
-        self.subtotal = QLineEdit("0.00")
+        self.subtotal = QLineEdit("0.0")
         self.subtotal.setReadOnly(True)
         self.subtotal.setFixedWidth(65)
-        self.discount_line_edit = QLineEdit("0.00")
+        self.discount_line_edit = QLineEdit("0.0")
         self.discount_line_edit.setReadOnly(True)
         self.discount_line_edit.setFixedWidth(65)
-        self.total = QLineEdit("0.00")
+        self.total = QLineEdit("0.0")
         self.total.setReadOnly(True)
         self.total.setFixedWidth(65)
 
@@ -115,11 +109,14 @@ class createOrderClass(QWidget):
         self.price_widget.setLayout(self.price_layout)
 
         #Create Invoice Button
+        self.save_button = QPushButton("Save")
+        self.save_button.clicked.connect(self.save_invoice)
         self.preview_button = QPushButton("Preview Invoice")
         self.preview_button.clicked.connect(self.preview_invoice_clicked)
         self.invoice_button = QPushButton("Create Invoice")
         self.invoice_button.clicked.connect(self.create_invoice_clicked)
         self.invoice_layout = QHBoxLayout()
+        self.invoice_layout.addWidget(self.save_button)
         self.invoice_layout.addWidget(self.preview_button)
         self.invoice_layout.addWidget(self.invoice_button)
         self.invoice_widget = QWidget()
@@ -144,7 +141,6 @@ class createOrderClass(QWidget):
         self.current_order.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.order_layout.addWidget(self.current_order)
         self.order_layout.addWidget(self.price_widget)
-        self.order_layout.addWidget(self.invoice_widget)
         self.order_box.setLayout(self.order_layout)
 
 
@@ -152,7 +148,12 @@ class createOrderClass(QWidget):
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.find_product_box)
         self.main_layout.addWidget(self.order_box)
+        self.main_layout.addWidget(self.invoice_widget)
         self.setLayout(self.main_layout)
+        self.discount = 0
+
+        ##
+        ##
 
 
     def preview_invoice_clicked(self):
@@ -202,28 +203,124 @@ class createOrderClass(QWidget):
     def clicked_Ok(self):
         self.pop_up_instance.close()
 
-    def clicked(self, ProductList):
+    def clicked(self):
         self.indexes = self.display_table.selectionModel().selectedRows()
-        for index in self.indexes:
-            row = index.row()
-            row += 1
+        if self.indexes:
+            for index in self.indexes:
+                row = index.row()
+                row += 1
 
-        price = addingProductToOrder(self, row)
-        self.subtotal_price = self.subtotal_price + price
-        self.subtotal_price = round(self.subtotal_price, 4)
-        self.discount = 0.00
-        self.discount_multiplier = (1 - self.discount)
-        self.money_off = (self.discount_multiplier * self.subtotal_price)
-        self.total_price = (self.money_off)
+            price = addingProductToOrder(self, row)
+            self.subtotal_price = self.subtotal_price + price
+            self.subtotal_price = round(self.subtotal_price, 4)
+            self.discount_multiplier = (1 - self.discount)
+            self.total_price = (self.discount_multiplier * self.subtotal_price)
+            self.total_price = round(self.total_price, 4)
+            self.money_off = (self.subtotal_price - self.total_price)
+            self.money_off = round(self.money_off, 4)
+            
+            self.subtotal.setText(str(self.subtotal_price))
+            self.discount_line_edit.setText(str(self.money_off))
 
-        self.subtotal.setText(str(self.subtotal_price))
-        self.discount_line_edit.setText(str(self.discount))
-        self.total.setText(str(self.total_price))
+            self.total.setText(str(self.total_price))
+                
+            self.order_model.select()
+        else:
+            pass
         
-        self.order_model.select()
+    def change_price(self):
+        self.subtotal_price
+        self.discount_multiplier = (1 - self.discount)
+        
+        self.total_price = (self.discount_multiplier * self.subtotal_price)
+
+        
+        self.money_off = (self.subtotal_price - self.total_price)
+
+            
+        if len(str(self.subtotal_price)) == 5:
+            self.subtotal.setText(str(self.subtotal_price)[:5])
+            self.discount_line_edit.setText(str(self.money_off)[:5])
+            self.total.setText(str(self.total_price)[:5])
+
+        elif len(str(self.subtotal_price)) == 6:
+            self.subtotal.setText(str(self.subtotal_price)[:6])
+            self.discount_line_edit.setText(str(self.money_off)[:6])
+            self.total.setText(str(self.total_price)[:6])
+
+        else:
+            self.subtotal.setText(str(self.subtotal_price)[:4])
+            self.discount_line_edit.setText(str(self.money_off)[:4])
+            self.total.setText(str(self.total_price)[:4])
 
     def find_product(self):
         ProductName = self.category_search.text()
         filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%'".format(ProductName)
         self.model.setFilter(filter_query)
         self.model.select()
+
+    def find_member_by_id(self):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            member_id = self.member_line_edit.text()
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM Member WHERE MemberID = ?",(member_id,))
+            product_info = cursor.fetchall()
+            db.commit()
+            if product_info:
+                self.discount = 0.1
+                self.change_price()
+            if not product_info:
+                self.discount = 0.0
+                self.change_price()
+                self.display_message()
+
+    def display_message(self):
+        self.member_id_error_instance = PopUpWindow("Fucking Buy Membership Now",300,100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.member_id_error_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Oi bitch, your Member ID aint valid ya cunt")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_up)
+        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_up)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.member_id_error_instance.setCentralWidget(self.pop_up_widget)
+        self.member_id_error_instance.move(800,450)
+        self.member_id_error_instance.show()
+        self.member_id_error_instance.raise_()
+
+    def close_pop_up(self):
+        self.member_id_error_instance.close()
+
+    def save_invoice(self):
+        print("saved")
+        createCustomerOrder()
+
+    def save_sucess(self):
+        self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.add_order_instance.setWindowIcon(self.icon)
+        self.label = QLabel("Order Sucessfully Saved")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+        self.pop_up_layout = QVBoxLayout()
+        self.pop_up_widget = QWidget()
+        self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.buttonBox)
+        self.pop_up_widget.setLayout(self.pop_up_layout)
+        self.add_order_instance.setCentralWidget(self.pop_up_widget)
+        self.add_order_instance.move(800,450)
+        self.add_order_instance.show()
+        self.add_order_instance.raise_()
+        
+       

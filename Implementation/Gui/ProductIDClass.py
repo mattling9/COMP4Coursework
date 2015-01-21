@@ -8,7 +8,6 @@ class ProductIDClass(QWidget):
     """A representation of A Push Button Widget"""
     def __init__(self, Label, index):
         super().__init__()
-        print("function has been run")
         self.visible = False
         self.layout = QHBoxLayout()
         self.widget = QWidget()

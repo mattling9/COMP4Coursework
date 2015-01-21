@@ -97,10 +97,6 @@ class MainWindow(QMainWindow):
         self.edit_product_instance.setDisabled(True)
         self.edit_product_layout = QVBoxLayout()
         self.product_id = ProductIDClass("Product ID", 1)
-        print("before:")
-        print(self.product_id.visible)
-        print("dunno")
-        print(self.product_id.visible)
         self.product_id.button.clicked.connect(self.change_view)
         self.product_id.setFixedHeight(40)
         self.edit_product_layout.addWidget(self.title)
@@ -112,8 +108,6 @@ class MainWindow(QMainWindow):
         self.stacked_layout.addWidget(self.edit_product_widget)
 
     def change_view(self):
-        print("Is Enabled:")
-        print(self.edit_product_instance.isEnabled())
         if not self.edit_product_instance.isEnabled():
             self.edit_product_instance.setEnabled(True)
         else:
@@ -402,6 +396,9 @@ class MainWindow(QMainWindow):
         clearOrderTable()
         self.create_order_instance.order_model.select()
         self.create_order_instance.model.select()
+        self.create_order_instance.subtotal.setText("0.0")
+        self.create_order_instance.total.setText("0.0")
+        self.create_order_instance.discount_line_edit.setText("0.0")
         self.stacked_layout.setCurrentIndex(5)
         self.setFixedSize(700, 800)
 
