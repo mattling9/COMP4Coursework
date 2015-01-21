@@ -77,6 +77,14 @@ class createOrderClass(QWidget):
         self.find_product_layout.addWidget(self.table_widget)
         self.find_product_box.setLayout(self.find_product_layout)
 
+        self.member_label = QLabel("Member ID:")
+        self.member_line_edit = QLineEdit()
+        self.member_button = QPushButton("Find...")
+        self.member_layout = QHBoxLayout()
+        self.member_widget = QWidget()
+        self.member_layout.addWidget(self.member_label)
+        self.member_layout.addWidget(self.member_line_edit)
+        self.member_widget.setLayout(self.member_layout)
         self.subtotal_label = QLabel("Subtotal: £")
         self.subtotal_label.setAlignment(Qt.AlignRight)
         self.total_label = QLabel("Total: £")
@@ -95,12 +103,14 @@ class createOrderClass(QWidget):
 
         #Subtotal, Tax and Total Prices
         self.price_layout = QGridLayout()
-        self.price_layout.addWidget(self.subtotal_label, 0,0)
-        self.price_layout.addWidget(self.tax_label, 1,0)
-        self.price_layout.addWidget(self.total_label, 2,0)
-        self.price_layout.addWidget(self.subtotal, 0,1)
-        self.price_layout.addWidget(self.discount_line_edit, 1,1)
-        self.price_layout.addWidget(self.total, 2,1)
+        self.price_layout.addWidget(self.member_widget, 0,0)
+        self.price_layout.addWidget(self.member_button, 0,1)
+        self.price_layout.addWidget(self.subtotal_label, 1,0)
+        self.price_layout.addWidget(self.tax_label, 2,0)
+        self.price_layout.addWidget(self.total_label, 3,0)
+        self.price_layout.addWidget(self.subtotal, 1,1)
+        self.price_layout.addWidget(self.discount_line_edit, 2,1)
+        self.price_layout.addWidget(self.total, 3,1)
         self.price_widget = QWidget()
         self.price_widget.setLayout(self.price_layout)
 
@@ -214,6 +224,6 @@ class createOrderClass(QWidget):
 
     def find_product(self):
         ProductName = self.category_search.text()
-        filter_query = "ProductName like '%{0}%'".format(ProductName)
+        filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%'".format(ProductName)
         self.model.setFilter(filter_query)
         self.model.select()

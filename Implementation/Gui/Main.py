@@ -1,7 +1,8 @@
-import sys, shutil
+import sys, shutil, sqlite3
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4.QtSql import *
 from ProductSearchClass import *
 from AddingProductClass import *
 from AddingMemberClass import *
@@ -14,6 +15,7 @@ from DatabaseClass import *
 from FindingPopUpClass import *
 from SQLConnection import *
 from CreatingTable import *
+from AddingRemovingData import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -89,16 +91,17 @@ class MainWindow(QMainWindow):
         self.stacked_layout.addWidget(self.add_product_widget)
 
     def edit_product(self):
-        self.product_found = False
         self.title = self.create_title()
         self.title.setText("Edit Product ")
         self.edit_product_instance = addProductClass("Edit Product")
+        self.edit_product_instance.setDisabled(True)
         self.edit_product_layout = QVBoxLayout()
-        if self.product_found == False:
-            self.edit_product_instance.setEnabled(False)
-        elif self.product_found == True:
-            self.edit_product_instance.setEnabled(True)
-        self.product_id = ProductIDClass("Product ID")
+        self.product_id = ProductIDClass("Product ID", 1)
+        print("before:")
+        print(self.product_id.visible)
+        print("dunno")
+        print(self.product_id.visible)
+        self.product_id.button.clicked.connect(self.change_view)
         self.product_id.setFixedHeight(40)
         self.edit_product_layout.addWidget(self.title)
         self.edit_product_layout.addWidget(self.product_id)
@@ -108,17 +111,25 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.edit_product_widget)
         self.stacked_layout.addWidget(self.edit_product_widget)
 
+    def change_view(self):
+        print("Is Enabled:")
+        print(self.edit_product_instance.isEnabled())
+        if not self.edit_product_instance.isEnabled():
+            self.edit_product_instance.setEnabled(True)
+        else:
+            self.edit_product_instance.setDisabled(True)
+
     def delete_product(self):
         self.product_found = False
         self.title = self.create_title()
         self.title.setText("Delete Product ")
         self.delete_product_instance = addProductClass("Delete Product")
         self.delete_product_layout = QVBoxLayout()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.delete_product_instance.setEnabled(False)
-        elif self.product_found == True:
+        elif self.product_id.visible == True:
             self.delete_product_instance.setEnabled(True)
-        self.product_id = ProductIDClass("Product ID")
+        self.product_id = ProductIDClass("Product ID", 2)
         self.product_id.setFixedHeight(40)
         self.delete_product_layout.addWidget(self.title)
         self.delete_product_layout.addWidget(self.product_id)
@@ -149,14 +160,14 @@ class MainWindow(QMainWindow):
 
         
         self.edit_member_instance = addMemberClass("Edit Member")        
-        self.product_id = ProductIDClass("Member ID")
+        self.product_id = ProductIDClass("Member ID", 7)
         self.product_id.setFixedHeight(40)
         self.edit_member_layout = QVBoxLayout()
         self.edit_member_widget = QWidget()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.edit_member_instance.setEnabled(False)
-        elif self.product_found == True:
-            self.edit_member_instanceset.Enabled(True)
+        elif self.product_id.visible == True:
+            self.edit_member_instance.setEnabled(True)
         self.edit_member_layout.addWidget(self.title)
         self.edit_member_layout.addWidget(self.product_id)
         self.edit_member_layout.addWidget(self.edit_member_instance)
@@ -170,13 +181,13 @@ class MainWindow(QMainWindow):
 
         
         self.delete_member_instance = addMemberClass("Delete Member")
-        self.product_id = ProductIDClass("Member ID")
+        self.product_id = ProductIDClass("Member ID", 8)
         self.product_id.setFixedHeight(40)
         self.delete_member_layout = QVBoxLayout()
         self.delete_member_widget = QWidget()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.delete_member_instance.setEnabled(False)
-        elif self.product_found == True:
+        elif self.product_id.visible == True:
             self.delete_member_instance.setEnabled(True)
         self.delete_member_layout.addWidget(self.title)
         self.delete_member_layout.addWidget(self.product_id)
@@ -208,13 +219,13 @@ class MainWindow(QMainWindow):
 
         
         self.edit_employee_instance = addEmployeeClass("Edit Employee")
-        self.product_id = ProductIDClass("Employee ID")
+        self.product_id = ProductIDClass("Employee ID", 10)
         self.product_id.setFixedHeight(40)
         self.edit_employee_layout = QVBoxLayout()
         self.edit_employee_widget = QWidget()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.edit_employee_instance.setEnabled(False)
-        elif self.product_found == True:
+        elif self.product_id.visible == True:
             self.edit_employee_instance.setEnabled(True)
         self.edit_employee_layout.addWidget(self.title)
         self.edit_employee_layout.addWidget(self.product_id)
@@ -229,13 +240,13 @@ class MainWindow(QMainWindow):
 
         
         self.delete_employee_instance = addEmployeeClass("Delete Employee")
-        self.product_id = ProductIDClass("Employee ID")
+        self.product_id = ProductIDClass("Employee ID", 11)
         self.product_id.setFixedHeight(40)
         self.delete_employee_layout = QVBoxLayout()
         self.delete_employee_widget = QWidget()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.delete_employee_instance.setEnabled(False)
-        elif self.product_found == True:
+        elif self.product_id.visible == True:
             self.delete_employee_instance.setEnabled(True)
         self.delete_employee_layout.addWidget(self.title)
         self.delete_employee_layout.addWidget(self.product_id)
@@ -247,15 +258,15 @@ class MainWindow(QMainWindow):
     def manage_stock(self):
         self.title = self.create_title()
         self.title.setText("Manage Stock")
-        self.product_id = ProductIDClass("Product ID")
-        self.product_id.setFixedHeight(40)
         self.manage_stock_instance = manageStockClass()
+        self.product_id = ProductIDClass("Product ID", 4)
+        self.product_id.setFixedHeight(40)
         
         self.manage_stock_layout = QVBoxLayout()
         self.manage_stock_widget = QWidget()
-        if self.product_found == False:
+        if self.product_id.visible == False:
             self.manage_stock_instance.setEnabled(False)
-        elif self.product_found == True:
+        elif self.product_id.visible == True:
             self.manage_stock_instance.setEnabled(True)
         self.manage_stock_layout.addWidget(self.title)
         self.manage_stock_layout.addWidget(self.product_id)

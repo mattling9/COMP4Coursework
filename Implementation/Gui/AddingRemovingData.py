@@ -163,14 +163,6 @@ def FindProductByName(self, ProductName):
             print(MatchedProductsTuple)
             
             if len(MatchedProducts) > 0:
-                #display_match_cursor = db.cursor()
-                #display_match_cursor.execute("SELECT * FROM Product where ProductID IN (?)",(MatchedProducts))
-                #ReturnedProductList = display_match_cursor.fetchall()
-                print("")
-                #print("ReturnedProductList:")
-                #print(ReturnedProductList)
-                print("")
-
                 query = QSqlQuery("SELECT * FROM Product where ProductID IN (:id)")
                 query.bindValue(":id", MatchedProductsTuple)
                 self.query_model.setQuery(query)
@@ -183,6 +175,9 @@ def FindProductByName(self, ProductName):
                 no_match_cursor = db.cursor()
                 no_match_cursor.execute("SELECT * FROM Product where ProductID = -1")
                 print("len(MatchedProducts) !> 0")
+
+    
+    
                 
                 
 
