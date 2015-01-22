@@ -275,10 +275,10 @@ class createOrderClass(QWidget):
                 self.display_message()
 
     def display_message(self):
-        self.member_id_error_instance = PopUpWindow("Fucking Buy Membership Now",300,100)
+        self.member_id_error_instance = PopUpWindow("Beacon Vets Stock Control",300,100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.member_id_error_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Oi bitch, your Member ID aint valid ya cunt")
+        self.label = QLabel("Sorry, that MemberID is not valid.")
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -299,8 +299,7 @@ class createOrderClass(QWidget):
         self.member_id_error_instance.close()
 
     def save_invoice(self):
-        print("saved")
-        createCustomerOrder()
+        createCustomerOrder(self)
 
     def save_sucess(self):
         self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)

@@ -86,6 +86,24 @@ def deletingLocation():
         db.commit()
 
 #------------------------------------------------------------------------------------------
+def addingCustomerOrder(member_id, employee_id, date_time):
+    CustomerDetails = (member_id, employee_id, date_time)
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = "insert into CustomerOrder (MemberID, EmployeeID, DateTime) values(?,?,?)"
+        cursor.execute(sql, CustomerDetails)
+        db.commit()
+
+def removingCustomerOrder():
+    Order_ID = "1"
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = "delete FROM CustomerOrder WHERE OrderID = ?"
+        cursor.execute(sql, Order_ID)
+        db.commit()
+
+
+        
 def addingOrder(ProductID, name, size, price, quantity):
     ProductOrderID = get_product_order_id()
     order_info = (ProductID, name, size, price, quantity)
@@ -173,13 +191,23 @@ def get_product_order_id():
             cursor = db.cursor()
             cursor.execute("SELECT * FROM ProductOrder")
             items = cursor.fetchall()
-            print(items)
     return items
 
-def createCustomerOrder():
-    date = datetime.date.today()
-    date_formatted = date.strftime("%d %m %Y")
-    print(date_formatted)
+def createCustomerOrder(self):
+    date = datetime.datetime.today()
+    date_time = date.strftime("%d-%m-%Y %H:%M")
+    self.member_id = self.member_line_edit.text()
+    #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
+    self.employee_id = 2
+    #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
+    addingCustomerOrder(self.member_id, self.employee_id, date_time)
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM CustomerOrder")
+        customer_order_list = cursor.fetchall()
+        date = datetime.datetime.today()
+        date_time = date.strftime("%d-%m-%Y %H:%M")
+    
 
                 
                 
