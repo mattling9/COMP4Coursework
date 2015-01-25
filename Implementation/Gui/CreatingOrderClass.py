@@ -1,9 +1,11 @@
-import sqlite3, sys
+import sqlite3, sys, random, smtplib, datetime
 from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class createOrderClass(QWidget):
     """A representation of creating an order"""
@@ -109,16 +111,26 @@ class createOrderClass(QWidget):
         self.price_widget.setLayout(self.price_layout)
 
         #Create Invoice Button
-        self.save_button = QPushButton("Save")
-        self.save_button.clicked.connect(self.save_invoice)
-        self.preview_button = QPushButton("Preview Invoice")
+        self.preview_button = QPushButton("Preview")
+        self.preview_button.setFixedWidth(200)
         self.preview_button.clicked.connect(self.preview_invoice_clicked)
-        self.invoice_button = QPushButton("Create Invoice")
-        self.invoice_button.clicked.connect(self.create_invoice_clicked)
-        self.invoice_layout = QHBoxLayout()
-        self.invoice_layout.addWidget(self.save_button)
+        self.print_checkbox = QCheckBox("Print Invoice")
+        self.email_invoice = QCheckBox("Send Invoice To Email")
+        self.email_invoice.stateChanged.connect(self.enable_email)
+        self.email_invoice_address = QLineEdit()
+        self.email_invoice_address.setPlaceholderText("Email Address")
+        self.email_invoice_address.setEnabled(False)
+
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.invoice_saved)
+        
+        self.invoice_layout = QVBoxLayout()
         self.invoice_layout.addWidget(self.preview_button)
-        self.invoice_layout.addWidget(self.invoice_button)
+        self.invoice_layout.addWidget(self.print_checkbox)
+        self.invoice_layout.addWidget(self.email_invoice)
+        self.invoice_layout.addWidget(self.email_invoice_address)
         self.invoice_widget = QWidget()
         self.invoice_widget.setLayout(self.invoice_layout)
     
@@ -149,56 +161,196 @@ class createOrderClass(QWidget):
         self.main_layout.addWidget(self.find_product_box)
         self.main_layout.addWidget(self.order_box)
         self.main_layout.addWidget(self.invoice_widget)
+        self.main_layout.addWidget(self.buttonBox)
         self.setLayout(self.main_layout)
         self.discount = 0
 
-        ##
-        ##
-
+    def invoice_saved(self):
+        if self.print_checkbox.isChecked() and self.email_invoice.isChecked():
+            self.print_document()
+            self.email_document()
+        elif self.print_checkbox.isChecked():
+            self.print_document()
+        elif self.email_invoice.isChecked():
+            self.email_document()
 
     def preview_invoice_clicked(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Invoice Preview", 900, 900)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel()
-        self.image = QPixmap("./images/Logo.jpg")
-        self.label.setPixmap(self.image)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.clicked_Ok)
-        self.buttons = self.buttonBox.buttons()
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-        self.pop_up_instance.showMaximized()
-        self.pop_up_instance.raise_()
+        self.printer = QPrinter()
+        html = self.createHtml()
+        document = QTextDocument()
+        document.setHtml(html)
+        PrintPreview = QPrintPreviewDialog(self.printer, self)
+        PrintPreview.paintRequested.connect(document.print_)
+        PrintPreview.showFullScreen()
+        PrintPreview.exec()
+        PrintPreview.showFullScreen()
 
-    def create_invoice_clicked(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Stock Control", 900, 900)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
+    def createHtml(self):
+        date = datetime.datetime.today()
+        date_time = date.strftime("%d-%m-%Y %H:%M")
+        company_address = ["21-23 Station Road","Silloth","Cumbria","CA7 4AE"]
+        company_contact = ["Phone: 016973 20242","Email: beaconvets@gmail.com"]
+        invoice_to = "mattling9@hotmail.co.uk"
+        invoice_number = "4"
+        invoice_date = "21-1-2015"
+        product_order = [["Pedigree Chum","2","3.99","7.98"]]
+        subtotal = "7.98"
+        discount = "0.80"
+        total = "7.18"
+        invoice_history = [["22-1-2015 14:19","Invoice Sent"],["22-1-2015 14:18","Invoice Created"]]
         
-        self.label = QLabel()
-        self.image = QPixmap("./images/Logo.jpg")
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.clicked_Ok)
-        self.buttons = self.buttonBox.buttons()
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-        self.pop_up_instance.show()
-        self.pop_up_instance.raise_()
+        html = u""
+        html += """<html>
 
+                <head>
+                <style>
+                table, th, td {border: 1px solid white; border-collapse: collapse}
+                th, td {padding: 5px; text-align: left}
+                body{padding:10px; background-color:white; width:21cm; height:28cm; margin: 10px; box-shadow: 0px 0px 30px rgba(50, 50, 50, 0.75);} 
+                </style>
+                </head>
+                <body style="font-family:'Verdana'; font-size:13px">
+                <br>
+                <img src="C:/Users/Matt/Desktop/GitHub/COMP4Coursework/Implementation/Gui/images/Logo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
+                <br>
+                <b>Beacon Veterinary Centre </b> 
+                <br>"""
+
+        for item in company_address:
+            html += """{0} <br> """.format(item)
+        html += "<br>"
+
+        for line in company_contact:
+            html += """{0} <br> """.format(line)
+        html += """ <br>
+                    <div align="right"> 
+
+                    <table style="width:45%">
+                    <tr>
+                    <td bgcolor= "#94FF70"><b>Invoice Number<bb/></td>"""
+                 
+        html += """<td bgcolor="#F8F8F8">{0}</td>
+                   </tr>
+                   <tr>""".format(invoice_number)
+        html += """<td bgcolor="#94FF70"><b>Invoice Date<b/></td>"""
+        html += """<td bgcolor="#F8F8F8">{0}</td>""".format(invoice_date)
+        html += """  </tr>
+                     </table>
+                     </div>
+                     <b>Invoice To:</b> <br>"""
+        html += "{0} <br><br><br><br>".format(invoice_to)
+        html += """<div> 
+
+                   <table width="100%">
+                   <tr>
+                   <td bgcolor="#94FF70"><b>Description<bb/></td>
+                   <td bgcolor="#94FF70"><b>Quantity</b></td>
+                   <td bgcolor="#94FF70"><b>Price</b></td>
+                   <td bgcolor="#94FF70"><b>Total Price</b></td>			
+                   </tr>
+                   <tr>"""
+        for line in product_order:
+            html += """<td bgcolor="#F8F8F8">{0}</td>
+                       <td bgcolor="#F8F8F8">{1}</td>
+                       <td bgcolor="#F8F8F8">{2}</td>
+                       <td bgcolor="#F8F8F8">{3}</td>""".format(line[0],line[1],line[2],line[3])
+        html +=   """</tr>
+                     <tr>"""
+        for count in range(0,4):
+            html += """<td bgcolor="#F8F8F8"></td>"""
+        html += """</tr>
+                   <tr>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#94FF70"><b>Subtotal:</b></td>"""
+        html += """<td bgcolor="#F8F8F8">{0}</td>		
+                   </tr>
+                   <tr>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#94FF70"><b>Discount:</b></td>""".format(subtotal)
+        html += """<td bgcolor="#F8F8F8">{0}</td>		
+                   </tr>
+                   <tr>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#94FF70"><b>Total:</b></td>""".format(discount)
+        html += """<td bgcolor="#94FF70"><b>7.18</b></td>		
+                   </tr>
+                   </table>
+                   <br><br><br><br><br>
+
+                   </div>
+                   <div > 
     
+                   <table width:45%;>
+                   <tr>
+                   <th bgcolor= "#E0E0E0"><b>Date and Time</b>
+                   <th bgcolor= "#E0E0E0"><b>Invoice History</b>
+                   </tr>
+                   <tr>"""
+        html += """<td bgcolor= "#F8F8F8">{0}</td>
+                   <td bgcolor="#F8F8F8">Invoice Sent</td>		
+                   </tr>
+                   <tr>""".format(date_time)
+        html += """<td bgcolor="#F8F8F8">{0}</td>
+                   <td bgcolor="#F8F8F8">Invoice Created</td>		
+                   </tr>
+                   </table>
+                   </div>
+
+                  <br>
+                  <br>
+                  </body>
+                  </html>""".format(date_time)
+        return html
+
+        
+
+    def print_document(self):
+        self.printer = QPrinter()
+        html = self.createHtml()
+        document = QTextDocument()
+        document.setHtml(html)
+
+        dialog = QPrintDialog(self.printer, self)
+        if dialog.exec_():
+            document = QTextDocument()
+            document.setHtml(html)
+            document.print_(self.printer)
+        print("document printed")
+
+
+    def email_document(self):
+        date = datetime.date.today()
+        date = date.strftime("%d-%m-%Y")
+        subject = ("Beacon Vets Invoice from {0}".format(date))
+        html = self.createHtml()
+        text = ("Hello, Here is the Invoice from the order you made on: {0}".format(date))
+        message = MIMEText(html, 'html')
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = "beaconvets@gmail.com"
+        msg['To'] = self.email_invoice_address.text()
+
+        part1 = MIMEText(text, 'plain')
+        part2 = MIMEText(html, 'html')
+        msg.attach(part1)
+        msg.attach(part2)
+        
+        mail = smtplib.SMTP('smtp.gmail.com','587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login('mattling147@gmail.com','alienware')
+        mail.sendmail('mattling147@gmail.com', self.email_invoice_address.text(), msg.as_string())
+        mail.close()
+        print("email sent")
+
+    def enable_email(self):
+        if self.email_invoice.isChecked():
+            self.email_invoice_address.setEnabled(True)
+        else:
+            self.email_invoice_address.setEnabled(False)
 
     def clicked_Ok(self):
         self.pop_up_instance.close()
@@ -269,6 +421,7 @@ class createOrderClass(QWidget):
             if product_info:
                 self.discount = 0.1
                 self.change_price()
+                self.email_invoice_address.setText(product_info[0][11])
             if not product_info:
                 self.discount = 0.0
                 self.change_price()

@@ -30,14 +30,13 @@ class ProductIDClass(QWidget):
             product_id = self.line_edit.text()
             cursor = db.cursor()
             cursor.execute("SELECT * FROM Product WHERE ProductID = ?",(product_id,))
-            product_info = cursor.fetchall()
+            self.product_info = cursor.fetchall()
             db.commit()
-            print(product_info)
-            self.visible = True
-            print(self.visible)
-            if not product_info:
+            if self.product_info:
+                print(self.product_info)
+                
+            if not self.product_info:
                 print("NOT IN DATABASE")
-                self.visible = False
         
 
     def find_member_by_id(self):

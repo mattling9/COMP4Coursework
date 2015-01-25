@@ -110,19 +110,12 @@ class MainWindow(QMainWindow):
     def change_view(self):
         if not self.edit_product_instance.isEnabled():
             self.edit_product_instance.setEnabled(True)
-        else:
-            self.edit_product_instance.setDisabled(True)
 
     def delete_product(self):
-        self.product_found = False
         self.title = self.create_title()
         self.title.setText("Delete Product ")
         self.delete_product_instance = addProductClass("Delete Product")
         self.delete_product_layout = QVBoxLayout()
-        if self.product_id.visible == False:
-            self.delete_product_instance.setEnabled(False)
-        elif self.product_id.visible == True:
-            self.delete_product_instance.setEnabled(True)
         self.product_id = ProductIDClass("Product ID", 2)
         self.product_id.setFixedHeight(40)
         self.delete_product_layout.addWidget(self.title)
@@ -400,7 +393,7 @@ class MainWindow(QMainWindow):
         self.create_order_instance.total.setText("0.0")
         self.create_order_instance.discount_line_edit.setText("0.0")
         self.stacked_layout.setCurrentIndex(5)
-        self.setFixedSize(700, 800)
+        self.setFixedSize(900, 850)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
