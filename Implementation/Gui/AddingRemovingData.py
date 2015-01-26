@@ -4,19 +4,24 @@ from PyQt4.QtGui import *
 from PyQt4.QtSql import *
 #-----------------------------------------Product-----------------------------------------
 
-def addingProduct(name, size, price, location1, location2):
-    Product = (name,size,price,location1,location2)
+def addingProduct(name, size, price, category, location1, location2, image_path):
+    Product = (name, size, price, category, location1, location2, image_path)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Product (ProductName, Size, Price, Location1, Location2) values(?,?,?,?,?)"
+        sql = "insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath) values(?,?,?,?,?,?,?)"
         cursor.execute(sql,Product)
         db.commit()
-    self.updatedData.emit()
 
+def editProduct(product_id, name, size, price, category):
+    Product = (name, size, price, category, product_id)
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = "UPDATE Product SET ProductName= ?,  Size = ?,  Price = ?, Category= ? WHERE ProductID = ?"
+        cursor.execute(sql,Product)
+        db.commit()
 
-def deletingProduct():
-    ProductID = input("Enter ProductID To Delete")
-    data = (ProductID,)
+def deletingProduct(product_id):
+    data = (product_id,)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = "delete from Product where ProductID = ?"
@@ -147,12 +152,6 @@ def addingProductToOrder(self, ProductID):
             IncrementQuantity(ProductID, quantity)
             return price
 
-def clearOrderTable():
-        
-        with sqlite3.connect("ProductDatabase.db") as db:
-            cursor = db.cursor()
-            cursor.execute("DELETE FROM ProductOrder")
-
 def FindProductByName(self, ProductName):
         with sqlite3.connect("ProductDatabase.db") as db:
             find_product_cursor = db.cursor()
@@ -171,7 +170,6 @@ def FindProductByName(self, ProductName):
                 else:
                     pass
             MatchedProductsTuple = tuple(MatchedProducts)
-            
             if len(MatchedProducts) > 0:
                 query = QSqlQuery("SELECT * FROM Product where ProductID IN (:id)")
                 query.bindValue(":id", MatchedProductsTuple)

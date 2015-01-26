@@ -27,8 +27,10 @@ def create_product_table():
               ProductName string,
               Size string,
               Price string,
+              Category string,
               Location1 string,
               Location2 string,
+              ImagePath string,
               Primary Key(ProductID))"""
     create_table(db_name, "Product", sql)
 

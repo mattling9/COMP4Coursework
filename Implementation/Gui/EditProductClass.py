@@ -5,9 +5,9 @@ from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
 
-class addProductClass(QWidget):
-    """ A representation of the Adding Product Interface"""
-    def __init__(self, ButtonText):
+class editProductClass(QWidget):
+    """ A representation of the Editing Product Interface"""
+    def __init__(self):
         super().__init__()
         self.resize(10,20)
         #Adding group box
@@ -17,7 +17,18 @@ class addProductClass(QWidget):
         
 
         #creating the buttons
-    
+        self.find_product_id_layout = QHBoxLayout()
+        self.find_product_id_widget = QWidget()
+        self.find_product_id_label = QLabel("ProductID")
+        self.find_product_id_line_edit = QLineEdit()
+        self.find_product_id_button = QPushButton("Find...")
+        self.find_product_id_button.clicked.connect(self.find_product_by_id)
+
+                                        
+        self.find_product_id_layout.addWidget(self.find_product_id_label)
+        self.find_product_id_layout.addWidget(self.find_product_id_line_edit)
+        self.find_product_id_layout.addWidget(self.find_product_id_button)
+        self.find_product_id_widget.setLayout(self.find_product_id_layout)
         
         #Price
         self.pound = QLabel("Price: £")
@@ -73,19 +84,19 @@ class addProductClass(QWidget):
         #Location 1
         self.location1 = QLineEdit()
         self.location1.setPlaceholderText("Stock In Location 1...")
+        self.location1.setDisabled(True)
         self.validator = QIntValidator()
-        self.location1.setValidator(self.validator)
-        self.location1.textChanged.connect(self.validate_stock1)
+
 
         #Location 2
         self.location2 = QLineEdit()
         self.location2.setPlaceholderText("Stock In Location 2...")
+        self.location2.setDisabled(True)
         self.validator = QIntValidator()
-        self.location2.setValidator(self.validator)
-        self.location2.textChanged.connect(self.validate_stock2)
+
 
         #Done
-        self.done = QPushButton(ButtonText)
+        self.done = QPushButton("Save")
         self.done.clicked.connect(self.CreatePopUpWindow)
 
         #Product Name
@@ -158,8 +169,10 @@ class addProductClass(QWidget):
 
         self.leftright_widget = QWidget()
         self.leftright_widget.setLayout(self.leftright_layout)
+        self.leftright_widget.setDisabled(True)
 
         self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.find_product_id_widget)
         self.main_layout.addWidget(self.leftright_widget)
         self.main_layout.addWidget(self.done)
         self.main_widget = QWidget()
@@ -170,10 +183,10 @@ class addProductClass(QWidget):
         self.setLayout(self.total_layout)
         
     def CreatePopUpWindow(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
+        self.pop_up_instance = PopUpWindow("Beacon Vets Editing Product", 300, 100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are you sure you want to Add The Product?")
+        self.label = QLabel("Are you sure you want to Edit The Product?")
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -194,7 +207,7 @@ class addProductClass(QWidget):
         self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.add_product_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Product Sucessfully Added!")
+        self.label = QLabel("Product Sucessfully Edited!")
         self.label.setAlignment(Qt.AlignCenter)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -212,16 +225,15 @@ class addProductClass(QWidget):
         self.add_product_instance.raise_()
 
     def get_image_path(self):
-        self.old_path =  QFileDialog.getOpenFileName()
-        self.path.setText(self.old_path)
+        path =  QFileDialog.getOpenFileName()
+        self.path.setText(path)
         
 
     def update_image(self):
-        rows_in_table = self.get_new_product_id()
-        self.file_name = (rows_in_table + 1)
-        self.new_path = ("./ProductImages/{0}.jpg".format(str(self.file_name)))
-        shutil.copy(self.path.text(), self.new_path)
-        self.pixmap = QPixmap(self.old_path)
+        path = self.path.text()
+        new_path = "./ProductImages/01.jpg"
+        shutil.copy(path, new_path)
+        self.pixmap = QPixmap(path)
         self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
 
@@ -230,9 +242,27 @@ class addProductClass(QWidget):
         self.temp = ""
         self.category_string = str((self.category1_button.currentText() + " " + self.category2_button.currentText()))
         self.size_string = self.temp.join(self.size_list)
-        addingProduct(self.product_name.text(), self.size_string, self.price_button.text(), self.category_string, self.location1.text(), self.location2.text(), self.new_path)
+        editProduct(self.find_product_id_line_edit.text(), self.product_name.text(), self.size_string, self.price_button.text(), self.category_string)
         self.AddProductSucess()
         
+    def find_product_by_id(self):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            product_id = self.find_product_id_line_edit.text()
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM Product WHERE ProductID = ?",(product_id,))
+            self.product_info = cursor.fetchall()
+            db.commit()
+            if self.product_info:
+                self.size = int(re.match(r'\d+', self.product_info[0][2]).group())
+                self.leftright_widget.setEnabled(True)
+                self.product_name.setText(self.product_info[0][1])
+                self.size_integer.setText(str(self.size))
+                self.price_button.setText(str(self.product_info[0][3]))
+                
+                
+                
+            if not self.product_info:
+                print("NOT IN DATABASE")   
         
 
 
@@ -243,14 +273,7 @@ class addProductClass(QWidget):
         self.add_product_instance.close()
         self.pop_up_instance.close()
 
-    def get_new_product_id(self):
-        with sqlite3.connect("ProductDatabase.db") as db:
-            cursor = db.cursor()
-            cursor.execute("SELECT COUNT(ProductID) FROM Product")
-            rows_list = cursor.fetchall()
-            rows_in_table = rows_list[0][0]
-            db.commit()
-        return rows_in_table
+    
 
 
     #VALIDATION
@@ -287,29 +310,6 @@ class addProductClass(QWidget):
             if valid:
                 self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
         else:
-            self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-        
-    def validate_stock1(self):
-        self.pattern = re.compile("[0-9]")
-        self.stock = self.location1.text()
-        valid =  self.pattern.match(self.stock)
-        if len(self.stock) > 0 and len(self.stock) <= 2:
-            if valid:
-                self.location1.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-        else:
-            self.location1.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-    def validate_stock2(self):
-        self.pattern = re.compile("[0-9]")
-        self.stock = self.location2.text()
-        valid =  self.pattern.match(self.stock)
-        if len(self.stock) > 0 and len(self.stock) <= 2:
-            if valid:
-                self.location2.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-        else:
-            self.location2.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        
-        
+            self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")        
     
     

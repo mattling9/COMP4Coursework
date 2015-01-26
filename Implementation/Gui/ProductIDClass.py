@@ -8,21 +8,15 @@ class ProductIDClass(QWidget):
     """A representation of A Push Button Widget"""
     def __init__(self, Label, index):
         super().__init__()
-        self.visible = False
         self.layout = QHBoxLayout()
         self.widget = QWidget()
-        self.label = QLabel(Label)
-        self.line_edit = QLineEdit()
-        self.button = QPushButton("Find...")
-        if index == 1:
-            self.button.clicked.connect(self.find_product_by_id)
-        elif index == 7:
-            self.button.clicked.connect(self.find_member_by_id)
-        elif index == 10:
-            self.button.clicked.connect(self.find_employee_by_id)   
-        self.layout.addWidget(self.label)
-        self.layout.addWidget(self.line_edit)
-        self.layout.addWidget(self.button)
+        self.find_product_id_label = QLabel(Label)
+        self.find_product_id_line_edit = QLineEdit()
+        self.find_product_id_button = QPushButton("Find...")
+   
+        self.layout.addWidget(self.find_product_id_label)
+        self.layout.addWidget(self.find_product_id_line_edit)
+        self.layout.addWidget(self.find_product_id_button)
         self.setLayout(self.layout)
 
     def find_product_by_id(self):

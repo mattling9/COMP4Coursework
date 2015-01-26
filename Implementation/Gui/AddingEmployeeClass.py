@@ -99,7 +99,6 @@ class addEmployeeClass(QWidget):
         full_name_list = [first_name[:1], last_name, product_id]
         user_name = ""
         self.user_name = user_name.join(full_name_list)
-        print(self.user_name)
         self.user_name_output.setText(self.user_name)
         self.first_name_output.setText(self.first_name.text())
         self.last_name_output.setText(self.last_name.text())

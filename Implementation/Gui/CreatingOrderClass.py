@@ -40,8 +40,9 @@ class createOrderClass(QWidget):
         self.model.setTable("Product")
         self.model.select()
         self.display_table.setModel(self.model)
-        self.display_table.hideColumn(4)
         self.display_table.hideColumn(5)
+        self.display_table.hideColumn(6)
+        self.display_table.hideColumn(7)
         column_width_list = [80, 300, 90, 75]
         counter = 0
         for item in column_width_list:
@@ -51,7 +52,6 @@ class createOrderClass(QWidget):
         
 
         self.display_table.horizontalHeader().setStretchLastSection(True)
-        self.display_table.verticalHeader().setStretchLastSection(True)
         self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.display_table.doubleClicked.connect(self.clicked)
         self.display_table.show()
@@ -138,17 +138,16 @@ class createOrderClass(QWidget):
         #order_group_box
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
-        self.current_order = QTableView()
-        self.order_model = None
-        if not self.order_model or not isinstance(self.order_model, QSqlTableModel):
-            self.order_model = QSqlTableModel()
-
-        self.order_model.setTable("ProductOrder")
-        self.order_model.select()
-        self.current_order.setModel(self.order_model)
+        self.current_order = QTableWidget(0,5)
         self.current_order.setAlternatingRowColors(True)
-        self.current_order.hideColumn(0)
-        self.current_order.hideColumn(1)
+        self.column_headers = ["ProductID","Product Name","Size","Price","Category"]
+        self.current_order.setHorizontalHeaderLabels(self.column_headers)
+        column_width_list = [100, 300, 90, 75]
+        counter = 0
+        for item in column_width_list:
+            self.current_order.setColumnWidth(counter, item)
+            counter += 1
+            
         self.current_order.horizontalHeader().setStretchLastSection(True)
         self.current_order.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.order_layout.addWidget(self.current_order)
@@ -185,19 +184,20 @@ class createOrderClass(QWidget):
         PrintPreview.exec()
         PrintPreview.showFullScreen()
 
-    def createHtml(self):
+    def createHtml(self, product_info):
         date = datetime.datetime.today()
         date_time = date.strftime("%d-%m-%Y %H:%M")
+        
         company_address = ["21-23 Station Road","Silloth","Cumbria","CA7 4AE"]
         company_contact = ["Phone: 016973 20242","Email: beaconvets@gmail.com"]
         invoice_to = "mattling9@hotmail.co.uk"
         invoice_number = "4"
-        invoice_date = "21-1-2015"
+        invoice_date = datetime.date.today().strftime("%d-%m-%Y")
         product_order = [["Pedigree Chum","2","3.99","7.98"]]
         subtotal = "7.98"
         discount = "0.80"
         total = "7.18"
-        invoice_history = [["22-1-2015 14:19","Invoice Sent"],["22-1-2015 14:18","Invoice Created"]]
+        invoice_history = [[date ,"Invoice Sent"],[date,"Invoice Created"]]
         
         html = u""
         html += """<html>
@@ -211,7 +211,7 @@ class createOrderClass(QWidget):
                 </head>
                 <body style="font-family:'Verdana'; font-size:13px">
                 <br>
-                <img src="C:/Users/Matt/Desktop/GitHub/COMP4Coursework/Implementation/Gui/images/Logo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
+                <img src="./images/Logo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
                 <br>
                 <b>Beacon Veterinary Centre </b> 
                 <br>"""
@@ -356,7 +356,20 @@ class createOrderClass(QWidget):
         self.pop_up_instance.close()
 
     def clicked(self):
-        self.indexes = self.display_table.selectionModel().selectedRows()
+        self.indexes = self.display_table.selectionModel().selection().indexes()
+        rows = []
+        for selected_row in self.indexes:
+            row_number = selected_row.row()
+            if row_number not in rows:
+                rows.append(row_number)      
+        no_of_rows_selected = len(rows)
+        if no_of_rows_selected == 1:
+            self.selected_product_id = self.model.record(rows[0]).field(0).value()
+            self.find_product_by_id(self.selected_product_id)
+        
+
+        
+
         if self.indexes:
             for index in self.indexes:
                 row = index.row()
@@ -375,8 +388,6 @@ class createOrderClass(QWidget):
             self.discount_line_edit.setText(str(self.money_off))
 
             self.total.setText(str(self.total_price))
-                
-            self.order_model.select()
         else:
             pass
         
@@ -407,9 +418,25 @@ class createOrderClass(QWidget):
 
     def find_product(self):
         ProductName = self.category_search.text()
-        filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%'".format(ProductName)
+        filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%' or Category like '%{0}%'".format(ProductName)
         self.model.setFilter(filter_query)
         self.model.select()
+
+    def find_product_by_id(self, product_id):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM Product WHERE ProductID = ?",(product_id,))
+            product_info = cursor.fetchall()
+            db.commit()
+            new_row = (self.current_order.rowCount())
+            self.current_order.insertRow(new_row)
+            count = 0
+            for item in product_info[0]:
+                self.current_order.setItem(new_row, count, (QTableWidgetItem(str(item))))
+                count += 1
+                
+            
+
 
     def find_member_by_id(self):
         with sqlite3.connect("ProductDatabase.db") as db:
