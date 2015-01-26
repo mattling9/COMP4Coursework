@@ -127,31 +127,6 @@ def IncrementQuantity(ProductID, quantity):
         cursor.execute(sql, product_info)
         db.commit()
 
-def addingProductToOrder(self, ProductID):
-    with sqlite3.connect("ProductDatabase.db") as db:
-        cursor = db.cursor()
-        find_cursor = db.cursor()
-        cursor.execute(" SELECT * FROM Product WHERE ProductID = ?",(ProductID,))
-        find_cursor.execute(" SELECT ProductID, Quantity FROM ProductOrder WHERE ProductID = ?",(ProductID,))
-        product = cursor.fetchall()
-        returned_product = find_cursor.fetchall()
-        db.commit()
-        MatchingProductID = returned_product
-        quantity = 1
-        if not MatchingProductID:
-            quantity = 1
-            ProductID = product[0][0]
-            name = product[0][1]
-            size = product[0][2]
-            price = product[0][3]
-            addingOrder(ProductID, name, size, price, quantity)
-            return price
-        elif ProductID == MatchingProductID[0][0]:
-            price = product[0][3]
-            quantity = MatchingProductID[0][1]
-            IncrementQuantity(ProductID, quantity)
-            return price
-
 def FindProductByName(self, ProductName):
         with sqlite3.connect("ProductDatabase.db") as db:
             find_product_cursor = db.cursor()
@@ -165,7 +140,6 @@ def FindProductByName(self, ProductName):
                 ProductList.append(item)
             for count in range(0, len(ProductList)):
                 if ProductName in ProductList[count][1]:
-                    print(ProductList[count][0])
                     MatchedProducts.append(ProductList[count][0])
                 else:
                     pass

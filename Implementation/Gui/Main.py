@@ -339,6 +339,10 @@ class MainWindow(QMainWindow):
         self.setFixedSize(700, 600)
 
     def create_new_order_function(self):
+        self.create_order_instance.current_order.clearContents()
+        for line in range(0, self.create_order_instance.current_order.rowCount()):
+            self.create_order_instance.current_order.removeRow(line)
+        self.create_order_instance.current_order.removeRow(0)
         self.create_order_instance.subtotal.setText("0.0")
         self.create_order_instance.total.setText("0.0")
         self.create_order_instance.discount_line_edit.setText("0.0")

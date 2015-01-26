@@ -140,7 +140,7 @@ class createOrderClass(QWidget):
         self.order_layout = QVBoxLayout()
         self.current_order = QTableWidget(0,5)
         self.current_order.setAlternatingRowColors(True)
-        self.column_headers = ["ProductID","Product Name","Size","Price","Category"]
+        self.column_headers = ["ProductID","Product Name","Size","Price","Quantity"]
         self.current_order.setHorizontalHeaderLabels(self.column_headers)
         column_width_list = [100, 300, 90, 75]
         counter = 0
@@ -184,19 +184,23 @@ class createOrderClass(QWidget):
         PrintPreview.exec()
         PrintPreview.showFullScreen()
 
-    def createHtml(self, product_info):
+    def createHtml(self):
         date = datetime.datetime.today()
         date_time = date.strftime("%d-%m-%Y %H:%M")
         
         company_address = ["21-23 Station Road","Silloth","Cumbria","CA7 4AE"]
         company_contact = ["Phone: 016973 20242","Email: beaconvets@gmail.com"]
-        invoice_to = "mattling9@hotmail.co.uk"
+        invoice_to = self.email_invoice_address.text()
         invoice_number = "4"
         invoice_date = datetime.date.today().strftime("%d-%m-%Y")
-        product_order = [["Pedigree Chum","2","3.99","7.98"]]
-        subtotal = "7.98"
-        discount = "0.80"
-        total = "7.18"
+        product_order = []
+        for row in range(0, self.current_order.rowCount()):
+            product = str(self.current_order.item(row, 0).text()), str(self.current_order.item(row, 1).text()), str(self.current_order.item(row, 2).text()), str(self.current_order.item(row, 3).text()), str(self.current_order.item(row, 4).text())
+            product_order.append(product)
+            
+        subtotal = self.subtotal.text()
+        discount = self.discount_line_edit.text()
+        total = self.total.text()
         invoice_history = [[date ,"Invoice Sent"],[date,"Invoice Created"]]
         
         html = u""
@@ -244,22 +248,27 @@ class createOrderClass(QWidget):
                    <table width="100%">
                    <tr>
                    <td bgcolor="#94FF70"><b>Description<bb/></td>
+                   <td bgcolor="#94FF70"><b>Size</b></td>
                    <td bgcolor="#94FF70"><b>Quantity</b></td>
                    <td bgcolor="#94FF70"><b>Price</b></td>
                    <td bgcolor="#94FF70"><b>Total Price</b></td>			
-                   </tr>
-                   <tr>"""
-        for line in product_order:
-            html += """<td bgcolor="#F8F8F8">{0}</td>
-                       <td bgcolor="#F8F8F8">{1}</td>
-                       <td bgcolor="#F8F8F8">{2}</td>
-                       <td bgcolor="#F8F8F8">{3}</td>""".format(line[0],line[1],line[2],line[3])
-        html +=   """</tr>
-                     <tr>"""
-        for count in range(0,4):
+                   </tr>"""
+        for product in product_order:
+            total_price = float(product[3]) * float(product[4])
+            rounded_total = round(total_price,4)
+            html += """<tr>"""
+            html += """<td bgcolor="#F8F8F8">{0}</td>""".format(product[1])
+            html += """<td bgcolor="#F8F8F8">{0}</td>""".format(product[2])
+            html += """<td bgcolor="#F8F8F8">{0}</td>""".format(product[4])
+            html += """<td bgcolor="#F8F8F8">{0}</td>""".format(product[3])
+            html += """<td bgcolor="#F8F8F8">{0}</td>""".format(rounded_total)
+            html +=   """</tr>"""
+        html += "<tr>"
+        for count in range(0,5):        
             html += """<td bgcolor="#F8F8F8"></td>"""
         html += """</tr>
                    <tr>
+                   <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#94FF70"><b>Subtotal:</b></td>"""
@@ -268,14 +277,16 @@ class createOrderClass(QWidget):
                    <tr>
                    <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#94FF70"><b>Discount:</b></td>""".format(subtotal)
         html += """<td bgcolor="#F8F8F8">{0}</td>		
                    </tr>
                    <tr>
                    <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#F8F8F8"></td>
+                   <td bgcolor="#F8F8F8"></td>
                    <td bgcolor="#94FF70"><b>Total:</b></td>""".format(discount)
-        html += """<td bgcolor="#94FF70"><b>7.18</b></td>		
+        html += """<td bgcolor="#94FF70"><b>{0}</b></td>		
                    </tr>
                    </table>
                    <br><br><br><br><br>
@@ -288,7 +299,7 @@ class createOrderClass(QWidget):
                    <th bgcolor= "#E0E0E0"><b>Date and Time</b>
                    <th bgcolor= "#E0E0E0"><b>Invoice History</b>
                    </tr>
-                   <tr>"""
+                   <tr>""".format(total)
         html += """<td bgcolor= "#F8F8F8">{0}</td>
                    <td bgcolor="#F8F8F8">Invoice Sent</td>		
                    </tr>
@@ -365,31 +376,44 @@ class createOrderClass(QWidget):
         no_of_rows_selected = len(rows)
         if no_of_rows_selected == 1:
             self.selected_product_id = self.model.record(rows[0]).field(0).value()
-            self.find_product_by_id(self.selected_product_id)
-        
-
-        
-
+            product_info = self.find_product_by_id(self.selected_product_id)
         if self.indexes:
             for index in self.indexes:
                 row = index.row()
                 row += 1
 
-            price = addingProductToOrder(self, row)
-            self.subtotal_price = self.subtotal_price + price
-            self.subtotal_price = round(self.subtotal_price, 4)
-            self.discount_multiplier = (1 - self.discount)
-            self.total_price = (self.discount_multiplier * self.subtotal_price)
-            self.total_price = round(self.total_price, 4)
-            self.money_off = (self.subtotal_price - self.total_price)
-            self.money_off = round(self.money_off, 4)
-            
-            self.subtotal.setText(str(self.subtotal_price))
-            self.discount_line_edit.setText(str(self.money_off))
+                
+        inTable = False
+        if self.current_order.rowCount() != 0:
+            for row in range(0, self.current_order.rowCount()):
+                if product_info[0][0] == int(self.current_order.item(row,0).text()):
+                    new_quantity = int(self.current_order.item(row,4).text()) + 1
+                    self.current_order.setItem(row,4, (QTableWidgetItem(str(new_quantity))))
+                    self.subtotal_price = float(self.current_order.item(row,3).text()) * float(self.current_order.item(row,4).text())
+                    inTable  = True
 
-            self.total.setText(str(self.total_price))
-        else:
-            pass
+        if inTable == False:
+            new_row = (self.current_order.rowCount())
+            self.current_order.insertRow(new_row)
+            count = 0
+            for item in product_info[0]:
+                self.current_order.setItem(new_row, count, (QTableWidgetItem(str(item))))
+                count += 1
+            self.current_order.setItem(new_row, 4, (QTableWidgetItem(str(1))))
+            self.subtotal_price += float(self.current_order.item(new_row,3).text())
+
+        
+        self.subtotal_price = round(self.subtotal_price, 4)
+        self.discount_multiplier = (1 - self.discount)
+        self.total_price = (self.discount_multiplier * self.subtotal_price)
+        self.total_price = round(self.total_price, 4)
+        self.money_off = (self.subtotal_price - self.total_price)
+        self.money_off = round(self.money_off, 4)
+        
+        self.subtotal.setText(str(self.subtotal_price))
+        self.discount_line_edit.setText(str(self.money_off))
+
+        self.total.setText(str(self.total_price))
         
     def change_price(self):
         self.subtotal_price
@@ -425,15 +449,11 @@ class createOrderClass(QWidget):
     def find_product_by_id(self, product_id):
         with sqlite3.connect("ProductDatabase.db") as db:
             cursor = db.cursor()
-            cursor.execute("SELECT * FROM Product WHERE ProductID = ?",(product_id,))
+            cursor.execute("SELECT ProductID, ProductName, Size, Price FROM Product WHERE ProductID = ?",(product_id,))
             product_info = cursor.fetchall()
             db.commit()
-            new_row = (self.current_order.rowCount())
-            self.current_order.insertRow(new_row)
-            count = 0
-            for item in product_info[0]:
-                self.current_order.setItem(new_row, count, (QTableWidgetItem(str(item))))
-                count += 1
+            return product_info
+            
                 
             
 
