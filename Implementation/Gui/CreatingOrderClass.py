@@ -172,6 +172,24 @@ class createOrderClass(QWidget):
             self.print_document()
         elif self.email_invoice.isChecked():
             self.email_document()
+        self.createCustomerOrder()
+
+    def createCustomerOrder(self):
+        date = datetime.datetime.today()
+        date_time = date.strftime("%d-%m-%Y %H:%M")
+        self.member_id = self.member_line_edit.text()
+        #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
+        self.employee_id = 2
+        #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
+        addingCustomerOrder(self.member_id, self.employee_id, date_time)
+        order_id = self.get_order_id()
+        for row in range (0, self.current_order.rowCount()):
+            ProductID = str(self.current_order.item(row,0).text())
+            name = str(self.current_order.item(row,1).text())
+            size = str(self.current_order.item(row,2).text())
+            price = str(self.current_order.item(row,3).text())
+            quantity = str(self.current_order.item(row,4).text())
+            addingOrder(order_id, ProductID, name, size, price, quantity)
 
     def preview_invoice_clicked(self):
         self.printer = QPrinter()
@@ -183,6 +201,16 @@ class createOrderClass(QWidget):
         PrintPreview.showFullScreen()
         PrintPreview.exec()
         PrintPreview.showFullScreen()
+
+    def get_order_id(self):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            cursor.execute("SELECT COUNT(DISTINCT OrderID) FROM CustomerOrder")
+            items = cursor.fetchall()
+            print(items)
+            order_id = int(items[0][0])
+            new_order_string = str(order_id)
+        return new_order_string
 
     def createHtml(self):
         date = datetime.datetime.today()
@@ -389,7 +417,6 @@ class createOrderClass(QWidget):
                 if product_info[0][0] == int(self.current_order.item(row,0).text()):
                     new_quantity = int(self.current_order.item(row,4).text()) + 1
                     self.current_order.setItem(row,4, (QTableWidgetItem(str(new_quantity))))
-                    self.subtotal_price = float(self.current_order.item(row,3).text()) * float(self.current_order.item(row,4).text())
                     inTable  = True
 
         if inTable == False:
@@ -400,10 +427,13 @@ class createOrderClass(QWidget):
                 self.current_order.setItem(new_row, count, (QTableWidgetItem(str(item))))
                 count += 1
             self.current_order.setItem(new_row, 4, (QTableWidgetItem(str(1))))
-            self.subtotal_price += float(self.current_order.item(new_row,3).text())
+
+        self.price = 0.00
+        for row in range(0, self.current_order.rowCount()):
+            self.price += float(self.current_order.item(row,3).text()) * float(self.current_order.item(row,4).text())
 
         
-        self.subtotal_price = round(self.subtotal_price, 4)
+        self.subtotal_price = round(self.price, 4)
         self.discount_multiplier = (1 - self.discount)
         self.total_price = (self.discount_multiplier * self.subtotal_price)
         self.total_price = round(self.total_price, 4)
@@ -471,7 +501,7 @@ class createOrderClass(QWidget):
                 self.email_invoice_address.setText(product_info[0][11])
             if not product_info:
                 self.discount = 0.0
-                self.change_price()
+                #self.change_price()
                 self.display_message()
 
     def display_message(self):

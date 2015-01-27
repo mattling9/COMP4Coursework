@@ -20,6 +20,7 @@ from FindingPopUpClass import *
 from SQLConnection import *
 from CreatingTable import *
 from AddingRemovingData import *
+from PreferencesClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -27,7 +28,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Beacon Vets Stock Control")
-        self.setFixedSize(700, 600)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.setWindowIcon(self.icon)
         self.statusBar().showMessage('Status: Idle')
@@ -51,6 +51,11 @@ class MainWindow(QMainWindow):
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
         self.create_new_order_function()
+        self.preferences()
+        self.setWindowTitle("Beacon Vets Stock Control")
+        self.setFixedSize(900, 850)
+        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.setWindowIcon(self.icon)
         
         
 
@@ -235,6 +240,9 @@ class MainWindow(QMainWindow):
         self.search_instance.show()
         self.search_instance.raise_()
 
+    def preferences(self):
+        self.preferences_instance = preferencesClass()
+        self.stacked_layout.addWidget(self.preferences_instance)
         
     def Settings(self):
         #Adding Actions
@@ -253,6 +261,7 @@ class MainWindow(QMainWindow):
         self.remove_an_employee_action = QAction("Remove Employee", self)
         self.search_product_action = QAction("Product Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
+        self.preferences_action = QAction("Preferences", self)
         #Creating MenuBar
         self.menu = QMenuBar()
 
@@ -284,6 +293,7 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.remove_an_employee_action)
         self.optionsmenu = self.menu.addMenu("Options")
         self.optionsmenu.addAction(self.search_product_action)
+        self.optionsmenu.addAction(self.preferences_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
@@ -305,6 +315,7 @@ class MainWindow(QMainWindow):
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
         self.search_product_action.triggered.connect(self.search_product_function)
+        self.preferences_action.triggered.connect(self.preferences_function)
 
         #Set Menu Bar
         self.setMenuBar(self.menu)
@@ -377,6 +388,9 @@ class MainWindow(QMainWindow):
 
     def search_product_function(self):
         self.search()
+
+    def preferences_function(self):
+        self.stacked_layout.setCurrentIndex(12)
 
         
 

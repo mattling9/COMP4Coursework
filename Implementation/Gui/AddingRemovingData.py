@@ -109,12 +109,11 @@ def removingCustomerOrder():
 
 
         
-def addingOrder(ProductID, name, size, price, quantity):
-    ProductOrderID = get_product_order_id()
-    order_info = (ProductID, name, size, price, quantity)
+def addingOrder(order_id, ProductID, name, size, price, quantity):
+    order_info = (order_id, ProductID, name, size, price, quantity)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into ProductOrder (ProductID, ProductName, Size, Price, Quantity) values(?,?,?,?,?)"
+        sql = "insert into ProductOrder (OrderID, ProductID, ProductName, Size, Price, Quantity) values(?,?,?,?,?,?)"
         cursor.execute(sql, order_info)
         db.commit()
 
@@ -158,28 +157,12 @@ def FindProductByName(self, ProductName):
                 no_match_cursor.execute("SELECT * FROM Product where ProductID = -1")
 
 
-def get_product_order_id():
+def get_order_id():
     with sqlite3.connect("ProductDatabase.db") as db:
             cursor = db.cursor()
             cursor.execute("SELECT * FROM ProductOrder")
             items = cursor.fetchall()
     return items
-
-def createCustomerOrder(self):
-    date = datetime.datetime.today()
-    date_time = date.strftime("%d-%m-%Y %H:%M")
-    self.member_id = self.member_line_edit.text()
-    #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
-    self.employee_id = 2
-    #NEED TO GET EMPLOYEE ID FROM THE EMPLOYEE WHO IS CURRENTLY LOGGED IN!!
-    addingCustomerOrder(self.member_id, self.employee_id, date_time)
-    with sqlite3.connect("ProductDatabase.db") as db:
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM CustomerOrder")
-        customer_order_list = cursor.fetchall()
-        date = datetime.datetime.today()
-        date_time = date.strftime("%d-%m-%Y %H:%M")
-    
 
                 
                 
