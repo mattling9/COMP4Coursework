@@ -14,6 +14,10 @@ class preferencesClass(QWidget):
         ##
         self.company_info = QGroupBox("Company Info:")
         self.company_info_layout = QVBoxLayout()
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.save_clicked)
 
 
         self.image_layout = QVBoxLayout()
@@ -32,7 +36,7 @@ class preferencesClass(QWidget):
         #
         self.path = QLineEdit()
         self.path.setReadOnly(True)
-        self.path.setText("Input Path From File")
+        self.path.setText(path)
         self.browse_button = QPushButton("Browse...")
         self.browse_button.clicked.connect(self.get_path)
         self.upload_button = QPushButton("Upload")
@@ -77,6 +81,16 @@ class preferencesClass(QWidget):
         self.invoice_email = QLineEdit()
         self.invoice_password = QLineEdit()
         self.invoice_password.setEchoMode(QLineEdit.Password)
+
+        self.gmail_groupbox = QGroupBox("Email Account:")
+        self.gmail_layout = QGridLayout()
+        self.gmail_layout.addWidget(self.invoice_email_label, 0,0)
+        self.gmail_layout.addWidget(self.invoice_email, 0,1)
+        self.gmail_layout.addWidget(self.invoice_password_label, 1,0)
+        self.gmail_layout.addWidget(self.invoice_password, 1,1)
+        self.gmail_groupbox.setLayout(self.gmail_layout)
+        self.gmail_groupbox.setFixedHeight(250)
+        
         
         label_list = [self.company_name_label, self.street_label, self.town_label, self.city_label, self.county_label, self.postcode_label, self.phone_label, self.email_label]
         line_edit_list = [self.company_name, self.street, self.town, self.city, self.county, self.postcode, self.phone, self.email]
@@ -104,7 +118,18 @@ class preferencesClass(QWidget):
         self.company_info.setFixedWidth(330)
 
         self.main_layout.addWidget(self.company_info)
-        self.setLayout(self.main_layout)
+        self.main_widget.setLayout(self.main_layout)
+
+        self.leftright_layout = QHBoxLayout()
+        self.leftright_layout.addWidget(self.main_widget)
+        self.leftright_layout.addWidget(self.gmail_groupbox)
+        self.leftright_widget = QWidget()
+        self.leftright_widget.setLayout(self.leftright_layout)
+        
+        self.main_layout2 = QVBoxLayout()
+        self.main_layout2.addWidget(self.leftright_widget)
+        self.main_layout2.addWidget(self.buttonBox)
+        self.setLayout(self.main_layout2)
             
                 
         
@@ -120,8 +145,22 @@ class preferencesClass(QWidget):
         self.pixmap = QPixmap(self.path.text())
         self.scaled_image = self.pixmap.scaled(230, 230, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image_label.setPixmap(self.scaled_image)
-    
-    
+
+    def save_clicked(self):
+        updateSettings(self.path.text(),
+                       self.company_name.text(),
+                       self.street.text(),
+                       self.town.text(),
+                       self.city.text(),
+                       self.county.text(),
+                       self.postcode.text(),
+                       self.phone.text(),
+                       self.email.text(),
+                       self.invoice_email.text(),
+                       self.invoice_password.text())
+        print("updated")
+        
+     
         
         
         

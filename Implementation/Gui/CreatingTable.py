@@ -102,6 +102,22 @@ def create_product_location_table():
             Foreign Key(LocationID) references Location(LocationID))"""        
     create_table(db_name,"ProductLocation", sql)
 
+def create_settings_table():
+    sql = """create table Settings
+              (SettingsID,
+              Logo string,
+              CompanyName string,
+              Street string,
+              Town text,
+              City text,
+              County interger,
+              Postcode text,
+              Phone Number text,
+              EmailAddress text,
+              GmailAddress text,
+              GmailPassword text)"""
+    create_table(db_name, "Settings", sql)   
+
 if __name__ == "__main__":
     db_name = "ProductDatabase.db"
     create_product_table()
@@ -111,3 +127,4 @@ if __name__ == "__main__":
     create_employee_table()
     create_member_table()
     create_order_table()
+    create_settings_table()

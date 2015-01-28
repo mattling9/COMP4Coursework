@@ -150,7 +150,6 @@ def FindProductByName(self, ProductName):
                 self.query_table.setModel(self.query_model)
                 self.query_table.show()
                 
-                
             
             else:
                 no_match_cursor = db.cursor()
@@ -164,6 +163,22 @@ def get_order_id():
             items = cursor.fetchall()
     return items
 
+def updateSettings(logo, company_name, street, town, city, county, postcode, phone, email_address, gmail_address, gmail_password):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        search_cursor = db.cursor()
+        settings_data = (logo, company_name, street, town, city, county, postcode, phone, email_address, gmail_address, gmail_password)
+        cursor.execute("SELECT * FROM Settings where 1=1")
+        item_in_list = cursor.fetchall()
+        print(item_in_list)
+        if not item_in_list:
+            sql =("""INSERT into Settings WHERE(Logo= ?,  CompanyName = ?,  Street = ?, Town= ?, City = ?,
+                          County = ?, Postcode= ?, Phone= ?, EmailAddress= ?, GmailAddress= ?, GmailPassword= ?)""")
+        else:
+            sql =("""UPDATE Settings SET Logo= ?,  CompanyName = ?,  Street = ?, Town= ?, City = ?,
+                          County = ?, Postcode= ?, Phone= ?, EmailAddress= ?, GmailAddress= ?, GmailPassword= ?""")
+        search_cursor.execute(sql, settings_data)
+        db.commit()
                 
                 
 

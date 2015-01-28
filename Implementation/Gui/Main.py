@@ -259,9 +259,9 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
-        self.search_product_action = QAction("Product Search Window", self)
-        self.search_product_action.setShortcut("Ctrl+F")
         self.preferences_action = QAction("Preferences", self)
+        self.search_product_action = QAction("Search Window", self)
+        self.search_product_action.setShortcut("Ctrl+F")
         #Creating MenuBar
         self.menu = QMenuBar()
 
@@ -292,8 +292,8 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.edit_employee_action)
         self.employeemenu.addAction(self.remove_an_employee_action)
         self.optionsmenu = self.menu.addMenu("Options")
-        self.optionsmenu.addAction(self.search_product_action)
         self.optionsmenu.addAction(self.preferences_action)
+        self.optionsmenu.addAction(self.search_product_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
@@ -391,6 +391,7 @@ class MainWindow(QMainWindow):
 
     def preferences_function(self):
         self.stacked_layout.setCurrentIndex(12)
+        self.setFixedSize(900, 850)
 
         
 
