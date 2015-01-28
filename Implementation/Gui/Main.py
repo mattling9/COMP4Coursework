@@ -27,9 +27,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Beacon Vets Stock Control")
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.setWindowIcon(self.icon)
+        settings = getSettings()
         self.statusBar().showMessage('Status: Idle')
         self.connection = SQLConnection("ProductDatabase.db")
         open_db = self.connection.open_database()
@@ -52,9 +50,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
         self.create_new_order_function()
         self.preferences()
-        self.setWindowTitle("Beacon Vets Stock Control")
+        self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
         self.setFixedSize(900, 850)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
+        self.icon = QIcon("{0}".format(str(settings[0][1])))
         self.setWindowIcon(self.icon)
         
         

@@ -107,8 +107,9 @@ class editProductClass(QWidget):
         self.product_name.setFixedWidth(300)
 
         #Image
+        settings = getSettings()
         self.image = QLabel()
-        self.image_pixmap = QPixmap(".\images\Default.png")
+        self.image_pixmap = QPixmap(settings[0][1])
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         

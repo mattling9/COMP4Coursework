@@ -9,6 +9,7 @@ class preferencesClass(QWidget):
     """ A representation of the Adding Product Interface"""
     def __init__(self):
         super().__init__()
+        settings = getSettings()
         self.main_layout = QVBoxLayout()
         self.main_widget = QWidget()
         ##
@@ -23,7 +24,7 @@ class preferencesClass(QWidget):
         self.image_layout = QVBoxLayout()
         self.image_widget = QWidget()
         ##
-        path = "./images/Logo.jpg"
+        path = settings[0][1]
         self.unscaled_pixmap = QPixmap(path)
         self.pixmap = self.unscaled_pixmap.scaled(230, 230, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image_label = QLabel()
@@ -39,11 +40,8 @@ class preferencesClass(QWidget):
         self.path.setText(path)
         self.browse_button = QPushButton("Browse...")
         self.browse_button.clicked.connect(self.get_path)
-        self.upload_button = QPushButton("Upload")
-        self.upload_button.clicked.connect(self.set_image)
         self.path_layout.addWidget(self.path)
         self.path_layout.addWidget(self.browse_button)
-        self.path_layout.addWidget(self.upload_button)
         self.path_widget.setLayout(self.path_layout)
         self.path_widget.setFixedWidth(300)
         
@@ -66,21 +64,27 @@ class preferencesClass(QWidget):
         self.phone = QLineEdit()
         self.email = QLineEdit()
 
-        #INSERT THE DATA FROM FILE HERE
-        self.company_name.setText("")
-        self.street.setText("")
-        self.town.setText("")
-        self.city.setText("")
-        self.county.setText("")
-        self.postcode.setText("")
-        self.phone.setText("")
-        self.email.setText("")
-        #INSERT THE DATA FROM FILE HERE
         self.invoice_email_label = QLabel("Email: ")
         self.invoice_password_label = QLabel("Password: ")
         self.invoice_email = QLineEdit()
         self.invoice_password = QLineEdit()
         self.invoice_password.setEchoMode(QLineEdit.Password)
+
+        self.new_path_line_edit = QLineEdit()
+
+        #INSERT THE DATA FROM FILE HERE
+
+        self.company_name.setText(settings[0][2])
+        self.street.setText(settings[0][3])
+        self.town.setText(settings[0][4])
+        self.city.setText(settings[0][5])
+        self.county.setText(settings[0][6])
+        self.postcode.setText(settings[0][7])
+        self.phone.setText(settings[0][8])
+        self.email.setText(settings[0][9])
+        self.invoice_email.setText(settings[0][10])
+        self.invoice_password.setText(settings[0][11])
+        #INSERT THE DATA FROM FILE HERE
 
         self.gmail_groupbox = QGroupBox("Email Account:")
         self.gmail_layout = QGridLayout()
@@ -137,17 +141,18 @@ class preferencesClass(QWidget):
     def get_path(self):
         self.path_text =  QFileDialog.getOpenFileName()
         self.path.setText(self.path_text)
-
-    def set_image(self):
-        self.file_name = "Logo.jpg"
-        self.new_path = ("./ProductImages/{0}.jpg".format(self.file_name))
+        self.file_name = "SystemLogo.jpg"
+        self.new_path = ("./ProductImages/{0}".format(self.file_name))
         shutil.copy(self.path.text(), self.new_path)
         self.pixmap = QPixmap(self.path.text())
+        self.new_path_line_edit.setText(self.new_path)
         self.scaled_image = self.pixmap.scaled(230, 230, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image_label.setPixmap(self.scaled_image)
 
+
     def save_clicked(self):
-        updateSettings(self.path.text(),
+        encrypted_password = change_password(self.invoice_password.text(), 3)
+        updateSettings(self.new_path,
                        self.company_name.text(),
                        self.street.text(),
                        self.town.text(),
@@ -157,10 +162,13 @@ class preferencesClass(QWidget):
                        self.phone.text(),
                        self.email.text(),
                        self.invoice_email.text(),
-                       self.invoice_password.text())
+                       encrypted_password)
         print("updated")
         
      
+
+
+    
         
         
         

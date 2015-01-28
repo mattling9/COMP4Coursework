@@ -166,20 +166,42 @@ def get_order_id():
 def updateSettings(logo, company_name, street, town, city, county, postcode, phone, email_address, gmail_address, gmail_password):
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
+        settings_id = 1
         search_cursor = db.cursor()
         settings_data = (logo, company_name, street, town, city, county, postcode, phone, email_address, gmail_address, gmail_password)
+        settings_data_with_id = (settings_id, logo, company_name, street, town, city, county, postcode, phone, email_address, gmail_address, gmail_password)
         cursor.execute("SELECT * FROM Settings where 1=1")
         item_in_list = cursor.fetchall()
-        print(item_in_list)
         if not item_in_list:
-            sql =("""INSERT into Settings WHERE(Logo= ?,  CompanyName = ?,  Street = ?, Town= ?, City = ?,
-                          County = ?, Postcode= ?, Phone= ?, EmailAddress= ?, GmailAddress= ?, GmailPassword= ?)""")
+            sql = "insert into Settings (SettingsID, Logo,  CompanyName,  Street, Town , City, County, Postcode, Phone, EmailAddress, GmailAddress, GmailPassword) values(?,?,?,?,?,?,?,?,?,?,?,?)"
+            search_cursor.execute(sql, settings_data_with_id)
+            db.commit()
         else:
-            sql =("""UPDATE Settings SET Logo= ?,  CompanyName = ?,  Street = ?, Town= ?, City = ?,
-                          County = ?, Postcode= ?, Phone= ?, EmailAddress= ?, GmailAddress= ?, GmailPassword= ?""")
-        search_cursor.execute(sql, settings_data)
-        db.commit()
-                
-                
+            sql = "UPDATE Settings Set Logo = ?,  CompanyName = ?,  Street = ?, Town= ?, City = ?, County = ?, Postcode = ?, Phone = ?, EmailAddress = ?, GmailAddress = ?, GmailPassword = ? where SettingsID = 1"
+            search_cursor.execute(sql, settings_data)
+            db.commit()
+
+def getSettings():
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM Settings where SettingsID = 1")
+        settings = cursor.fetchall()
+    return settings
+
+def change_password(password, shift):
+	password = password.lower()
+	encrypted_password = ""
+	for c in password:
+		if c in "abcdefghijklmnopqrstuvwxyz":
+			num = ord(c)
+			num += shift
+			if num > ord("z"):
+				num -= 26
+			elif num < ord("a"):
+				num += 26
+			encrypted_password += chr(num)
+		else:
+			encrypted_password += c
+	return encrypted_password
 
         

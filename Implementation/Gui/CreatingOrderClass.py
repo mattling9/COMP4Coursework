@@ -12,6 +12,7 @@ class createOrderClass(QWidget):
     def __init__(self):
         super().__init__()
         ProductID_list = []
+        settings = getSettings()
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Find Product:")
         self.category_label.setFixedWidth(70)
@@ -213,11 +214,12 @@ class createOrderClass(QWidget):
         return new_order_string
 
     def createHtml(self):
+        settings = getSettings()
         date = datetime.datetime.today()
         date_time = date.strftime("%d-%m-%Y %H:%M")
         
-        company_address = ["21-23 Station Road","Silloth","Cumbria","CA7 4AE"]
-        company_contact = ["Phone: 016973 20242","Email: beaconvets@gmail.com"]
+        company_address = [settings[0][3],settings[0][4],settings[0][5],settings[0][6],settings[0][7]]
+        company_contact = [("Phone: {0}".format(settings[0][8])) ,("Email: {0}".format(settings[0][9]))]
         invoice_to = self.email_invoice_address.text()
         invoice_number = "4"
         invoice_date = datetime.date.today().strftime("%d-%m-%Y")
@@ -231,7 +233,7 @@ class createOrderClass(QWidget):
         total = self.total.text()
         invoice_history = [[date ,"Invoice Sent"],[date,"Invoice Created"]]
         
-        html = u""
+        html = ""
         html += """<html>
 
                 <head>
@@ -243,7 +245,7 @@ class createOrderClass(QWidget):
                 </head>
                 <body style="font-family:'Verdana'; font-size:13px">
                 <br>
-                <img src="./images/Logo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
+                <img src="./ProductImages/SystemLogo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
                 <br>
                 <b>Beacon Veterinary Centre </b> 
                 <br>"""
@@ -361,9 +363,13 @@ class createOrderClass(QWidget):
 
 
     def email_document(self):
+        settings = getSettings()
         date = datetime.date.today()
         date = date.strftime("%d-%m-%Y")
         subject = ("Beacon Vets Invoice from {0}".format(date))
+        decrypted_password = change_password(settings[0][11], -3)
+
+        
         html = self.createHtml()
         text = ("Hello, Here is the Invoice from the order you made on: {0}".format(date))
         message = MIMEText(html, 'html')
@@ -376,12 +382,16 @@ class createOrderClass(QWidget):
         part2 = MIMEText(html, 'html')
         msg.attach(part1)
         msg.attach(part2)
+        send_from = '{0}'.format(settings[0][10])
+        password = decrypted_password
+        print(password)
+
         
         mail = smtplib.SMTP('smtp.gmail.com','587')
         mail.ehlo()
         mail.starttls()
-        mail.login('mattling147@gmail.com','alienware')
-        mail.sendmail('mattling147@gmail.com', self.email_invoice_address.text(), msg.as_string())
+        mail.login(send_from, password)
+        mail.sendmail(send_from, self.email_invoice_address.text(), msg.as_string())
         mail.close()
         print("email sent")
 
@@ -551,5 +561,4 @@ class createOrderClass(QWidget):
         self.add_order_instance.move(800,450)
         self.add_order_instance.show()
         self.add_order_instance.raise_()
-        
-       
+
