@@ -152,7 +152,8 @@ class preferencesClass(QWidget):
 
     def save_clicked(self):
         encrypted_password = change_password(self.invoice_password.text(), 3)
-        updateSettings(self.new_path,
+        
+        updateSettings("./ProductImages/SystemLogo.jpg",
                        self.company_name.text(),
                        self.street.text(),
                        self.town.text(),
