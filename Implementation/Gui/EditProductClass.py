@@ -109,7 +109,7 @@ class editProductClass(QWidget):
         #Image
         settings = getSettings()
         self.image = QLabel()
-        self.image_pixmap = QPixmap(settings[0][1])
+        self.image_pixmap = QPixmap("./images/Default.png")
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
@@ -127,6 +127,7 @@ class editProductClass(QWidget):
         
         self.path = QLineEdit("")
         self.path.setReadOnly(True)
+        self.path.setText(path)
         self.browse_layout.addWidget(self.path)
         self.browse_layout.addWidget(self.browse)
         self.browse_layout.addWidget(self.upload)
@@ -231,10 +232,7 @@ class editProductClass(QWidget):
         
 
     def update_image(self):
-        path = self.path.text()
-        new_path = "./ProductImages/01.jpg"
-        shutil.copy(path, new_path)
-        self.pixmap = QPixmap(path)
+        self.pixmap = QPixmap(self.path.text())
         self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
 
@@ -243,7 +241,7 @@ class editProductClass(QWidget):
         self.temp = ""
         self.category_string = str((self.category1_button.currentText() + " " + self.category2_button.currentText()))
         self.size_string = self.temp.join(self.size_list)
-        editProduct(self.find_product_id_line_edit.text(), self.product_name.text(), self.size_string, self.price_button.text(), self.category_string)
+        editProduct(self.find_product_id_line_edit.text(), self.product_name.text(), self.size_string, self.price_button.text(), self.category_string, self.path.text())
         self.AddProductSucess()
         
     def find_product_by_id(self):
@@ -259,6 +257,10 @@ class editProductClass(QWidget):
                 self.product_name.setText(self.product_info[0][1])
                 self.size_integer.setText(str(self.size))
                 self.price_button.setText(str(self.product_info[0][3]))
+                self.path.setText(self.product_info[0][7])
+                self.pixmap = QPixmap(self.path.text())
+                self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.image.setPixmap(self.scaled_image)
                 
                 
                 

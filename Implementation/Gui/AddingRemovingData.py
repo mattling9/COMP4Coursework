@@ -12,11 +12,11 @@ def addingProduct(name, size, price, category, location1, location2, image_path)
         cursor.execute(sql,Product)
         db.commit()
 
-def editProduct(product_id, name, size, price, category):
-    Product = (name, size, price, category, product_id)
+def editProduct(product_id, name, size, price, category, path):
+    Product = (name, size, price, category, path, product_id)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "UPDATE Product SET ProductName= ?,  Size = ?,  Price = ?, Category= ? WHERE ProductID = ?"
+        sql = "UPDATE Product SET ProductName= ?,  Size = ?,  Price = ?, Category= ?, ImagePath= ? WHERE ProductID = ?"
         cursor.execute(sql,Product)
         db.commit()
 
@@ -204,4 +204,19 @@ def change_password(password, shift):
 			encrypted_password += c
 	return encrypted_password
 
-        
+def getStock(product_id):
+    product_info = (product_id,)
+    with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            sql = ("SELECT Location1 FROM Product WHERE ProductID = ?")
+            cursor.execute(sql, product_info)
+            current_stock = cursor.fetchall()
+    return current_stock
+
+def editStock(new_stock, product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        product_info = (new_stock, product_id,)
+        cursor = db.cursor()
+        sql = "UPDATE Product SET Location1= ? WHERE ProductID = ?"
+        cursor.execute(sql, product_info)
+        db.commit()

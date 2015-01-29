@@ -174,6 +174,7 @@ class createOrderClass(QWidget):
         elif self.email_invoice.isChecked():
             self.email_document()
         self.createCustomerOrder()
+        self.change_stock()
 
     def createCustomerOrder(self):
         date = datetime.datetime.today()
@@ -217,7 +218,7 @@ class createOrderClass(QWidget):
         settings = getSettings()
         date = datetime.datetime.today()
         date_time = date.strftime("%d-%m-%Y %H:%M")
-        
+        company_name = settings[0][2]
         company_address = [settings[0][3],settings[0][4],settings[0][5],settings[0][6],settings[0][7]]
         company_contact = [("Phone: {0}".format(settings[0][8])) ,("Email: {0}".format(settings[0][9]))]
         invoice_to = self.email_invoice_address.text()
@@ -246,9 +247,9 @@ class createOrderClass(QWidget):
                 <body style="font-family:'Verdana'; font-size:13px">
                 <br>
                 <img src="./ProductImages/SystemLogo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
-                <br>
-                <b>Beacon Veterinary Centre </b> 
                 <br>"""
+        html += """<b> {0} </b>""".format(company_name)
+        html += "<br>"
 
         for item in company_address:
             html += """{0} <br> """.format(item)
@@ -561,4 +562,13 @@ class createOrderClass(QWidget):
         self.add_order_instance.move(800,450)
         self.add_order_instance.show()
         self.add_order_instance.raise_()
+
+    def change_stock(self):
+        for row in range(0, self.current_order.rowCount()):
+            product_id = self.current_order.item(row, 0).text()
+            quantity = self.current_order.item(row, 4).text()
+            current_stock = getStock(product_id)
+            new_stock = current_stock[0][0] - int(quantity)
+            editStock(new_stock, product_id)
+            
 
