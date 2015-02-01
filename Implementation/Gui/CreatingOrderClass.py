@@ -126,6 +126,7 @@ class createOrderClass(QWidget):
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.invoice_saved)
+        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.automatically_update_settings)
         
         self.invoice_layout = QVBoxLayout()
         self.invoice_layout.addWidget(self.preview_button)
@@ -175,6 +176,7 @@ class createOrderClass(QWidget):
             self.email_document()
         self.createCustomerOrder()
         self.change_stock()
+        self.change_weekly_sales()
 
     def createCustomerOrder(self):
         date = datetime.datetime.today()
@@ -209,7 +211,6 @@ class createOrderClass(QWidget):
             cursor = db.cursor()
             cursor.execute("SELECT COUNT(DISTINCT OrderID) FROM CustomerOrder")
             items = cursor.fetchall()
-            print(items)
             order_id = int(items[0][0])
             new_order_string = str(order_id)
         return new_order_string
@@ -385,7 +386,6 @@ class createOrderClass(QWidget):
         msg.attach(part2)
         send_from = '{0}'.format(settings[0][10])
         password = decrypted_password
-        print(password)
 
         
         mail = smtplib.SMTP('smtp.gmail.com','587')
@@ -570,5 +570,18 @@ class createOrderClass(QWidget):
             current_stock = getStock(product_id)
             new_stock = current_stock[0][0] - int(quantity)
             editStock(new_stock, product_id)
-            
+
+    def change_weekly_sales(self):
+        for row in range(0, self.current_order.rowCount()):
+            product_id = self.current_order.item(row, 0).text()
+            products_sold  = self.current_order.item(row, 4).text()
+            update_weekly_sales(product_id, products_sold)
+
+    def automatically_update_settings(self):
+        product_id_list = get_all_product_id()
+        for product_id in product_id_list:
+                weekly_sales = get_current_week_sales(str(product_id))
+                #######PLOT WEEKLY SALES TO GRAPH######
+                reset_weekly_sales(product_id)
+                print("updated")
 

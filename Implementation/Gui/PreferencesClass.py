@@ -24,7 +24,10 @@ class preferencesClass(QWidget):
         self.image_layout = QVBoxLayout()
         self.image_widget = QWidget()
         ##
-        path = settings[0][1]
+        if not settings:
+            path = ""
+        else:
+            path = settings[0][1]
         self.unscaled_pixmap = QPixmap(path)
         self.pixmap = self.unscaled_pixmap.scaled(230, 230, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image_label = QLabel()
@@ -73,18 +76,18 @@ class preferencesClass(QWidget):
         self.new_path_line_edit = QLineEdit()
 
         #INSERT THE DATA FROM FILE HERE
-
-        self.company_name.setText(settings[0][2])
-        self.street.setText(settings[0][3])
-        self.town.setText(settings[0][4])
-        self.city.setText(settings[0][5])
-        self.county.setText(settings[0][6])
-        self.postcode.setText(settings[0][7])
-        self.phone.setText(settings[0][8])
-        self.email.setText(settings[0][9])
-        self.invoice_email.setText(settings[0][10])
-        self.invoice_password.setText(settings[0][11])
-        #INSERT THE DATA FROM FILE HERE
+        if settings:
+            self.company_name.setText(settings[0][2])
+            self.street.setText(settings[0][3])
+            self.town.setText(settings[0][4])
+            self.city.setText(settings[0][5])
+            self.county.setText(settings[0][6])
+            self.postcode.setText(settings[0][7])
+            self.phone.setText(settings[0][8])
+            self.email.setText(settings[0][9])
+            self.invoice_email.setText(settings[0][10])
+            self.invoice_password.setText(settings[0][11])
+            #INSERT THE DATA FROM FILE HERE
 
         self.gmail_groupbox = QGroupBox("Email Account:")
         self.gmail_layout = QGridLayout()
@@ -165,7 +168,11 @@ class preferencesClass(QWidget):
                        self.invoice_email.text(),
                        encrypted_password)
         print("updated")
+
         
+        self.setWindowTitle("{0} Stock Control".format(self.company_name.text()))
+        self.icon = QIcon("./ProductImages/SystemLogo.jpg")
+        self.setWindowIcon(self.icon)
      
 
 

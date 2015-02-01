@@ -104,6 +104,7 @@ class addProductClass(QWidget):
 
         #Browse
         path = "./images/Default.png"
+        self.new_path_edit = QLineEdit()
         
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
@@ -220,6 +221,7 @@ class addProductClass(QWidget):
         rows_in_table = self.get_new_product_id()
         self.file_name = (rows_in_table + 1)
         self.new_path = ("./ProductImages/{0}.jpg".format(str(self.file_name)))
+        self.new_path_edit.setText(self.new_path)
         shutil.copy(self.path.text(), self.new_path)
         self.pixmap = QPixmap(self.old_path)
         self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
@@ -230,7 +232,7 @@ class addProductClass(QWidget):
         self.temp = ""
         self.category_string = str((self.category1_button.currentText() + " " + self.category2_button.currentText()))
         self.size_string = self.temp.join(self.size_list)
-        addingProduct(self.product_name.text(), self.size_string, self.price_button.text(), self.category_string, self.location1.text(), self.location2.text(), self.new_path)
+        addingProduct(self.product_name.text(), self.size_string, self.price_button.text(), self.category_string, self.location1.text(), self.location2.text(), self.new_path_edit.text(), 0)
         self.AddProductSucess()
         
         

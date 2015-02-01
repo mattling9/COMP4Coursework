@@ -261,11 +261,18 @@ class editProductClass(QWidget):
                 self.pixmap = QPixmap(self.path.text())
                 self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
-                
-                
-                
             if not self.product_info:
-                print("NOT IN DATABASE")   
+                print("NOT IN DATABASE")
+                self.size = ""
+                self.leftright_widget.setDisabled(True)
+                self.product_name.setText("")
+                self.size_integer.setText("")
+                self.price_button.setText("")
+                self.path.setText("./images/Default.png")
+                self.pixmap = QPixmap(self.path.text())
+                self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.image.setPixmap(self.scaled_image)
+                
         
 
 

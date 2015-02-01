@@ -27,6 +27,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        check_date()
         settings = getSettings()
         self.statusBar().showMessage('Status: Idle')
         self.connection = SQLConnection("ProductDatabase.db")
@@ -50,9 +51,14 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
         self.create_new_order_function()
         self.preferences()
-        self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
+        if settings:
+            self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
+            self.icon = QIcon("{0}".format(str(settings[0][1])))
+        else:
+            self.setWindowTitle(" No Current Company Name")
+            self.icon = QIcon("")
+
         self.setFixedSize(900, 850)
-        self.icon = QIcon("{0}".format(str(settings[0][1])))
         self.setWindowIcon(self.icon)
         
         
@@ -341,7 +347,7 @@ class MainWindow(QMainWindow):
 
     def manage_stock_function(self):
         self.stacked_layout.setCurrentIndex(4)
-        self.setFixedSize(700, 600)
+        self.setFixedSize(900, 800)
 
     def product_restock_function(self):
         self.stacked_layout.setCurrentIndex(0)
@@ -357,6 +363,7 @@ class MainWindow(QMainWindow):
         self.create_order_instance.discount_line_edit.setText("0.0")
         self.stacked_layout.setCurrentIndex(5)
         self.setFixedSize(900, 850)
+        self.create_order_instance.model.select()
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)

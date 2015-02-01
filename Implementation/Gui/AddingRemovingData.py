@@ -1,14 +1,14 @@
-import sqlite3, sys, datetime
+import sqlite3, sys, datetime, calendar
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
 #-----------------------------------------Product-----------------------------------------
 
-def addingProduct(name, size, price, category, location1, location2, image_path):
-    Product = (name, size, price, category, location1, location2, image_path)
+def addingProduct(name, size, price, category, location1, location2, image_path, weekly_sales):
+    Product = (name, size, price, category, location1, location2, image_path, weekly_sales)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath) values(?,?,?,?,?,?,?)"
+        sql = "insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales) values(?,?,?,?,?,?,?,?)"
         cursor.execute(sql,Product)
         db.commit()
 
@@ -188,6 +188,7 @@ def getSettings():
         settings = cursor.fetchall()
     return settings
 
+############################################################ MUST SAY WHERE I GOT THIS CODE FROM... #####################################################
 def change_password(password, shift):
 	password = password.lower()
 	encrypted_password = ""
@@ -203,6 +204,7 @@ def change_password(password, shift):
 		else:
 			encrypted_password += c
 	return encrypted_password
+#########################################################################################################################################################
 
 def getStock(product_id):
     product_info = (product_id,)
@@ -220,3 +222,125 @@ def editStock(new_stock, product_id):
         sql = "UPDATE Product SET Location1= ? WHERE ProductID = ?"
         cursor.execute(sql, product_info)
         db.commit()
+
+
+def update_weekly_sales(product_id, sales):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        find_cursor = db.cursor()
+        find_info = (product_id)
+        find_sql = "SELECT WeeklySales from Product WHERE ProductID = ?"
+        find_cursor.execute(find_sql, find_info)
+        returned_sales = find_cursor.fetchall()
+        if not returned_sales:
+            current_weekly_sales = 0
+        else:
+            current_weekly_sales = returned_sales[0][0]
+        new_weekly_sales = current_weekly_sales + int(sales)
+        
+        
+        
+        update_cursor = db.cursor()
+        update_info = (new_weekly_sales, product_id,)
+        update_sql = "UPDATE Product SET WeeklySales= ? WHERE ProductID = ?"
+        update_cursor.execute(update_sql, update_info)
+        db.commit()
+
+def reset_weekly_sales(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        product_info = (str(product_id))
+        sql = "UPDATE Product SET WeeklySales = 0  WHERE ProductID = ?"
+        cursor.execute(sql, product_info)
+        
+def get_date_stored():
+        with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            sql = "SELECT SalesDate from Settings"
+            cursor.execute(sql)
+            date_stored = cursor.fetchall()
+        return date_stored
+
+def update_date(input_date):
+        with sqlite3.connect("ProductDatabase.db") as db:
+            cursor = db.cursor()
+            product_info = (input_date)
+            date = (input_date,)
+            sql = "UPDATE Settings SET SalesDate = ?"
+            cursor.execute(sql, product_info)
+
+def get_current_week_sales(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        weekly_sales = []
+        cursor = db.cursor()
+        sql =("SELECT WeeklySales From Product WHERE ProductID =?")
+        cursor.execute(sql, product_id)
+        returned_sales = cursor.fetchall()
+        for item in returned_sales[0]:
+            weekly_sales.append(item)
+    print("weekly_sales: {0}".format(weekly_sales[0]))
+    return weekly_sales
+
+def get_all_product_id():
+    with sqlite3.connect("ProductDatabase.db") as db:
+        product_id_list = []
+        cursor = db.cursor()
+        cursor.execute("SELECT * From Product")
+        products = cursor.fetchall()
+        for product in products:
+            product_id_list.append(product[0])
+    return product_id_list
+
+
+def check_date():
+
+    
+    #get date stored as SalesDate
+    date_stored = get_date_stored()
+    
+    current_date = datetime.date.today()
+    current_year = current_date.year
+    current_month = current_date.month
+    current_day = current_date.day
+    
+    if current_day < 8:
+        current_month = current_date.month
+        last_month = current_month - 1
+        next_month = current_month + 1
+        no_days_last_month = calendar.monthrange(current_date.year, last_month)[1]
+        days_to_minus = 7 - current_day
+        previous_month = datetime.date(current_year, last_month, no_days_last_month)
+        new_day = previous_month.day - days_to_minus
+        new_date = datetime.date(current_year, last_month, new_day)
+
+    else:
+        new_date = datetime.date(current_year, current_month, (current_day - 7))
+
+    new_date = new_date.strftime("%d-%m-%Y")
+    
+    if date_stored == None:
+        print("date updated")
+        update_date(current_date.strftime("%d-%m-%Y"))
+
+    elif date_stored == new_date:
+        #IF A WEEK HAS PASSED ADD WEEKLY SALES TO TOTAL SALES AND CHANGE WEEKLY SALES TO 0. STORE CURRENT DATE AS SALES DATE
+        product_id_list = get_all_product_id()
+        for product_id in product_id_list:
+            total_sales_list = []
+            total_sales = get_total_sales(str(product_id))
+            for item in total_sales:
+                total_sales_list.append(item)
+            weekly_sales = get_current_week_sales(str(product_id))
+            total_sales_list.append(weekly_sales)
+            update_total_sales(total_sales_list, str(product_id))
+            reset_weekly_sales(product_id)
+            print("updated")
+        
+        
+        
+        
+
+        
+    
+
+    
+    

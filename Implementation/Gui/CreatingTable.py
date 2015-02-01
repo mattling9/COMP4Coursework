@@ -31,6 +31,7 @@ def create_product_table():
               Location1 string,
               Location2 string,
               ImagePath string,
+              WeeklySales string,
               Primary Key(ProductID))"""
     create_table(db_name, "Product", sql)
 
@@ -115,7 +116,8 @@ def create_settings_table():
               Phone Number text,
               EmailAddress text,
               GmailAddress text,
-              GmailPassword text)"""
+              GmailPassword text,
+              SalesDate text)"""
     create_table(db_name, "Settings", sql)   
 
 if __name__ == "__main__":
