@@ -581,7 +581,10 @@ class createOrderClass(QWidget):
         product_id_list = get_all_product_id()
         for product_id in product_id_list:
                 weekly_sales = get_current_week_sales(str(product_id))
+                if weekly_sales[0] != 0:
+                    update_product_sales(product_id, weekly_sales[0])
                 #######PLOT WEEKLY SALES TO GRAPH######
                 reset_weekly_sales(product_id)
+                update_date(datetime.date.today().strftime("%d-%m-%Y"))
                 print("updated")
 

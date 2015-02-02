@@ -35,6 +35,14 @@ def create_product_table():
               Primary Key(ProductID))"""
     create_table(db_name, "Product", sql)
 
+def create_product_sales_table():
+    sql = """create table ProductSales
+          (ProductID integer,
+          Date string,
+          Sales string,
+          foreign key(ProductID) references Product(ProductID))"""
+    create_table(db_name, "ProductSales", sql)     
+
 
 def create_employee_table():
     sql = """create table Employee
@@ -123,6 +131,7 @@ def create_settings_table():
 if __name__ == "__main__":
     db_name = "ProductDatabase.db"
     create_product_table()
+    create_product_sales_table()
     create_product_order_table()
     create_location_table()
     create_product_location_table()

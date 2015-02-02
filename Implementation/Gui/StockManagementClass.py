@@ -1,11 +1,14 @@
-import sys, random, datetime, sqlite3, re
+import sys, random, datetime, sqlite3, re, numpy
 
+from pylab import *
 from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib import pyplot as plt
 from matplotlib.dates import date2num
+from matplotlib.legend_handler import HandlerLine2D
+from AddingRemovingData import *
 
 
 class manageStockClass(QWidget):
@@ -26,6 +29,7 @@ class manageStockClass(QWidget):
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.save)
 
         self.path = (".\images\Default.png")
         self.image = QLabel()
@@ -70,11 +74,10 @@ class manageStockClass(QWidget):
         #ADDING THE GRAPH TO THE WINDOW
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
-        self.plot()
         #ADDING THE GRAPH TO THE WINDOW
-        self.graph = QLabel("Heres ya graph")
         self.prediction_label = QLabel("Estimated Restock: ")
         self.prediction = QLineEdit()
+        self.prediction.setReadOnly(True)
 
         self.prediction_layout = QHBoxLayout()
         self.prediction_widget = QWidget()
@@ -98,34 +101,56 @@ class manageStockClass(QWidget):
         self.setLayout(self.main_layout)
 
     def plot(self):
-
-        data = [(datetime.datetime.strptime('01-02-2015', "%d-%m-%Y"), 11),
-                (datetime.datetime.strptime('08-02-2015', "%d-%m-%Y"), 1),
-                (datetime.datetime.strptime('15-02-2015', "%d-%m-%Y"), 5),
-                (datetime.datetime.strptime('22-02-2015', "%d-%m-%Y"), 3)]
-
-
-        x = [date2num(date) for (date, value) in data]
-        y = [value for (date, value) in data]
-
+        plt.clf()
+        today_date = datetime.date.today().strftime("%d-%m-%Y")
+        today_date2 = datetime.datetime.strptime(today_date, "%d-%m-%Y")
+        product_id = self.product_id.text()
+        sales = get_product_sales(product_id)
+        dates = get_product_sales_date(product_id)
+        print(dates)
+        data = []
         graph = self.figure.add_subplot(111)
+        if dates:
+            for count in range(0, len(dates)):
+                
+                value = (datetime.datetime.strptime(dates[count][0], "%d-%m-%Y"), sales[count][0])
+                data.append(value)
+                x = [date2num(date) for (date, value) in data]
+                y = [value for (date, value) in data]
+                
+            # plot data
+            line, = graph.plot(x,y, 'r-o',
+            linestyle=("-"),
+            color=('#7CFC00'),
+            marker="o",
+            markeredgecolor="#1919FF",
+            markerfacecolor="#1919FF",
+            linewidth=3.0,
+            label="Sales Made Each Week")
+            plt.xlabel("Date")
+            plt.ylabel("Weekly Sales")
+            graph.set_xticks(x)
+            graph.set_xticklabels([date.strftime("%d-%m-%Y") for (date, value) in data])
+
+            if len(dates) > 1:
+                #plotting the average
+                (m,b) = polyfit(x,y,1)
+                yp = polyval([m,b],x)
+                average, = graph.plot(x,yp,
+                linestyle=("--"),
+                color=('#FF1919'),
+                linewidth=1.0,
+                label ="Average Sales made each Week")
+                
+            plt.legend(loc='upper left')
+            
+
+        elif dates == None:
+            graph.plot(0,0)
+            plt.xlabel("Date")
+            plt.ylabel("Weekly Sales")
         
-        # plot data
-        graph.plot(x,y, 'r-o',
-        linestyle=("-"),
-        color=('#7CFC00'),
-        marker="o",
-        markeredgecolor="#1919FF",
-        markerfacecolor="#1919FF",
-        linewidth=3.0)
-        plt.xlabel("Date")
-        plt.ylabel("Weekly Sales")
-
-
-        graph.set_xticks(x)
-        graph.set_xticklabels([date.strftime("%d-%m-%Y") for (date, value) in data])
-
-        #refresh canvas
+        self.canvas.draw()
 
     def find_product_by_id(self):
         with sqlite3.connect("ProductDatabase.db") as db:
@@ -144,9 +169,18 @@ class manageStockClass(QWidget):
                 self.pixmap = QPixmap(self.path)
                 self.scaled_image = self.pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
-
-                self.canvas.draw()
+                self.plot()
             if not self.product_info:
                 print("NOT IN DATABASE")
                 self.current_stock_groupbox.setDisabled(True)
                 self.stock_prediction_groupbox.setDisabled(True)
+                self.product_name.setText("Product Name")
+                self.path = (".\images\Default.png")
+                self.image_pixmap = QPixmap(self.path)
+                self.scaled_image = self.image_pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.image.setPixmap(self.scaled_image)
+                self.stock1.setValue(0)
+                self.stock2.setValue(0)
+
+    def save(self):
+        edit_stock(self.product_id.text(), int(self.stock1.value()), int(self.stock2.value()))
