@@ -95,8 +95,8 @@ class addEmployeeClass(QWidget):
     def update_preview(self):
         first_name = self.first_name.text().strip('"')
         last_name = self.last_name.text().strip('"')
-        product_id = "11"
-        full_name_list = [first_name[:1], last_name, product_id]
+        employee_id = get_new_employee_id()
+        full_name_list = [first_name[:1], last_name, str(employee_id)]
         user_name = ""
         self.user_name = user_name.join(full_name_list)
         self.user_name_output.setText(self.user_name)
@@ -126,11 +126,19 @@ class addEmployeeClass(QWidget):
         self.pop_up_instance.raise_()
 
     def AddEmployeeSucess(self):
+        self.bold = QFont()
+        self.bold.setBold(True)
+        
         self.add_employee_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.add_employee_instance.setWindowIcon(self.icon)
         self.label = QLabel("Employee Sucessfully Added!")
         self.label.setAlignment(Qt.AlignCenter)
+        self.label.setFont(self.bold)
+        self.message = QLabel(" You can now log in with the following log in details: \n \n Username: {0} \n Password: password".format(self.user_name))
+    
+
+                              
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
@@ -139,6 +147,7 @@ class addEmployeeClass(QWidget):
         self.pop_up_layout = QVBoxLayout()
         self.pop_up_widget = QWidget()
         self.pop_up_layout.addWidget(self.label)
+        self.pop_up_layout.addWidget(self.message)
         self.pop_up_layout.addWidget(self.buttonBox)
         self.pop_up_widget.setLayout(self.pop_up_layout)
         self.add_employee_instance.setCentralWidget(self.pop_up_widget)
@@ -147,10 +156,12 @@ class addEmployeeClass(QWidget):
         self.add_employee_instance.raise_()
 
     def clicked_yes(self):
+        self.password = change_password("password", 3)
         addingEmployee(self.user_name,
                        self.first_name.text(),
                        self.last_name.text(),
-                       self.email_address.text())
+                       self.email_address.text(),
+                       self.password)
         self.AddEmployeeSucess()
 
 

@@ -51,6 +51,7 @@ def create_employee_table():
               EmployeeFirstName text,
               EmployeeLastName text,
               EmployeeEmail text,
+              EmployeePassword text,
               Primary Key(EmployeeID))"""
     create_table(db_name, "Employee", sql)
 

@@ -1,4 +1,4 @@
-import sys, shutil, sqlite3
+import sys, shutil, sqlite3, smtplib, datetime
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -8,7 +8,7 @@ from ProductSearchClass import *
 from AddingProductClass import *
 from EditProductClass import *
 from DeleteProductClass import *
-
+from PopUpMenuClass import *
 from AddingMemberClass import *
 from AddingEmployeeClass import *
 from StockManagementClass import *
@@ -21,6 +21,9 @@ from SQLConnection import *
 from CreatingTable import *
 from AddingRemovingData import *
 from PreferencesClass import *
+from LogInClass import *
+from PasswordResetClass import *
+from ErrorMessageClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -28,6 +31,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         check_date()
+        add_admin_employee()
         settings = getSettings()
         self.statusBar().showMessage('Status: Idle')
         self.connection = SQLConnection("ProductDatabase.db")
@@ -46,11 +50,13 @@ class MainWindow(QMainWindow):
         self.add_employee()
         self.edit_employee()
         self.delete_employee()
+        self.preferences()
+        self.log_in()
+        self.password_reset()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.widget)
-        self.create_new_order_function()
-        self.preferences()
+        self.log_in_function()
         if settings:
             self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
             self.icon = QIcon("{0}".format(str(settings[0][1])))
@@ -58,7 +64,6 @@ class MainWindow(QMainWindow):
             self.setWindowTitle(" No Current Company Name")
             self.icon = QIcon("")
 
-        self.setFixedSize(900, 850)
         self.setWindowIcon(self.icon)
         
         
@@ -247,6 +252,17 @@ class MainWindow(QMainWindow):
     def preferences(self):
         self.preferences_instance = preferencesClass()
         self.stacked_layout.addWidget(self.preferences_instance)
+
+    def log_in(self):
+        self.log_in_instance = logInClass()
+        self.log_in_instance.enter_button.clicked.connect(self.find_account)
+        self.log_in_instance.connect(self.log_in_instance.forgot_password, SIGNAL('clicked()'), self.reset_password)
+        self.stacked_layout.addWidget(self.log_in_instance)
+
+    def password_reset(self):
+        self.password_reset_instance = PasswordResetClass()
+        self.password_reset_instance.button.clicked.connect(self.display_message)
+        self.stacked_layout.addWidget(self.password_reset_instance)
         
     def Settings(self):
         #Adding Actions
@@ -255,7 +271,6 @@ class MainWindow(QMainWindow):
         self.delete_a_product_action = QAction("Delete a Product", self)
         self.find_a_product_action = QAction("Find a Product", self)
         self.manage_current_stock_action = QAction("Manage Stock", self)
-        self.product_restock_action = QAction("Product Restock", self)
         self.create_order_action = QAction("Create New Order", self)
         self.add_new_member_action = QAction("Add New Member", self)
         self.edit_member_action  = QAction("Edit a Member", self)
@@ -266,6 +281,7 @@ class MainWindow(QMainWindow):
         self.preferences_action = QAction("Preferences", self)
         self.search_product_action = QAction("Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
+        self.log_off_action = QAction("Log off", self)
         #Creating MenuBar
         self.menu = QMenuBar()
 
@@ -284,7 +300,6 @@ class MainWindow(QMainWindow):
         self.productsmenu.addAction(self.find_a_product_action)
         self.stockmenu = self.menu.addMenu("Stock")
         self.stockmenu.addAction(self.manage_current_stock_action)
-        self.stockmenu.addAction(self.product_restock_action)
         self.ordermenu = self.menu.addMenu("Order")
         self.ordermenu.addAction(self.create_order_action)
         self.membersmenu = self.menu.addMenu("Member")
@@ -298,6 +313,7 @@ class MainWindow(QMainWindow):
         self.optionsmenu = self.menu.addMenu("Options")
         self.optionsmenu.addAction(self.preferences_action)
         self.optionsmenu.addAction(self.search_product_action)
+        self.optionsmenu.addAction(self.log_off_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
 
@@ -310,7 +326,6 @@ class MainWindow(QMainWindow):
         self.delete_a_product_action.triggered.connect(self.delete_product_function)
         self.find_a_product_action.triggered.connect(self.find_product_function)
         self.manage_current_stock_action.triggered.connect(self.manage_stock_function)
-        self.product_restock_action.triggered.connect(self.product_restock_function)
         self.create_order_action.triggered.connect(self.create_new_order_function)
         self.add_new_member_action.triggered.connect(self.add_new_member_function)
         self.edit_member_action.triggered.connect(self.edit_member_function)
@@ -320,6 +335,7 @@ class MainWindow(QMainWindow):
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
         self.search_product_action.triggered.connect(self.search_product_function)
         self.preferences_action.triggered.connect(self.preferences_function)
+        self.log_off_action.triggered.connect(self.log_in_function)
 
         #Set Menu Bar
         self.setMenuBar(self.menu)
@@ -349,10 +365,6 @@ class MainWindow(QMainWindow):
         self.stacked_layout.setCurrentIndex(4)
         self.setFixedSize(900, 800)
 
-    def product_restock_function(self):
-        self.stacked_layout.setCurrentIndex(0)
-        self.setFixedSize(700, 600)
-
     def create_new_order_function(self):
         self.create_order_instance.current_order.clearContents()
         for line in range(0, self.create_order_instance.current_order.rowCount()):
@@ -364,6 +376,7 @@ class MainWindow(QMainWindow):
         self.stacked_layout.setCurrentIndex(5)
         self.setFixedSize(900, 850)
         self.create_order_instance.model.select()
+        self.move(300,1)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
@@ -398,7 +411,80 @@ class MainWindow(QMainWindow):
         self.stacked_layout.setCurrentIndex(12)
         self.setFixedSize(900, 850)
 
+    def log_in_function(self):
+        self.stacked_layout.setCurrentIndex(13)
+        self.setFixedSize(600,400)
+        self.menu.hide()
+        self.log_in_instance.username.setText("")
+        self.log_in_instance.password.setText("")
+
+    def password_reset_function(self):
+        self.stacked_layout.setCurrentIndex(14)
+        self.setFixedSize(600,400)
+        self.password_reset_instance.email_address.setText("")
         
+    def find_account(self):
+        encrypted_password_entered = change_password(self.log_in_instance.password.text(), 3)
+        self.return_signal = find_username_and_password(self.log_in_instance.username.text(), encrypted_password_entered)
+        if self.return_signal == 1:
+            self.error_message_instance = ErrorMessageClass("Sorry the Password you entered is incorrect")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+        elif self.return_signal == 2:
+            self.error_message_instance = ErrorMessageClass("Sorry the Username and Password you entered are incorrect")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+        elif self.return_signal == 3:
+            print("Log In Sucessful")
+            self.create_new_order_function()
+            self.menu.show()
+
+
+
+    def reset_password(self):
+        self.password_reset_function()
+
+    def display_message(self):
+        self.valid = find_employee_by_email(self.password_reset_instance.email_address.text())
+        if self.valid:
+            username = get_employee_username(self.password_reset_instance.email_address.text())
+            password = get_employee_password(self.password_reset_instance.email_address.text())
+            first_name = get_employee_first_name(self.password_reset_instance.email_address.text())
+            self.send_password_reset_email(self.password_reset_instance.email_address.text(), username, password, first_name)
+            self.log_in_function()
+            self.error_message_instance = ErrorMessageClass("Your Username and Password have been sent to your email address.")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+
+        else:
+            self.error_message_instance = ErrorMessageClass("Sorry the Email address does not match any of the Accounts.")
+
+    def send_password_reset_email(self, email_address, username, password, first_name):
+        print(username)
+        print(password)
+        settings = getSettings()
+        subject = ("Your Beacon Vet Account Details")
+
+        send_from = '{0}'.format(settings[0][10])
+        decrypted_password = change_password(settings[0][11], -3)
+
+        msg = "\r\n".join([
+              "From: BeaconVets@Admin.com",
+                "To: {0}".format(email_address),
+                "Subject: Beacon Vets Account Details",
+              "",
+              ("Hello {0}, Here are your account details: \n \n Username:   {1} \n  Password:   {2}".format(first_name, username, password))])
+
+        mail = smtplib.SMTP('smtp.gmail.com','587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login(send_from, decrypted_password)
+        mail.sendmail(send_from, email_address, msg)
+        mail.close()
+        print("email sent")    
 
 def main():
     stock_control = QApplication(sys.argv) #creates new application

@@ -75,7 +75,7 @@ class manageStockClass(QWidget):
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
         #ADDING THE GRAPH TO THE WINDOW
-        self.prediction_label = QLabel("Estimated Restock: ")
+        self.prediction_label = QLabel("Predicted  Sales Next Week: ")
         self.prediction = QLineEdit()
         self.prediction.setReadOnly(True)
 
@@ -134,8 +134,17 @@ class manageStockClass(QWidget):
 
             if len(dates) > 1:
                 #plotting the average
-                (m,b) = polyfit(x,y,1)
-                yp = polyval([m,b],x)
+                #the line below gets the gradient and y intercept from the line of best fit where
+                # m = gradient, c = y intercept. (c is not right because dates have been used!)
+                (m,c) = polyfit(x,y,1)
+                yp = polyval([m,c],x)
+                difference = yp[1] - yp[0]
+                rounded_difference = round(difference, 2)
+                length_of_list = len(yp)
+                last_sale = yp[length_of_list - 1]
+                predicted_sale = last_sale + rounded_difference
+                rounded_predicted_sale = int(round(predicted_sale, 0))
+                self.prediction.setText(str(rounded_predicted_sale))
                 average, = graph.plot(x,yp,
                 linestyle=("--"),
                 color=('#FF1919'),
@@ -143,6 +152,7 @@ class manageStockClass(QWidget):
                 label ="Average Sales made each Week")
                 
             plt.legend(loc='upper left')
+            graph.grid(b=True, which='major')
             
 
         elif dates == None:
@@ -172,6 +182,7 @@ class manageStockClass(QWidget):
                 self.plot()
             if not self.product_info:
                 print("NOT IN DATABASE")
+                plt.clf()
                 self.current_stock_groupbox.setDisabled(True)
                 self.stock_prediction_groupbox.setDisabled(True)
                 self.product_name.setText("Product Name")

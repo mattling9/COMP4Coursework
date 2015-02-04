@@ -60,11 +60,11 @@ def deletingMember():
 
 #-----------------------------------------Employee-----------------------------------------
 
-def addingEmployee(EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail):
-    Employee = (EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail)
+def addingEmployee(EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail,EmployeePassword):
+    Employee = (EmployeeUserName,EmployeeFirstName,EmployeeLastName,EmployeeEmail,EmployeePassword)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Employee (EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail) values(?,?,?,?)"
+        sql = "insert into Employee (EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail, EmployeePassword) values(?,?,?,?,?)"
         cursor.execute(sql,Employee)
         db.commit()
 
@@ -350,9 +350,10 @@ def check_date():
 def update_product_sales(product_id, sales):
     with sqlite3.connect("ProductDatabase.db") as db:
         #date = datetime.date.today().strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,8).strftime("%d-%m-%Y")
-        date = datetime.date(2015,2,15).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,22).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,2,9).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,2,16).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,2,23).strftime("%d-%m-%Y")
+        date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
         product_info = (product_id, date, sales,)
         cursor = db.cursor()
         sql = "Insert into ProductSales (ProductID, Date, Sales) values(?,?,?)"
@@ -378,14 +379,93 @@ def get_product_sales(product_id):
         if sales_list:
             return sales_list
         
-    
+def get_new_employee_id():
+    with sqlite3.connect("ProductDatabase.db") as db:
+        employee_id_list = []
+        cursor = db.cursor()
+        cursor.execute("Select EmployeeID From Employee")
+        employee_ids = cursor.fetchall()
+        if employee_ids:
+            for employee_id in employee_ids:
+                for individual_id in employee_id:
+                    employee_id_list.append(individual_id)
+                counter = len(employee_id_list)
+                greatest_employee_id = (employee_id_list[counter - 1])
+                new_employee_id = greatest_employee_id + 1
+        else:
+            new_employee_id = 1
+    return new_employee_id
+                
+def find_username_and_password(username, password):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        username_cursor = db.cursor()
+        password_cursor = db.cursor()
+        username_sql = "Select * From Employee Where EmployeeUsername = ?"
+        password_sql = "Select * From Employee Where EmployeePassword = ?"
+        username_cursor.execute(username_sql, (username,))
+        password_cursor.execute(password_sql, (password,))
+        username_list = username_cursor.fetchall()
+        password_list = password_cursor.fetchone()
+        if not username_list and not password_list:
+            return_signal = 2
+        elif not password_list:
+            return_signal = 1
+        elif username_list and password_list:
+            return_signal = 3
+        else:
+            return_signal = 2
+            
+        return return_signal
         
+def find_employee_by_email(email):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        in_database = False
+        cursor = db.cursor()
+        sql = ("Select * From Employee Where EmployeeEmail = ?")
+        cursor.execute(sql, (email,))
+        employee_list = cursor.fetchall()
+        if employee_list:
+            in_database = True
+        return in_database
         
+def get_employee_username(email):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = ("Select EmployeeUsername From Employee Where EmployeeEmail = ?")
+        cursor.execute(sql, (email,))
+        employee_list = cursor.fetchall()
+        employee_username = employee_list[0][0]
+        return employee_username
         
-        
+def get_employee_password(email):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = ("Select EmployeePassword From Employee Where EmployeeEmail = ?")
+        cursor.execute(sql, (email,))
+        employee_list = cursor.fetchall()
+        encrypted_password = str(employee_list[0][0])
+        decrypted_password = change_password(encrypted_password, -3)
+        return decrypted_password
 
-        
-    
+def get_employee_first_name(email):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        sql = ("Select EmployeeFirstName From Employee Where EmployeeEmail = ?")
+        cursor.execute(sql, (email,))
+        employee_list = cursor.fetchall()
+        first_name = employee_list[0][0]
+        return first_name
+
+def add_admin_employee():
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        cursor.execute("Select * From Employee")
+        employees = cursor.fetchall()
+        if not employees:
+            values = ('1', 'THenderson1', 'Tom', 'Henderson', 'thenderson11@gmail.com', 'sdvvzrug',)
+            admin_cursor = db.cursor()
+            sql = ("Insert Into Employee (EmployeeID, EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail, EmployeePassword) values(?,?,?,?,?,?)")
+            admin_cursor.execute(sql, values)
 
     
     
