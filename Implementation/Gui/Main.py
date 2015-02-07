@@ -4,13 +4,15 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
 from ProductSearchClass import *
-
 from AddingProductClass import *
 from EditProductClass import *
 from DeleteProductClass import *
 from PopUpMenuClass import *
 from AddingMemberClass import *
+from EditMemberClass import *
+from DeleteMemberClass import *
 from AddingEmployeeClass import *
+from EditEmployeeClass import *
 from StockManagementClass import *
 from ProductIDClass import *
 from CreatingOrderClass import *
@@ -24,6 +26,9 @@ from PreferencesClass import *
 from LogInClass import *
 from PasswordResetClass import *
 from ErrorMessageClass import *
+from ChangePasswordClass import *
+from StyleSheet import *
+from CustomToolbarClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -33,15 +38,14 @@ class MainWindow(QMainWindow):
         check_date()
         add_admin_employee()
         settings = getSettings()
-        self.statusBar().showMessage('Status: Idle')
+        self.setStyleSheet(css)
         self.connection = SQLConnection("ProductDatabase.db")
         open_db = self.connection.open_database()
         self.Settings()
         self.stacked_layout = QStackedLayout()
         self.add_product()
-        product_name_info = self.edit_product()
+        self.edit_product()
         self.delete_product()
-        self.search_product()
         self.manage_stock()
         self.create_order()
         self.add_member()
@@ -53,9 +57,24 @@ class MainWindow(QMainWindow):
         self.preferences()
         self.log_in()
         self.password_reset()
+        self.change_password()
+        self.edit_member()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
-        self.setCentralWidget(self.widget)
+
+        #Adding The Custom TitleBar
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.title_bar = TitleBar()
+        self.title_bar.minimise.clicked.connect(self.minimise_main_window)
+        self.title_bar.close.clicked.connect(self.close_main_window)
+        self.main_layout = QVBoxLayout()
+        self.main_widget = QWidget()
+        self.main_layout.addWidget(self.title_bar)
+        self.main_layout.addWidget(self.menu)
+        self.main_layout.addWidget(self.widget)
+        self.main_widget.setLayout(self.main_layout)
+        self.setCentralWidget(self.main_widget)
+        
         self.log_in_function()
         if settings:
             self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
@@ -65,6 +84,25 @@ class MainWindow(QMainWindow):
             self.icon = QIcon("")
 
         self.setWindowIcon(self.icon)
+
+    def minimise_main_window(self):
+        self.showMinimized()
+
+    def close_main_window(self):
+        self.close()
+
+    def mousePressEvent(self,event):
+
+        if event.button() == Qt.LeftButton:
+            self.moving = True; self.offset = event.pos()
+
+    def mouseMoveEvent(self,event):
+        try:
+            if self.moving:
+                self.move(event.globalPos()-self.offset)
+        except AttributeError:
+            pass
+
         
         
 
@@ -72,26 +110,8 @@ class MainWindow(QMainWindow):
     def create_title(self):
         self.title = QLabel("Default Text")
         self.title.setAlignment(Qt.AlignCenter)
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.title.setFont(font)
-        self.title.setFixedHeight(30)
+        self.title.setObjectName('title')
         return self.title
-
-
-    def search_product(self):
-        self.title = self.create_title()
-        self.title.setText("Search For Product")
-        
-        self.search_product_instance = searchProductClass()
-        #create layout to hold widgets
-        self.search_product_layout = QVBoxLayout()
-        self.search_product_layout.addWidget(self.search_product_instance)                                     
-        self.select_animal_widget = QWidget()
-        self.select_animal_widget.setLayout(self.search_product_layout)
-        self.setCentralWidget(self.select_animal_widget)
-        self.stacked_layout.addWidget(self.select_animal_widget)
 
         
     def add_product(self):
@@ -156,7 +176,7 @@ class MainWindow(QMainWindow):
         self.title.setText("Edit Member")
 
         
-        self.edit_member_instance = addMemberClass("Edit Member")        
+        self.edit_member_instance = editMemberClass("Edit Member")        
         self.edit_member_layout = QVBoxLayout()
         self.edit_member_widget = QWidget()
         self.edit_member_layout.addWidget(self.title)
@@ -170,7 +190,7 @@ class MainWindow(QMainWindow):
         self.title.setText("Delete Member")
 
         
-        self.delete_member_instance = addMemberClass("Delete Member")
+        self.delete_member_instance = deleteMemberClass("Delete Member")
         self.delete_member_layout = QVBoxLayout()
         self.delete_member_widget = QWidget()
         self.delete_member_layout.addWidget(self.title)
@@ -196,7 +216,7 @@ class MainWindow(QMainWindow):
     def edit_employee(self):
         self.title = self.create_title()
         self.title.setText("Edit Employee")
-        self.edit_employee_instance = addEmployeeClass("Edit Employee")
+        self.edit_employee_instance = editEmployeeClass("Edit Employee")
         self.edit_employee_layout = QVBoxLayout()
         self.edit_employee_widget = QWidget()
         self.edit_employee_layout.addWidget(self.title)
@@ -263,6 +283,16 @@ class MainWindow(QMainWindow):
         self.password_reset_instance = PasswordResetClass()
         self.password_reset_instance.button.clicked.connect(self.display_message)
         self.stacked_layout.addWidget(self.password_reset_instance)
+
+    def change_password(self):
+        self.change_password_instance = ChangePasswordClass("Please Enter a new password, then re-enter it below.", 0)
+        self.change_password_instance.button.clicked.connect(self.match_passwords)
+        self.stacked_layout.addWidget(self.change_password_instance)
+        self.change_password_instance2 = ChangePasswordClass("Please enter a new password below. The Verification code has been sent to your email address.", 1)
+        self.change_password_instance2.button.clicked.connect(self.match_codes)
+        self.stacked_layout.addWidget(self.change_password_instance2)
+        
+        
         
     def Settings(self):
         #Adding Actions
@@ -278,9 +308,11 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Remove Employee", self)
+        self.explanation_action = QAction("Why Can't I Access These?", self)
         self.preferences_action = QAction("Preferences", self)
         self.search_product_action = QAction("Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
+        self.change_password_action = QAction("Change Password", self)
         self.log_off_action = QAction("Log off", self)
         #Creating MenuBar
         self.menu = QMenuBar()
@@ -297,7 +329,6 @@ class MainWindow(QMainWindow):
         self.productsmenu.addAction(self.add_product_action)
         self.productsmenu.addAction(self.edit_product_action)
         self.productsmenu.addAction(self.delete_a_product_action)
-        self.productsmenu.addAction(self.find_a_product_action)
         self.stockmenu = self.menu.addMenu("Stock")
         self.stockmenu.addAction(self.manage_current_stock_action)
         self.ordermenu = self.menu.addMenu("Order")
@@ -310,9 +341,11 @@ class MainWindow(QMainWindow):
         self.employeemenu.addAction(self.add_an_employee_action)
         self.employeemenu.addAction(self.edit_employee_action)
         self.employeemenu.addAction(self.remove_an_employee_action)
+        self.employeemenu.addAction(self.explanation_action)
         self.optionsmenu = self.menu.addMenu("Options")
         self.optionsmenu.addAction(self.preferences_action)
         self.optionsmenu.addAction(self.search_product_action)
+        self.optionsmenu.addAction(self.change_password_action)
         self.optionsmenu.addAction(self.log_off_action)
         #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
         
@@ -324,7 +357,6 @@ class MainWindow(QMainWindow):
         self.add_product_action.triggered.connect(self.add_product_function)
         self.edit_product_action.triggered.connect(self.edit_product_function)
         self.delete_a_product_action.triggered.connect(self.delete_product_function)
-        self.find_a_product_action.triggered.connect(self.find_product_function)
         self.manage_current_stock_action.triggered.connect(self.manage_stock_function)
         self.create_order_action.triggered.connect(self.create_new_order_function)
         self.add_new_member_action.triggered.connect(self.add_new_member_function)
@@ -333,12 +365,15 @@ class MainWindow(QMainWindow):
         self.add_an_employee_action.triggered.connect(self.add_an_employee_function)
         self.edit_employee_action.triggered.connect(self.edit_employee_function)
         self.remove_an_employee_action.triggered.connect(self.remove_an_employee_function)
+        self.explanation_action.triggered.connect(self.explanation_function)
         self.search_product_action.triggered.connect(self.search_product_function)
         self.preferences_action.triggered.connect(self.preferences_function)
         self.log_off_action.triggered.connect(self.log_in_function)
+        self.change_password_action.triggered.connect(self.change_password_function)
 
         #Set Menu Bar
-        self.setMenuBar(self.menu)
+        #self.setMenuBar(self.menu)
+
         
 
         
@@ -351,18 +386,13 @@ class MainWindow(QMainWindow):
 
     def edit_product_function(self):
         self.stacked_layout.setCurrentIndex(1)
-        self.setFixedSize(700, 600)
-
+        self.setFixedSize(700, 700)
     def delete_product_function(self):
         self.stacked_layout.setCurrentIndex(2)
-        self.setFixedSize(700, 600)
-
-    def find_product_function(self):
-        self.stacked_layout.setCurrentIndex(3)
-        self.setFixedSize(700, 600)
+        self.setFixedSize(700, 700)
 
     def manage_stock_function(self):
-        self.stacked_layout.setCurrentIndex(4)
+        self.stacked_layout.setCurrentIndex(3)
         self.setFixedSize(900, 800)
 
     def create_new_order_function(self):
@@ -373,78 +403,149 @@ class MainWindow(QMainWindow):
         self.create_order_instance.subtotal.setText("0.0")
         self.create_order_instance.total.setText("0.0")
         self.create_order_instance.discount_line_edit.setText("0.0")
-        self.stacked_layout.setCurrentIndex(5)
+        self.stacked_layout.setCurrentIndex(4)
         self.setFixedSize(900, 850)
         self.create_order_instance.model.select()
         self.move(300,1)
 
     def add_new_member_function(self):
-        self.stacked_layout.setCurrentIndex(6)
+        self.stacked_layout.setCurrentIndex(5)
         self.setFixedSize(700, 600)
 
     def edit_member_function(self):
-        self.stacked_layout.setCurrentIndex(7)
-        self.setFixedSize(700, 600)
-
-
+        self.stacked_layout.setCurrentIndex(6)
+        self.setFixedSize(700, 700)
     def remove_a_member_function(self):
+        self.stacked_layout.setCurrentIndex(7)
+        self.setFixedSize(700, 700)
+    def add_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(8)
         self.setFixedSize(700, 600)
 
-    def add_an_employee_function(self):
-        self.stacked_layout.setCurrentIndex(9)
-        self.setFixedSize(700, 600)
-
     def edit_employee_function(self):
-        self.stacked_layout.setCurrentIndex(10)
-        self.setFixedSize(700, 600)
+        self.stacked_layout.setCurrentIndex(9)
+        self.setFixedSize(700, 700)
     
 
     def remove_an_employee_function(self):
-        self.stacked_layout.setCurrentIndex(11)
+        self.stacked_layout.setCurrentIndex(10)
         self.setFixedSize(700, 600)
 
+    def explanation_function(self):
+        self.error_message_instance = ErrorMessageClass("The Reason you cannot access the above options is because you \n must be logged into the master account to access them.")
+        self.error_message_instance.move(750,500)
+        self.error_message_instance.show()
+        self.error_message_instance.raise_()
     def search_product_function(self):
         self.search()
 
     def preferences_function(self):
-        self.stacked_layout.setCurrentIndex(12)
+        self.stacked_layout.setCurrentIndex(11)
         self.setFixedSize(900, 850)
 
     def log_in_function(self):
-        self.stacked_layout.setCurrentIndex(13)
-        self.setFixedSize(600,400)
+        self.stacked_layout.setCurrentIndex(12)
+        self.setFixedSize(600,460)
         self.menu.hide()
         self.log_in_instance.username.setText("")
         self.log_in_instance.password.setText("")
 
     def password_reset_function(self):
-        self.stacked_layout.setCurrentIndex(14)
+        self.stacked_layout.setCurrentIndex(13)
         self.setFixedSize(600,400)
         self.password_reset_instance.email_address.setText("")
+
+    def change_password_function(self):
+        if self.menu.isHidden():
+            self.stacked_layout.setCurrentIndex(14)
+            self.setFixedSize(600,400)
+            self.change_password_instance.password1.setText("")
+            self.change_password_instance.password2.setText("")
+        else:
+            self.send_code_to_email(self.log_in_instance.username.text())
+            self.stacked_layout.setCurrentIndex(15)
+            self.setFixedSize(600,400)
+            self.change_password_instance2.password1.setText("")
+            self.change_password_instance2.password2.setText("")
+            self.change_password_instance2.code.setText("")
+        
         
     def find_account(self):
+        settings = getSettings()
         encrypted_password_entered = change_password(self.log_in_instance.password.text(), 3)
         self.return_signal = find_username_and_password(self.log_in_instance.username.text(), encrypted_password_entered)
         if self.return_signal == 1:
-            self.error_message_instance = ErrorMessageClass("Sorry the Password you entered is incorrect")
-            self.error_message_instance.move(750,500)
-            self.error_message_instance.show()
-            self.error_message_instance.raise_()
-        elif self.return_signal == 2:
             self.error_message_instance = ErrorMessageClass("Sorry the Username and Password you entered are incorrect")
             self.error_message_instance.move(750,500)
             self.error_message_instance.show()
             self.error_message_instance.raise_()
-        elif self.return_signal == 3:
-            print("Log In Sucessful")
-            self.create_new_order_function()
-            self.menu.show()
+        elif self.return_signal == 2:
+            if self.log_in_instance.password.text() == 'password':
+                self.change_password_function()
+            else:
+                self.create_new_order_function()
+                self.menu.show()
+                username = find_employee_by_username(self.log_in_instance.username.text())
+                EmployeeID = username[3]
+                if int(EmployeeID) != 1:
+                    self.add_an_employee_action.setDisabled(True)
+                    self.edit_employee_action.setDisabled(True)
+                    self.remove_an_employee_action.setDisabled(True)
+                    self.explanation_action.setVisible(True)
+                else:
+                    self.add_an_employee_action.setEnabled(True)
+                    self.edit_employee_action.setEnabled(True)
+                    self.remove_an_employee_action.setEnabled(True)
+                    self.explanation_action.setVisible(False)
 
 
 
     def reset_password(self):
         self.password_reset_function()
+
+    def match_passwords(self):
+        if self.change_password_instance.password1.text() == self.change_password_instance.password2.text():
+            encrypted_password = change_password(self.change_password_instance.password1.text(), 3)
+            change_employee_password(self.log_in_instance.username.text(), encrypted_password)
+            self.error_message_instance = ErrorMessageClass("Your Password has Sucessfully been changed!")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+            self.create_new_order_function()
+            self.menu.show()
+
+
+        else:
+            self.error_message_instance = ErrorMessageClass("Sorry your passwords do not match.")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+
+    def match_codes(self):
+        
+        if int(self.code) != int(self.change_password_instance2.code.text()):
+            self.error_message_instance = ErrorMessageClass("The Code you entered does not match the one emailed to you.")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+
+        elif self.change_password_instance2.password1.text() != self.change_password_instance2.password2.text():
+            self.error_message_instance = ErrorMessageClass("The passwords you entered do not match")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+        
+        elif (self.change_password_instance2.password1.text() == self.change_password_instance2.password2.text() and int(self.code) == int(self.change_password_instance2.code.text())):
+            encrypted_password = change_password(self.change_password_instance2.password1.text(), 3)
+            change_employee_password(self.log_in_instance.username.text(), encrypted_password)
+            self.error_message_instance = ErrorMessageClass("Your Password has Sucessfully been changed!")
+            self.error_message_instance.move(750,500)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+            self.create_new_order_function()
+            self.menu.show()
+            
+    
 
     def display_message(self):
         self.valid = find_employee_by_email(self.password_reset_instance.email_address.text())
@@ -463,8 +564,6 @@ class MainWindow(QMainWindow):
             self.error_message_instance = ErrorMessageClass("Sorry the Email address does not match any of the Accounts.")
 
     def send_password_reset_email(self, email_address, username, password, first_name):
-        print(username)
-        print(password)
         settings = getSettings()
         subject = ("Your Beacon Vet Account Details")
 
@@ -486,13 +585,34 @@ class MainWindow(QMainWindow):
         mail.close()
         print("email sent")    
 
+    def send_code_to_email(self, username):
+        settings = getSettings()
+        self.code = random.randint(1000,9999)
+        print(self.code)
+        decrypted_password = change_password(settings[0][11], -3)
+        employee_info = find_employee_by_username(username)
+        message = "Hello {0}, \n \n Your Reset Password Code is:  ".format(employee_info[0])
+        msg = "\r\n".join([
+          "From: BeaconVets@Admin.com",
+          "To: {0}".format(employee_info[1]),
+          "Subject: Password Reset Code",
+          "",
+          ("{0}{1}".format(message ,str(self.code)))])
+        mail = smtplib.SMTP('smtp.gmail.com','587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login('mattling147@gmail.com', decrypted_password)
+        mail.sendmail('mattling147@gmail.com', str(employee_info[2]) , msg)
+        mail.close()
+        
 def main():
     stock_control = QApplication(sys.argv) #creates new application
-    main_window = MainWindow() #Creates a New instance of main window
-    main_window.show()
-    main_window.raise_()
+    mainWindow = MainWindow()#Creates a New instance of main window
+    mainWindow.show()
+    mainWindow.raise_()
     stock_control.exec_() 
-
-
+    
 if __name__ == '__main__':
-    main()
+    main() 
+
+

@@ -9,7 +9,6 @@ class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
     def __init__(self, ButtonText):
         super().__init__()
-        self.resize(10,20)
         #Adding group box
         self.product_info_group_box = QGroupBox()
         self.product_info_group_box.setTitle("Enter Product Information:")
@@ -41,11 +40,13 @@ class addProductClass(QWidget):
         self.size_integer.setValidator(self.validator)
         self.size_integer.textChanged.connect(self.validate_size)
         self.size_integer.setPlaceholderText("Size: (750)")
+        self.size_integer.setFixedWidth(180)
         self.size_button = QComboBox()
         self.size_button.addItem("Kg.")
         self.size_button.addItem("g.")
         self.size_button.addItem("L.")
         self.size_button.addItem("ml.")
+        self.size_button.setFixedHeight(30)
         self.size_layout.addWidget(self.size_integer)
         self.size_layout.addWidget(self.size_button)
         self.size_widget.setLayout(self.size_layout)
@@ -54,7 +55,9 @@ class addProductClass(QWidget):
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Category")
         self.category1_button = QComboBox()
+        self.category1_button.setFixedHeight(30)
         self.category2_button = QComboBox()
+        self.category2_button.setFixedHeight(30)
         self.category1_button.addItem("Dog")
         self.category1_button.addItem("Cat")
         self.category1_button.addItem("Fish")
@@ -87,32 +90,38 @@ class addProductClass(QWidget):
         #Done
         self.done = QPushButton(ButtonText)
         self.done.clicked.connect(self.CreatePopUpWindow)
+        self.done.setFixedWidth(100)
+        self.done.setFixedHeight(27)
 
         #Product Name
         self.product_name = QLineEdit()
         self.product_name.textChanged.connect(self.validate_name)
         product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
-        self.product_name.setFixedWidth(300)
+        self.product_name.setFixedWidth(270)
 
         #Image
         self.image = QLabel()
-        self.image_pixmap = QPixmap(".\images\Default.png")
+        self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
 
         #Browse
-        path = "./images/Default.png"
+        path = "./ProductImages/Default.jpg"
         self.new_path_edit = QLineEdit()
         
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
         self.browse = QPushButton("Browse...")
         self.browse.clicked.connect(self.get_image_path)
+        self.browse.setFixedSize(84, 27)
+        self.browse.setObjectName('browse')
         
         self.upload = QPushButton("Upload")
         self.upload.clicked.connect(self.update_image)
+        self.upload.setFixedSize(78,27)
+        self.upload.setObjectName('upload')
         
         self.path = QLineEdit("")
         self.path.setReadOnly(True)
@@ -160,9 +169,17 @@ class addProductClass(QWidget):
         self.leftright_widget = QWidget()
         self.leftright_widget.setLayout(self.leftright_layout)
 
+        self.add_product_layout = QHBoxLayout()
+        self.add_product_widget = QWidget()
+        self.spacer = QLabel()
+        self.spacer.setFixedWidth(600)
+        self.add_product_layout.addWidget(self.spacer)
+        self.add_product_layout.addWidget(self.done)
+        self.add_product_widget.setLayout(self.add_product_layout)
+
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.leftright_widget)
-        self.main_layout.addWidget(self.done)
+        self.main_layout.addWidget(self.add_product_widget)
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
 
@@ -220,7 +237,7 @@ class addProductClass(QWidget):
     def update_image(self):
         rows_in_table = self.get_new_product_id()
         self.file_name = (rows_in_table + 1)
-        self.new_path = ("./ProductImages/{0}.jpg".format(str(self.file_name)))
+        self.new_path = ("./ProductImages/{0}".format(str(self.file_name)))
         self.new_path_edit.setText(self.new_path)
         shutil.copy(self.path.text(), self.new_path)
         self.pixmap = QPixmap(self.old_path)

@@ -10,19 +10,16 @@ class PasswordResetClass(QWidget):
         self.setWindowTitle('Menu Button Test')
         self.setFixedSize(600, 400)
 
-        self.bold = QFont()
-        self.bold.setBold(True)
-        self.bold.setPointSize(16)
-
         self.forgot_password = QLabel("Forgot Your Password?")
-        self.forgot_password.setFont(self.bold)
+        self.forgot_password.setObjectName('forgot_password')
         self.forgot_password.setAlignment(Qt.AlignCenter)
         
-        self.description = QLabel("Enter your email address to reset your password.")
+        self.description = QLabel("Enter your email address and we will email you your account details.")
         #self.description.setAlignment(Qt.AlignCenter)
         
         self.email_address = QLineEdit()
         self.email_address.setPlaceholderText("Email address")
+        self.email_address.setFixedWidth(550)
 
 
         self.button_layout = QHBoxLayout()
@@ -31,6 +28,7 @@ class PasswordResetClass(QWidget):
         self.spacer.setFixedWidth(450)
         self.button = QPushButton("Next")
         self.button.setFixedWidth(80)
+        self.button.setFixedHeight(27)
         self.button_layout.addWidget(self.spacer)
         self.button_layout.addWidget(self.button)
         self.button_widget.setLayout(self.button_layout)

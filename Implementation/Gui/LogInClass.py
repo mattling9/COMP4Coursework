@@ -13,54 +13,76 @@ class logInClass(QWidget):
         log_in_sucess = False
         self.return_signal = None
         self.username_label = QLabel("Username: ")
+        self.username_label.setFixedWidth(80)
         self.password_label = QLabel("Password: ")
+        self.password_label.setFixedWidth(80)
         self.username = QLineEdit()
         self.username.setPlaceholderText("Username:")
+        self.username.setFixedWidth(200)
         self.password = QLineEdit()
         self.password.setPlaceholderText("Password")
         self.password.setEchoMode(2)
+        self.password.setFixedWidth(200)
 
         self.font = QFont()
         self.font.setUnderline(True)
         self.forgot_password = ExtendedQLabel(" Forgot Username or Password?")
+        self.forgot_password.setAlignment(Qt.AlignCenter)
         self.forgot_password.setFont(self.font)
         self.forgot_password.setAlignment(Qt.AlignCenter)
         self.palette = QPalette(self.forgot_password.palette())
         self.palette.setColor(QPalette.WindowText, QColor(Qt.blue))
         self.forgot_password.setPalette(self.palette)
         self.forgot_password.setToolTip("Click this link if you have forgotten your password.")
-        self.forgot_password.setFixedWidth(150)
+        self.forgot_password.setFixedWidth(220)
         self.forgot_password.setFixedHeight(40)
 
+
         
-        self.enter_button = QPushButton()
-        self.enter_button.setFixedWidth(50)
-        self.enter_button.setIcon(QIcon("./ProductImages/arrow.png"))
+        self.enter_button = QPushButton("Sign In")
+        self.enter_button.setFixedWidth(80)
+        self.enter_button.setFixedHeight(27)
+
+        self.description = QLabel("Sign In")
+
+        self.logo = QLabel()
+        self.pixmap = QPixmap(".\SystemImages\SystemLogo.png")
+        self.scaled_pixmap = self.pixmap.scaled(200, 200, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.logo.setPixmap(self.scaled_pixmap)
+        self.logo.setAlignment(Qt.AlignCenter)
+
+        #spacers
 
 
         self.spacer = QLabel()
-        self.spacer.setFixedWidth(100)
+        self.spacer.setFixedWidth(0)
+        
 
-        self.log_in_widget = QWidget()
+
+
         self.log_in_layout = QGridLayout()
-        self.log_in_layout.addWidget(self.spacer, 0,0)
-        self.log_in_layout.addWidget(self.username_label, 0,1)
-        self.log_in_layout.addWidget(self.username, 0,2)
-        self.log_in_layout.addWidget(self.spacer, 0,3)
-        self.log_in_layout.addWidget(self.spacer, 1,0)
-        self.log_in_layout.addWidget(self.password_label, 1,1)
-        self.log_in_layout.addWidget(self.password, 1,2)
-        self.log_in_layout.addWidget(self.spacer, 1,4)
-        self.log_in_layout.addWidget(self.enter_button, 1,3)
-        self.log_in_layout.addWidget(self.forgot_password, 2,2)
-        self.log_in_layout.addWidget(self.spacer, 3,0)
+        self.log_in_widget = QWidget()
+        self.log_in_layout.addWidget(self.username_label, 0,0)
+        self.log_in_layout.addWidget(self.username, 0,1)
+        self.log_in_layout.addWidget(self.password_label, 1,0)
+        self.log_in_layout.addWidget(self.password, 1,1)
+        self.log_in_layout.addWidget(self.enter_button, 1,2)
+        self.log_in_layout.addWidget(self.forgot_password, 2,1)
         self.log_in_widget.setLayout(self.log_in_layout)
+        self.log_in_widget.setFixedWidth(400)
+
+        self.align_layout = QHBoxLayout()
+        self.align_widget = QWidget()
+        self.align_layout.addWidget(self.spacer)
+        self.align_layout.addWidget(self.log_in_widget)
+        self.align_widget.setLayout(self.align_layout)
+
+
 
         self.main_widget = QWidget()
         self.main_layout = QVBoxLayout()
-        self.main_layout.addWidget(self.spacer)
-        self.main_layout.addWidget(self.log_in_widget)
-
+        self.main_layout.addWidget(self.logo)
+        self.main_layout.addWidget(self.align_widget)
         self.setLayout(self.main_layout)
         
 

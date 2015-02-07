@@ -9,26 +9,37 @@ class MainWindow(QMainWindow):
         super().__init__()
         """A representation of the log in screen"""
         #STYLE
-        self.setWindowFlags(Qt.FramelessWindowHint)
-        self.setStyleSheet("""font-family: Segoe UI;
-                           font-size: 12pt;
-                           background-color: white;""")
+        self.setStyleSheet("""QMainWindow{
+                               background-color: white;
+                               font-family: Segoe UI;
+                               font-size: 12pt;}
+                               
+                               QPushButton{
+                               font-family: Segoe UI;
+                               font-size: 11pt;
+                               font-weight: bold;
+                               color: white;
+                               background-color: rgb(0,240,0);
+                               border: 0px}
+                               
+                               QPushButton:pressed{
+                               font-family: Segoe UI;
+                               font-size: 12pt;
+                               font-color: white;
+                               background-color: rgb(0,210,0);}
 
+                               QLineEdit{
+                               font-family: Segoe UI;
+                               font-size: 12pt;}
+                               QLabel{
+                               font-family: Segoe UI;
+                               font-size: 12pt;}
+                               """)
+                               
+                                
+        
 
-        self.minimize= QToolButton(self);
-        self.minimize.setIcon(QtGui.QIcon(''));
-
-        self.maximize=QtGui.QToolButton(self);
-        self.maximize.setIcon(QtGui.QIcon('img/max.png'));
-
-        close=QtGui.QToolButton(self);
-        close.setIcon(QtGui.QIcon('img/close.png'));
-
-        self.minimize.setMinimumHeight(10);
-        close.setMinimumHeight(10);
-        self.maximize.setMinimumHeight(10);
-
-        self.title_bar = QTitleBar()
+        
         #STYLE
         self.setFixedSize(600,400)        
         self.username_label = QLabel("Username:")
@@ -53,17 +64,9 @@ class MainWindow(QMainWindow):
         
         self.enter_button = QPushButton("Sign In")
         self.enter_button.setFixedWidth(80)
-        self.enter_button.setFixedHeight(26)
+        self.enter_button.setFixedHeight(30)
         self.enter_button.clicked.connect(self.find_account)
-        self.enter_button.setStyleSheet("""background-color: rgb(0,240,0);
-                                           color: #FFFFFF;
-                                           border: none;
-                                           font-family:
-                                           Segoe UI;
-                                           font-size: 11pt;
-                                           font-weight: bold;""")
-        self.enter_button.pressed.connect(self.change_colour1)
-        self.enter_button.released.connect(self.change_colour2)
+
 
 
         self.spacer = QLabel()
@@ -86,11 +89,9 @@ class MainWindow(QMainWindow):
 
         self.main_widget = QWidget()
         self.main_layout = QVBoxLayout()
-        self.main_layout.addWidget(self.title_bar)
         self.main_layout.addWidget(self.spacer)
         self.main_layout.addWidget(self.log_in_widget)
         self.main_widget.setLayout(self.main_layout)
-
         self.setCentralWidget(self.main_widget)
 
     def button_clicked(self):
@@ -99,23 +100,6 @@ class MainWindow(QMainWindow):
     def find_account(self):
         print("Account Not in Database")
 
-    def change_colour1(self):
-        if self.enter_button.pressed:
-            self.enter_button.setStyleSheet("""background-color: rgb(0,210,0);
-                                               color: #FFFFFF;
-                                               border: none;
-                                               font-family:
-                                               Segoe UI;
-                                               font-size: 11pt;
-                                               font-weight: bold;""")
-    def change_colour2(self):
-            self.enter_button.setStyleSheet("""background-color: rgb(0,240,0);
-                                               color: #FFFFFF;
-                                               border: none;
-                                               font-family:
-                                               Segoe UI;
-                                               font-size: 11pt;
-                                               font-weight: bold;""")
         
 
 def main():

@@ -144,7 +144,7 @@ class preferencesClass(QWidget):
     def get_path(self):
         self.path_text =  QFileDialog.getOpenFileName()
         self.path.setText(self.path_text)
-        self.file_name = "SystemLogo.jpg"
+        self.file_name = "SystemLogo.png"
         self.new_path = ("./ProductImages/{0}".format(self.file_name))
         shutil.copy(self.path.text(), self.new_path)
         self.pixmap = QPixmap(self.path.text())
@@ -156,7 +156,7 @@ class preferencesClass(QWidget):
     def save_clicked(self):
         encrypted_password = change_password(self.invoice_password.text(), 3)
         
-        updateSettings("./ProductImages/SystemLogo.jpg",
+        updateSettings("./ProductImages/SystemLogo.png",
                        self.company_name.text(),
                        self.street.text(),
                        self.town.text(),
@@ -171,7 +171,7 @@ class preferencesClass(QWidget):
 
         
         self.setWindowTitle("{0} Stock Control".format(self.company_name.text()))
-        self.icon = QIcon("./ProductImages/SystemLogo.jpg")
+        self.icon = QIcon("./ProductImages/SystemLogo.png")
         self.setWindowIcon(self.icon)
      
 

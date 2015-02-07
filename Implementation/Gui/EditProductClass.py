@@ -9,7 +9,6 @@ class editProductClass(QWidget):
     """ A representation of the Editing Product Interface"""
     def __init__(self):
         super().__init__()
-        self.resize(10,20)
         #Adding group box
         self.product_info_group_box = QGroupBox()
         self.product_info_group_box.setTitle("Enter Product Information:")
@@ -22,13 +21,12 @@ class editProductClass(QWidget):
         self.find_product_id_label = QLabel("ProductID")
         self.find_product_id_line_edit = QLineEdit()
         self.find_product_id_button = QPushButton("Find...")
-        self.find_product_id_button.clicked.connect(self.find_product_by_id)
-
-                                        
+        self.find_product_id_button.clicked.connect(self.find_product_by_id)                                        
         self.find_product_id_layout.addWidget(self.find_product_id_label)
         self.find_product_id_layout.addWidget(self.find_product_id_line_edit)
         self.find_product_id_layout.addWidget(self.find_product_id_button)
         self.find_product_id_widget.setLayout(self.find_product_id_layout)
+        self.find_product_id_widget.setFixedHeight(40)
         
         #Price
         self.pound = QLabel("Price: £")
@@ -96,7 +94,7 @@ class editProductClass(QWidget):
 
 
         #Done
-        self.done = QPushButton("Save")
+        self.done = QPushButton("Edit Product")
         self.done.clicked.connect(self.CreatePopUpWindow)
 
         #Product Name
@@ -109,13 +107,13 @@ class editProductClass(QWidget):
         #Image
         settings = getSettings()
         self.image = QLabel()
-        self.image_pixmap = QPixmap("./images/Default.png")
+        self.image_pixmap = QPixmap("./ProductImages/Default.jpg")
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
 
         #Browse
-        path = "./images/Default.png"
+        path = "./ProductImages/Default.jpg"
         
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
@@ -179,7 +177,7 @@ class editProductClass(QWidget):
         self.main_layout.addWidget(self.done)
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
-
+        
         self.total_layout = QVBoxLayout()
         self.total_layout.addWidget(self.main_widget)
         self.setLayout(self.total_layout)
@@ -268,7 +266,7 @@ class editProductClass(QWidget):
                 self.product_name.setText("")
                 self.size_integer.setText("")
                 self.price_button.setText("")
-                self.path.setText("./images/Default.png")
+                self.path.setText("./ProductImages/Default.jpg")
                 self.pixmap = QPixmap(self.path.text())
                 self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
