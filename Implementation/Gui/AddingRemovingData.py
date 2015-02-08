@@ -5,10 +5,10 @@ from PyQt4.QtSql import *
 #-----------------------------------------Product-----------------------------------------
 
 def addingProduct(name, size, price, category, location1, location2, image_path, weekly_sales):
-    Product = (name, size, price, category, location1, location2, image_path, weekly_sales)
+    Product = (name, size, price, category, location1, location2, image_path, weekly_sales, '0')
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales) values(?,?,?,?,?,?,?,?)"
+        sql = "insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales, DailySales) values(?,?,?,?,?,?,?,?,?)"
         cursor.execute(sql,Product)
         db.commit()
 
@@ -262,7 +262,7 @@ def editStock(new_stock, product_id):
         db.commit()
 
 
-def update_weekly_sales(product_id, sales):
+def update_product_weekly_sales(product_id, sales):
     with sqlite3.connect("ProductDatabase.db") as db:
         find_cursor = db.cursor()
         find_info = (product_id)
@@ -274,12 +274,27 @@ def update_weekly_sales(product_id, sales):
         else:
             current_weekly_sales = returned_sales[0][0]
         new_weekly_sales = current_weekly_sales + int(sales)
-        
-        
-        
         update_cursor = db.cursor()
         update_info = (new_weekly_sales, product_id,)
         update_sql = "UPDATE Product SET WeeklySales= ? WHERE ProductID = ?"
+        update_cursor.execute(update_sql, update_info)
+        db.commit()
+
+def update_product_daily_sales(product_id, sales):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        find_cursor = db.cursor()
+        find_info = (product_id)
+        find_sql = "SELECT DailySales from Product WHERE ProductID = ?"
+        find_cursor.execute(find_sql, find_info)
+        returned_sales = find_cursor.fetchall()
+        if not returned_sales:
+            current_weekly_sales = 0
+        else:
+            current_weekly_sales = returned_sales[0][0]
+        new_weekly_sales = current_weekly_sales + int(sales)
+        update_cursor = db.cursor()
+        update_info = (new_weekly_sales, product_id,)
+        update_sql = "UPDATE Product SET DailySales= ? WHERE ProductID = ?"
         update_cursor.execute(update_sql, update_info)
         db.commit()
 
@@ -288,6 +303,13 @@ def reset_weekly_sales(product_id):
         cursor = db.cursor()
         product_info = (str(product_id))
         sql = "UPDATE Product SET WeeklySales = 0  WHERE ProductID = ?"
+        cursor.execute(sql, product_info)
+
+def reset_daily_sales(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        product_info = (str(product_id))
+        sql = "UPDATE Product SET DailySales = 0  WHERE ProductID = ?"
         cursor.execute(sql, product_info)
         
 def get_date_stored():
@@ -318,6 +340,19 @@ def get_current_week_sales(product_id):
                 weekly_sales.append(item)
     return weekly_sales
 
+def get_current_daily_sales(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        product_info = (product_id,)
+        daily_sales = []
+        cursor = db.cursor()
+        sql =("SELECT DailySales From Product WHERE ProductID =?")
+        cursor.execute(sql, product_info)
+        returned_sales = cursor.fetchall()
+        if returned_sales:
+            for item in returned_sales[0]:
+                daily_sales.append(item)
+    return daily_sales
+
 def get_all_product_id():
     with sqlite3.connect("ProductDatabase.db") as db:
         product_id_list = []
@@ -330,8 +365,6 @@ def get_all_product_id():
 
 
 def check_date():
-
-    
     #get date stored as SalesDate
     date_stored = get_date_stored()
     
@@ -357,52 +390,96 @@ def check_date():
     
     if not date_stored:
         print("date updated")
+        add_default_settings()
         update_date(current_date.strftime("%d-%m-%Y"))
 
     elif date_stored[0][0] == "":
         print("date updated")
+        add_default_settings()
         update_date(current_date.strftime("%d-%m-%Y"))
 
     elif date_stored == new_date:
         #IF A WEEK HAS PASSED ADD WEEKLY SALES TO TOTAL SALES AND CHANGE WEEKLY SALES TO 0. STORE CURRENT DATE AS SALES DATE
         product_id_list = get_all_product_id()
         for product_id in product_id_list:
-            total_sales_list = []
-            total_sales = get_total_sales(str(product_id))
-            for item in total_sales:
-                total_sales_list.append(item)
-            weekly_sales = get_current_week_sales(str(product_id))
-            total_sales_list.append(weekly_sales)
-            reset_weekly_sales(product_id)
-        print("updated")
+                weekly_sales = get_current_week_sales(str(product_id))
+                daily_sales = get_current_daily_sales(str(product_id))
+                if weekly_sales[0] != 0:
+                    update_product_sales(product_id, weekly_sales[0])
+                if daily_sales[0] != 0:
+                    update_product_sales(product_id, weekly_sales[0])
+                #######PLOT WEEKLY SALES TO GRAPH######
+                reset_weekly_sales(product_id)
+                reset_daily_sales(product_id)
+                update_date(datetime.date.today().strftime("%d-%m-%Y"))
 
-def update_product_sales(product_id, sales):
+def add_default_settings():
+    with sqlite3.connect("ProductDatabase.db") as db:
+        cursor = db.cursor()
+        values = (1,0,'example@gmail.com','password')
+        sql = "insert into Settings (SettingsID, SalesDate, GmailAddress, GmailPassword) values(?,?,?,?)"
+        cursor.execute(sql, values)
+        db.commit()
+
+def update_weekly_sales(product_id, sales):
     with sqlite3.connect("ProductDatabase.db") as db:
         #date = datetime.date.today().strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,9).strftime("%d-%m-%Y")
+        date = datetime.date(2015,2,21).strftime("%d-%m-%Y")
         #date = datetime.date(2015,2,16).strftime("%d-%m-%Y")
         #date = datetime.date(2015,2,23).strftime("%d-%m-%Y")
-        date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
         product_info = (product_id, date, sales,)
         cursor = db.cursor()
-        sql = "Insert into ProductSales (ProductID, Date, Sales) values(?,?,?)"
+        sql = "Insert into WeeklyProductSales (ProductID, Date, Sales) values(?,?,?)"
+        cursor.execute(sql, product_info)
+        
+def update_daily_sales(product_id, sales):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        #date = datetime.date.today().strftime("%d-%m-%Y")
+        date = datetime.date(2015,2,21).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,2,16).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,2,23).strftime("%d-%m-%Y")
+        #date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
+        product_info = (product_id, date, sales,)
+        cursor = db.cursor()
+        sql = "Insert into DailyProductSales (ProductID, Date, Sales) values(?,?,?)"
         cursor.execute(sql, product_info)
 
-def get_product_sales_date(product_id):
+def get_weekly_sales_date(product_id):
     with sqlite3.connect("ProductDatabase.db") as db:
         product_info = (product_id,)
         cursor = db.cursor()
-        sql = "Select Date From ProductSales Where ProductID = ?"
+        sql = "Select Date From WeeklyProductSales Where ProductID = ?"
         cursor.execute(sql, product_info)
         date_list = cursor.fetchall()
         if date_list:
             return date_list
 
-def get_product_sales(product_id):
+def get_weekly_sales(product_id):
     with sqlite3.connect("ProductDatabase.db") as db:
         product_info = (product_id,)
         cursor = db.cursor()
-        sql = "Select Sales From ProductSales Where ProductID = ?"
+        sql = "Select Sales From WeeklyProductSales Where ProductID = ?"
+        cursor.execute(sql, product_info)
+        sales_list = cursor.fetchall()
+        if sales_list:
+            return sales_list
+
+def get_daily_sales_date(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        product_info = (product_id,)
+        cursor = db.cursor()
+        sql = "Select Date From DailyProductSales Where ProductID = ?"
+        cursor.execute(sql, product_info)
+        date_list = cursor.fetchall()
+        if date_list:
+            return date_list
+
+def get_daily_sales(product_id):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        product_info = (product_id,)
+        cursor = db.cursor()
+        sql = "Select Sales From DailyProductSales Where ProductID = ?"
         cursor.execute(sql, product_info)
         sales_list = cursor.fetchall()
         if sales_list:

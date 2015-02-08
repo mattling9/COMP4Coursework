@@ -46,6 +46,7 @@ class createOrderClass(QWidget):
         self.display_table.hideColumn(6)
         self.display_table.hideColumn(7)
         self.display_table.hideColumn(8)
+        self.display_table.hideColumn(9)
         column_width_list = [80, 150, 90, 75]
         counter = 0
         for item in column_width_list:
@@ -190,6 +191,7 @@ class createOrderClass(QWidget):
         self.createCustomerOrder()
         self.change_stock()
         self.change_weekly_sales()
+        self.change_daily_sales()
         self.save_sucess()
 
     def createCustomerOrder(self):
@@ -558,16 +560,23 @@ class createOrderClass(QWidget):
         for row in range(0, self.current_order.rowCount()):
             product_id = self.current_order.item(row, 0).text()
             products_sold  = self.current_order.item(row, 4).text()
-            update_weekly_sales(product_id, products_sold)
+            update_product_weekly_sales(product_id, products_sold)
+
+    def change_daily_sales(self):
+        for row in range(0, self.current_order.rowCount()):
+            product_id = self.current_order.item(row, 0).text()
+            products_sold  = self.current_order.item(row, 4).text()
+            update_product_daily_sales(product_id, products_sold)
 
     def automatically_update_settings(self):
         product_id_list = get_all_product_id()
         for product_id in product_id_list:
                 weekly_sales = get_current_week_sales(str(product_id))
-                if weekly_sales[0] != 0:
-                    update_product_sales(product_id, weekly_sales[0])
+                #daily_sales = get_current_daily_sales(str(product_id))
+                update_weekly_sales(product_id, weekly_sales[0])
+                #update_daily_sales(product_id, daily_sales[0])
                 #######PLOT WEEKLY SALES TO GRAPH######
                 reset_weekly_sales(product_id)
+                #reset_daily_sales(product_id)
                 update_date(datetime.date.today().strftime("%d-%m-%Y"))
-                print("updated")
 

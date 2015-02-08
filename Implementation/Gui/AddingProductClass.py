@@ -190,7 +190,7 @@ class addProductClass(QWidget):
         
     def CreatePopUpWindow(self):
         self.pop_up_instance = PopUpWindow("Are you sure you want to add the Product?", QDialogButtonBox.Yes, QDialogButtonBox.No)
-        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.AddProductSucess)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
         self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddProductSucess(self):

@@ -75,6 +75,9 @@ css = """QMainWindow{
                     font-size: 20pt;
                     font-weight: bold;}
 
+        QLabel#product_name{
+                    font-size: 20pt;}
+
         QLabel#blue_password, QLabel#blue_question{
                     font-size: 12pt;
                     color: blue;}
@@ -87,6 +90,7 @@ css = """QMainWindow{
                    border-width: 1px;
                    border-color: rgb(210,210,210);
                    color: rgb(70,70,70);}
+                   
         QGroupBox{
                    font-family: Segoe UI;
                    font-size: 11pt;

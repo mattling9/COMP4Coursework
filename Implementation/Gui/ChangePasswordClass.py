@@ -31,7 +31,6 @@ class ChangePasswordClass(QWidget):
         self.code_widget = QWidget()
         self.code_label = QLabel("4 Digit Code: ")
         self.code = QLineEdit()
-        self.code.setPlaceholderText("4352")
         self.code_layout.addWidget(self.code_label)
         self.code_layout.addWidget(self.code)
         self.code_widget.setLayout(self.code_layout)

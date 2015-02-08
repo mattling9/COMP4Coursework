@@ -12,4 +12,6 @@ def change_password(password, shift):
 			encrypted_password += chr(num)
 		else:
 			encrypted_password += c
-	return encrypted_password
+	print(encrypted_password)
+
+change_password('dolhqzduh', -3)

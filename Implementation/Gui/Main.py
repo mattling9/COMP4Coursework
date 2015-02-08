@@ -78,10 +78,9 @@ class MainWindow(QMainWindow):
         
         self.log_in_function()
         if settings:
-            self.setWindowTitle("{0} Stock Control".format(settings[0][2]))
+            self.setWindowTitle("Beacon Vets Stock Control")
             self.icon = QIcon("{0}".format(str(settings[0][1])))
         else:
-            self.setWindowTitle(" No Current Company Name")
             self.icon = QIcon("")
 
         self.setWindowIcon(self.icon)
@@ -681,37 +680,43 @@ class MainWindow(QMainWindow):
             username = get_employee_username(self.password_reset_instance.email_address.text())
             password = get_employee_password(self.password_reset_instance.email_address.text())
             first_name = get_employee_first_name(self.password_reset_instance.email_address.text())
-            self.send_password_reset_email(self.password_reset_instance.email_address.text(), username, password, first_name)
-            self.log_in_function()
-            self.error_message_instance = ErrorMessageClass("Your Username and Password have been sent to your email address.")
-            self.error_message_instance.move(750,500)
-            self.error_message_instance.show()
-            self.error_message_instance.raise_()
+            try:
+                self.send_password_reset_email(self.password_reset_instance.email_address.text(), username, password, first_name)
+                self.log_in_function()
+                self.error_message_instance = ErrorMessageClass("Your Username and Password have been sent to your email address.")
+                self.error_message_instance.move(750,500)
+                self.error_message_instance.show()
+                self.error_message_instance.raise_()
+            except smtplib.SMTPAuthenticationError:
+                self.error_message_instance = ErrorMessageClass("The Gmail Account Details are not valid.")
+                self.error_message_instance.move(750,500)
+                self.error_message_instance.show()
+                self.error_message_instance.raise_()
 
         else:
             self.error_message_instance = ErrorMessageClass("Sorry the Email address does not match any of the Accounts.")
 
     def send_password_reset_email(self, email_address, username, password, first_name):
-        settings = getSettings()
-        subject = ("Your Beacon Vet Account Details")
+            settings = getSettings()
+            subject = ("Your Beacon Vet Account Details")
 
-        send_from = '{0}'.format(settings[0][10])
-        decrypted_password = change_password(settings[0][11], -3)
+            send_from = '{0}'.format(settings[0][10])
+            decrypted_password = change_password(settings[0][11], -3)
 
-        msg = "\r\n".join([
-              "From: beaconvets@gmail.com",
-                "To: {0}".format(email_address),
-                "Subject: Beacon Vets Account Details",
-              "",
-              ("Hello {0}, Here are your account details: \n \n Username:   {1} \n  Password:   {2}".format(first_name, username, password))])
+            msg = "\r\n".join([
+                  "From: beaconvets@gmail.com",
+                    "To: {0}".format(email_address),
+                    "Subject: Beacon Vets Account Details",
+                  "",
+                  ("Hello {0}, Here are your account details: \n \n Username:   {1} \n  Password:   {2}".format(first_name, username, password))])
 
-        mail = smtplib.SMTP('smtp.gmail.com','587')
-        mail.ehlo()
-        mail.starttls()
-        mail.login(send_from, decrypted_password)
-        mail.sendmail(send_from, email_address, msg)
-        mail.close()
-        print("email sent")    
+            mail = smtplib.SMTP('smtp.gmail.com','587')
+            mail.ehlo()
+            mail.starttls()
+            mail.login(send_from, decrypted_password)
+            mail.sendmail(send_from, email_address, msg)
+            mail.close()
+            print("email sent")
 
     def send_code_to_email(self, username):
         settings = getSettings()

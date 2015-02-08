@@ -32,16 +32,25 @@ def create_product_table():
               Location2 string,
               ImagePath string,
               WeeklySales string,
+              DailySales string,
               Primary Key(ProductID))"""
     create_table(db_name, "Product", sql)
 
-def create_product_sales_table():
-    sql = """create table ProductSales
+def create_weekly_product_sales_table():
+    sql = """create table WeeklyProductSales
           (ProductID integer,
           Date string,
           Sales string,
           foreign key(ProductID) references Product(ProductID))"""
-    create_table(db_name, "ProductSales", sql)     
+    create_table(db_name, "WeeklyProductSales", sql)
+
+def create_daily_product_sales_table():
+    sql = """create table DailyProductSales
+          (ProductID integer,
+          Date string,
+          Sales string,
+          foreign key(ProductID) references Product(ProductID))"""
+    create_table(db_name, "DailyProductSales", sql) 
 
 
 def create_employee_table():
@@ -132,7 +141,8 @@ def create_settings_table():
 if __name__ == "__main__":
     db_name = "ProductDatabase.db"
     create_product_table()
-    create_product_sales_table()
+    create_weekly_product_sales_table()
+    create_daily_product_sales_table()
     create_product_order_table()
     create_location_table()
     create_product_location_table()

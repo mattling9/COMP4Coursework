@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 from matplotlib.dates import date2num
 from matplotlib.legend_handler import HandlerLine2D
 from AddingRemovingData import *
+from ErrorMessageClass import *
 
 
 class manageStockClass(QWidget):
@@ -39,11 +40,8 @@ class manageStockClass(QWidget):
         self.scaled_image = self.image_pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
 
-        font = QFont()
-        font.setPointSize(14)
-        font.setBold(True)
         self.product_name = QLabel("Product Name")
-        self.product_name.setFont(font)
+        self.product_name.setObjectName("product_name")
         self.stock1_label = QLabel("Stock in Shop: ")
         self.stock2_label = QLabel("Stock in Storage Room: ")
         self.stock1 = QSpinBox()
@@ -80,8 +78,7 @@ class manageStockClass(QWidget):
         self.canvas = FigureCanvas(self.figure)
         #ADDING THE GRAPH TO THE WINDOW
         self.prediction_label = QLabel("Predicted  Sales Next Week: ")
-        self.prediction = QLineEdit()
-        self.prediction.setReadOnly(True)
+        self.prediction = QLabel()
 
         self.prediction_layout = QHBoxLayout()
         self.prediction_widget = QWidget()
@@ -89,8 +86,26 @@ class manageStockClass(QWidget):
         self.prediction_layout.addWidget(self.prediction)
         self.prediction_widget.setLayout(self.prediction_layout)
 
+        self.change_sales_layout = QHBoxLayout()
+        self.change_sales_widget = QWidget()
+        self.change_sales_label = QLabel("View Sales Per:")
+        self.change_sales_box = QComboBox()
+        self.change_sales_box.setFixedHeight(30)
+        self.change_sales_box.addItem("Day")
+        self.change_sales_box.addItem("Week")
+        self.change_sales_box.currentIndexChanged.connect(self.change_graph)
+        self.change_sales_layout.addWidget(self.change_sales_label)
+        self.change_sales_layout.addWidget(self.change_sales_box)
+        self.change_sales_widget.setLayout(self.change_sales_layout)
+
+        self.sales_layout = QVBoxLayout()
+        self.sales_widget = QWidget()
+        self.sales_layout.addWidget(self.change_sales_widget)
+        self.sales_layout.addWidget(self.prediction_widget)
+        self.sales_widget.setLayout(self.sales_layout)
+
         self.stock_prediction_layout.addWidget(self.canvas)
-        self.stock_prediction_layout.addWidget(self.prediction_widget)
+        self.stock_prediction_layout.addWidget(self.sales_widget)
         self.stock_prediction_groupbox.setLayout(self.stock_prediction_layout)
 
         self.current_stock_groupbox.setDisabled(True)
@@ -104,18 +119,21 @@ class manageStockClass(QWidget):
         self.main_layout.addWidget(self.buttonBox)
         self.setLayout(self.main_layout)
 
-    def plot(self):
+    def plot(self, sales_by):
         plt.clf()
-        today_date = datetime.date.today().strftime("%d-%m-%Y")
-        today_date2 = datetime.datetime.strptime(today_date, "%d-%m-%Y")
         product_id = self.product_id.text()
-        sales = get_product_sales(product_id)
-        dates = get_product_sales_date(product_id)
+        if sales_by == "day":
+            sales = get_daily_sales(product_id)
+            dates = get_daily_sales_date(product_id)
+            plt.ylabel("Daily Sales")
+        elif sales_by == "week":
+            sales = get_weekly_sales(product_id)
+            dates = get_weekly_sales_date(product_id)
+            plt.ylabel("Weekly Sales")
         data = []
         graph = self.figure.add_subplot(111)
         if dates:
             for count in range(0, len(dates)):
-                
                 value = (datetime.datetime.strptime(dates[count][0], "%d-%m-%Y"), sales[count][0])
                 data.append(value)
                 x = [date2num(date) for (date, value) in data]
@@ -129,9 +147,8 @@ class manageStockClass(QWidget):
             markeredgecolor="#1919FF",
             markerfacecolor="#1919FF",
             linewidth=3.0,
-            label="Sales Made Each Week")
+            label = ("No. of Sales made"))
             plt.xlabel("Date")
-            plt.ylabel("Weekly Sales")
             graph.set_xticks(x)
             graph.set_xticklabels([date.strftime("%d-%m-%Y") for (date, value) in data])
 
@@ -151,8 +168,8 @@ class manageStockClass(QWidget):
                 average, = graph.plot(x,yp,
                 linestyle=("--"),
                 color=('#FF1919'),
-                linewidth=1.0,
-                label ="Average Sales made each Week")
+                label = ("Average Sales made"),
+                linewidth=1.0)
                 
             plt.legend(loc='upper left')
             graph.grid(b=True, which='major')
@@ -182,9 +199,10 @@ class manageStockClass(QWidget):
                 self.pixmap = QPixmap(self.path)
                 self.scaled_image = self.pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
-                self.plot()
+                self.plot("week")
+                self.change_sales_box.setCurrentIndex(1)
             if not self.product_info:
-                self.error = ErrorMessageClass("No product with Product ID: {0}".format(self.find_product_id_line_edit.text()))
+                self.error = ErrorMessageClass("No product with Product ID: {0}".format(self.product_id.text()))
                 self.error.setFixedSize(400,150)
                 plt.clf()
                 self.current_stock_groupbox.setDisabled(True)
@@ -199,3 +217,12 @@ class manageStockClass(QWidget):
 
     def save(self):
         edit_stock(self.product_id.text(), int(self.stock1.value()), int(self.stock2.value()))
+        self.error = ErrorMessageClass("Stock Successfully saved!")
+        self.error.setFixedSize(400,150)
+
+    def change_graph(self):
+        if self.change_sales_box.currentIndex() == 0:
+            self.plot("day")
+
+        elif self.change_sales_box.currentIndex() == 1:
+            self.plot("week")
