@@ -2,21 +2,88 @@ from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from CustomToolbarClass import *
 
-class SearchClass(QMainWindow):
+class SearchClass(QDialog):
     def __init__(self):
         super().__init__()
-        self.setFixedSize(800,400)
+        style_sheet = """QDialog#main_window{
+                                 background-color: white;
+                                 border-style: solid;
+                                 border-width: 2px;
+                                 border-color: rgb(180,180,180);}
+                         QLabel{
+                                 font-family: Segoe UI;
+                                 font-size: 12pt;
+                                 color: rgb(70,70,70)}
+
+                        QPushButton{
+                                 font-family: Segoe UI;
+                                 font-size: 11pt;
+                                 font-weight: bold;
+                                 color: white;
+                                 background-color: rgb(0,240,0);
+                                 border: 0px;} 
+                   
+                        QTableView{
+                                 font-family: Segoe UI;
+                                 font-size: 12pt;
+                                 color: rgb(70,70,70);
+                                 border-style: solid;
+                                 border-width: 1px;
+                                 border-color: rgb(200,200,200);
+                                 selection-background-color: rgb(0,240,0);
+                                 selection-color: rgb(255,255,255);}
+                                   
+                        QHeaderView:section{
+                                 background: white;
+                                 font-family: Segoe UI;
+                                 font-size: 12pt;
+                                 border-style: solid;
+                                 border-width: 1px;
+                                 border-color: rgb(200,200,200);
+                                 color: rgb(70,70,70);
+                                 height: 30px;}
+                                 
+                        QLineEdit{
+                                 font-family: Segoe UI;
+                                 font-size: 12pt;}
+                                 
+                        QComboBox{
+                                 font-family: Segoe UI;
+                                 font-size: 12pt;
+                                 background: white;
+                                 border-style: solid;
+                                 border-width: 1px;
+                                 border-color: rgb(210,210,210);
+                                 color: rgb(70,70,70);}
+
+                      """
+        self.setObjectName("main_window")
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.title_bar = TitleBar()
+        self.title_bar.minimise.clicked.connect(self.minimise_window)
+        self.title_bar.close.clicked.connect(self.close_window)
+
+        self.buttonBox = QDialogButtonBox()
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
+        self.buttonBox.button(QDialogButtonBox.Close).setFixedSize(84,27)
+        self.buttonBox.button(QDialogButtonBox.Close).clicked.connect(self.close_window)
+
+
+        
+        self.setFixedSize(800,500)
         self.setWindowTitle("Find Something in The Database")
         self.icon = QIcon(QPixmap("./images/Logo.jpg"))
         self.setWindowIcon(self.icon)
         self.label = QLabel()
         self.pixmap = QPixmap("./images/search_icon.png")
-        self.scaled_pixmap = self.pixmap.scaled(15,15, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.scaled_pixmap = self.pixmap.scaled(27,27, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.label.setPixmap(self.scaled_pixmap)
 
         self.main_layout = QVBoxLayout()
-        self.group_box = QGroupBox()
+        self.group_box = QWidget()
         
         self.table_selection_layout = QHBoxLayout()
         self.table_selection_label = QLabel("Search For: ")
@@ -58,42 +125,43 @@ class SearchClass(QMainWindow):
         for item in column_width_list:
             self.display_table.setColumnWidth(counter, item)
             counter += 1
-        self.display_table.hideColumn(4)
-        self.display_table.hideColumn(5)
 
         
 
         self.display_table.horizontalHeader().setStretchLastSection(True)
         self.display_table_layout.addWidget(self.display_table)
         self.display_table_widget.setLayout(self.display_table_layout)
+        self.display_table.horizontalHeader().setObjectName("header")
 
 
-
-        
+        self.main_layout.addWidget(self.title_bar)
         self.main_layout.addWidget(self.search_widget)
         self.main_layout.addWidget(self.display_table_widget)
+        self.main_layout.addWidget(self.buttonBox)
         self.group_box.setLayout(self.main_layout)
         self.group_box_layout = QVBoxLayout()
         self.group_box_layout.addWidget(self.group_box)
-        self.setCentralWidget(self.group_box)
+        self.setLayout(self.group_box_layout)
+        self.setStyleSheet(style_sheet)
 
     def change_table(self):
         if self.table_combo_box.currentIndex() == 0:
             self.model.setTable("Product")
             self.model.select()
             self.display_table.setModel(self.model)
-            self.display_table.hideColumn(4)
-            self.display_table.hideColumn(5)
+            self.display_table.showColumn(5)
             self.display_table.update()
         elif self.table_combo_box.currentIndex() == 1:
             self.model.setTable("Member")
             self.model.select()
+            self.display_table.showColumn(5)
             self.display_table.setModel(self.model)
             self.display_table.update()
         elif self.table_combo_box.currentIndex() == 2:
             self.model.setTable("Employee")
             self.model.select()
             self.display_table.setModel(self.model)
+            self.display_table.hideColumn(5)
             self.display_table.update()
 
     def decide_search(self):
@@ -123,6 +191,24 @@ class SearchClass(QMainWindow):
         filter_query = "EmployeeID like '%{0}%' or EmployeeFirstName like '%{0}%' or EmployeeLastName like '%{0}%' or EmployeeFirstName like '%{0}%'".format(employee)
         self.model.setFilter(filter_query)
         self.model.select()
+
+    def minimise_window(self):
+        self.showMinimized()
+
+    def close_window(self):
+        self.close()
+
+    def mousePressEvent(self,event):
+
+        if event.button() == Qt.LeftButton:
+            self.moving = True; self.offset = event.pos()
+
+    def mouseMoveEvent(self,event):
+        try:
+            if self.moving:
+                self.move(event.globalPos()-self.offset)
+        except AttributeError:
+            pass
 
 
     

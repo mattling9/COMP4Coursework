@@ -75,24 +75,88 @@ css = """QMainWindow{
                     font-size: 20pt;
                     font-weight: bold;}
 
+        QLabel#blue_password, QLabel#blue_question{
+                    font-size: 12pt;
+                    color: blue;}
+
         QComboBox{
                    font-family: Segoe UI;
                    font-size: 12pt;
                    background: white;
-                   border: 0px;
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(210,210,210);
                    color: rgb(70,70,70);}
         QGroupBox{
                    font-family: Segoe UI;
                    font-size: 11pt;
                    color: rgb(70,70,70);}
 
-        QPushButton#upload, QPushButton#browse{
+        QPushButton#upload, QPushButton#browse, QPushButton#preview, QPushButton#enter, QPushButton#submit{
                    font-family: Segoe UI;
                    font-size: 11pt;
                    color: white;
                    background-color: rgb(170,170,170);
                    border: 0px}
+        QPushButton#upload:disabled, QPushButton#browse:disabled, QPushButton#preview:disabled, QPushButton#enter:disabled, QPushButton#submit:disabled{
+                   font-family: Segoe UI;
+                   font-size: 11pt;
+                   color: rgb(150,150,150);
+                   background-color: rgb(170,170,170);
+                   border: 0px}
+        QSpinBox{
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   background: white;
+                   border: 0px;
+                   color: rgb(70,70,70);}
+
+        QCheckBox{
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   background: white;
+                   border: 0px;
+                   color: rgb(70,70,70);}
+
+        QPushButton#find_button:disabled{
+                   font-family: Segoe UI;
+                   font-size: 11pt;
+                   font-weight: bold;
+                   color: white;
+                   background-color: white;
+                   border: 0px;}
                    
+        QTableView#display_table{
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   color: rgb(70,70,70);
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(200,200,200);
+                   selection-background-color: rgb(0,240,0);}
+                   
+        QTableView#current_order{
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   color: rgb(70,70,70);
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(200,200,200);
+                   selection-background-color: rgb(255,255,255);
+                   selection-color: rgb(70,70,70);}
+                   
+        QHeaderView:section{
+                   background: white ;
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(200,200,200);
+                   color: rgb(70,70,70);
+                   height: 30px;}
+
+        
+        
 
 
         """

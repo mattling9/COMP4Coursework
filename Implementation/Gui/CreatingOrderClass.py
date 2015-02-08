@@ -3,6 +3,7 @@ from PyQt4.QtSql import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from ErrorMessageClass import *
 from AddingRemovingData import *
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -15,7 +16,7 @@ class createOrderClass(QWidget):
         settings = getSettings()
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Find Product:")
-        self.category_label.setFixedWidth(70)
+        self.category_label.setFixedWidth(100)
         self.category_search = QLineEdit()
         self.category_search.textChanged.connect(self.find_product)
         self.category_layout.addWidget(self.category_label)
@@ -27,7 +28,7 @@ class createOrderClass(QWidget):
 
       #Product Display Table
         self.display_table = QTableView()
-        self.display_table.setFixedHeight(150)
+        self.display_table.setObjectName("display_table")
         self.display_table_layout = QVBoxLayout()
         self.display_table_layout.addWidget(self.display_table)
         self.display_table.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -44,7 +45,8 @@ class createOrderClass(QWidget):
         self.display_table.hideColumn(5)
         self.display_table.hideColumn(6)
         self.display_table.hideColumn(7)
-        column_width_list = [80, 300, 90, 75]
+        self.display_table.hideColumn(8)
+        column_width_list = [80, 150, 90, 75]
         counter = 0
         for item in column_width_list:
             self.display_table.setColumnWidth(counter, item)
@@ -59,8 +61,8 @@ class createOrderClass(QWidget):
 
         self.table_layout = QVBoxLayout()
 
-        self.add_product = QPushButton("Add Product")
-        self.add_product.setFixedWidth(100)
+        self.add_product = QPushButton("Add To Order")
+        self.add_product.setFixedSize(100, 27)
         self.add_product.clicked.connect(self.clicked, 0)
         self.table_layout.addWidget(self.display_table)
         self.table_layout.addWidget(self.add_product)
@@ -76,6 +78,8 @@ class createOrderClass(QWidget):
         self.member_label = QLabel("Member ID:")
         self.member_line_edit = QLineEdit()
         self.member_button = QPushButton("Enter")
+        self.member_button.setObjectName('enter')
+        self.member_button.setFixedSize(84,27)
         self.member_button.clicked.connect(self.find_member_by_id)
         self.member_layout = QHBoxLayout()
         self.member_widget = QWidget()
@@ -113,19 +117,23 @@ class createOrderClass(QWidget):
 
         #Create Invoice Button
         self.preview_button = QPushButton("Preview")
-        self.preview_button.setFixedWidth(200)
+        self.preview_button.setObjectName('preview')
+        self.preview_button.setFixedSize(90,27)
         self.preview_button.clicked.connect(self.preview_invoice_clicked)
         self.print_checkbox = QCheckBox("Print Invoice")
         self.email_invoice = QCheckBox("Send Invoice To Email")
         self.email_invoice.stateChanged.connect(self.enable_email)
         self.email_invoice_address = QLineEdit()
         self.email_invoice_address.setPlaceholderText("Email Address")
+        self.email_invoice_address.setFixedWidth(320)
         self.email_invoice_address.setEnabled(False)
 
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.invoice_saved)
+        self.buttonBox.button(QDialogButtonBox.Save).setFixedSize(84,27)
+        self.buttonBox.button(QDialogButtonBox.Cancel).setFixedSize(84,27)
         self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.automatically_update_settings)
         
         self.invoice_layout = QVBoxLayout()
@@ -141,10 +149,11 @@ class createOrderClass(QWidget):
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
         self.current_order = QTableWidget(0,5)
+        self.current_order.setObjectName("current_order")
         self.current_order.setAlternatingRowColors(True)
         self.column_headers = ["ProductID","Product Name","Size","Price","Quantity"]
         self.current_order.setHorizontalHeaderLabels(self.column_headers)
-        column_width_list = [100, 300, 90, 75]
+        column_width_list = [100, 150, 90, 75]
         counter = 0
         for item in column_width_list:
             self.current_order.setColumnWidth(counter, item)
@@ -156,11 +165,15 @@ class createOrderClass(QWidget):
         self.order_layout.addWidget(self.price_widget)
         self.order_box.setLayout(self.order_layout)
 
+        self.horizontal_layout = QHBoxLayout()
+        self.horizontal_widget = QWidget()
+        self.horizontal_layout.addWidget(self.find_product_box)
+        self.horizontal_layout.addWidget(self.order_box)
+        self.horizontal_widget.setLayout(self.horizontal_layout)
 
 
         self.main_layout = QVBoxLayout()
-        self.main_layout.addWidget(self.find_product_box)
-        self.main_layout.addWidget(self.order_box)
+        self.main_layout.addWidget(self.horizontal_widget)
         self.main_layout.addWidget(self.invoice_widget)
         self.main_layout.addWidget(self.buttonBox)
         self.setLayout(self.main_layout)
@@ -177,6 +190,7 @@ class createOrderClass(QWidget):
         self.createCustomerOrder()
         self.change_stock()
         self.change_weekly_sales()
+        self.save_sucess()
 
     def createCustomerOrder(self):
         date = datetime.datetime.today()
@@ -247,7 +261,7 @@ class createOrderClass(QWidget):
                 </head>
                 <body style="font-family:'Verdana'; font-size:13px">
                 <br>
-                <img src="./ProductImages/SystemLogo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
+                <img src="./SystemImages/SystemLogo.jpg" alt="Beacon Veterinary Centre Logo" width="109" height="109">
                 <br>"""
         html += """<b> {0} </b>""".format(company_name)
         html += "<br>"
@@ -514,55 +528,24 @@ class createOrderClass(QWidget):
                 self.discount = 0.0
                 #self.change_price()
                 self.display_message()
+                self.email_invoice_address.setText("")
 
     def display_message(self):
-        self.member_id_error_instance = PopUpWindow("Beacon Vets Stock Control",300,100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.member_id_error_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Sorry, that MemberID is not valid.")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_up)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_up)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.member_id_error_instance.setCentralWidget(self.pop_up_widget)
-        self.member_id_error_instance.move(800,450)
-        self.member_id_error_instance.show()
-        self.member_id_error_instance.raise_()
+        self.order_instance = PopUpWindow("Sorry, that MemberID is not valid.",QDialogButtonBox.Ok,QDialogButtonBox.Cancel)
+        self.order_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_up)
+        self.order_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_up)
 
     def close_pop_up(self):
-        self.member_id_error_instance.close()
+        self.order_instance.close()
 
     def save_invoice(self):
         createCustomerOrder(self)
 
     def save_sucess(self):
-        self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.add_order_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Order Sucessfully Saved")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.add_order_instance.setCentralWidget(self.pop_up_widget)
-        self.add_order_instance.move(800,450)
-        self.add_order_instance.show()
-        self.add_order_instance.raise_()
-
+        self.order_instance = PopUpWindow("Order Sucessfully Saved", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+        self.order_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_up)
+        self.order_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_up)
+        
     def change_stock(self):
         for row in range(0, self.current_order.rowCount()):
             product_id = self.current_order.item(row, 0).text()

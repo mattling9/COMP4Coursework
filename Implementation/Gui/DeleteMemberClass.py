@@ -2,7 +2,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
-
+from ErrorMessageClass import *
 import csv, re
 
 from PyQt4.QtGui import *
@@ -14,19 +14,18 @@ class deleteMemberClass(QWidget):
         """a representation of Deleting an Member"""
         def __init__(self, ButtonText):
                 super().__init__()
-                self.setFixedSize(700,600)
 
                 self.find_member_id_layout = QHBoxLayout()
                 self.find_member_id_widget = QWidget()
                 self.find_member_id_label = QLabel("MemberID")
                 self.find_member_id_line_edit = QLineEdit()
                 self.find_member_id_button = QPushButton("Find...")
+                self.find_member_id_button.setFixedSize(84,27)
                 self.find_member_id_button.clicked.connect(self.find_member_by_id)                                        
                 self.find_member_id_layout.addWidget(self.find_member_id_label)
                 self.find_member_id_layout.addWidget(self.find_member_id_line_edit)
                 self.find_member_id_layout.addWidget(self.find_member_id_button)
                 self.find_member_id_widget.setLayout(self.find_member_id_layout)
-                self.find_member_id_widget.setFixedHeight(40)
 
                 #Name_title
                 self.name_title = QComboBox()
@@ -41,12 +40,10 @@ class deleteMemberClass(QWidget):
                 #First name
                 self.first_name = QLineEdit()
                 self.first_name.setPlaceholderText("First Name: ")
-                self.first_name.textChanged.connect(self.validate_first_name)
                     
                 #Last Name
                 self.last_name = QLineEdit()
                 self.last_name.setPlaceholderText("Last Name: ")
-                self.last_name.textChanged.connect(self.validate_last_name)
                     
                 #Postcode Tickbox
                 self.postcode_tickbox = QCheckBox("Do You Live in Cumbria?")
@@ -54,6 +51,8 @@ class deleteMemberClass(QWidget):
                 #Find Button
                 self.find_button = QPushButton("Find...")
                 self.find_button.setEnabled(False)
+                self.find_button.setFixedSize(84,27)
+                self.find_button.setObjectName("find_button")
                 self.find_button.clicked.connect(self.FindPostcode)
 
                     
@@ -70,9 +69,7 @@ class deleteMemberClass(QWidget):
                 self.postcode_layout.addWidget(self.postcode_label)
                 self.postcode_layout.addWidget(self.postcode)
                 self.postcode_layout.addWidget(self.find_button)
-                self.postcode_widget.setLayout(self.postcode_layout)
-                self.postcode.textChanged.connect(self.ValidatePostcode)
-                
+                self.postcode_widget.setLayout(self.postcode_layout)                
 
                 #County
                 self.county_layout = QHBoxLayout()
@@ -96,7 +93,6 @@ class deleteMemberClass(QWidget):
                 self.city_widget = QWidget()
                 self.city_label = QLabel("City: ")
                 self.city = QLineEdit()
-                self.city.textChanged.connect(self.validate_city)
                 self.city.setPlaceholderText("City: ")
                 self.city_layout.addWidget(self.city_label)
                 self.city_layout.addWidget(self.city)
@@ -107,7 +103,6 @@ class deleteMemberClass(QWidget):
                 self.town_widget = QWidget()
                 self.town_label = QLabel("Town: ")
                 self.town = QLineEdit()
-                self.town.textChanged.connect(self.validate_town)
                 self.town.setPlaceholderText("Town: ")
                 self.town_layout.addWidget(self.town_label)
                 self.town_layout.addWidget(self.town)
@@ -118,7 +113,6 @@ class deleteMemberClass(QWidget):
                 self.street_widget = QWidget()
                 self.street_label = QLabel("Street: ")
                 self.street = QLineEdit()
-                self.street.textChanged.connect(self.validate_street)
                 self.street.setPlaceholderText("Street: ")
                 self.street_layout.addWidget(self.street_label)
                 self.street_layout.addWidget(self.street)
@@ -129,6 +123,7 @@ class deleteMemberClass(QWidget):
                 self.houseno_widget = QWidget()
                 self.houseno_label = QLabel("House No:")
                 self.houseno = QSpinBox()
+                self.houseno.setFixedWidth(50)
                 self.houseno.setRange(1,200)
                 self.houseno_layout.addWidget(self.houseno_label)
                 self.houseno_layout.addWidget(self.houseno)
@@ -139,7 +134,6 @@ class deleteMemberClass(QWidget):
                 self.telephone_number_widget = QWidget()
                 self.telephone_number_label = QLabel("Telephone Number: ")
                 self.telephone_number = QLineEdit()
-                self.telephone_number.textChanged.connect(self.validate_number)
                 self.telephone_number.setPlaceholderText("Telephone Number:")
                 self.telephone_number_layout.addWidget(self.telephone_number_label)
                 self.telephone_number_layout.addWidget(self.telephone_number)
@@ -150,7 +144,6 @@ class deleteMemberClass(QWidget):
                 self.email_widget = QWidget()
                 self.email_label = QLabel("Email: ")
                 self.email = QLineEdit()
-                self.email.textChanged.connect(self.validate_email)
                 self.email.setPlaceholderText("Email: ")
                 self.email_layout.addWidget(self.email_label)
                 self.email_layout.addWidget(self.email)
@@ -159,6 +152,7 @@ class deleteMemberClass(QWidget):
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
+                self.add_member.setFixedSize(120,27)
 
                     #Group Box
                 self.group_box = QGroupBox("Enter Member Information")
@@ -173,6 +167,14 @@ class deleteMemberClass(QWidget):
                 self.name_layout.addWidget(self.first_name)
                 self.name_layout.addWidget(self.last_name)
                 self.name_widget.setLayout(self.name_layout)
+
+                self.spacer = QLabel()
+                self.spacer.setFixedWidth(600)
+                self.add_member_layout = QHBoxLayout()
+                self.add_member_widget = QWidget()
+                self.add_member_layout.addWidget(self.spacer)
+                self.add_member_layout.addWidget(self.add_member)
+                self.add_member_widget.setLayout(self.add_member_layout)
 
 
                 self.main_layout = QVBoxLayout()
@@ -189,7 +191,7 @@ class deleteMemberClass(QWidget):
                 self.group_box_layout.addWidget(self.email_widget)
                 self.group_box.setLayout(self.group_box_layout)
                 self.main_layout.addWidget(self.group_box)
-                self.main_layout.addWidget(self.add_member)
+                self.main_layout.addWidget(self.add_member_widget)
                 self.main_widget.setLayout(self.main_layout)
                 self.main_widget.setDisabled(True)
 
@@ -209,46 +211,14 @@ class deleteMemberClass(QWidget):
         
 
         def CreatePopUpWindow(self):
-                self.pop_up_instance = PopUpWindow("Beacon Vets Removing Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.pop_up_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Are You Sure You Want To Remove The Member?")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-                self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-                self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-                self.pop_up_instance.move(750,500)
-                self.pop_up_instance.show()
-                self.pop_up_instance.raise_()
-
+                self.pop_up_instance = PopUpWindow("Are You Sure You Want To Remove The Member?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+                
         def EditMemberSucess(self):
-                self.add_member_instance = PopUpWindow("Beacon Vets Removing Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.add_member_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Member Sucessfully Removed!")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-                self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-                self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.add_member_instance.setCentralWidget(self.pop_up_widget)
-                self.add_member_instance.move(800,450)
-                self.add_member_instance.show()
-                self.add_member_instance.raise_()
+                self.add_member_instance = PopUpWindow("Member Sucessfully Removed!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
         def clicked_yes(self):
                 deletingMember(self.find_member_id_line_edit.text())
@@ -296,20 +266,31 @@ class deleteMemberClass(QWidget):
                     title_index = self.name_title.findText(self.member_info[0][1])
                     self.name_title.setCurrentIndex(title_index)
                     self.first_name.setText(self.member_info[0][2])
+                    self.first_name.setReadOnly(True)
                     self.last_name.setText(self.member_info[0][3])
+                    self.last_name.setReadOnly(True)
                     self.postcode.setText(self.member_info[0][9])
+                    self.postcode.setReadOnly(True)
                     county_index = self.county.findText(self.member_info[0][8])
                     self.county.setCurrentIndex(county_index)
                     self.city.setText(self.member_info[0][7])
+                    self.city.setReadOnly(True)
                     self.town.setText(self.member_info[0][6])
+                    self.town.setReadOnly(True)
                     self.street.setText(self.member_info[0][5])
+                    self.street.setReadOnly(True)
                     self.houseno.setValue(int(self.member_info[0][4]))
+                    self.houseno.setReadOnly(True)
                     telephone_number = ("0" + str(self.member_info[0][10]))
                     self.telephone_number.setText(telephone_number)
+                    self.telephone_number.setReadOnly(True)
                     self.email.setText(self.member_info[0][11])
+                    self.email.setReadOnly(True)
                                            
                 if not self.member_info:
-                    print("NOT IN DATABASE")
+                    self.error = ErrorMessageClass("No user found with Member ID: {0}".format(self.find_member_id_line_edit.text()))
+                    self.error.setFixedSize(400,150)
+
                     self.main_widget.setEnabled(False)
                     self.name_title.setCurrentIndex(0)
                     self.first_name.setText("")
@@ -322,96 +303,3 @@ class deleteMemberClass(QWidget):
                     self.houseno.setValue(0)
                     self.telephone_number.setText("")
                     self.email.setText("")
-
-        #VALIDATION
-        def ValidatePostcode(self):
-                pattern = re.compile("[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}")
-                PostCode = self.postcode.text()
-                self.postcode.setText(PostCode.upper())
-                valid =  pattern.match(PostCode.upper())
-                if valid:
-                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-
-
-        def validate_first_name(self):
-                self.FirstName = self.first_name.text()
-                self.pattern = re.compile("[A-Z]")
-                self.first_name.setText(self.FirstName.capitalize())
-                valid = self.pattern.match(self.FirstName.upper())
-                if len(self.FirstName) > 1 and len(self.FirstName) < 18:
-                        if valid:
-                                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.first_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        def validate_last_name(self):
-                self.LastName = self.last_name.text()
-                self.pattern = re.compile("[A-Z]")
-                self.last_name.setText(self.LastName.capitalize())
-                valid = self.pattern.match(self.LastName.upper())
-                if len(self.LastName) > 1 and len(self.LastName) < 18:
-                        if valid:
-                                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.last_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-                        
-
-        def validate_city(self):
-
-                self.City = self.city.text()
-                self.pattern = re.compile("[A-Z]")
-                self.city.setText(self.City.capitalize())
-                valid = self.pattern.match(self.City.upper())
-                if len(self.City) > 1 and len(self.City) < 18:
-                        if valid:
-                                self.city.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.city.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        def validate_town(self):
-
-                self.Town = self.town.text()
-                self.pattern = re.compile("[A-Z]")
-                self.town.setText(self.Town.capitalize())
-                valid = self.pattern.match(self.Town.upper())
-                if len(self.Town) > 3 and len(self.Town) < 32:
-                        if valid:
-                                self.town.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.town.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        def validate_street(self):
-
-                self.Street = self.street.text()
-                self.pattern = re.compile("[A-Z]")
-                self.street.setText(self.Street.capitalize())
-                valid = self.pattern.match(self.Street.upper())
-                if len(self.Street) > 3 and len(self.Street) < 18:
-                        if valid:
-                                self.street.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.street.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        def validate_number(self):
-
-                self.Number = self.telephone_number.text()
-                self.pattern = re.compile("[0-9]{11}")
-                self.telephone_number.setText(self.Number.capitalize())
-                valid = self.pattern.match(self.Number.upper())
-                if len(self.Number) > 3 and len(self.Number) < 18:
-                        if valid:
-                                self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
-
-        def validate_email(self):
-                self.Email = self.email.text()
-                self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
-                valid = self.pattern.match(self.Email.upper())
-                if valid:
-                        self.email.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
-                else:
-                        self.email.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")

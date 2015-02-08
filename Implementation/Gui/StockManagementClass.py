@@ -20,6 +20,7 @@ class manageStockClass(QWidget):
         self.product_id_label = QLabel("Product ID: ")
         self.product_id = QLineEdit()
         self.find_button = QPushButton("Find..")
+        self.find_button.setFixedSize(84,27)
         self.find_button.clicked.connect(self.find_product_by_id)
         self.product_id_layout.addWidget(self.product_id_label)
         self.product_id_layout.addWidget(self.product_id)
@@ -28,7 +29,8 @@ class manageStockClass(QWidget):
 
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Save)
+        self.buttonBox.button(QDialogButtonBox.Save).setFixedSize(84,27)
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.save)
 
         self.path = (".\images\Default.png")
@@ -45,7 +47,9 @@ class manageStockClass(QWidget):
         self.stock1_label = QLabel("Stock in Shop: ")
         self.stock2_label = QLabel("Stock in Storage Room: ")
         self.stock1 = QSpinBox()
+        self.stock1.setFixedWidth(50)
         self.stock2 = QSpinBox()
+        self.stock2.setFixedWidth(50)
 
         self.current_stock_groupbox = QGroupBox("Current Stock: ")
         self.current_stock_layout = QHBoxLayout()
@@ -107,7 +111,6 @@ class manageStockClass(QWidget):
         product_id = self.product_id.text()
         sales = get_product_sales(product_id)
         dates = get_product_sales_date(product_id)
-        print(dates)
         data = []
         graph = self.figure.add_subplot(111)
         if dates:
@@ -181,7 +184,8 @@ class manageStockClass(QWidget):
                 self.image.setPixmap(self.scaled_image)
                 self.plot()
             if not self.product_info:
-                print("NOT IN DATABASE")
+                self.error = ErrorMessageClass("No product with Product ID: {0}".format(self.find_product_id_line_edit.text()))
+                self.error.setFixedSize(400,150)
                 plt.clf()
                 self.current_stock_groupbox.setDisabled(True)
                 self.stock_prediction_groupbox.setDisabled(True)

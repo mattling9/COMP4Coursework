@@ -2,6 +2,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
+from ErrorMessageClass import *
 
 import csv, re
 
@@ -14,19 +15,18 @@ class editMemberClass(QWidget):
         """a representation of Adding an Member"""
         def __init__(self, ButtonText):
                 super().__init__()
-                self.setFixedSize(700,600)
 
                 self.find_member_id_layout = QHBoxLayout()
                 self.find_member_id_widget = QWidget()
                 self.find_member_id_label = QLabel("MemberID")
                 self.find_member_id_line_edit = QLineEdit()
                 self.find_member_id_button = QPushButton("Find...")
+                self.find_member_id_button.setFixedSize(84,27)
                 self.find_member_id_button.clicked.connect(self.find_member_by_id)                                        
                 self.find_member_id_layout.addWidget(self.find_member_id_label)
                 self.find_member_id_layout.addWidget(self.find_member_id_line_edit)
                 self.find_member_id_layout.addWidget(self.find_member_id_button)
                 self.find_member_id_widget.setLayout(self.find_member_id_layout)
-                self.find_member_id_widget.setFixedHeight(40)
 
                 #Name_title
                 self.name_title = QComboBox()
@@ -54,6 +54,8 @@ class editMemberClass(QWidget):
                 #Find Button
                 self.find_button = QPushButton("Find...")
                 self.find_button.setEnabled(False)
+                self.find_button.setObjectName("find_button")
+                self.find_button.setFixedSize(84,27)
                 self.find_button.clicked.connect(self.FindPostcode)
 
                     
@@ -65,7 +67,7 @@ class editMemberClass(QWidget):
                 self.postcode_widget = QWidget()
                 self.postcode_label = QLabel("Postcode: ")
                 self.postcode = QLineEdit()
-                #self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                #self.postcode.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 self.postcode.setPlaceholderText("Postcode: i.e(CB7 5LQ) ")
                 self.postcode_layout.addWidget(self.postcode_label)
                 self.postcode_layout.addWidget(self.postcode)
@@ -129,6 +131,7 @@ class editMemberClass(QWidget):
                 self.houseno_widget = QWidget()
                 self.houseno_label = QLabel("House No:")
                 self.houseno = QSpinBox()
+                self.houseno.setFixedWidth(50)
                 self.houseno.setRange(1,200)
                 self.houseno_layout.addWidget(self.houseno_label)
                 self.houseno_layout.addWidget(self.houseno)
@@ -158,6 +161,7 @@ class editMemberClass(QWidget):
 
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
+                self.add_member.setFixedSize(100,27)
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
 
                     #Group Box
@@ -174,6 +178,14 @@ class editMemberClass(QWidget):
                 self.name_layout.addWidget(self.last_name)
                 self.name_widget.setLayout(self.name_layout)
 
+                self.spacer = QLabel()
+                self.spacer.setFixedWidth(600)
+                self.add_member_layout = QHBoxLayout()
+                self.add_member_widget = QWidget()
+                self.add_member_layout.addWidget(self.spacer)
+                self.add_member_layout.addWidget(self.add_member)
+                self.add_member_widget.setLayout(self.add_member_layout)
+
 
                 self.main_layout = QVBoxLayout()
                 self.main_widget = QWidget()
@@ -189,7 +201,7 @@ class editMemberClass(QWidget):
                 self.group_box_layout.addWidget(self.email_widget)
                 self.group_box.setLayout(self.group_box_layout)
                 self.main_layout.addWidget(self.group_box)
-                self.main_layout.addWidget(self.add_member)
+                self.main_layout.addWidget(self.add_member_widget)
                 self.main_widget.setLayout(self.main_layout)
                 self.main_widget.setDisabled(True)
 
@@ -209,46 +221,14 @@ class editMemberClass(QWidget):
         
 
         def CreatePopUpWindow(self):
-                self.pop_up_instance = PopUpWindow("Beacon Vets Adding Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.pop_up_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Are You Sure You Want To Edit The Member?")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-                self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-                self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-                self.pop_up_instance.move(750,500)
-                self.pop_up_instance.show()
-                self.pop_up_instance.raise_()
+                self.pop_up_instance = PopUpWindow("Are You Sure You Want To Edit The Member?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
         def EditMemberSucess(self):
-                self.add_member_instance = PopUpWindow("Beacon Vets Adding Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.add_member_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Member Sucessfully Changed!")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-                self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-                self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.add_member_instance.setCentralWidget(self.pop_up_widget)
-                self.add_member_instance.move(800,450)
-                self.add_member_instance.show()
-                self.add_member_instance.raise_()
+                self.add_member_instance = PopUpWindow("Member Sucessfully Changed!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
         def clicked_yes(self):
                 print("before")
@@ -322,7 +302,8 @@ class editMemberClass(QWidget):
                     self.email.setText(self.member_info[0][11])
                                            
                 if not self.member_info:
-                    print("NOT IN DATABASE")
+                    self.error = ErrorMessageClass("No user found with Member ID: {0}".format(self.find_member_id_line_edit.text()))
+                    self.error.setFixedSize(400,150)
                     self.main_widget.setEnabled(False)
                     self.name_title.setCurrentIndex(0)
                     self.first_name.setText("")
@@ -343,7 +324,7 @@ class editMemberClass(QWidget):
                 self.postcode.setText(PostCode.upper())
                 valid =  pattern.match(PostCode.upper())
                 if valid:
-                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.postcode.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -356,7 +337,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.FirstName.upper())
                 if len(self.FirstName) > 1 and len(self.FirstName) < 18:
                         if valid:
-                                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.first_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -367,7 +348,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.LastName.upper())
                 if len(self.LastName) > 1 and len(self.LastName) < 18:
                         if valid:
-                                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.last_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
                         
@@ -380,7 +361,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.City.upper())
                 if len(self.City) > 1 and len(self.City) < 18:
                         if valid:
-                                self.city.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.city.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.city.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -392,7 +373,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.Town.upper())
                 if len(self.Town) > 3 and len(self.Town) < 32:
                         if valid:
-                                self.town.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.town.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.town.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -404,7 +385,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.Street.upper())
                 if len(self.Street) > 3 and len(self.Street) < 18:
                         if valid:
-                                self.street.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.street.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.street.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -416,7 +397,7 @@ class editMemberClass(QWidget):
                 valid = self.pattern.match(self.Number.upper())
                 if len(self.Number) > 3 and len(self.Number) < 18:
                         if valid:
-                                self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -425,6 +406,6 @@ class editMemberClass(QWidget):
                 self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
                 valid = self.pattern.match(self.Email.upper())
                 if valid:
-                        self.email.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                        self.email.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.email.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")

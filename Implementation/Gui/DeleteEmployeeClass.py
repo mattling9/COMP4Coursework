@@ -5,7 +5,7 @@ from AddingRemovingData import *
 from ErrorMessageClass import *
 
 
-class editEmployeeClass(QWidget):
+class deleteEmployeeClass(QWidget):
     """a representation of Adding an Employee"""
     def __init__(self,ButtonText):
         super().__init__()
@@ -138,21 +138,18 @@ class editEmployeeClass(QWidget):
         self.email_address_output.setText(self.email_address.text())
 
     def CreatePopUpWindow(self):
-        self.pop_up_instance = PopUpWindow("Are You Sure You Want To Edit The Employee?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.pop_up_instance = PopUpWindow("Are You Sure You Want To Delete The Employee?", QDialogButtonBox.Yes, QDialogButtonBox.No)
         self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
         self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
+
     def AddEmployeeSucess(self):
-        self.edit_employee_instance = PopUpWindow("Employee Sucessfully Edited!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+        self.edit_employee_instance = PopUpWindow("Employee Sucessfully Deleted!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
         self.edit_employee_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
         self.edit_employee_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def clicked_yes(self):
-        editingEmployee(self.find_employee_id_line_edit.text(),
-                        self.user_name_output.text(),
-                        self.first_name_output.text(),
-                        self.last_name_output.text(),
-                        self.email_address_output.text())
+        deletingEmployee(self.find_employee_id_line_edit.text())
         self.AddEmployeeSucess()
 
 
@@ -173,17 +170,19 @@ class editEmployeeClass(QWidget):
             if employee_info:
                 self.main_widget.setEnabled(True)
                 self.first_name.setText(employee_info[0][2])
+                self.first_name.setReadOnly(True)
                 self.last_name.setText(employee_info[0][3])
+                self.last_name.setReadOnly(True)
                 self.email_address.setText(employee_info[0][4])
+                self.email_address.setReadOnly(True)
                 self.user_name_output.setText(employee_info[0][1])
                 self.first_name_output.setText(self.first_name.text())
                 self.last_name_output.setText(self.last_name.text())
                 self.email_address_output.setText(self.email_address.text())
                                        
             if not employee_info:
-                self.error = ErrorMessageClass("No employee found with Employee ID: {0}".format(self.find_employee_id_line_edit.text()))
+                self.error = ErrorMessageClass("No user found with Member ID: {0}".format(self.find_employee_id_line_edit.text()))
                 self.error.setFixedSize(400,150)
-
                 self.main_widget.setDisabled(True)
                 self.first_name.setText("")
                 self.last_name.setText("")

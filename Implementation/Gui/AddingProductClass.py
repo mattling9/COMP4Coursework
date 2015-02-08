@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
+from CustomToolbarClass import *
 
 class addProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
@@ -98,7 +99,7 @@ class addProductClass(QWidget):
         self.product_name.textChanged.connect(self.validate_name)
         product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
-        self.product_name.setFixedWidth(270)
+        self.product_name.setFixedWidth(260)
 
         #Image
         self.image = QLabel()
@@ -188,46 +189,14 @@ class addProductClass(QWidget):
         self.setLayout(self.total_layout)
         
     def CreatePopUpWindow(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are you sure you want to Add The Product?")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-        self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-        self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-        self.pop_up_instance.move(750,500)
-        self.pop_up_instance.show()
-        self.pop_up_instance.raise_()
+        self.pop_up_instance = PopUpWindow("Are you sure you want to add the Product?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.AddProductSucess)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddProductSucess(self):
-        self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.add_product_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Product Sucessfully Added!")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.add_product_instance.setCentralWidget(self.pop_up_widget)
-        self.add_product_instance.move(800,450)
-        self.add_product_instance.show()
-        self.add_product_instance.raise_()
+        self.add_product_instance = PopUpWindow("Product Sucessfully Added!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def get_image_path(self):
         self.old_path =  QFileDialog.getOpenFileName()
@@ -271,6 +240,12 @@ class addProductClass(QWidget):
             db.commit()
         return rows_in_table
 
+    def minimise_window(self):
+        self.pop_up_instance.showMinimized()
+
+    def close_window(self):
+        self.pop_up_instance.close()
+
 
     #VALIDATION
     def validate_name(self):
@@ -281,7 +256,7 @@ class addProductClass(QWidget):
             valid = True
         
         if valid:
-            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.product_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -293,7 +268,7 @@ class addProductClass(QWidget):
         self.price_button.setText(self.price)
         valid =  self.pattern.match(self.price)
         if valid:
-                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
                 self.price_button.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
         
@@ -304,7 +279,7 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.size)
         if len(self.size) > 0 and len(self.size) <= 5:
             if valid:
-                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
         
@@ -314,7 +289,7 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.stock)
         if len(self.stock) > 0 and len(self.stock) <= 2:
             if valid:
-                self.location1.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.location1.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.location1.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -324,7 +299,7 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.stock)
         if len(self.stock) > 0 and len(self.stock) <= 2:
             if valid:
-                self.location2.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.location2.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.location2.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 

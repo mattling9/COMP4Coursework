@@ -1,9 +1,11 @@
-import shutil
+import shutil, sys
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
+from ExtendedQLabel import *
 from AddingRemovingData import *
+from ErrorMessageClass import *
 
 class preferencesClass(QWidget):
     """ A representation of the Adding Product Interface"""
@@ -17,9 +19,9 @@ class preferencesClass(QWidget):
         self.company_info_layout = QVBoxLayout()
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Save)
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.save_clicked)
-
+        self.buttonBox.button(QDialogButtonBox.Save).setFixedSize(84,27)
 
         self.image_layout = QVBoxLayout()
         self.image_widget = QWidget()
@@ -42,6 +44,8 @@ class preferencesClass(QWidget):
         self.path.setReadOnly(True)
         self.path.setText(path)
         self.browse_button = QPushButton("Browse...")
+        self.browse_button.setFixedSize(100, 27)
+        self.browse_button.setObjectName('browse')
         self.browse_button.clicked.connect(self.get_path)
         self.path_layout.addWidget(self.path)
         self.path_layout.addWidget(self.browse_button)
@@ -89,12 +93,17 @@ class preferencesClass(QWidget):
             self.invoice_password.setText(settings[0][11])
             #INSERT THE DATA FROM FILE HERE
 
+        self.question = ExtendedQLabel("What is this?")
+        self.question.setObjectName("blue_question")
+        self.question.setFixedSize(100, 40)
+
         self.gmail_groupbox = QGroupBox("Email Account:")
         self.gmail_layout = QGridLayout()
         self.gmail_layout.addWidget(self.invoice_email_label, 0,0)
         self.gmail_layout.addWidget(self.invoice_email, 0,1)
         self.gmail_layout.addWidget(self.invoice_password_label, 1,0)
         self.gmail_layout.addWidget(self.invoice_password, 1,1)
+        self.gmail_layout.addWidget(self.question, 2,1)
         self.gmail_groupbox.setLayout(self.gmail_layout)
         self.gmail_groupbox.setFixedHeight(250)
         
@@ -167,13 +176,14 @@ class preferencesClass(QWidget):
                        self.email.text(),
                        self.invoice_email.text(),
                        encrypted_password)
-        print("updated")
+        
+        self.info_saved_instance = ErrorMessageClass("Preferences Sucessfully Saved!")
+        self.info_saved_instance.setFixedSize(400,150)
 
         
         self.setWindowTitle("{0} Stock Control".format(self.company_name.text()))
         self.icon = QIcon("./ProductImages/SystemLogo.png")
         self.setWindowIcon(self.icon)
-     
 
 
     

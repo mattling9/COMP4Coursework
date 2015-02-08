@@ -28,14 +28,11 @@ class logInClass(QWidget):
         self.font.setUnderline(True)
         self.forgot_password = ExtendedQLabel(" Forgot Username or Password?")
         self.forgot_password.setAlignment(Qt.AlignCenter)
+        self.forgot_password.setObjectName("blue_password")
         self.forgot_password.setFont(self.font)
         self.forgot_password.setAlignment(Qt.AlignCenter)
-        self.palette = QPalette(self.forgot_password.palette())
-        self.palette.setColor(QPalette.WindowText, QColor(Qt.blue))
-        self.forgot_password.setPalette(self.palette)
         self.forgot_password.setToolTip("Click this link if you have forgotten your password.")
-        self.forgot_password.setFixedWidth(220)
-        self.forgot_password.setFixedHeight(40)
+        self.forgot_password.setFixedSize(220, 40)
 
 
         

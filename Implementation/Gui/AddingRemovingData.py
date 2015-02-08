@@ -98,8 +98,7 @@ def editingEmployee(EmployeeID, EmployeeUserName, EmployeeFirstName,EmployeeLast
         cursor.execute(sql, Employee)
         db.commit()
 
-def deletingEmployee():
-    EmployeeID = input("Enter EmployeeID To Delete")
+def deletingEmployee(EmployeeID):
     data = (EmployeeID,)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()

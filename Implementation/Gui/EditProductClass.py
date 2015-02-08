@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
+from ErrorMessageClass import *
 
 class editProductClass(QWidget):
     """ A representation of the Editing Product Interface"""
@@ -21,12 +22,13 @@ class editProductClass(QWidget):
         self.find_product_id_label = QLabel("ProductID")
         self.find_product_id_line_edit = QLineEdit()
         self.find_product_id_button = QPushButton("Find...")
-        self.find_product_id_button.clicked.connect(self.find_product_by_id)                                        
+        self.find_product_id_button.setFixedSize(84,27)
+        self.find_product_id_button.clicked.connect(self.find_product_by_id)
+        
         self.find_product_id_layout.addWidget(self.find_product_id_label)
         self.find_product_id_layout.addWidget(self.find_product_id_line_edit)
         self.find_product_id_layout.addWidget(self.find_product_id_button)
         self.find_product_id_widget.setLayout(self.find_product_id_layout)
-        self.find_product_id_widget.setFixedHeight(40)
         
         #Price
         self.pound = QLabel("Price: £")
@@ -50,6 +52,7 @@ class editProductClass(QWidget):
         self.size_integer.setValidator(self.validator)
         self.size_integer.textChanged.connect(self.validate_size)
         self.size_integer.setPlaceholderText("Size: (750)")
+        self.size_integer.setFixedWidth(180)
         self.size_button = QComboBox()
         self.size_button.addItem("Kg.")
         self.size_button.addItem("g.")
@@ -63,7 +66,9 @@ class editProductClass(QWidget):
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Category")
         self.category1_button = QComboBox()
+        self.category1_button.setFixedHeight(30)
         self.category2_button = QComboBox()
+        self.category2_button.setFixedHeight(30)
         self.category1_button.addItem("Dog")
         self.category1_button.addItem("Cat")
         self.category1_button.addItem("Fish")
@@ -96,13 +101,13 @@ class editProductClass(QWidget):
         #Done
         self.done = QPushButton("Edit Product")
         self.done.clicked.connect(self.CreatePopUpWindow)
-
+        self.done.setFixedSize(100, 27)
         #Product Name
         self.product_name = QLineEdit()
         self.product_name.textChanged.connect(self.validate_name)
         product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
-        self.product_name.setFixedWidth(300)
+        self.product_name.setFixedWidth(260)
 
         #Image
         settings = getSettings()
@@ -114,14 +119,17 @@ class editProductClass(QWidget):
 
         #Browse
         path = "./ProductImages/Default.jpg"
-        
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
         self.browse = QPushButton("Browse...")
+        self.browse.setFixedSize(84, 27)
         self.browse.clicked.connect(self.get_image_path)
+        self.browse.setObjectName('browse')
         
         self.upload = QPushButton("Upload")
         self.upload.clicked.connect(self.update_image)
+        self.upload.setFixedSize(78,27)
+        self.upload.setObjectName('upload')
         
         self.path = QLineEdit("")
         self.path.setReadOnly(True)
@@ -130,7 +138,6 @@ class editProductClass(QWidget):
         self.browse_layout.addWidget(self.browse)
         self.browse_layout.addWidget(self.upload)
         self.browse_widget.setLayout(self.browse_layout)
-        self.browse_widget.setFixedWidth(300)
         
         
         #Creating Layouts and Adding Widgets
@@ -171,10 +178,18 @@ class editProductClass(QWidget):
         self.leftright_widget.setLayout(self.leftright_layout)
         self.leftright_widget.setDisabled(True)
 
+        self.add_product_layout = QHBoxLayout()
+        self.add_product_widget = QWidget()
+        self.spacer = QLabel()
+        self.spacer.setFixedWidth(600)
+        self.add_product_layout.addWidget(self.spacer)
+        self.add_product_layout.addWidget(self.done)
+        self.add_product_widget.setLayout(self.add_product_layout)
+
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.find_product_id_widget)
         self.main_layout.addWidget(self.leftright_widget)
-        self.main_layout.addWidget(self.done)
+        self.main_layout.addWidget(self.add_product_widget)
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
         
@@ -183,49 +198,17 @@ class editProductClass(QWidget):
         self.setLayout(self.total_layout)
         
     def CreatePopUpWindow(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Editing Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are you sure you want to Edit The Product?")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-        self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-        self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-        self.pop_up_instance.move(750,500)
-        self.pop_up_instance.show()
-        self.pop_up_instance.raise_()
+        self.pop_up_instance = PopUpWindow("Are you sure you want to Edit The Product?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddProductSucess(self):
-        self.add_product_instance = PopUpWindow("Beacon Vets Adding Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.add_product_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Product Sucessfully Edited!")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.add_product_instance.setCentralWidget(self.pop_up_widget)
-        self.add_product_instance.move(800,450)
-        self.add_product_instance.show()
-        self.add_product_instance.raise_()
+        self.add_product_instance = PopUpWindow("Product Sucessfully Edited!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def get_image_path(self):
-        path =  QFileDialog.getOpenFileName()
+        path = QFileDialog.getOpenFileName()
         self.path.setText(path)
         
 
@@ -260,15 +243,15 @@ class editProductClass(QWidget):
                 self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
             if not self.product_info:
-                print("NOT IN DATABASE")
-                self.size = ""
+                self.error = ErrorMessageClass("No product with Product ID: {0}".format(self.find_product_id_line_edit.text()))
+                self.error.setFixedSize(400,150)
                 self.leftright_widget.setDisabled(True)
                 self.product_name.setText("")
                 self.size_integer.setText("")
                 self.price_button.setText("")
-                self.path.setText("./ProductImages/Default.jpg")
-                self.pixmap = QPixmap(self.path.text())
-                self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.path.setText(".\ProductImages\Default.jpg")
+                self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+                self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image.setPixmap(self.scaled_image)
                 
         
@@ -293,7 +276,7 @@ class editProductClass(QWidget):
             valid = True
         
         if valid:
-            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.product_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -305,7 +288,7 @@ class editProductClass(QWidget):
         self.price_button.setText(self.price)
         valid =  self.pattern.match(self.price)
         if valid:
-                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
                 self.price_button.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
         
@@ -316,7 +299,7 @@ class editProductClass(QWidget):
         valid =  self.pattern.match(self.size)
         if len(self.size) > 0 and len(self.size) <= 5:
             if valid:
-                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
         else:
             self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")        
     

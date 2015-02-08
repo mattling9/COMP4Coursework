@@ -4,12 +4,11 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
-
+from ErrorMessageClass import *
 class deleteProductClass(QWidget):
     """ A representation of the Adding Product Interface"""
     def __init__(self):
         super().__init__()
-        self.resize(10,20)
         #Adding group box
         self.product_info_group_box = QGroupBox()
         self.product_info_group_box.setTitle("Enter Product Information:")
@@ -22,6 +21,7 @@ class deleteProductClass(QWidget):
         self.find_product_id_label = QLabel("ProductID")
         self.find_product_id_line_edit = QLineEdit()
         self.find_product_id_button = QPushButton("Find...")
+        self.find_product_id_button.setFixedSize(84,27)
         self.find_product_id_button.clicked.connect(self.find_product_by_id)
 
                                         
@@ -49,6 +49,7 @@ class deleteProductClass(QWidget):
         self.size_integer = QLineEdit()
         self.size_integer.setReadOnly(True)
         self.size_integer.setPlaceholderText("Size: (750)")
+        self.size_integer.setFixedWidth(180)
         self.size_button = QComboBox()
         self.size_button.setDisabled(True)
         self.size_button.addItem("Kg.")
@@ -63,8 +64,10 @@ class deleteProductClass(QWidget):
         self.category_layout = QHBoxLayout()
         self.category_label = QLabel("Category")
         self.category1_button = QComboBox()
+        self.category1_button.setFixedHeight(30)
         self.category1_button.setDisabled(True)
         self.category2_button = QComboBox()
+        self.category2_button.setFixedHeight(30)
         self.category2_button.setDisabled(True)
         self.category1_button.addItem("Dog")
         self.category1_button.addItem("Cat")
@@ -96,40 +99,45 @@ class deleteProductClass(QWidget):
         #Done
         self.done = QPushButton("Delete Product")
         self.done.clicked.connect(self.CreatePopUpWindow)
+        self.done.setFixedSize(110, 27)
 
         #Product Name
         self.product_name = QLineEdit()
         self.product_name.setReadOnly(True)
         product_name_info = self.product_name.text()
         self.product_name.setPlaceholderText("Product Name...")
-        self.product_name.setFixedWidth(300)
+        self.product_name.setFixedWidth(260)
 
         #Image
         self.image = QLabel()
-        self.image_pixmap = QPixmap(".\images\Default.png")
+        self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
         self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.image.setPixmap(self.scaled_image)
         
 
         #Browse
-        path = "./images/Default.png"
+        path = "./ProductImages/Default.jpg"
         
         self.browse_layout = QHBoxLayout()
         self.browse_widget = QWidget()
         self.browse = QPushButton("Browse...")
         self.browse.setDisabled(True)
         self.browse.clicked.connect(self.get_image_path)
+        self.browse.setFixedSize(84, 27)
+        self.browse.setObjectName('browse')
         
         self.upload = QPushButton("Upload")
         self.upload.setDisabled(True)
+        self.upload.setFixedSize(78,27)
+        self.upload.setObjectName('upload')
         
         self.path = QLineEdit("")
         self.path.setReadOnly(True)
+        self.path.setText(path)
         self.browse_layout.addWidget(self.path)
         self.browse_layout.addWidget(self.browse)
         self.browse_layout.addWidget(self.upload)
         self.browse_widget.setLayout(self.browse_layout)
-        self.browse_widget.setFixedWidth(300)
         
         
         #Creating Layouts and Adding Widgets
@@ -170,10 +178,18 @@ class deleteProductClass(QWidget):
         self.leftright_widget.setLayout(self.leftright_layout)
         self.leftright_widget.setDisabled(True)
 
+        self.add_product_layout = QHBoxLayout()
+        self.add_product_widget = QWidget()
+        self.spacer = QLabel()
+        self.spacer.setFixedWidth(600)
+        self.add_product_layout.addWidget(self.spacer)
+        self.add_product_layout.addWidget(self.done)
+        self.add_product_widget.setLayout(self.add_product_layout)
+
         self.main_layout = QVBoxLayout()
         self.main_layout.addWidget(self.find_product_id_widget)
         self.main_layout.addWidget(self.leftright_widget)
-        self.main_layout.addWidget(self.done)
+        self.main_layout.addWidget(self.add_product_widget)
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
 
@@ -182,50 +198,23 @@ class deleteProductClass(QWidget):
         self.setLayout(self.total_layout)
         
     def CreatePopUpWindow(self):
-        self.pop_up_instance = PopUpWindow("Beacon Vets Deleting Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.pop_up_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Are you sure you want to Delete The Product?")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-        self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-        self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-        self.pop_up_instance.move(750,500)
-        self.pop_up_instance.show()
-        self.pop_up_instance.raise_()
+        self.pop_up_instance = PopUpWindow("Are you sure you want to Delete The Product?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddProductSucess(self):
-        self.add_product_instance = PopUpWindow("Beacon Vets Deleting Product", 300, 100)
-        self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-        self.add_product_instance.setWindowIcon(self.icon)
-        self.label = QLabel("Product Sucessfully Deleted!")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-        self.pop_up_layout = QVBoxLayout()
-        self.pop_up_widget = QWidget()
-        self.pop_up_layout.addWidget(self.label)
-        self.pop_up_layout.addWidget(self.buttonBox)
-        self.pop_up_widget.setLayout(self.pop_up_layout)
-        self.add_product_instance.setCentralWidget(self.pop_up_widget)
-        self.add_product_instance.move(800,450)
-        self.add_product_instance.show()
-        self.add_product_instance.raise_()
+        self.add_product_instance = PopUpWindow("Product Sucessfully Deleted!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.add_product_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def get_image_path(self):
         path =  QFileDialog.getOpenFileName()
         self.path.setText(path)
+
+    def update_image(self):
+        self.pixmap = QPixmap(self.path.text())
+        self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.image.setPixmap(self.scaled_image)
 
     def clicked_yes(self):
         self.size_list = [self.size_integer.text(), self.size_button.currentText()]
@@ -247,11 +236,23 @@ class deleteProductClass(QWidget):
                 self.product_name.setText(self.product_info[0][1])
                 self.size_integer.setText(self.product_info[0][2])
                 self.price_button.setText(str(self.product_info[0][3]))
+                self.path.setText(self.product_info[0][7])
+                self.pixmap = QPixmap(self.path.text())
+                self.scaled_image = self.pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.image.setPixmap(self.scaled_image)
                 
                 
                 
             if not self.product_info:
-                print("NOT IN DATABASE")   
+                self.error = ErrorMessageClass("No product found with Product ID: {0}".format(self.find_product_id_line_edit.text()))
+                self.error.setFixedSize(400,150)
+                self.product_name.setText("")
+                self.size_integer.setText("")
+                self.price_button.setText("")
+                self.path.setText(".\ProductImages\Default.jpg")
+                self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+                self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+                self.image.setPixmap(self.scaled_image)
         
 
 

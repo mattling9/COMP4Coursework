@@ -13,6 +13,7 @@ class addMemberClass(QWidget):
 
                 #Name_title
                 self.name_title = QComboBox()
+                self.name_title.setFixedSize(60,30)
                 self.name_title.addItem("Mr.")
                 self.name_title.addItem("Mrs.")
                 self.name_title.addItem("Ms.")
@@ -20,7 +21,6 @@ class addMemberClass(QWidget):
                 self.name_title.addItem("Dr.")
                 self.name_title.addItem("Prof.")
                 self.name_title.addItem("Sgt.")
-
                 #First name
                 self.first_name = QLineEdit()
                 self.first_name.setPlaceholderText("First Name: ")
@@ -37,7 +37,9 @@ class addMemberClass(QWidget):
                 #Find Button
                 self.find_button = QPushButton("Find...")
                 self.find_button.setEnabled(False)
+                self.find_button.setFixedSize(84,27)
                 self.find_button.clicked.connect(self.FindPostcode)
+                self.find_button.setObjectName("find_button")
 
                     
                 self.postcode_tickbox.stateChanged.connect(self.change_button)
@@ -63,6 +65,7 @@ class addMemberClass(QWidget):
                 self.county_label = QLabel("County: ")
                 self.county = QComboBox()
                 self.county_list = []
+                self.county.setFixedSize(200,30)
                 self.get_counties()
                 
                 for item in self.county_list:
@@ -72,7 +75,6 @@ class addMemberClass(QWidget):
                 self.county_layout.addWidget(self.county_label)
                 self.county_layout.addWidget(self.county)
                 self.county_widget.setLayout(self.county_layout)
-                
 
                 #City
                 self.city_layout = QHBoxLayout()
@@ -112,6 +114,7 @@ class addMemberClass(QWidget):
                 self.houseno_widget = QWidget()
                 self.houseno_label = QLabel("House No:")
                 self.houseno = QSpinBox()
+                self.houseno.setFixedWidth(50)
                 self.houseno.setRange(1,200)
                 self.houseno_layout.addWidget(self.houseno_label)
                 self.houseno_layout.addWidget(self.houseno)
@@ -141,6 +144,7 @@ class addMemberClass(QWidget):
 
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
+                self.add_member.setFixedSize(100,27)
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
 
                     #Group Box
@@ -156,6 +160,14 @@ class addMemberClass(QWidget):
                 self.name_layout.addWidget(self.first_name)
                 self.name_layout.addWidget(self.last_name)
                 self.name_widget.setLayout(self.name_layout)
+                
+                self.spacer = QLabel()
+                self.spacer.setFixedWidth(600)
+                self.add_member_layout = QHBoxLayout()
+                self.add_member_widget = QWidget()
+                self.add_member_layout.addWidget(self.spacer)
+                self.add_member_layout.addWidget(self.add_member)
+                self.add_member_widget.setLayout(self.add_member_layout)
 
 
                 self.main_layout = QVBoxLayout()
@@ -172,7 +184,7 @@ class addMemberClass(QWidget):
                 self.group_box_layout.addWidget(self.email_widget)
                 self.group_box.setLayout(self.group_box_layout)
                 self.main_layout.addWidget(self.group_box)
-                self.main_layout.addWidget(self.add_member)
+                self.main_layout.addWidget(self.add_member_widget)
                 self.setLayout(self.main_layout)
 
 
@@ -185,46 +197,14 @@ class addMemberClass(QWidget):
         
 
         def CreatePopUpWindow(self):
-                self.pop_up_instance = PopUpWindow("Beacon Vets Adding Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.pop_up_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Are You Sure You Want To Add The Member?")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Yes | QDialogButtonBox.No)
-                self.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-                self.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.pop_up_instance.setCentralWidget(self.pop_up_widget)
-                self.pop_up_instance.move(750,500)
-                self.pop_up_instance.show()
-                self.pop_up_instance.raise_()
+                self.pop_up_instance = PopUpWindow("Are You Sure You Want To Add The Member?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+                self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
         def AddMemberSucess(self):
-                self.add_member_instance = PopUpWindow("Beacon Vets Adding Member", 300, 100)
-                self.icon = QIcon(QPixmap("./images/Logo.jpg"))
-                self.add_member_instance.setWindowIcon(self.icon)
-                self.label = QLabel("Member Sucessfully Added!")
-                self.label.setAlignment(Qt.AlignCenter)
-                self.buttonBox = QDialogButtonBox()
-                self.buttonBox.setOrientation(Qt.Horizontal)
-                self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-                self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-                self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
-                self.pop_up_layout = QVBoxLayout()
-                self.pop_up_widget = QWidget()
-                self.pop_up_layout.addWidget(self.label)
-                self.pop_up_layout.addWidget(self.buttonBox)
-                self.pop_up_widget.setLayout(self.pop_up_layout)
-                self.add_member_instance.setCentralWidget(self.pop_up_widget)
-                self.add_member_instance.move(800,450)
-                self.add_member_instance.show()
-                self.add_member_instance.raise_()
+                self.add_member_instance = PopUpWindow("Member Sucessfully Added!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+                self.add_member_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
         def clicked_yes(self):
                 print("before")

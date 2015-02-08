@@ -13,6 +13,7 @@ class ChangePasswordClass(QWidget):
         self.bold.setPointSize(16)
 
         self.forgot_password = QLabel("Change Your Password")
+        self.forgot_password.setObjectName("forgot_password")
         self.forgot_password.setFont(self.bold)
         self.forgot_password.setAlignment(Qt.AlignCenter)
         
@@ -40,7 +41,7 @@ class ChangePasswordClass(QWidget):
         self.spacer = QWidget()
         self.spacer.setFixedWidth(450)
         self.button = QPushButton("Next")
-        self.button.setFixedWidth(80)
+        self.button.setFixedSize(84, 27)
         self.button_layout.addWidget(self.spacer)
         self.button_layout.addWidget(self.button)
         self.button_widget.setLayout(self.button_layout)

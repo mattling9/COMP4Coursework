@@ -1,9 +1,9 @@
 import sys, shutil, sqlite3, smtplib, datetime
 
+from matplotlib import pyplot as plt
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
-from ProductSearchClass import *
 from AddingProductClass import *
 from EditProductClass import *
 from DeleteProductClass import *
@@ -13,10 +13,10 @@ from EditMemberClass import *
 from DeleteMemberClass import *
 from AddingEmployeeClass import *
 from EditEmployeeClass import *
+from DeleteEmployeeClass import *
 from StockManagementClass import *
 from ProductIDClass import *
 from CreatingOrderClass import *
-from PopUpMenuClass import *
 from DatabaseClass import *
 from FindingPopUpClass import *
 from SQLConnection import *
@@ -74,6 +74,7 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.widget)
         self.main_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.main_widget)
+        
         
         self.log_in_function()
         if settings:
@@ -162,7 +163,7 @@ class MainWindow(QMainWindow):
         self.title = self.create_title()
         self.title.setText("Add Member")
         
-        self.add_member_instance = addMemberClass("Add New Member")
+        self.add_member_instance = addMemberClass("Add Member")
         self.add_member_layout = QVBoxLayout()
         self.add_member_widget = QWidget()
         self.add_member_layout.addWidget(self.title)
@@ -204,7 +205,7 @@ class MainWindow(QMainWindow):
     def add_employee(self):
         self.title = self.create_title()
         self.title.setText("Add Employee")
-        self.add_employee_instance = addEmployeeClass("Add New Employee")
+        self.add_employee_instance = addEmployeeClass("Add Employee")
         self.add_employee_layout = QVBoxLayout()
         self.add_employee_widget = QWidget()
         self.add_employee_layout.addWidget(self.title)
@@ -228,7 +229,7 @@ class MainWindow(QMainWindow):
     def delete_employee(self):
         self.title = self.create_title()
         self.title.setText("Delete Employee")
-        self.delete_employee_instance = addEmployeeClass("Delete Employee")
+        self.delete_employee_instance = deleteEmployeeClass("Delete Employee")
         self.delete_employee_layout = QVBoxLayout()
         self.delete_employee_widget = QWidget()
         self.delete_employee_layout.addWidget(self.title)
@@ -246,6 +247,7 @@ class MainWindow(QMainWindow):
         self.manage_stock_layout.addWidget(self.title)
         self.manage_stock_layout.addWidget(self.manage_stock_instance)
         self.manage_stock_widget.setLayout(self.manage_stock_layout)
+        
         self.setCentralWidget(self.manage_stock_widget)
         self.stacked_layout.addWidget(self.manage_stock_widget)
 
@@ -271,6 +273,7 @@ class MainWindow(QMainWindow):
 
     def preferences(self):
         self.preferences_instance = preferencesClass()
+        self.preferences_instance.connect(self.preferences_instance.question, SIGNAL('clicked()'), self.email_question)
         self.stacked_layout.addWidget(self.preferences_instance)
 
     def log_in(self):
@@ -282,13 +285,14 @@ class MainWindow(QMainWindow):
     def password_reset(self):
         self.password_reset_instance = PasswordResetClass()
         self.password_reset_instance.button.clicked.connect(self.display_message)
+        self.password_reset_instance.back.clicked.connect(self.log_in_function)
         self.stacked_layout.addWidget(self.password_reset_instance)
 
     def change_password(self):
         self.change_password_instance = ChangePasswordClass("Please Enter a new password, then re-enter it below.", 0)
         self.change_password_instance.button.clicked.connect(self.match_passwords)
         self.stacked_layout.addWidget(self.change_password_instance)
-        self.change_password_instance2 = ChangePasswordClass("Please enter a new password below. The Verification code has been sent to your email address.", 1)
+        self.change_password_instance2 = ChangePasswordClass("Please enter a new password below. The Code has been sent to your email address.", 1)
         self.change_password_instance2.button.clicked.connect(self.match_codes)
         self.stacked_layout.addWidget(self.change_password_instance2)
         
@@ -307,7 +311,7 @@ class MainWindow(QMainWindow):
         self.remove_a_member_action = QAction("Delete a Member", self)
         self.add_an_employee_action = QAction("Add Employee", self)
         self.edit_employee_action = QAction("Edit an Employee", self)
-        self.remove_an_employee_action = QAction("Remove Employee", self)
+        self.remove_an_employee_action = QAction("Delete Employee", self)
         self.explanation_action = QAction("Why Can't I Access These?", self)
         self.preferences_action = QAction("Preferences", self)
         self.search_product_action = QAction("Search Window", self)
@@ -382,18 +386,69 @@ class MainWindow(QMainWindow):
 
     def add_product_function(self, product_name_info):
         self.stacked_layout.setCurrentIndex(0)
+        self.add_product_instance.price_button.setText("")
+        self.add_product_instance.size_integer.setText("")
+        self.add_product_instance.size_button.setCurrentIndex(0)
+        self.add_product_instance.category1_button.setCurrentIndex(0)
+        self.add_product_instance.category2_button.setCurrentIndex(0)
+        self.add_product_instance.location1.setText("")
+        self.add_product_instance.location2.setText("")
+        self.add_product_instance.product_name.setText("")
+        self.add_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+        self.add_product_instance.scaled_image = self.add_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.add_product_instance.image.setPixmap(self.add_product_instance.scaled_image)
+        self.edit_product_instance.path.setText(".\ProductImages\Default.jpg")
+        
         self.setFixedSize(700, 600)
 
     def edit_product_function(self):
         self.stacked_layout.setCurrentIndex(1)
+        self.edit_product_instance.find_product_id_line_edit.setText("")
+        self.edit_product_instance.price_button.setText("")
+        self.edit_product_instance.size_integer.setText("")
+        self.edit_product_instance.size_button.setCurrentIndex(0)
+        self.edit_product_instance.category1_button.setCurrentIndex(0)
+        self.edit_product_instance.category2_button.setCurrentIndex(0)
+        self.edit_product_instance.location1.setText("")
+        self.edit_product_instance.location2.setText("")
+        self.edit_product_instance.product_name.setText("")
+        self.edit_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+        self.edit_product_instance.scaled_image = self.edit_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.edit_product_instance.image.setPixmap(self.edit_product_instance.scaled_image)
+        self.edit_product_instance.path.setText(".\ProductImages\Default.jpg")
+        
         self.setFixedSize(700, 700)
     def delete_product_function(self):
         self.stacked_layout.setCurrentIndex(2)
+        self.delete_product_instance.find_product_id_line_edit.setText("")
+        self.delete_product_instance.price_button.setText("")
+        self.delete_product_instance.size_integer.setText("")
+        self.delete_product_instance.size_button.setCurrentIndex(0)
+        self.delete_product_instance.category1_button.setCurrentIndex(0)
+        self.delete_product_instance.category2_button.setCurrentIndex(0)
+        self.delete_product_instance.location1.setText("")
+        self.delete_product_instance.location2.setText("")
+        self.delete_product_instance.product_name.setText("")
+        self.delete_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+        self.delete_product_instance.scaled_image = self.delete_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.delete_product_instance.image.setPixmap(self.delete_product_instance.scaled_image)
+        self.delete_product_instance.path.setText(".\ProductImages\Default.jpg")
         self.setFixedSize(700, 700)
 
     def manage_stock_function(self):
         self.stacked_layout.setCurrentIndex(3)
-        self.setFixedSize(900, 800)
+        self.manage_stock_instance.product_id.setText("")
+        self.manage_stock_instance.stock1.setValue(0)
+        self.manage_stock_instance.stock2.setValue(0)
+        self.manage_stock_instance.prediction.setText("")
+        self.manage_stock_instance.current_stock_groupbox.setDisabled(True)
+        self.manage_stock_instance.stock_prediction_groupbox.setDisabled(True)
+        self.manage_stock_instance.path = (".\images\Default.png")
+        self.manage_stock_instance.image_pixmap = QPixmap(self.manage_stock_instance.path)
+        self.manage_stock_instance.scaled_image = self.manage_stock_instance.image_pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.manage_stock_instance.image.setPixmap(self.manage_stock_instance.scaled_image)
+        plt.clf()
+        self.setFixedSize(900, 850)
 
     def create_new_order_function(self):
         self.create_order_instance.current_order.clearContents()
@@ -404,32 +459,91 @@ class MainWindow(QMainWindow):
         self.create_order_instance.total.setText("0.0")
         self.create_order_instance.discount_line_edit.setText("0.0")
         self.stacked_layout.setCurrentIndex(4)
-        self.setFixedSize(900, 850)
+        self.setFixedSize(1200, 770)
         self.create_order_instance.model.select()
         self.move(300,1)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(5)
-        self.setFixedSize(700, 600)
+        self.add_member_instance.name_title.setCurrentIndex(0)
+        self.add_member_instance.first_name.setText("")
+        self.add_member_instance.last_name.setText("")
+        self.add_member_instance.postcode.setText("")
+        self.add_member_instance.county.setCurrentIndex(0)
+        self.add_member_instance.city.setText("")
+        self.add_member_instance.town.setText("")
+        self.add_member_instance.street.setText("")
+        self.add_member_instance.houseno.setValue(0)
+        self.add_member_instance.telephone_number.setText("")
+        self.add_member_instance.email.setText("")
+        self.setFixedSize(700, 750)
 
     def edit_member_function(self):
         self.stacked_layout.setCurrentIndex(6)
-        self.setFixedSize(700, 700)
+        self.edit_member_instance.find_member_id_line_edit.setText("")
+        self.edit_member_instance.name_title.setCurrentIndex(0)
+        self.edit_member_instance.first_name.setText("")
+        self.edit_member_instance.last_name.setText("")
+        self.edit_member_instance.postcode.setText("")
+        self.edit_member_instance.county.setCurrentIndex(0)
+        self.edit_member_instance.city.setText("")
+        self.edit_member_instance.town.setText("")
+        self.edit_member_instance.street.setText("")
+        self.edit_member_instance.houseno.setValue(0)
+        self.edit_member_instance.telephone_number.setText("")
+        self.edit_member_instance.email.setText("")
+        self.setFixedSize(700, 800)
     def remove_a_member_function(self):
         self.stacked_layout.setCurrentIndex(7)
-        self.setFixedSize(700, 700)
+        self.edit_member_instance.find_member_id_line_edit.setText("")
+        self.delete_member_instance.name_title.setCurrentIndex(0)
+        self.delete_member_instance.first_name.setText("")
+        self.delete_member_instance.last_name.setText("")
+        self.delete_member_instance.postcode.setText("")
+        self.delete_member_instance.county.setCurrentIndex(0)
+        self.delete_member_instance.city.setText("")
+        self.delete_member_instance.town.setText("")
+        self.delete_member_instance.street.setText("")
+        self.delete_member_instance.houseno.setValue(0)
+        self.delete_member_instance.telephone_number.setText("")
+        self.delete_member_instance.email.setText("")
+        self.setFixedSize(700, 800)
+
     def add_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(8)
+        self.add_employee_instance.user_name_output.setText("")
+        self.add_employee_instance.first_name.setText("")
+        self.add_employee_instance.first_name_output.setText("")
+        self.add_employee_instance.last_name.setText("")
+        self.add_employee_instance.last_name_output.setText("")
+        self.add_employee_instance.email_address.setText("")
+        self.add_employee_instance.email_address_output.setText("")
         self.setFixedSize(700, 600)
 
     def edit_employee_function(self):
         self.stacked_layout.setCurrentIndex(9)
-        self.setFixedSize(700, 700)
+        self.edit_employee_instance.find_employee_id_line_edit.setText("")
+        self.edit_employee_instance.user_name_output.setText("")
+        self.edit_employee_instance.first_name.setText("")
+        self.edit_employee_instance.first_name_output.setText("")
+        self.edit_employee_instance.last_name.setText("")
+        self.edit_employee_instance.last_name_output.setText("")
+        self.edit_employee_instance.email_address.setText("")
+        self.edit_employee_instance.email_address_output.setText("")
+        self.setFixedSize(700, 650)
     
 
     def remove_an_employee_function(self):
         self.stacked_layout.setCurrentIndex(10)
-        self.setFixedSize(700, 600)
+        self.delete_employee_instance.find_employee_id_line_edit.setText("")
+        self.delete_employee_instance.user_name_output.setText("")
+        self.delete_employee_instance.first_name.setText("")
+        self.delete_employee_instance.first_name_output.setText("")
+        self.delete_employee_instance.last_name.setText("")
+        self.delete_employee_instance.last_name_output.setText("")
+        self.delete_employee_instance.email_address.setText("")
+        self.delete_employee_instance.email_address_output.setText("")
+        self.setFixedSize(700, 650)
 
     def explanation_function(self):
         self.error_message_instance = ErrorMessageClass("The Reason you cannot access the above options is because you \n must be logged into the master account to access them.")
@@ -462,13 +576,21 @@ class MainWindow(QMainWindow):
             self.change_password_instance.password1.setText("")
             self.change_password_instance.password2.setText("")
         else:
-            self.send_code_to_email(self.log_in_instance.username.text())
-            self.stacked_layout.setCurrentIndex(15)
-            self.setFixedSize(600,400)
-            self.change_password_instance2.password1.setText("")
-            self.change_password_instance2.password2.setText("")
-            self.change_password_instance2.code.setText("")
-        
+            try:
+                self.send_code_to_email(self.log_in_instance.username.text())
+                self.stacked_layout.setCurrentIndex(15)
+                self.setFixedSize(650,400)
+                self.change_password_instance2.password1.setText("")
+                self.change_password_instance2.password2.setText("")
+                self.change_password_instance2.code.setText("")
+
+            except smtplib.SMTPAuthenticationError:
+                self.error_message_instance = ErrorMessageClass("Error: The Gmail account details are not valid.")
+                self.error_message_instance.move(750,500)
+                self.error_message_instance.show()
+                self.error_message_instance.raise_()
+
+
         
     def find_account(self):
         settings = getSettings()
@@ -502,6 +624,12 @@ class MainWindow(QMainWindow):
 
     def reset_password(self):
         self.password_reset_function()
+
+    def email_question(self):
+        self.error_message_instance = ErrorMessageClass("This is the email address and password used to send the: \n - Invoice Form \n - Password Reset Code \n - Account Reminder \n  \n This must be a Gmail account.")
+        self.error_message_instance.move(750,500)
+        self.error_message_instance.show()
+        self.error_message_instance.raise_()
 
     def match_passwords(self):
         if self.change_password_instance.password1.text() == self.change_password_instance.password2.text():
@@ -571,7 +699,7 @@ class MainWindow(QMainWindow):
         decrypted_password = change_password(settings[0][11], -3)
 
         msg = "\r\n".join([
-              "From: BeaconVets@Admin.com",
+              "From: beaconvets@gmail.com",
                 "To: {0}".format(email_address),
                 "Subject: Beacon Vets Account Details",
               "",
@@ -593,16 +721,16 @@ class MainWindow(QMainWindow):
         employee_info = find_employee_by_username(username)
         message = "Hello {0}, \n \n Your Reset Password Code is:  ".format(employee_info[0])
         msg = "\r\n".join([
-          "From: BeaconVets@Admin.com",
-          "To: {0}".format(employee_info[1]),
+          "From: beaconvets@gmail.com",
+          "To: {0}".format(employee_info[2]),
           "Subject: Password Reset Code",
           "",
           ("{0}{1}".format(message ,str(self.code)))])
         mail = smtplib.SMTP('smtp.gmail.com','587')
         mail.ehlo()
         mail.starttls()
-        mail.login('mattling147@gmail.com', decrypted_password)
-        mail.sendmail('mattling147@gmail.com', str(employee_info[2]) , msg)
+        mail.login('{0}'.format(settings[0][10]) , decrypted_password)
+        mail.sendmail('{0}'.format(settings[0][10]), str(employee_info[2]) , msg)
         mail.close()
         
 def main():
