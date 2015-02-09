@@ -1,4 +1,4 @@
-import sys, shutil, sqlite3, smtplib, datetime
+import sys, shutil, sqlite3, smtplib, datetime, time
 
 from matplotlib import pyplot as plt
 from PyQt4.QtCore import *
@@ -29,6 +29,7 @@ from ErrorMessageClass import *
 from ChangePasswordClass import *
 from StyleSheet import *
 from CustomToolbarClass import *
+from SplashscreenClass import *
 
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
@@ -61,7 +62,8 @@ class MainWindow(QMainWindow):
         self.edit_member()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
-
+    
+        
         #Adding The Custom TitleBar
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.title_bar = TitleBar()
@@ -84,6 +86,11 @@ class MainWindow(QMainWindow):
             self.icon = QIcon("")
 
         self.setWindowIcon(self.icon)
+        
+    def change_splashscreen_frame():
+        pixmap = self.movie.currentPixmap()
+        self.setPixmap(pixmap)
+        self.setMask(pixmap.mask())
 
     def minimise_main_window(self):
         self.showMinimized()
@@ -437,6 +444,7 @@ class MainWindow(QMainWindow):
     def manage_stock_function(self):
         self.stacked_layout.setCurrentIndex(3)
         self.manage_stock_instance.product_id.setText("")
+        self.manage_stock_instance.product_name.setText("Product Name")
         self.manage_stock_instance.stock1.setValue(0)
         self.manage_stock_instance.stock2.setValue(0)
         self.manage_stock_instance.prediction.setText("")
@@ -589,6 +597,19 @@ class MainWindow(QMainWindow):
                 self.error_message_instance.show()
                 self.error_message_instance.raise_()
 
+            except TimeoutError:
+                self.error_message_instance = ErrorMessageClass("A connection attempt failed because the connected party did not properly respond after a period of time.")
+                self.error_message_instance.move(750,500)
+                self.error_message_instance.show()
+                self.error_message_instance.raise_()
+
+            except:
+                self.error_message_instance = ErrorMessageClass("An error occured and the email could not be sent.")
+                self.error_message_instance.move(750,500)
+                self.error_message_instance.show()
+                self.error_message_instance.raise_()
+            
+
 
         
     def find_account(self):
@@ -604,6 +625,7 @@ class MainWindow(QMainWindow):
             if self.log_in_instance.password.text() == 'password':
                 self.change_password_function()
             else:
+                #IF THE LOG IN IS SUCCESSFUL
                 self.create_new_order_function()
                 self.menu.show()
                 username = find_employee_by_username(self.log_in_instance.username.text())
@@ -618,6 +640,7 @@ class MainWindow(QMainWindow):
                     self.edit_employee_action.setEnabled(True)
                     self.remove_an_employee_action.setEnabled(True)
                     self.explanation_action.setVisible(False)
+                check_for_stock_updates(self)
 
 
 
@@ -640,6 +663,18 @@ class MainWindow(QMainWindow):
             self.error_message_instance.raise_()
             self.create_new_order_function()
             self.menu.show()
+            username = find_employee_by_username(self.log_in_instance.username.text())
+            EmployeeID = username[3]
+            if int(EmployeeID) != 1:
+                self.add_an_employee_action.setDisabled(True)
+                self.edit_employee_action.setDisabled(True)
+                self.remove_an_employee_action.setDisabled(True)
+                self.explanation_action.setVisible(True)
+            else:
+                self.add_an_employee_action.setEnabled(True)
+                self.edit_employee_action.setEnabled(True)
+                self.remove_an_employee_action.setEnabled(True)
+                self.explanation_action.setVisible(False)
 
 
         else:
@@ -739,7 +774,7 @@ class MainWindow(QMainWindow):
         mail.close()
         
 def main():
-    stock_control = QApplication(sys.argv) #creates new application
+    stock_control = QApplication(sys.argv) #creates new application   
     mainWindow = MainWindow()#Creates a New instance of main window
     mainWindow.show()
     mainWindow.raise_()

@@ -50,7 +50,7 @@ class addMemberClass(QWidget):
                 self.postcode_widget = QWidget()
                 self.postcode_label = QLabel("Postcode: ")
                 self.postcode = QLineEdit()
-                #self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                #self.postcode.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 self.postcode.setPlaceholderText("Postcode: i.e(CB7 5LQ) ")
                 self.postcode_layout.addWidget(self.postcode_label)
                 self.postcode_layout.addWidget(self.postcode)
@@ -259,7 +259,7 @@ class addMemberClass(QWidget):
                 self.postcode.setText(PostCode.upper())
                 valid =  pattern.match(PostCode.upper())
                 if valid:
-                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                        self.postcode.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.postcode.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -272,7 +272,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.FirstName.upper())
                 if len(self.FirstName) > 1 and len(self.FirstName) < 18:
                         if valid:
-                                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.first_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -283,7 +283,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.LastName.upper())
                 if len(self.LastName) > 1 and len(self.LastName) < 18:
                         if valid:
-                                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.last_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
                         
@@ -296,7 +296,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.City.upper())
                 if len(self.City) > 1 and len(self.City) < 18:
                         if valid:
-                                self.city.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.city.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.city.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -308,7 +308,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.Town.upper())
                 if len(self.Town) > 3 and len(self.Town) < 32:
                         if valid:
-                                self.town.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.town.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.town.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -320,7 +320,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.Street.upper())
                 if len(self.Street) > 3 and len(self.Street) < 18:
                         if valid:
-                                self.street.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.street.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.street.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -332,7 +332,7 @@ class addMemberClass(QWidget):
                 valid = self.pattern.match(self.Number.upper())
                 if len(self.Number) > 3 and len(self.Number) < 18:
                         if valid:
-                                self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                                self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.telephone_number.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
 
@@ -341,6 +341,6 @@ class addMemberClass(QWidget):
                 self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
                 valid = self.pattern.match(self.Email.upper())
                 if valid:
-                        self.email.setStyleSheet("QLineEdit { background-color : rgb(166,251,153);}")
+                        self.email.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
                 else:
                         self.email.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")

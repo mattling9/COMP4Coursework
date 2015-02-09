@@ -47,7 +47,7 @@ class addProductClass(QWidget):
         self.size_button.addItem("g.")
         self.size_button.addItem("L.")
         self.size_button.addItem("ml.")
-        self.size_button.setFixedHeight(30)
+        self.size_button.setFixedSize(50,30)
         self.size_layout.addWidget(self.size_integer)
         self.size_layout.addWidget(self.size_button)
         self.size_widget.setLayout(self.size_layout)

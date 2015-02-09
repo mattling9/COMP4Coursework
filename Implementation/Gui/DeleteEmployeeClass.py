@@ -159,6 +159,14 @@ class deleteEmployeeClass(QWidget):
     def close_pop_ups(self):
         self.edit_employee_instance.close()
         self.pop_up_instance.close()
+        self.main_widget.setDisabled(True)
+        self.first_name.setText("")
+        self.last_name.setText("")
+        self.email_address.setText("")
+        self.user_name_output.setText("")
+        self.first_name_output.setText("")
+        self.last_name_output.setText("")
+        self.email_address_output.setText("")
 
     def find_employee_by_id(self):
         with sqlite3.connect("ProductDatabase.db") as db:

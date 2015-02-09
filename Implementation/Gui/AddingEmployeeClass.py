@@ -1,3 +1,4 @@
+import re
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
@@ -28,6 +29,7 @@ class addEmployeeClass(QWidget):
         self.first_name_label = QLabel("First Name: ")
         self.first_name_label.setFixedWidth(100)
         self.first_name = QLineEdit("")
+        self.first_name.textChanged.connect(self.validate_first_name)
         self.first_name.setPlaceholderText("First Name")
         self.first_name_output = QLineEdit("")
         self.first_name_output.setReadOnly(True)
@@ -41,6 +43,7 @@ class addEmployeeClass(QWidget):
         self.last_name_label = QLabel("Last Name: ")
         self.last_name_label.setFixedWidth(100)
         self.last_name = QLineEdit("")
+        self.last_name.textChanged.connect(self.validate_last_name)
         self.last_name.setPlaceholderText("Last Name")
         self.last_name_output = QLineEdit("")
         self.last_name_output.setReadOnly(True)
@@ -54,6 +57,7 @@ class addEmployeeClass(QWidget):
         self.email_address_label = QLabel("Email Address: ")
         self.email_address_label.setFixedWidth(100)
         self.email_address = QLineEdit()
+        self.email_address.textChanged.connect(self.validate_email)
         self.email_address.setPlaceholderText("Email Address")
         self.email_address_output = QLineEdit("")
         self.email_address_output.setReadOnly(True)
@@ -140,3 +144,35 @@ class addEmployeeClass(QWidget):
     def close_pop_ups(self):
         self.add_employee_instance.close()
         self.pop_up_instance.close()
+
+    #VALDIATION
+    def validate_first_name(self):
+        self.FirstName = self.first_name.text()
+        self.pattern = re.compile("[A-Z]")
+        self.first_name.setText(self.FirstName.capitalize())
+        valid = self.pattern.match(self.FirstName.upper())
+        if len(self.FirstName) > 1 and len(self.FirstName) < 18:
+            if valid:
+                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+        else:
+            self.first_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+
+    def validate_last_name(self):
+        self.LastName = self.last_name.text()
+        self.pattern = re.compile("[A-Z]")
+        self.last_name.setText(self.LastName.capitalize())
+        valid = self.pattern.match(self.LastName.upper())
+        if len(self.LastName) > 1 and len(self.LastName) < 18:
+            if valid:
+                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+        else:
+            self.last_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+
+    def validate_email(self):
+                self.Email = self.email_address.text()
+                self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
+                valid = self.pattern.match(self.Email.upper())
+                if valid:
+                        self.email_address.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                else:
+                        self.email_address.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")

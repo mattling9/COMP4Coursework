@@ -132,6 +132,11 @@ class SearchClass(QDialog):
         self.display_table_layout.addWidget(self.display_table)
         self.display_table_widget.setLayout(self.display_table_layout)
         self.display_table.horizontalHeader().setObjectName("header")
+        self.display_table.hideColumn(5)
+        self.display_table.hideColumn(6)
+        self.display_table.hideColumn(7)
+        self.display_table.hideColumn(8)
+        self.display_table.hideColumn(9)
 
 
         self.main_layout.addWidget(self.title_bar)
@@ -149,12 +154,20 @@ class SearchClass(QDialog):
             self.model.setTable("Product")
             self.model.select()
             self.display_table.setModel(self.model)
-            self.display_table.showColumn(5)
+            self.display_table.hideColumn(5)
+            self.display_table.hideColumn(6)
+            self.display_table.hideColumn(7)
+            self.display_table.hideColumn(8)
+            self.display_table.hideColumn(9)
             self.display_table.update()
         elif self.table_combo_box.currentIndex() == 1:
             self.model.setTable("Member")
             self.model.select()
             self.display_table.showColumn(5)
+            self.display_table.showColumn(6)
+            self.display_table.showColumn(7)
+            self.display_table.showColumn(8)
+            self.display_table.showColumn(9)
             self.display_table.setModel(self.model)
             self.display_table.update()
         elif self.table_combo_box.currentIndex() == 2:
@@ -162,6 +175,10 @@ class SearchClass(QDialog):
             self.model.select()
             self.display_table.setModel(self.model)
             self.display_table.hideColumn(5)
+            self.display_table.showColumn(6)
+            self.display_table.showColumn(7)
+            self.display_table.showColumn(8)
+            self.display_table.showColumn(9)
             self.display_table.update()
 
     def decide_search(self):
@@ -175,7 +192,7 @@ class SearchClass(QDialog):
 
     def find_product(self):
         product = self.line_edit.text()
-        filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%'".format(product)
+        filter_query = "ProductID like '%{0}%' or ProductName like '%{0}%' or Size like '%{0}%' or Price like '%{0}%' or Category like '%{0}%'".format(product)
         self.model.setFilter(filter_query)
         self.model.select()
     

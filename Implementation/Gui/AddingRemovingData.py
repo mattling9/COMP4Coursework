@@ -2,6 +2,7 @@ import sqlite3, sys, datetime, calendar
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
+from ErrorMessageClass import *
 #-----------------------------------------Product-----------------------------------------
 
 def addingProduct(name, size, price, category, location1, location2, image_path, weekly_sales):
@@ -580,5 +581,41 @@ def find_employee_by_username(username):
         cursor.execute(sql, (username,))
         employee_list = cursor.fetchall()
         return employee_list[0]
-    
+
+def check_for_stock_updates(self):
+    with sqlite3.connect("ProductDatabase.db") as db:
+        restock_list = []
+        move_list = []
+        product_cursor = db.cursor()
+        product_cursor.execute( "Select ProductName from Product WHERE 1=1")
+        product_id_list = product_cursor.fetchall()
+        for item in product_id_list:
+            stock_cursor = db.cursor()
+            sql = "Select Location1, Location2 from Product WHERE ProductName = ?"
+            stock_cursor.execute(sql, (item))
+            stock_list = stock_cursor.fetchall()
+            total_stock = int(stock_list[0][0]) + int(stock_list[0][1])
+            if total_stock < 5:
+                restock_list.append(item)
+            if int(stock_list[0][0]) < 5:
+                move_list.append(item)
+
+        if restock_list:
+            message = "Warning! \n \n The following products need to be restocked: \n \n "
+            for product_name in restock_list:
+                message += "-{0} \n".format(product_name[0])
+            self.error_message_instance = ErrorMessageClass(message)
+            self.error_message_instance.move(750,400)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+
+        elif move_list:
+            message = "Warning! \n \n The following products need to have stock moved to the shop: \n \n"
+            for product_name in move_list:
+                message += "-{0} \n".format(product_name[0])
+            self.error_message_instance = ErrorMessageClass(message)
+            self.error_message_instance.move(750,400)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+        db.commit()    
     
