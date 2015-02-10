@@ -153,9 +153,15 @@ class addEmployeeClass(QWidget):
         valid = self.pattern.match(self.FirstName.upper())
         if len(self.FirstName) > 1 and len(self.FirstName) < 18:
             if valid:
-                self.first_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.first_name.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0);}"""                )
         else:
-            self.first_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.first_name.setStyleSheet(          """QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
 
     def validate_last_name(self):
         self.LastName = self.last_name.text()
@@ -164,15 +170,27 @@ class addEmployeeClass(QWidget):
         valid = self.pattern.match(self.LastName.upper())
         if len(self.LastName) > 1 and len(self.LastName) < 18:
             if valid:
-                self.last_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.last_name.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0);}"""                )
         else:
-            self.last_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.last_name.setStyleSheet(          """QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
 
     def validate_email(self):
                 self.Email = self.email_address.text()
                 self.pattern = re.compile("[0-9A-Z]{2,18}[\@][0-9A-Z]{3,18}[\.][A-Z]{2,18}")
                 valid = self.pattern.match(self.Email.upper())
                 if valid:
-                        self.email_address.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                        self.email_address.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0);}"""                )
                 else:
-                        self.email_address.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+                        self.email_address.setStyleSheet(          """QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")

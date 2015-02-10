@@ -407,7 +407,7 @@ class MainWindow(QMainWindow):
         self.add_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
         self.add_product_instance.scaled_image = self.add_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.add_product_instance.image.setPixmap(self.add_product_instance.scaled_image)
-        self.edit_product_instance.path.setText(".\ProductImages\Default.jpg")
+        self.edit_product_instance.path.setText("")
         
         self.setFixedSize(700, 600)
 
@@ -425,7 +425,7 @@ class MainWindow(QMainWindow):
         self.edit_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
         self.edit_product_instance.scaled_image = self.edit_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.edit_product_instance.image.setPixmap(self.edit_product_instance.scaled_image)
-        self.edit_product_instance.path.setText(".\ProductImages\Default.jpg")
+        self.edit_product_instance.path.setText("")
         
         self.setFixedSize(700, 700)
     def delete_product_function(self):
@@ -442,7 +442,7 @@ class MainWindow(QMainWindow):
         self.delete_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
         self.delete_product_instance.scaled_image = self.delete_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.delete_product_instance.image.setPixmap(self.delete_product_instance.scaled_image)
-        self.delete_product_instance.path.setText(".\ProductImages\Default.jpg")
+        self.delete_product_instance.path.setText("")
         self.setFixedSize(700, 700)
 
     def manage_stock_function(self):

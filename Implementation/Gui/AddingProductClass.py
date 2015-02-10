@@ -256,9 +256,15 @@ class addProductClass(QWidget):
             valid = True
         
         if valid:
-            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+            self.product_name.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0);}""")
         else:
-            self.product_name.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.product_name.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
 
 
     def validate_price(self):
@@ -268,9 +274,15 @@ class addProductClass(QWidget):
         self.price_button.setText(self.price)
         valid =  self.pattern.match(self.price)
         if valid:
-                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.price_button.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0)}""")
         else:
-                self.price_button.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+                self.price_button.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
         
     
     def validate_size(self):
@@ -279,9 +291,15 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.size)
         if len(self.size) > 0 and len(self.size) <= 5:
             if valid:
-                self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.size_integer.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0)}""")
         else:
-            self.size_integer.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.size_integer.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
         
     def validate_stock1(self):
         self.pattern = re.compile("[0-9]")
@@ -289,9 +307,15 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.stock)
         if len(self.stock) > 0 and len(self.stock) <= 2:
             if valid:
-                self.location1.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.location1.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0)}""")
         else:
-            self.location1.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.location1.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
 
     def validate_stock2(self):
         self.pattern = re.compile("[0-9]")
@@ -299,9 +323,15 @@ class addProductClass(QWidget):
         valid =  self.pattern.match(self.stock)
         if len(self.stock) > 0 and len(self.stock) <= 2:
             if valid:
-                self.location2.setStyleSheet("QLineEdit { background-color : rgb(0,240,0);}")
+                self.location2.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1.5px;
+                                            border-color : rgb(0,240,0)}""")
         else:
-            self.location2.setStyleSheet("QLineEdit { background-color : rgb(255,255,255);}")
+            self.location2.setStyleSheet("""QLineEdit {
+                                            border-style: solid;
+                                            border-width: 1px;
+                                            border-color : rgb(200,200,200}""")
 
         
         
