@@ -175,7 +175,10 @@ class deleteEmployeeClass(QWidget):
             cursor.execute("SELECT * FROM Employee WHERE EmployeeID = ?",(employee_id,))
             employee_info = cursor.fetchall()
             db.commit()
-            if employee_info:
+            if employee_info[0][0] == 1:
+                self.error = ErrorMessageClass("You are not authorised to delete the admin account")
+                self.error.setFixedSize(400,150)
+            elif employee_info:
                 self.main_widget.setEnabled(True)
                 self.first_name.setText(employee_info[0][2])
                 self.first_name.setReadOnly(True)

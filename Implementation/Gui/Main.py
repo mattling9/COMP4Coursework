@@ -288,6 +288,11 @@ class MainWindow(QMainWindow):
         self.log_in_instance.connect(self.log_in_instance.forgot_password, SIGNAL('clicked()'), self.reset_password)
         self.stacked_layout.addWidget(self.log_in_instance)
 
+    def keyPressEvent(self, qKeyEvent):
+        if self.stacked_layout.currentIndex() == 12:
+            if qKeyEvent.key() == Qt.Key_Return: 
+                self.find_account()
+
     def password_reset(self):
         self.password_reset_instance = PasswordResetClass()
         self.password_reset_instance.button.clicked.connect(self.display_message)
@@ -301,8 +306,7 @@ class MainWindow(QMainWindow):
         self.change_password_instance2 = ChangePasswordClass("Please enter a new password below. The Code has been sent to your email address.", 1)
         self.change_password_instance2.button.clicked.connect(self.match_codes)
         self.stacked_layout.addWidget(self.change_password_instance2)
-        
-        
+                
         
     def Settings(self):
         #Adding Actions
