@@ -109,8 +109,16 @@ class SearchClass(QDialog):
         self.search_widget = QWidget()
         self.search_widget.setLayout(self.search_layout)
 
+        self.product_right_click_menu = QMenu()
+        self.member_right_click_menu = QMenu()
+        self.employee_right_click_menu = QMenu()
 
         self.display_table = QTableView()
+        
+        self.display_table.clicked.connect(self.clicked)
+        
+        self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.display_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.display_table.setFixedHeight(300)
         self.display_table_layout = QVBoxLayout()
         self.display_table_widget = QWidget()
@@ -148,6 +156,19 @@ class SearchClass(QDialog):
         self.group_box_layout.addWidget(self.group_box)
         self.setLayout(self.group_box_layout)
         self.setStyleSheet(style_sheet)
+
+    def clicked(self):
+        self.indexes = self.display_table.selectionModel().selection().indexes()
+        if self.indexes:
+            self.customContextMenuRequested.connect(self.show_menu)
+    def show_menu(self, position):
+
+        if self.table_combo_box.currentIndex() == 0:
+            self.product_right_click_menu.exec_(self.mapToGlobal(position))
+        elif self.table_combo_box.currentIndex() == 1:
+            self.member_right_click_menu.exec_(self.mapToGlobal(position))
+        elif self.table_combo_box.currentIndex() == 2:
+            self.employee_right_click_menu.exec_(self.mapToGlobal(position))
 
     def change_table(self):
         if self.table_combo_box.currentIndex() == 0:

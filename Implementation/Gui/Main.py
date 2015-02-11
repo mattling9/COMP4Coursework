@@ -273,9 +273,30 @@ class MainWindow(QMainWindow):
 
     def search(self):
         self.search_instance = SearchClass()
+        
+        self.search_instance.product_right_click_menu.addAction("Manage Stock" , self.EditStock)
+        self.search_instance.product_right_click_menu.addAction("Edit Product" , self.EditProduct)
+
+        self.search_instance.member_right_click_menu.addAction("Edit Member" , self.EditMember)
+
+        self.search_instance.employee_right_click_menu.addAction("Edit Employee" , self.EditEmployee)
+        
         self.search_instance.move(750,300)
         self.search_instance.show()
         self.search_instance.raise_()
+
+    def EditStock(self):
+        print("stock")
+
+    def EditProduct(self):
+        print("product")
+
+    def EditMember(self):
+        print("member")
+
+    def EditEmployee(self):
+        print("employee")
+        
 
     def preferences(self):
         self.preferences_instance = preferencesClass()

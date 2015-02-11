@@ -6,9 +6,13 @@ class TestApp(QMainWindow):
         super(TestApp, self).__init__(*args)
 
         #create contex menu
-        self.menu = QMenu(self)
+        self.menu = QMenu()
         self.menu.addAction("Edit Product Data", self.EditShortcut, "CTRL+E")
         self.menu.addAction("Manage Stock", self.ManageShortcut, "CTRL+M")
+
+        self.menu2 = QMenu(self)
+        self.menu2.addAction("Edit Product Data2", self.EditShortcut, "CTRL+E")
+        self.menu2.addAction("Manage Stock2", self.ManageShortcut, "CTRL+M")
 
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.execContextMenu)
