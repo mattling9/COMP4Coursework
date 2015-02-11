@@ -84,6 +84,7 @@ class deleteEmployeeClass(QWidget):
         #Add Account
         self.add_account = QPushButton(ButtonText)
         self.add_account.clicked.connect(self.CreatePopUpWindow)
+        self.add_account.setShortcut(QKeySequence("CTRL+S"))
         self.add_account.setFixedSize(120, 27)
 
         self.spacer = QLabel()
@@ -159,14 +160,7 @@ class deleteEmployeeClass(QWidget):
     def close_pop_ups(self):
         self.edit_employee_instance.close()
         self.pop_up_instance.close()
-        self.main_widget.setDisabled(True)
-        self.first_name.setText("")
-        self.last_name.setText("")
-        self.email_address.setText("")
-        self.user_name_output.setText("")
-        self.first_name_output.setText("")
-        self.last_name_output.setText("")
-        self.email_address_output.setText("")
+        self.clear_fields()
 
     def find_employee_by_id(self):
         with sqlite3.connect("ProductDatabase.db") as db:
@@ -194,11 +188,14 @@ class deleteEmployeeClass(QWidget):
             if not employee_info:
                 self.error = ErrorMessageClass("No user found with Member ID: {0}".format(self.find_employee_id_line_edit.text()))
                 self.error.setFixedSize(400,150)
-                self.main_widget.setDisabled(True)
-                self.first_name.setText("")
-                self.last_name.setText("")
-                self.email_address.setText("")
-                self.user_name_output.setText("")
-                self.first_name_output.setText("")
-                self.last_name_output.setText("")
-                self.email_address_output.setText("")
+                self.clear_fields()
+
+    def clear_fields(self):
+        self.main_widget.setDisabled(True)
+        self.first_name.setText("")
+        self.last_name.setText("")
+        self.email_address.setText("")
+        self.user_name_output.setText("")
+        self.first_name_output.setText("")
+        self.last_name_output.setText("")
+        self.email_address_output.setText("")

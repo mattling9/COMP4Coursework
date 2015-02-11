@@ -404,14 +404,12 @@ def check_date():
         product_id_list = get_all_product_id()
         for product_id in product_id_list:
                 weekly_sales = get_current_week_sales(str(product_id))
-                daily_sales = get_current_daily_sales(str(product_id))
-                if weekly_sales[0] != 0:
-                    update_product_sales(product_id, weekly_sales[0])
-                if daily_sales[0] != 0:
-                    update_product_sales(product_id, weekly_sales[0])
+                #daily_sales = get_current_daily_sales(str(product_id))
+                update_weekly_sales(product_id, weekly_sales[0])
+                #update_daily_sales(product_id, daily_sales[0])
                 #######PLOT WEEKLY SALES TO GRAPH######
                 reset_weekly_sales(product_id)
-                reset_daily_sales(product_id)
+                #reset_daily_sales(product_id)
                 update_date(datetime.date.today().strftime("%d-%m-%Y"))
 
 def add_default_settings():
@@ -424,11 +422,7 @@ def add_default_settings():
 
 def update_weekly_sales(product_id, sales):
     with sqlite3.connect("ProductDatabase.db") as db:
-        #date = datetime.date.today().strftime("%d-%m-%Y")
-        date = datetime.date(2015,2,21).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,16).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,23).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
+        date = datetime.date.today().strftime("%d-%m-%Y")
         product_info = (product_id, date, sales,)
         cursor = db.cursor()
         sql = "Insert into WeeklyProductSales (ProductID, Date, Sales) values(?,?,?)"
@@ -436,11 +430,7 @@ def update_weekly_sales(product_id, sales):
         
 def update_daily_sales(product_id, sales):
     with sqlite3.connect("ProductDatabase.db") as db:
-        #date = datetime.date.today().strftime("%d-%m-%Y")
-        date = datetime.date(2015,2,21).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,16).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,2,23).strftime("%d-%m-%Y")
-        #date = datetime.date(2015,3,2).strftime("%d-%m-%Y")
+        date = datetime.date.today().strftime("%d-%m-%Y")
         product_info = (product_id, date, sales,)
         cursor = db.cursor()
         sql = "Insert into DailyProductSales (ProductID, Date, Sales) values(?,?,?)"

@@ -1,18 +1,14 @@
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PopUpMenuClass import *
-from AddingRemovingData import *
-from ErrorMessageClass import *
-
 import csv, re
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PopUpMenuClass import *
 from AddingRemovingData import *
+from ErrorMessageClass import *
+
 
 class editMemberClass(QWidget):
-        """a representation of Adding an Member"""
+        """a representation of editing an Member"""
         def __init__(self, ButtonText):
                 super().__init__()
 
@@ -160,6 +156,7 @@ class editMemberClass(QWidget):
 
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
+                self.add_member.setShortcut(QKeySequence("CTRL+S"))
                 self.add_member.setFixedSize(100,27)
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
 

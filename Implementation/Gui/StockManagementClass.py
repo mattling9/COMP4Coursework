@@ -32,6 +32,7 @@ class manageStockClass(QWidget):
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Save)
         self.buttonBox.button(QDialogButtonBox.Save).setFixedSize(84,27)
+        self.buttonBox.button(QDialogButtonBox.Save).setShortcut(QKeySequence("CTRL+S"))
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.save)
 
         self.path = (".\images\Default.png")

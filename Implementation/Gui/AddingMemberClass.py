@@ -143,6 +143,7 @@ class addMemberClass(QWidget):
 
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
+                self.add_member.setShortcut(QKeySequence("CTRL+S"))
                 self.add_member.setFixedSize(100,27)
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
 

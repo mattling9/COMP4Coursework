@@ -151,6 +151,7 @@ class deleteMemberClass(QWidget):
 
                     #Add Member Button
                 self.add_member = QPushButton(ButtonText)
+                self.add_member.setShortcut(QKeySequence("CTRL+S"))
                 self.add_member.clicked.connect(self.CreatePopUpWindow)
                 self.add_member.setFixedSize(120,27)
 
@@ -231,6 +232,7 @@ class deleteMemberClass(QWidget):
         def close_pop_ups(self):
                 self.add_member_instance.close()
                 self.pop_up_instance.close()
+                self.clear_fields()
 
         def FindPostcode(self):
                 self.address_list = []
@@ -290,16 +292,18 @@ class deleteMemberClass(QWidget):
                 if not self.member_info:
                     self.error = ErrorMessageClass("No user found with Member ID: {0}".format(self.find_member_id_line_edit.text()))
                     self.error.setFixedSize(400,150)
-
-                    self.main_widget.setEnabled(False)
-                    self.name_title.setCurrentIndex(0)
-                    self.first_name.setText("")
-                    self.last_name.setText("")
-                    self.postcode.setText("")
-                    self.county.setCurrentIndex(0)
-                    self.city.setText("")
-                    self.town.setText("")
-                    self.street.setText("")
-                    self.houseno.setValue(0)
-                    self.telephone_number.setText("")
-                    self.email.setText("")
+                    self.clear_fields()
+                    
+        def clear_fields(self):
+                self.main_widget.setEnabled(False)
+                self.name_title.setCurrentIndex(0)
+                self.first_name.setText("")
+                self.last_name.setText("")
+                self.postcode.setText("")
+                self.county.setCurrentIndex(0)
+                self.city.setText("")
+                self.town.setText("")
+                self.street.setText("")
+                self.houseno.setValue(0)
+                self.telephone_number.setText("")
+                self.email.setText("")

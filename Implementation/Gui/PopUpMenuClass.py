@@ -37,6 +37,7 @@ class PopUpWindow(QDialog):
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(button1 | button2)
         self.buttonBox.button(button1).setFixedSize(84,27)
+        self.buttonBox.button(button1).setShortcut(QKeySequence("Return"))
         self.buttonBox.button(button2).setFixedSize(84,27)
         self.pop_up_layout = QVBoxLayout()
         self.pop_up_layout.addWidget(self.title_bar)

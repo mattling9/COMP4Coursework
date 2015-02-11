@@ -7,15 +7,21 @@ from CustomToolbarClass import *
 class SearchClass(QDialog):
     def __init__(self):
         super().__init__()
-        style_sheet = """QDialog#main_window{
+        self.style_sheet = """QDialog#main_window{
                                  background-color: white;
                                  border-style: solid;
                                  border-width: 2px;
                                  border-color: rgb(180,180,180);}
-                         QLabel{
+                        QMenu{
+                                 background-color: white;
+                                 font-family: Segoe UI;
+                                 font-size: 11pt;
+                                 color: rgb(50,50,50);}
+                                 
+                        QLabel{
                                  font-family: Segoe UI;
                                  font-size: 12pt;
-                                 color: rgb(70,70,70)}
+                                 color: rgb(70,70,70);}
 
                         QPushButton{
                                  font-family: Segoe UI;
@@ -35,8 +41,8 @@ class SearchClass(QDialog):
                                  selection-background-color: rgb(0,240,0);
                                  selection-color: rgb(255,255,255);}
                                    
-                        QHeaderView:section{
-                                 background: white;
+                         QHeaderView:section{
+                                 background: white ;
                                  font-family: Segoe UI;
                                  font-size: 12pt;
                                  border-style: solid;
@@ -58,7 +64,9 @@ class SearchClass(QDialog):
                                  border-color: rgb(210,210,210);
                                  color: rgb(70,70,70);}
 
-                      """
+                                 
+                        """
+        self.setStyleSheet(self.style_sheet)
         self.setObjectName("main_window")
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.title_bar = TitleBar()
@@ -113,9 +121,14 @@ class SearchClass(QDialog):
         self.member_right_click_menu = QMenu()
         self.employee_right_click_menu = QMenu()
 
+        self.customContextMenuRequested.connect(self.show_menu)
+
         self.display_table = QTableView()
+        self.display_table.setObjectName("search_table")
         
-        self.display_table.clicked.connect(self.clicked)
+        self.connect(self.display_table.horizontalHeader(), SIGNAL('sectionClicked (int)'), self.change_sorting)
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        
         
         self.display_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.display_table.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -155,20 +168,26 @@ class SearchClass(QDialog):
         self.group_box_layout = QVBoxLayout()
         self.group_box_layout.addWidget(self.group_box)
         self.setLayout(self.group_box_layout)
-        self.setStyleSheet(style_sheet)
 
-    def clicked(self):
-        self.indexes = self.display_table.selectionModel().selection().indexes()
-        if self.indexes:
-            self.customContextMenuRequested.connect(self.show_menu)
     def show_menu(self, position):
+        self.indexes = self.display_table.selectionModel().selection().indexes()
+        rows = []
+        for selected_row in self.indexes:
+            row_number = selected_row.row()
+            if row_number not in rows:
+                rows.append(row_number)      
+        no_of_rows_selected = len(rows)
+        if no_of_rows_selected == 1:
+            #gets the product_id of product selected
+            self.product_id = self.model.record(rows[0]).field(0).value()
 
-        if self.table_combo_box.currentIndex() == 0:
-            self.product_right_click_menu.exec_(self.mapToGlobal(position))
-        elif self.table_combo_box.currentIndex() == 1:
-            self.member_right_click_menu.exec_(self.mapToGlobal(position))
-        elif self.table_combo_box.currentIndex() == 2:
-            self.employee_right_click_menu.exec_(self.mapToGlobal(position))
+        if self.indexes:
+            if self.table_combo_box.currentIndex() == 0:
+                self.product_right_click_menu.exec_(self.mapToGlobal(position))
+            elif self.table_combo_box.currentIndex() == 1:
+                self.member_right_click_menu.exec_(self.mapToGlobal(position))
+            elif self.table_combo_box.currentIndex() == 2:
+                self.employee_right_click_menu.exec_(self.mapToGlobal(position))
 
     def change_table(self):
         if self.table_combo_box.currentIndex() == 0:
@@ -201,6 +220,9 @@ class SearchClass(QDialog):
             self.display_table.showColumn(8)
             self.display_table.showColumn(9)
             self.display_table.update()
+
+    def change_sorting(self, column):
+        self.display_table.sortByColumn(column)
 
     def decide_search(self):
         if self.table_combo_box.currentIndex() == 0:

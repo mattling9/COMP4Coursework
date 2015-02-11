@@ -129,6 +129,17 @@ css = """QMainWindow{
                    color: white;
                    background-color: white;
                    border: 0px;}
+
+                   
+        QTableView{
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   color: rgb(70,70,70);
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(200,200,200);
+                   selection-background-color: rgb(255,255,255);
+                   selection-color: rgb(70,70,70);}
                    
         QTableView#display_table{
                    font-family: Segoe UI;
@@ -156,6 +167,16 @@ css = """QMainWindow{
                    border-style: solid;
                    border-width: 1px;
                    border-color: rgb(200,200,200);
+                   color: rgb(70,70,70);
+                   height: 30px;}
+
+        QHeaderView:section:pressed{
+                   background: rgb(200,200,200);
+                   font-family: Segoe UI;
+                   font-size: 12pt;
+                   border-style: solid;
+                   border-width: 1px;
+                   border-color: rgb(220,220,220);
                    color: rgb(70,70,70);
                    height: 30px;}
 

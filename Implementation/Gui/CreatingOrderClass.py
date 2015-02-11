@@ -28,6 +28,7 @@ class createOrderClass(QWidget):
 
       #Product Display Table
         self.display_table = QTableView()
+        self.connect(self.display_table.horizontalHeader(), SIGNAL('sectionClicked (int)'), self.change_product_sorting)
         self.display_table.setObjectName("display_table")
         self.display_table_layout = QVBoxLayout()
         self.display_table_layout.addWidget(self.display_table)
@@ -131,11 +132,10 @@ class createOrderClass(QWidget):
 
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Save |QDialogButtonBox.Cancel)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Save)
         self.buttonBox.button(QDialogButtonBox.Save).clicked.connect(self.invoice_saved)
+        self.buttonBox.button(QDialogButtonBox.Save).setShortcut(QKeySequence("CTRL+S"))
         self.buttonBox.button(QDialogButtonBox.Save).setFixedSize(84,27)
-        self.buttonBox.button(QDialogButtonBox.Cancel).setFixedSize(84,27)
-        self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.automatically_update_settings)
         
         self.invoice_layout = QVBoxLayout()
         self.invoice_layout.addWidget(self.preview_button)
@@ -150,6 +150,7 @@ class createOrderClass(QWidget):
         self.order_box = QGroupBox("Current Order")
         self.order_layout = QVBoxLayout()
         self.current_order = QTableWidget(0,5)
+        self.connect(self.current_order.horizontalHeader(), SIGNAL('sectionClicked (int)'), self.change_order_sorting)
         self.current_order.setObjectName("current_order")
         self.current_order.setAlternatingRowColors(True)
         self.column_headers = ["ProductID","Product Name","Size","Price","Quantity"]
@@ -179,6 +180,12 @@ class createOrderClass(QWidget):
         self.main_layout.addWidget(self.buttonBox)
         self.setLayout(self.main_layout)
         self.discount = 0
+
+    def change_product_sorting(self, column):
+        self.display_table.sortByColumn(column)
+
+    def change_order_sorting(self, column):
+        self.current_order.sortByColumn(column)
 
     def invoice_saved(self):
         if self.print_checkbox.isChecked() and self.email_invoice.isChecked():
@@ -567,16 +574,3 @@ class createOrderClass(QWidget):
             product_id = self.current_order.item(row, 0).text()
             products_sold  = self.current_order.item(row, 4).text()
             update_product_daily_sales(product_id, products_sold)
-
-    def automatically_update_settings(self):
-        product_id_list = get_all_product_id()
-        for product_id in product_id_list:
-                weekly_sales = get_current_week_sales(str(product_id))
-                #daily_sales = get_current_daily_sales(str(product_id))
-                update_weekly_sales(product_id, weekly_sales[0])
-                #update_daily_sales(product_id, daily_sales[0])
-                #######PLOT WEEKLY SALES TO GRAPH######
-                reset_weekly_sales(product_id)
-                #reset_daily_sales(product_id)
-                update_date(datetime.date.today().strftime("%d-%m-%Y"))
-

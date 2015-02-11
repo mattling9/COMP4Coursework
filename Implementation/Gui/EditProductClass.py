@@ -101,6 +101,7 @@ class editProductClass(QWidget):
 
         #Done
         self.done = QPushButton("Edit Product")
+        self.done.setShortcut(QKeySequence("CTRL+S"))
         self.done.clicked.connect(self.CreatePopUpWindow)
         self.done.setFixedSize(100, 27)
         #Product Name

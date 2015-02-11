@@ -99,6 +99,7 @@ class deleteProductClass(QWidget):
         #Done
         self.done = QPushButton("Delete Product")
         self.done.clicked.connect(self.CreatePopUpWindow)
+        self.done.setShortcut(QKeySequence("CTRL+S"))
         self.done.setFixedSize(110, 27)
 
         #Product Name
@@ -246,22 +247,27 @@ class deleteProductClass(QWidget):
             if not self.product_info:
                 self.error = ErrorMessageClass("No product found with Product ID: {0}".format(self.find_product_id_line_edit.text()))
                 self.error.setFixedSize(400,150)
-                self.product_name.setText("")
-                self.size_integer.setText("")
-                self.price_button.setText("")
-                self.path.setText(".\ProductImages\Default.jpg")
-                self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
-                self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
-                self.image.setPixmap(self.scaled_image)
+                self.clear_fields()
         
 
 
+    def clear_fields(self):
+        self.find_product_id_line_edit.setText("")
+        self.product_name.setText("")
+        self.size_integer.setText("")
+        self.price_button.setText("")
+        self.path.setText(".\ProductImages\Default.jpg")
+        self.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
+        self.scaled_image = self.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.image.setPixmap(self.scaled_image)
+        
     def clicked_no(self):
         self.pop_up_instance.close()
 
     def close_pop_ups(self):
         self.add_product_instance.close()
         self.pop_up_instance.close()
+        self.clear_fields()
      
     
     

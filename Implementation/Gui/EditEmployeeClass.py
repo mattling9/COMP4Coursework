@@ -6,7 +6,7 @@ from ErrorMessageClass import *
 import re
 
 class editEmployeeClass(QWidget):
-    """a representation of Adding an Employee"""
+    """a representation of editing an Employee"""
     def __init__(self,ButtonText):
         super().__init__()
 
@@ -87,6 +87,7 @@ class editEmployeeClass(QWidget):
         #Add Account
         self.add_account = QPushButton(ButtonText)
         self.add_account.clicked.connect(self.CreatePopUpWindow)
+        self.add_account.setShortcut(QKeySequence("CTRL+S"))
         self.add_account.setFixedSize(120, 27)
 
         self.spacer = QLabel()

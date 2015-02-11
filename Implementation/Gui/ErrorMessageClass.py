@@ -46,6 +46,7 @@ class ErrorMessageClass(QDialog):
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Ok )
+        self.buttonBox.button(QDialogButtonBox.Ok).setShortcut(QKeySequence("Return"))
         self.buttonBox.button(QDialogButtonBox.Ok).setFixedSize(84,27)
         self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_window)
         self.pop_up_layout = QVBoxLayout()
@@ -59,6 +60,7 @@ class ErrorMessageClass(QDialog):
         self.move(700,430)
         self.show()
         self.raise_()
+        
 
     def close_window(self):
         self.close()

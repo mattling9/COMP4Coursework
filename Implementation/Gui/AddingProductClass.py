@@ -90,6 +90,7 @@ class addProductClass(QWidget):
 
         #Done
         self.done = QPushButton(ButtonText)
+        self.done.setShortcut(QKeySequence("CTRL+S"))
         self.done.clicked.connect(self.CreatePopUpWindow)
         self.done.setFixedWidth(100)
         self.done.setFixedHeight(27)

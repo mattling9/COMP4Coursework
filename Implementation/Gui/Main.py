@@ -59,7 +59,6 @@ class MainWindow(QMainWindow):
         self.log_in()
         self.password_reset()
         self.change_password()
-        self.edit_member()
         self.widget = QWidget()
         self.widget.setLayout(self.stacked_layout)
     
@@ -86,11 +85,6 @@ class MainWindow(QMainWindow):
             self.icon = QIcon("")
 
         self.setWindowIcon(self.icon)
-        
-    def change_splashscreen_frame():
-        pixmap = self.movie.currentPixmap()
-        self.setPixmap(pixmap)
-        self.setMask(pixmap.mask())
 
     def minimise_main_window(self):
         self.showMinimized()
@@ -286,16 +280,35 @@ class MainWindow(QMainWindow):
         self.search_instance.raise_()
 
     def EditStock(self):
-        print("stock")
+        self.stacked_layout.setCurrentIndex(3)
+        self.manage_stock_instance.product_id.setText(str(self.search_instance.product_id))
+        self.manage_stock_instance.find_product_by_id()
+        self.search_instance.close()
+
+        self.setFixedSize(900, 850)
 
     def EditProduct(self):
-        print("product")
+        self.stacked_layout.setCurrentIndex(1)
+        self.edit_product_instance.find_product_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_product_instance.find_product_by_id()
+        self.search_instance.close()
 
+        self.setFixedSize(700, 700)
+        
     def EditMember(self):
-        print("member")
+        self.stacked_layout.setCurrentIndex(6)
+        self.edit_member_instance.find_member_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_member_instance.find_member_by_id()
+
+        self.search_instance.close()
+        self.setFixedSize(700, 800)
 
     def EditEmployee(self):
-        print("employee")
+        self.stacked_layout.setCurrentIndex(9)
+        self.edit_employee_instance.find_employee_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_employee_instance.find_employee_by_id()
+        self.search_instance.close()
+        self.setFixedSize(700, 650)
         
 
     def preferences(self):
@@ -525,6 +538,7 @@ class MainWindow(QMainWindow):
         self.edit_member_instance.telephone_number.setText("")
         self.edit_member_instance.email.setText("")
         self.setFixedSize(700, 800)
+        
     def remove_a_member_function(self):
         self.stacked_layout.setCurrentIndex(7)
         self.edit_member_instance.find_member_id_line_edit.setText("")
