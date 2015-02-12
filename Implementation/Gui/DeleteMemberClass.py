@@ -296,6 +296,7 @@ class deleteMemberClass(QWidget):
                     
         def clear_fields(self):
                 self.main_widget.setEnabled(False)
+                self.find_member_id_line_edit.setText("")
                 self.name_title.setCurrentIndex(0)
                 self.first_name.setText("")
                 self.last_name.setText("")

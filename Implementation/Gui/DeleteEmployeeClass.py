@@ -191,6 +191,7 @@ class deleteEmployeeClass(QWidget):
                 self.clear_fields()
 
     def clear_fields(self):
+        self.find_employee_id_line_edit.setText("")
         self.main_widget.setDisabled(True)
         self.first_name.setText("")
         self.last_name.setText("")

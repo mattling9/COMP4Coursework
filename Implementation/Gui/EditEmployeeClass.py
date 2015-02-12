@@ -152,6 +152,7 @@ class editEmployeeClass(QWidget):
         self.edit_employee_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def clicked_yes(self):
+        self.update_preview()
         editingEmployee(self.find_employee_id_line_edit.text(),
                         self.user_name_output.text(),
                         self.first_name_output.text(),

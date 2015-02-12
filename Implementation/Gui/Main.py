@@ -270,10 +270,13 @@ class MainWindow(QMainWindow):
         
         self.search_instance.product_right_click_menu.addAction("Manage Stock" , self.EditStock)
         self.search_instance.product_right_click_menu.addAction("Edit Product" , self.EditProduct)
+        self.search_instance.product_right_click_menu.addAction("Delete Product" , self.DeleteProduct)
 
         self.search_instance.member_right_click_menu.addAction("Edit Member" , self.EditMember)
-
+        self.search_instance.member_right_click_menu.addAction("Delete Member" , self.DeleteMember)
+        
         self.search_instance.employee_right_click_menu.addAction("Edit Employee" , self.EditEmployee)
+        self.search_instance.employee_right_click_menu.addAction("Delete Employee" , self.DeleteEmployee)
         
         self.search_instance.move(750,300)
         self.search_instance.show()
@@ -295,6 +298,14 @@ class MainWindow(QMainWindow):
 
         self.setFixedSize(700, 700)
         
+    def DeleteProduct(self):
+        self.stacked_layout.setCurrentIndex(2)
+        self.delete_product_instance.find_product_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_product_instance.find_product_by_id()
+        self.search_instance.close()
+
+        self.setFixedSize(700, 700)
+        
     def EditMember(self):
         self.stacked_layout.setCurrentIndex(6)
         self.edit_member_instance.find_member_id_line_edit.setText(str(self.search_instance.product_id))
@@ -303,10 +314,25 @@ class MainWindow(QMainWindow):
         self.search_instance.close()
         self.setFixedSize(700, 800)
 
+    def DeleteMember(self):
+        self.stacked_layout.setCurrentIndex(7)
+        self.delete_member_instance.find_member_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_member_instance.find_member_by_id()
+
+        self.search_instance.close()
+        self.setFixedSize(700, 800)
+
     def EditEmployee(self):
         self.stacked_layout.setCurrentIndex(9)
         self.edit_employee_instance.find_employee_id_line_edit.setText(str(self.search_instance.product_id))
         self.edit_employee_instance.find_employee_by_id()
+        self.search_instance.close()
+        self.setFixedSize(700, 650)
+
+    def DeleteEmployee(self):
+        self.stacked_layout.setCurrentIndex(10)
+        self.delete_employee_instance.find_employee_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_employee_instance.find_employee_by_id()
         self.search_instance.close()
         self.setFixedSize(700, 650)
         
@@ -345,30 +371,30 @@ class MainWindow(QMainWindow):
     def Settings(self):
         #Adding Actions
         self.add_product_action = QAction("Add a New Product", self)
+        self.add_product_action.setShortcut("Ctrl+P")
         self.edit_product_action = QAction("Edit a Product", self)
         self.delete_a_product_action = QAction("Delete a Product", self)
         self.find_a_product_action = QAction("Find a Product", self)
         self.manage_current_stock_action = QAction("Manage Stock", self)
         self.create_order_action = QAction("Create New Order", self)
+        self.create_order_action.setShortcut("Ctrl+O")
         self.add_new_member_action = QAction("Add New Member", self)
+        self.add_new_member_action.setShortcut("Ctrl+M")
         self.edit_member_action  = QAction("Edit a Member", self)
         self.remove_a_member_action = QAction("Delete a Member", self)
         self.add_an_employee_action = QAction("Add Employee", self)
+        self.add_an_employee_action.setShortcut("Ctrl+E")
         self.edit_employee_action = QAction("Edit an Employee", self)
         self.remove_an_employee_action = QAction("Delete Employee", self)
         self.explanation_action = QAction("Why Can't I Access These?", self)
-        self.preferences_action = QAction("Preferences", self)
+        self.preferences_action = QAction("Preferences", self) 
         self.search_product_action = QAction("Search Window", self)
         self.search_product_action.setShortcut("Ctrl+F")
         self.change_password_action = QAction("Change Password", self)
         self.log_off_action = QAction("Log off", self)
+        self.log_off_action.setShortcut(Qt.Key_Escape)
         #Creating MenuBar
         self.menu = QMenuBar()
-
-        #Creating ToolBar
-        #self.toolbar = QToolBar()
-        #self.addToolBar(Qt.RightToolBarArea, self.toolbar)
-        #self.toolbar.setMovable(False)
 
 
         #Adding Menu to MenuBar
@@ -395,11 +421,6 @@ class MainWindow(QMainWindow):
         self.optionsmenu.addAction(self.search_product_action)
         self.optionsmenu.addAction(self.change_password_action)
         self.optionsmenu.addAction(self.log_off_action)
-        #self.menu.setCornerWidget(self.databasemenu, Qt.TopRightCorner)
-        
-
-        #Add tools to Toolbar
-        #self.addToolBar(self.toolbar)
         
          #Add connections to buttons
         self.add_product_action.triggered.connect(self.add_product_function)
@@ -416,15 +437,8 @@ class MainWindow(QMainWindow):
         self.explanation_action.triggered.connect(self.explanation_function)
         self.search_product_action.triggered.connect(self.search_product_function)
         self.preferences_action.triggered.connect(self.preferences_function)
-        self.log_off_action.triggered.connect(self.log_in_function)
+        self.log_off_action.triggered.connect(self.log_off_function)
         self.change_password_action.triggered.connect(self.change_password_function)
-
-        #Set Menu Bar
-        #self.setMenuBar(self.menu)
-
-        
-
-        
 
     #Connecting Button Clicks to Doing Something   
 
@@ -602,6 +616,18 @@ class MainWindow(QMainWindow):
     def preferences_function(self):
         self.stacked_layout.setCurrentIndex(11)
         self.setFixedSize(900, 850)
+
+    def log_off_function(self):
+        self.decision = PopUpWindow("Are you sure you want to log off?", QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.decision.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.log_off_true)
+        self.decision.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.log_off_false)
+
+    def log_off_true(self):
+        self.log_in_function()
+        self.decision.close()
+        
+    def log_off_false(self):
+        self.decision.close()
 
     def log_in_function(self):
         self.stacked_layout.setCurrentIndex(12)
