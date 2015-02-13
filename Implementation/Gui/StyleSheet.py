@@ -177,7 +177,7 @@ css = """QMainWindow{
                    border-style: solid;
                    border-width: 1px;
                    border-color: rgb(220,220,220);
-                   color: rgb(70,70,70);
+                   color: white;
                    height: 30px;}
 
         

@@ -8,30 +8,76 @@
 \begin{center}
     \begin{tabular}{|p{2cm}|p{5cm}|p{5cm}|p{4cm}|}
         \hline
-        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \textbf{Strategy Rationale}\\ \hline
-        Example & Example & Example & Example \\ \hline
+        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \\ \hline
+	1. & Test the flow of control between the user interfaces & Top Down Testing &  \\ \hline
+	2. & Test validation of data inputs & Bottom Up testing Testing &  Each input and output will be tested when they're developed\\ \hline
+	3. & Test Data is stored in the correct location & Black-Box Testing & \\ \hline
+	4. & Test algorithms and SQL statements to ensure the output is correct & Black box testing &\\ \hline
+	5. & Test the system fulfills the specification & Acceptance testing & \\ \hline
+
     \end{tabular}
 \end{center}
 
 \subsection{Changes to Outline Plan}
+	Some of my test series were quite brief and only tested for one variable. For example test series 3, ' Test Data is stored in the correct location' only tests whether the data is stored in the correct location. Because i am storing encrypted passwords, and data that must be in a specific format, such as dates, i have change this test series to: 'Test data is stored in the correct format and is in the correct storage location'. \par
+
+ Looking at my original test plan, there are many aspects of my system in which i am not testing. One area which is not being tested is the emailing functionality. I need to test whether the emails are being sent to the correct email address, and that the contents of the email address are appropriate. For example i don't want the system to send an email to a user their account details, when i actually want to send them an email containing an invoice. Therefore i have added a test series to test the emailing functionality. \par
+
+During the implementation process i added keyboard shortcuts to increase the speed of flow of control between the interfaces. In my original outline plan there were no test to see if these keyboard shortcuts work as they should. Therefore, i have added a new test series to test the functionalilty of the keyboard shortcuts. \par
+
+Below is a table to show the changes i have made to the original outline plan created during the design phase. Any Test series that have been modified are highlighted in dark grey  and any new test series added have been highlighted in light grey.
 
 \begin{center}
     \begin{tabular}{|p{2cm}|p{5cm}|p{5cm}|p{4cm}|}
         \hline
-        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \textbf{Strategy Rationale}\\ \hline
-        Example & Example & Example & Example \\ \hline
+        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \\ \hline
+	1. & Test the flow of control between the user interfaces & Top Down Testing &  \\ \hline
+	2. & Test validation of data inputs & Bottom Up testing Testing &  Each input and output will be tested when they're developed\\ \hline
+	\rowcolor{orange}  3. & Test Data is stored in the format and is in the correct storage location & Black-Box Testing & \\ \hline
+	4. & Test algorithms and SQL statements to ensure the output is correct & Black box testing &\\ \hline
+	\rowcolor{green} 5. & Test that the email features work and that the contents of each email is appropriate & Black-Box Testing &\\ \hline
+	\rowcolor{green} 6. & Test that each keyboard shortcut does what it should & Black-Box testing & \\ \hline
+	7. & Test the system fulfills the specification & Acceptance testing & \\ \hline
+
     \end{tabular}
 \end{center}
 
 \subsection{Original Detailed Plan}
 
-\begin{center}
+\begin{flushleft}
+
+the table below shows my original test plan made during the design phase. Since the design phase i have implemented my system and made alterations to the features described during the design phase. Because of these changes made, i have removed some tests from my orignal test plan as they have become redundent due to the changes made during the implementation stage. The tests i have removed from my plan have been highlighted in red. Some tests have been removed because they require a few modifications to suit my system after the implementation stage, these changes are described in the 'Changes to Detailed Plan' section. 
+
     \begin{longtable}{|p{1.5cm}|p{2.5cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
         \hline
         \textbf{Test Series} & \textbf{Purpose of Test} & \textbf{Test Description} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Evidence}\\ \hline
-        Example & Example & Example & Example & Example & Example & Example & Example \\ \hline
+	\rowcolor{red} 1.01 & Test the Arrow button to see if it works successfully & The Arrow Button Should change to the Product Search Interface if log in details are correct & Click the arrow button & Normal & The Product Search Interface should be displayed &&  \\ \hline
+	\rowcolor{red} 1.02 & Test the keyboard shortcut assigned to the arrow button works successfully & The Keyboard Shortcut Should change to the Product Search Interface if log in details are correct & Press the Keyboard Shortcut after legitimate log in details are entered &  Normal &The Product Search Interface should be displayed &&  \\ \hline
+	1.03 & Test the Reset Password Here Link & When clicked the Link should change to the reset password interface & Left mouse click on the Reset Password Link &  Normal & The Reset Password Interface should be displayed &&  \\ \hline
+	1.04 & Test the Log Off button to see if it works successfully & Left mouse clicking the log off button should return back to the log in interface & Left mouse click Log off button &  Normal & The Log in interface should be displayed && \\ \hline
+	1.05 & Test to see if the Add new product option works successfully & The user should left click on the product tab then left click on the Add new product Option. & Left click Add new product button &  Normal &  The interface should change to the Add new product interface&& \\ \hline
+	1.06 & Test to see if the Delete Product button works & Clicking on the product tab then clicking on the delete product option & Left mouse click Delete a product button &  Normal & Interface should change to Delete a product interface&& \\ \hline
+	1.07 & Test to see if the manage stock button works successfully & Clicking on the Manage Stock button to see what the outcome is & The Manage Product button, under the Stock tab should be left clicked &  Normal & The Stock Management interface should be displayed. && \\ \hline
+	\rowcolor{red} 1.08 & Test to see if the Product restock button works & Clicking the Product restock button to see the result & left clicking the Stock tab then left clicking the Product restock tab &  Normal & The Stock management interface should be displayed. && \\ \hline
+	1.09 & Test to see if the add a new member button works & The Add new member button should change to the Add new memebr interface & Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed&& \\ \hline
+	1.10 & Testing to see what happens when remove member is clicked & left clicking the delete member button and recording outcome & Left clicking remove a member under the member tab & Normal & the Remove a member interface should be displayed && \\ \hline
+	1.11 & Test to see if the add a new employee button works & The Add new employee button should change to the Add new employee interface & Left clicking the add new employee button under the employee tab &  Normal & the Add new employee interface should be displayed&& \\ \hline
+	1.12 & Testing to see what happens when remove employee is clicked & left clicking the employee member button and recording outcome & Left clicking remove a employee under the employee tab & Normal & the Remove a employee interface should be displayed && \\ \hline
+	2.01 & Testing valid characters and range of Product Name & entering a range of different characters to see which ones are valid & Test123@+ & Normal & The string Test should be accepted however, the characters `123' and `@+' should not be accepted as they are integers and special characters && \\ \hline
+	2.02 & testing to see which file types are valid for Product Image & entering a range of file types to see which are valid & test.jpg, test.bnp, test.txt, test.png, test.gif, test.doc, test.pdf & Normal & The only accepted file types should be .jpg and .png. No other file extensions should be valid. && \\ \hline
+	2.03 & Testing to see which characters are valid in Price & entering a range of characters into price to see which are accepted & test123@+ & Normal & Only 123 should be accepted because  a price cannot contain letters or special characters && \\ \hline
+	2.04 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid & test123@+ & Normal & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers.&& \\ \hline
+	2.05 & Testing to see which characters are valid in Name & Entering a range of characters into name and seeing which ones are valid & Test123@+ & Normal & Only the letters `test' should be valid as a name cannot contain integers or special characters.&& \\ \hline
+	2.06 & seeing which characters are valid in email & seeing if a valid email is required to enter into this field & Bob.com, Bob@email, Bob@email.com & Normal & Only Bob@Email.com should be accepted. No string should be accepted unless it contains the `@' symbol followed by at least one `.' && \\ \hline
+	\rowcolor{red} 2.07 & testing for validation in telephone number & entering different numbers into the field to see which are valid & 999, 01234567890, 012345678987654 & Normal & Only 01234567890 should be valid as `999' is too short and 012345678987654 is too long. && \\ \hline
+	3.01 & Ensuring all product data is stored in the product table & Entering a product then ensuring all of its data is input into the Product table & Normal & Product: Dog Food & The ProductName should be Dog Food and the rest of the data should be stored in the Product Table && \\ \hline
+	3.02 & Ensuring all member data is stored in the member table & Entering a member then ensuring all of its data is input into the member table & Normal & Member: Bruce Wayne & The MemberName should be Bruce Wayne  and the rest of the data should be stored in the Member Table && \\ \hline
+	3.03 & Ensuring all Employee data is stored in the Employee table & Entering a employee then ensuring all of its data is input into the Employee table & Normal & Employee: Clark Kent & The EmployeeName should be Clark Kent and the rest of the data should be stored in the Employee Table && \\ \hline
+	4.01 & Ensuring the product table is created properly & Creating the product table and adding a product to ensure its working properly & adding product: Dog Food & normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column && \\ \hline
+	4.02 & Deleting a product from the database &  Entering a ProductID to delete then seeing if it was deleted successfully & ProductID = 2 & normal & The product database should be viewed, then a productID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database && \\ \hline
+
     \end{longtable}
-\end{center}
+\end{flushleft}
 
 \subsection{Changes to Detailed Plan}
 
@@ -52,10 +98,9 @@
 \section{Annotated Samples}
 
 \subsection{Actual Results}
+\end{landscape}
 
 \subsection{Evidence}
-
-\end{landscape}
 
 \section{Evaluation}
 
