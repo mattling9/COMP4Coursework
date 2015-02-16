@@ -170,6 +170,12 @@
 \end{figure}
 \pagebreak
 
+\begin{figure}[H]
+\caption{Reset Password Flowchart} \label{fig:Reset Password Flowchart}
+\hfill\includegraphics[scale=0.65]{PasswordResetFlowchart.pdf}\hspace*{\fill}
+\end{figure}
+\pagebreak
+
 \end{landscape}
 \section{User Interface Designs}
 
@@ -181,9 +187,13 @@
 
 
 \begin{flushleft}
-Looking at Figure 2.12 on Page 51, You can see the Employee Log in interface. The Log In interface contains two fields in which the username and password can be entered and two push buttons, one being the `?' and the other being `->'. The `?' symbol, when clicked, reminds the employee how their username is formed. (First Letter of First Name + Last Name + EmployeeID i.e: MLing03). None of the system is accessible on the log in screen which means that the user MUST log in before they can use the system. This is a security feature as it prevents anyone that does not have a username and password from using the system. The `->' button is simply a click button that checks the employees username and password to see if they are valid. A keyboard shortcut that is commonly assigned to this is `Enter'. \par
+Looking at Figure 2.13 , You can see the Employee Log in interface. The Log In interface contains two fields in which the username and password can be entered and two push buttons, one being the `?' and the other being `->'. The `?' symbol, when clicked, reminds the employee how their username is formed. (First Letter of First Name + Last Name + EmployeeID i.e: MLing03). None of the system is accessible on the log in screen which means that the user MUST log in before they can use the system. This is a security feature as it prevents anyone that does not have a username and password from using the system. The `->' button is simply a click button that checks the employees username and password to see if they are valid. A keyboard shortcut that is commonly assigned to this is `Enter'. \par
 
+<<<<<<< HEAD
+If the user clicks on `Reset Password Here' Then the user is directed to a page where they enter a new password to use. A security measure to stop the password being changed by anyone is that the system sends an email to the address assigned to that account, that way, only the employee in which the account is associated with can change the password.  Once the user has logged in, the menu bar should be displayed which will allow the user to navigate between the interfaces.\par
+=======
 If the user clicks on `Reset Password Here' Then the user is directed to a page where they enter a new password to use. A secuirty measure to stop the password being changed by anyone is that the system sends an email to the address assigned to that account, that way, only the employee in which the account is associated with can change the password.  Once the user has logged in, the menu bar should be displayed which will allow the user to navigate between the interfaces.\par
+>>>>>>> origin/master
 
 \end{flushleft}
 
@@ -192,11 +202,11 @@ If the user clicks on `Reset Password Here' Then the user is directed to a page 
 \hfill\includegraphics[width = 14cm]{UIDProductSeachInterfaceEdited.pdf}\hspace*{\fill}
 \end{figure}
 
-Figure 2.13 is the Product Search Interface, This will also act as the main menu as this will be the most commonly used interface. Once the user has logged in, The six tabs are always displayed at the top of the application, no matter what interface they are on (other than the log in interface). \par
+Figure 2.14 is the Product Search Interface, This will also act as the main menu as this will be the most commonly used interface. Once the user has logged in, The six tabs are always displayed at the top of the application, no matter what interface they are on (other than the log in interface). \par
 
 The product Search interface is used when the user wants to find a specific product. This can be done one of three ways. If the user knows the name of the product they are looking for, they can simply use the search bar which is described later in the User Interface Design Section. Alternatively the user can Go to the Product Search interface and click on the large buttons that are made up of an Animal and a picture of that animal, by clicking on that button, The user will then have to click on the category in which the product falls under(i.e food / health care) The user will then be given a table of all the products that fall under that category. The user will be able to sort the products to find the product they are looking for. \par
 
-However, going from a product from one category to a product from another category may be quite confusing going back and forth between categories, pressing multiple buttons. Therefore a list down the left hand side of the page has Each Category Sorted into each Animal. The user can then jsut simply click on the category and they will be taken straight to the products. This method will allow the user to find products faster by reducing time selecting categories. \par
+However, going from a product from one category to a product from another category may be quite confusing going back and forth between categories, pressing multiple buttons. Therefore a list down the left hand side of the page has Each Category Sorted into each Animal. The user can then just simply click on the category and they will be taken straight to the products. This method will allow the user to find products faster by reducing time selecting categories. \par
 
 When The user has finished using the system, they can return to the Product Search interface and click the `Log Off' button under the Options Tab in the MenuBar. This will log the user out and will require an employee to enter their log in details before the system can be accessed again. if the application is closed using the close button in the top right hand corner, without the user logging out, the user will automatically be logged out. However if the user clicks the close button, a warning message will be displayed to confirm they want to close the application. This prevents the application from closing when the user accidentally clicks the close button. \par
 
@@ -205,11 +215,15 @@ When The user has finished using the system, they can return to the Product Sear
 \hfill\includegraphics[width = 6cm]{UIDProductSeachInterfaceMenus.pdf}\hspace*{\fill}
 \end{figure}
 
+<<<<<<< HEAD
+Looking at Figure 2.15 and referring back to Figure 2.14, we can see the options that appear when each tab is clicked. Each option has a symbol next to it to easily identify the option the user wants. When add new product is selected, the user is taken to the add new product interface. Deleting a Product / Member / Employee Account will ask for the ID for the item they user wants to delete, then remove all the data relating to the ID from the system. The Manage Stock, Add New Member and Add new Employee buttons will take the user to the corresponding interface. To navigate between the pages, the user will use the menu to select the page they want to go to. For example, if the user is on the Add new Product screen and wants to go to the Add new Member, They go to the Member Menu then select Add new Member. Their current page will then change to the new page they selected. An example of this is shown below:\par
+=======
 Looking at Figure 2.14 and referring back to Figure 2.13, we can see the options that appear when each tab is clicked. Each option has a symbol next to it to easily identify the option the user wants. When add new product is selected, the user is taken to the add new product interface. Deleting a Product / Member / Employee Account will ask for the ID for the item they user wants to delete, then remove all the data relating to the ID from the sytem. The Manage Stock, Add New Member and Add new Employee buttons will take the user to the corresponding interface. To navigate between the pages, the user will use the menu to select the page they want to go to. For example, if the user is on the Add new Product screen and wants to go to the Add new Member, They go to the Member Menu then select Add new Member. Their current page will then change to the new page they selected. An example of this is shown below:\par
+>>>>>>> origin/master
 
 \begin{figure}[H]
 \caption{Right Click Options For MenuBars} \label{fig:Right Click Options For MenuBars}
-\hfill\includegraphics[width = 6cm]{ChangingInterfaceDiagram.pdf}\hspace*{\fill}
+\hfill\includegraphics[width = 17cm]{ChangingInterfaceDiagram.pdf}\hspace*{\fill}
 \end{figure}
 
 \pagebreak
@@ -219,7 +233,7 @@ Looking at Figure 2.14 and referring back to Figure 2.13, we can see the options
 \hfill\includegraphics[width = 14cm]{UIDAddingAProductEdited.pdf}\hspace*{\fill}
 \end{figure}
 
-Figure 2.15, is the Adding a New Product Interface. Here there is a field in which the user can enter the Product name and the price. To upload an image, the user much click the browse button which will open a window in which the user can select the image file of their choice. once the user has selected the file they must click upload. Once clicked, the upload button will crop the imagine to fit the image area and will display the image to the user, so they can change the image if need be before the product is added to the system. \par
+Figure 2.16, is the Adding a New Product Interface. Here there is a field in which the user can enter the Product name and the price. To upload an image, the user much click the browse button which will open a window in which the user can select the image file of their choice. once the user has selected the file they must click upload. Once clicked, the upload button will crop the imagine to fit the image area and will display the image to the user, so they can change the image if need be before the product is added to the system. \par
 
 The user has the option to enter any value between 1-1000 in Size field.  This field is to specify the specific size of an item. For example there might be two types of the same dog food, one 500 grams one 750 grams. The value is then followed by a drop down menu. To prevent erroneous data being entered. \par
 
@@ -247,16 +261,20 @@ For security, this interface should only be accessible by my client (the adminis
 \hfill\includegraphics[width = 14cm]{CreatingaMemberDiagramEdited.pdf}\hspace*{\fill}
 \end{figure}
 
+<<<<<<< HEAD
+Adding a new Member requires the user to enter the most information, meaning that creating a new member will take the longest amount of time. To try and reduce the amount of time entering data i would like to implement the ability to enter the postcode and the rest of the location fields (i.e Street, Town ect..) to be filled out automatically. Once the `Add Account' button is pressed the data entered is added to the database under the Member table. Most, if not all of the  interfaces will have a large underlined title at the top of the interface. This is to prevent the user from entering the wrong details into the wrong interface. For example the user might accidentally enter a Members information into an Employee Account. The title at the top of each interface is to prevent the user from choosing the wrong interface. \par
+=======
 Adding a new Member requires the user to enter the most information, mening that creating a new member will take the longesta mount of time. To try and reduce the amount of time entering data i would like to implement the ability to enter the postcode and the rest of the location fields (i.e Street, Town ect..) to be filled out automatically. Once the `Add Account' button is pressed the data entered is added to the database under the Member table. Most, if not all of the  interfaces will have a large underlined title at the top of the interface. This is to prevent the user from entering the wrong details into the wrong interface. For example the user might accidentally enter a Members information into an Employee Account. The title at the top of each interface is to prevent the user from choosing the wrong interface. \par
+>>>>>>> origin/master
 
 \begin{figure}[H]
 \caption{Stock Management Interface} \label{fig:Stock Management Interface}
 \hfill\includegraphics[width = 14cm]{StockManagementDiagramEdited.pdf}\hspace*{\fill}
 \end{figure}
 
-Figure 2.19 shows both the Stock Management Interface, but also the search bar. The search bar is circled in red in Figure 2.19, and can be accessed from any of the interfaces other than the log in interface. The search bar allows the User to search for a Product, Employee or Member by entering a string of characters that matches inforamtion stored in the database. for example, entering `food' into the search bar will return any Product with the term `food' in it. \par
+Figure 2.20 shows both the Stock Management Interface, but also the search bar. The search bar is circled in red in Figure 2.20, and can be accessed from any of the interfaces other than the log in interface. The search bar allows the User to search for a Product, Employee or Member by entering a string of characters that matches inforamtion stored in the database. for example, entering `food' into the search bar will return any Product with the term `food' in it. \par
 
-  When a match / multiple matches have been found to what is entered into the search field, An image of the product is displayed along with the product name. If the results contain a member or an employee, no image is displalyed just the First and Last name of the member / employee. This sidebar will be accessed using a keyboard shortcut for ease of access and speed of use. \par
+  When a match / multiple matches have been found to what is entered into the search field, An image of the product is displayed along with the product name. If the results contain a member or an employee, no image is displayed just the First and Last name of the member / employee. This sidebar will be accessed using a keyboard shortcut for ease of access and speed of use. \par
 
 
 \begin{figure}[H]
@@ -266,9 +284,17 @@ Figure 2.19 shows both the Stock Management Interface, but also the search bar. 
 
 Once the user finds the product they were looking for, they can right click the Product Name or the image and a drop down menu will appear. The user can then either Edit the Product Data or Manage the stock of that specific product. The information about a member is not liekly to change often, but is still possible, therefore, when the user right clicks on the member returned from the search, a similar drop down menu will be displayed and the user will be able to edit the Members details. \par
 
+<<<<<<< HEAD
+Going back to Figure 2.20. The stock Management Interface displays the image and name of a product and wil also display the current stock in each location and a will display a boolean variable if more stock of that product is required. The user can change the stock in each location by double clicking the current stock, which will allow the user to delete the old stock and enter the new stock. Once the user has edited the stock they can hit the `Done' button which will return them to the Product Search Interface.\par
+
+The user will not be able to change the products image or name here. This can be done by going to the Product tab and selecting Edit Product. This will take the User to the `Edit Product Interface, where the user can either enter the ProductID of the product they want to edit. If the user does not know the ProductID of the product they want to edit, the user can go to the product search interface, by going to the Product Menu, then Find a Product. Here the user will be able to search for the product and find its ProductID. I would also like the implement the ability for the user to right click a Product within the Find Product Interface and have the option to Edit Product Data from here. They will then automatically be taken to the edit Product interface, the Product ID field will allready be filled in and the current product information will be displayed to the user for them to edit. The user can then change the attributes they want and save the Product with the changed data. 
+
+
+=======
 Going back to Figure 2.19. The stock Management Interface displays the image and name of a product and wil also display the current stock in each location and a will display a boolean variable if more stock of that product is required. The user can change the stock in each location by double clicking the current stock, which will allow the user to delete the old stock and enter the new stock. Once the user has edited the stock they can hit the `Done' button which will return them to the Product Search Interface.\par
 
 The user will not be able to change the products image or name here. This can be done by going to the Product tab and selecting Edit Product. This will take the User to the `Edit Product Interface, where the user can either enter the ProductID of the product they want to edit. If the user does not know the productID of the product they want to edit, the user can go to the product search interface, by going to the Product Menu, then Find a Product. Here the user will be able to search for the product and find its ProductID. I would also like the implement the ability for the user to right click a Product within the Find Product Interface and have the option to Edit Product Data from here. They will then automatically be taken to the edit Product interface, the Product ID field will allready be filled in and the current product information will be displayed to the user for them to edit. The user can then change the attributes they want and save the Product with the changed data. 
+>>>>>>> origin/master
 
 \subsection{Hardware Specification}
 	
@@ -293,7 +319,7 @@ I have decided that my client does not mandatory need to purchase any further ha
 
 \begin{landscape}
 \begin{figure}[H]
-\caption{Changing Stock Structure Chart} \label{fig:SotckStructureChart}
+\caption{Changing Stock Structure Chart} \label{fig:StockStructureChart}
 \hfill\includegraphics[scale=0.65]{TDSC1.pdf}\hspace*{\fill}
 \end{figure}
 
@@ -308,7 +334,7 @@ I have decided that my client does not mandatory need to purchase any further ha
 
 \subsection{Algorithms in pseudo-code for each data transformation process}
 \begin{algorithm}[H]
-\label{fig:repeat_pseudo_example}
+\label{fig:Adding A New Product Pseudo code}
 \caption{Adding A New Product}
 \begin{algorithmic}[1]
 \SET{$ProductName$}{$NameOfProduct$}
@@ -331,7 +357,7 @@ I have decided that my client does not mandatory need to purchase any further ha
 \end{algorithm}
 
 \begin{algorithm}[H]
-\label{fig:repeat_pseudo_example}
+\label{fig:Adding The Product to The Database  Pseudo code}
 \caption{Adding The Product to The Database}
 \begin{algorithmic}[1]
 \Function {AddProduct}{ProductName: NewProductName, Category: NewCategory, Price: NewPrice}
@@ -346,15 +372,34 @@ I have decided that my client does not mandatory need to purchase any further ha
 \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}[H]
+\label{fig:Creating A Sales Graph  Pseudo code}
+\caption{Creating A Sales Graph.}
+\begin{algorithmic}[1]
+\SET{SalesWeek1}{CurentDate(Day-21)} 
 
+{SalesList.insert(SalesWeek1)}
+\SET{SalesWeek2}{CurrentDate(Day - 14)}
 
+{SalesList.insert(SalesWeek2)}
+\SET{SalesWeek3}{CurrentDate(Day - 7)}
+
+{SalesList.insert(SalesWeek3)}
+\SET{SalesWeek4}{CurrentDate}
+
+{SalesList.insert(SalesWeek4)}
+\SET {Graph}{pg.GraphicsWindow}
+\SET {WeekNo}{1}
+\For {sales in Sales List DO}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
 
 \begin{algorithm}[H]
 \label{fig:repeat_pseudo_example}
 \caption{Creating A Sales Graph.}
 \begin{algorithmic}[1]
-import pg
-\Function {Creating Graph}{}
+\Function {CreatingGraph}{Self}
 \SET {SalesList}{[]}
 \SET{SalesWeek1}{CurentDate{Day - 21}}
 SalesList.insert{SalesWeek1}
@@ -366,13 +411,21 @@ SalesList.insert{SalesWeek3}
 SalesList.insert{SalesWeek4}
 \SET {Graph}{pg.GraphicsWindow}
 \SET {WeekNo}{1}
-\FOR week in SalesList:
-	Graph.addPlot(sales, 0 ,WeekNo)
-	\SET{WeekNo}{WeekNo + 1}
+\For {Week in SalesList DO}
+Graph.addPlot(sales, 0 ,WeekNo)
+\SET{WeekNo}{WeekNo + 1}
 \EndFor
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+The Above algorithm uses data collected from sales  and presents the sales on a graph. The PythonGraph module to create the graph. The graph is created when the current date is the end of each month (30/31st). The sales of the product is recorded each week within the month and is stored under the date. For example 07/11/14 will show the sales of a specific product between 7th November and 1st November. The Sales each week are added to the list to get the total sales over the entire month. The sales are then added to a graph. the graph is created by 
+\begin{python}
+import pg
+Graph.addPlot(X-Value , Y-Value)
+\end{python}
+
+ The SalesList is a list that holds the data for each of the four weeks in the month. The sales for each week are then added to the graph, which can then be displayed to the user.
 
 
 \subsection{Object Diagrams}
@@ -384,6 +437,18 @@ SalesList.insert{SalesWeek4}
 
 \subsection{Class Definitions}
 
+\begin{figure}[H]
+\caption{Class Definitions for Order Product and Member} \label{fig:Class Definitions for Order Product and Member}
+\hfill\includegraphics[scale=0.5]{ClassDefinitions1.pdf}\hspace*{\fill}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Class Definitions for Employee, Manage Stock and SQLConnection} \label{fig:Class Definitions for Employee, Manage Stock and SQLConnection}
+\hfill\includegraphics[scale=0.5]{ClassDefinitions2.pdf}\hspace*{\fill}
+\end{figure}
+
+\pagebreak
+ 
 \section{Prototyping}
 
 When a user tries to reset their password, there must be a level of verification so that only the User of that account can change the password. Therefore, in my system i wanted to implement a method where if the user would like to reset their password, an email is sent to the email address associated with that Employee Account. This was a problem as i did not know how to send emails through python. \par
@@ -422,7 +487,7 @@ The Code is a 4 digit random number between 1000-9999. this number is generated 
 \end{figure}
 
 
-Figure 2.15 shows the results form the first prototype. The `9792' in blue is the code genrated by the random number generator, and i displayed it in the program to ensure it matches the code sent in the email. Looking at the email, i can see that the codes successfully match, however there are a few issues with this prototype. The first issue is that the email is sent with No Subject. This is a problem as it maybe hard for the employee to find the email if it has no subject. Another issue with having no Subject, is that the email has been sent to the junk. This is a problem because the user may expect the email to be received in their inbox as apposed to their junk. Another small problem is that the content of the email is not very user friendly, it simply contains the 4 digit code. \par
+Figure 2.15 shows the results form the first prototype. The `9792' in blue is the code generated by the random number generator, and i displayed it in the program to ensure it matches the code sent in the email. Looking at the email, i can see that the codes successfully match, however there are a few issues with this prototype. The first issue is that the email is sent with No Subject. This is a problem as it maybe hard for the employee to find the email if it has no subject. Another issue with having no Subject, is that the email has been sent to the junk. This is a problem because the user may expect the email to be received in their inbox as apposed to their junk. Another small problem is that the content of the email is not very user friendly, it simply contains the 4 digit code. \par
 
 \pagebreak
 
@@ -471,7 +536,7 @@ Looking at Figure 2.16 we can see that our problems have been resolved. The emai
 A simple test i needed to do, was to find out how to make a button clickable or not, depending on the state of a checkbox. Below is an example of what i want to implement into my system:
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Finding Postcode Example} \label{fig:Finding Postcode Example}
 \hfill\includegraphics[width = 15cm]{ToggleFindBefore1.png}\hspace*{\fill}
 \end{figure}
 
@@ -479,7 +544,8 @@ Here, the tickbox is currently not checked. When the tickbox is not checked i do
 \begin{python}
 self.postcode_tickbox.stateChanged.connect(self.change_button_method)
 \end{python}
-The line above runs the change_button_method whenever the the state of the checkbox is changed (whenever it is checked or unchecked.) In the change_button_method, i need to determine the current state of the checkbox, in order to know whether to change the button to clickable or not clickable.
+
+The line above runs the ``change button method'' whenever the the state of the checkbox is changed (whenever it is checked or unchecked.) In the change button method, i need to determine the current state of the checkbox, in order to know whether to change the button to clickable or not clickable.
 
 \begin{python}
 self.postcode_tickbox.checkState()
@@ -491,7 +557,7 @@ when run, the line above will return true if the checkbox is checked or will ret
 self.find_button.setEnabled(False)
 \end{python}
 
-When set to False, the button is not clickable, however when set to True, the button becomes clickable. Finally i need to add an IF statement to say for example, IF the checkbox is currently checked, change the push button so it is clickable. The final working IF function is displayed below within the "change_button_method" method.
+When set to False, the button is not clickable, however when set to True, the button becomes clickable. Finally i need to add an IF statement to say for example, IF the checkbox is currently checked, change the push button so it is clickable. The final working IF function is displayed below within the ``change button method'' method.
 
 \begin{python}
 def change_button_method(self):
@@ -501,81 +567,124 @@ def change_button_method(self):
             self.find_button.setEnabled(True)
 \end{python}
 
-this now changes the state of the push button depending on whether the checkbox is checked or not. Below is evidence of the test sucessfully working:
+this now changes the state of the push button depending on whether the checkbox is checked or not. Below is evidence of the test successfully working:
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Working Toggle Button Example 1} \label{fig: Results From Test 3 Example 1}
 \hfill\includegraphics[width = 15cm]{ToggleFindAfter1.png}\hspace*{\fill}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Working Toggle Button Example 2} \label{fig: Results From Test 3 Example 2}
 \hfill\includegraphics[width = 15cm]{ToggleFindAfter2.png}\hspace*{\fill}
 \end{figure}
 
-The User will be able to click the checkbox if they live in Cumbria. They can then enter their postcode and click the find button. Once they click the find button i want the system to be able to find information about their location and to be able to automatically fill it in for them i.e their town, street ect. In order to do this i will need an Array of data containing The relevent information for each postcode. Creating this large array manually in Python is a bad idea as it would take an enormous amount of time and would be an incredibly tedeous process.
+The User will be able to click the checkbox if they live in Cumbria. They can then enter their postcode and click the find button. Once they click the find button i want the system to be able to find information about their location and to be able to automatically fill it in for them i.e their town, street ect. In order to do this i will need an Array of data containing The relevant information for each postcode. Creating this large array manually in Python is a bad idea as it would take an enormous amount of time and would be an incredibly tedious process.
 
- Instead, i did some research and found a CSV File online containing The Postcode, Latitude, Longitude, Town and County of every location in england. This file was 500Mb, which i felt was too large to store the information about every postcode in england.Therefore, i decided just to use the postcodes in Cumbria because this is where the business is situated and where the vast majority of the customers will be from. I removed the columns containing the Longitude and Latitude of the location as this information will not be relevent within my system.After removing The irellivent postcodes and information the file size was reduced to 556Kb. The screenshot below shows what the CSV looks like:
+ Instead, i did some research and found a CSV File online containing The Postcode, Latitude, Longitude, Town and County of every location in england. This file was 500Mb, which i felt was too large to store the information about every postcode in england.Therefore, i decided just to use the postcodes in Cumbria because this is where the business is situated and where the vast majority of the customers will be from. I removed the columns containing the Longitude and Latitude of the location as this information will not be relevant within my system.After removing The irreverent postcodes and information the file size was reduced to 556Kb. The screenshot below shows what the CSV looks like:
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
-\hfill\includegraphics[width = 15cm]{PostcodeScreenshot.png}\hspace*{\fill}
+\caption{Example From Postcode CSV File} \label{fig:CSV File Exmaple}
+\hfill\includegraphics[height = 19cm]{PostcodeScreenshot.png}\hspace*{\fill}
 \end{figure}
 
-I want my system to be able to see if the postcode the user entered is in the file, and if it use, use the corresponding data to fill out the Town and County automatically. In order to use the data in the CSV file i have to import the csv module in python. This is doen simplying by doing \begin{python} import csv \end{python} Then, in order to use the data within the file i use the line:
+I want my system to be able to see if the postcode the user entered is in the file, and if it use, use the corresponding data to fill out the Town and County automatically. In order to use the data in the CSV file i have to import the csv module in python. This is done simply by doing 
+
+\begin{python} 
+import csv 
+\end{python} 
+
+Then, in order to use the data within the file i use the line:
 
 \begin{python}
 with open("CumbriaPostcodes.csv", "r")as postcode_file:
-                        self.postcodes = csv.reader(postcode_file)
-                        for item in self.postcodes:
-                                self.address_list.append(item)
+	self.postcodes = csv.reader(postcode_file)
+	for item in self.postcodes:
+		self.address_list.append(item)
 \end{python}
 
-The code above opens the CSV file.  \begin{python} "with open("CumbriaPostcodes.csv", "r")as postcode_file:"\end{python} Tells python that it needs to open the file "CumbriaPostcodes.csv", which is the name of the file containing the postcodes and the "r" tells python that i only want to read the data from it. If i wanted to add data i could use either "a" or "w".  \begin{python} "self.postcodes = csv.reader(postcode_file)"  \end{python} assigns self.postcodes to the postcode file. The data within the csv can now be used in python. I now want to Add each Address (Postcode, County and Town) to a list to create an Array. This is done simply by saying:
+The code above opens the CSV file. 
+ \begin{python} 
+ with open("CumbriaPostcodes.csv", "r")as postcode_file:
+ \end{python}
+ 
+ Tells python that it needs to open the file "CumbriaPostcodes.csv", which is the name of the file containing the postcodes and the "r" tells python that i only want to read the data from it. If i wanted to add data i could use either "a" or "w". 
+ 
+ \begin{python} 
+ self.postcodes = csv.reader(postcode_file)
+   \end{python} 
+   
+   assigns self.postcodes to the postcode file. The data within the csv can now be used in python. I now want to Add each Address (Postcode, County and Town) to a list to create an Array. This is done simply by saying:
 
 \begin{python}
  for item in self.postcodes:
-                                self.address_list.append(item)
+ 	self.address_list.append(item)
 \end{python}
 
-This says that for every line in the csv file, add that line to the self.address_list list. Using self.postcode_entered as the variable that contains the string of the postcode the user enters, I can see if that postcode is in the file by doing:
+This says that for every line in the csv file, add that line to the address list.
+
+  Using 
+  
+\begin{python}
+self.postcode_entered
+\end{python} 
+
+as the variable that contains the string of the postcode the user enters, I can see if that postcode is in the file by doing:
+
 \begin{python}
 for count in range(0, len(self.address_list)):
-                                if self.postcode_input in self.address_list[count]:
+	 if self.postcode_input in self.address_list[count]:
 \end{python}
 
-The FOR loop is run once for each item in the list. In this case its 19,363 times. Then for each address, it checks whether the postcode the user entered matches the postcode for that address. If they do match i want the system to get the county and town and then insert that data to the data fields. If the postcodes do not match, it should move to the next address in the array. If the postcode doesn't match any of the postcodes, an appropriote message should be displayed. The following code simply Assigns the County and Town from the CSV File to the County and Town Data Fields in my system if the postcodes match:
+The FOR loop is run once for each item in the list. In this case its 19,363 times. Then for each address, it checks whether the postcode the user entered matches the postcode for that address. If they do match i want the system to get the county and town and then insert that data to the data fields. If the postcodes do not match, it should move to the next address in the array. If the postcode doesn't match any of the postcodes, an appropriate message should be displayed. The following code simply Assigns the County and Town from the CSV File to the County and Town Data Fields in my system if the postcodes match:
 
 \begin{python}
 self.index = self.county.findText(self.address_list[count][2])
-                                        self.county.setCurrentIndex(self.index)
-                                        self.town.setText(self.address_list[count][1])
+self.county.setCurrentIndex(self.index)
+self.town.setText(self.address_list[count][1])
 \end{python}
 
-self.county is a combo box containg all the counties in England. The user simply selects the county from the list. \begin{python}"self.index = self.county.findText(self.address_list[count][2])" Looks in the county combo box and finds the index of the County that matches the postcode, this index is then assigned to self.index.\begin{python}  "self.county.setCurrentIndex(self.index)" \end{python}simply changes the current index of the combo box to the index of the matching county. Because self.town is a line edit, this can just be directly assigned to the town from the matching address. This is done using:\begin{python}"self.town.setText(self.address_list[count][1])".\end{python} Below is the working example of the test working:
+self.county is a combo box containg all the counties in England. The user simply selects the county from the list.
+ \begin{python}
+ self.index = self.county.findText(self.address_list[count][2]
+ )\end{python}
+ 
+ Looks in the county combo box and finds the index of the County that matches the postcode, this index is then assigned to self.index.
+\begin{python} 
+ self.county.setCurrentIndex(self.index)
+  \end{python}
+simply changes the current index of the combo box to the index of the matching county. Because self.town is a line edit, this can just be directly assigned to the town from the matching address. This is done using:
+\begin{python}
+self.town.setText(self.address_list[count][1])
+\end{python}
+
+ Below is the working example of the test working:
+
+\pagebreak
+
 
 Here we can see that 'CA7 4QT' is a legitimate postcode in the csv file.
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
-\hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
+\caption{Example Postcode From the CSV File} \label{fig:Example Address From CSV File}
+\hfill\includegraphics[height = 15cm]{FindingPostcodeEvidence1.png}\hspace*{\fill}
 \end{figure}
 
-The postcode is then entered into the postcode field, the checkbox is ticked which enables the find button and the find button is clicked. The find button is connected to the "find_postcode_method" method. Once the button is clicked, you can see that the data fields have been changed correctly. The fields highlighted in green shows that the data is valid.
+The postcode is then entered into the postcode field, the checkbox is ticked which enables the find button and the find button is clicked. The find button is connected to the "find postcode method" method. Once the button is clicked, you can see that the data fields have been changed correctly. The fields highlighted in green shows that the data is valid.
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Example Before Postcode is Entered} \label{fig:Example Before Postcode is entered}
 \hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence2.png}\hspace*{\fill}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Example After Postcode is Entered} \label{fig:Example After matching Postcode is entered}
 \hfill\includegraphics[width = 15cm]{FindingPostcodeEvidence3.png}\hspace*{\fill}
 \end{figure}
 
 Another test which i had to prototype was when An image is assigned to a specific product, a copy of that image is stored in my system so if the user deletes the image, there will be a copy of it that the system can use. 
 
-An easy way to make a copy of a file in python is to use the Shutil module. to use this module, i simply imported it using "import shutil". using the method "shutil.copy()" you simply enter the path in which the file comes from including the file name, and then the new path including the new name of the file. To implement this into my system, i use a Dialog box to get the image path from the user, then use the path to copy the image. because im storing all the product images in the same folder, the path the images are going to will be the same. Each image will be named as its associated products ProductID, i.e (15.jpg). Below is a working example of the code where self.path.text() is the original path of the image, supplied by the user and the new path is the folder in which the files are stored.
+An easy way to make a copy of a file in python is to use the Shutil module. To use this module, i simply imported it using "import shutil". using the method "shutil.copy()" you simply enter the path in which the file comes from including the file name, and then the new path including the new name of the file. To implement this into my system, i use a Dialog box to get the image path from the user, then use the path to copy the image. because im storing all the product images in the same folder, the path the images are going to will be the same. Each image will be named as its associated products ProductID, i.e (15.jpg). Below is a working example of the code where self.path.text() is the original path of the image, supplied by the user and the new path is the folder in which the files are stored.
 
 \begin{python}
 path = self.path.text()
@@ -583,26 +692,50 @@ new_path = "./ProductImages/01.jpg"
 shutil.copy(path, new_path)
 \end{python}
 
-The last simple thing that i wanted to prototype was to ensure the postcode is legitimate before it is added. In order for the postcode to be valid it must follow a specific pattern of letters and numbers. I used a regular expression to validate the postcode. to use regular expressions, i simply imported the regular expression module: \begin{python}"import re".\end{python} then to create a regular expression i just did:
+Evidence of the Photo being copied from one folder to another is shown below:
+
+\begin{figure}[H]
+\caption{Exmaple of the Original File Name In The Original Foder} \label{fig:Exmaple of the Original File Name In The Original Foder}
+\hfill\includegraphics[width = 15cm]{MoveFileExample1.png}\hspace*{\fill}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Exmaple of the New File Name In The New Folder} \label{fig:Exmaple of the Newl File Name In The New Folder}
+\hfill\includegraphics[width = 15cm]{MoveFileExample2.png}\hspace*{\fill}
+\end{figure}
+
+
+The last simple thing that i wanted to prototype was to ensure the postcode is legitimate before it is added. In order for the postcode to be valid it must follow a specific pattern of letters and numbers. I used a regular expression to validate the postcode. to use regular expressions, i simply imported the regular expression module: 
+
+\begin{python}"
+import re
+\end{python} 
+
+then to create a regular expression i just did:
 \begin{python}
 self.pattern = re.compile("[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}")
 \end{python}
  The regular expression above says that the postcode must have between 1 and 2 letters between A and Z, followed by an number between 0 and 9, then followed by either a number or a letter. after this the postcode must have a space then finally must end with a number between 0 and 9 and 2 letters between A and Z.
 
-to insure the postcode was between A and Z not a and z i used \begin{python}" postcode = postcode.upper()" \end{python}. this simply capitalized all the letters in the postcode.
+to insure the postcode was between A and Z not a and z i used  
 
-Below is an exmaple of a valid and a non valid postcode, if the postcode is valid, the system changes the background of the line edit from white to green.
+\begin{python}
+postcode = postcode.upper()"
+\end{python}
+
+ this simply capitalized all the letters in the postcode. Below is an example of a valid and a non valid postcode, if the postcode is valid, the system changes the background of the line edit from white to green.
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
+\caption{Example When a Non Valid postcode is entered} \label{fig:Example When a Non Valid postcode is entered }
 \hfill\includegraphics[width = 15cm]{ValidationTest1.png}\hspace*{\fill}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Results From Test 2} \label{fig:Results From Test 2}
-\hfill\includegraphics[width = 15cm]{ValidationTest2.png\hspace*{\fill}
+\caption{Example When a Valid postcode is entered} \label{fig:Example When a Valid postcode is entered}
+\hfill\includegraphics[width = 15cm]{ValidationTest2.png}\hspace*{\fill}
 \end{figure}
 
+\pagebreak
 
 \section{Definition of Data Requirements}
 
@@ -680,43 +813,32 @@ Below is an exmaple of a valid and a non valid postcode, if the postcode is vali
 \end{itemize}
 \subsection{Explanation of how data output items are generated}
 
+<<<<<<< HEAD
+
+=======
   \begin{tabular}{|p{4cm}|p{4cm}|}
         \hline
 	\textbf{Output} & \textbf{ How the Output is Generated}\\ \hline
 	{ Deleting or Editing Member} & {The User enters the MemberID of the product they want to Delete or Edit, The System then searches the Member Table in the Database for a matching MemberID. If the MemberID the user entered matches an existing MemberID , the corresponding Member information is output to the User where the information can then be changed.}\\ \hline
 	{Deleting or Editing Employee} & {The User enters the EmploeeID of the product they want to Delete or Edit, The System then searches the Employee Table in the Database for a matching EmployeeID. If the EmployeeID the user entered matches an existing EmployeeID , the corresponding Employee information is output to the User where the information can then be changed.}\\ \hline
-	{Order}&{ In The Order, The Employee who created the order is displayed at the top of the Order Invoice. The Order also contains the Product Name, Price, Size and Quantity of each product that the Customer purchased. The Total price and discount is also displayed on the Order Invoice.}
-	{Search Result}&{When using the Product Search interface, the Employee can enter specific information about a product and any Product that matches the search field will be output to the user. Here the user can choose to edit the product information or search for a different product.Every time the Employee changes the text in the search field, The system searches the Product Table within the database for any matching data with the search. If a match is found all corresponding data about that Product is output to the user.}
-	{ProductSearch Pop Up Window} & {Here, the user can search for any information within the database, a Product, a Member or an Employee. The user must know whether they are looking for a Member, Employee or Product as the system will ask the user to know which table to search. The system will display a drop down menu for the user with the option of Product, employee or Member. The User can select each of these options and the Table being displayed will change depending on which option from the dropdown menu the user selects. By Default, The Product Table is displayed and All Products are displayed within the table. If the User Chooses The Member Option, The System should change the current table being displayed to the Members Table. Once the Appropriote table is displayed, The user can then Search The table using specific Keywords and if any data matches the keyword, The Table will display the entire Member or EMployee or Product that corresponds to the matching data.}
+	{Order}&{ In The Order, The Employee who created the order is displayed at the top of the Order Invoice. The Order also contains the Product Name, Price, Size and Quantity of each product that the Customer purchased. The Total price and discount is also displayed on the Order Invoice.} \\ \hline
+	{Search Result}&{When using the Product Search interface, the Employee can enter specific information about a product and any Product that matches the search field will be output to the user. Here the user can choose to edit the product information or search for a different product.Every time the Employee changes the text in the search field, The system searches the Product Table within the database for any matching data with the search. If a match is found all corresponding data about that Product is output to the user.} \\ \hline
+	{ProductSearch Pop Up Window} & {Here, the user can search for any information within the database, a Product, a Member or an Employee. The user must know whether they are looking for a Member, Employee or Product as the system will ask the user to know which table to search. The system will display a drop down menu for the user with the option of Product, employee or Member. The User can select each of these options and the Table being displayed will change depending on which option from the dropdown menu the user selects. By Default, The Product Table is displayed and All Products are displayed within the table. If the User Chooses The Member Option, The System should change the current table being displayed to the Members Table. Once the Appropriote table is displayed, The user can then Search The table using specific Keywords and if any data matches the keyword, The Table will display the entire Member or EMployee or Product that corresponds to the matching data.}\\ \hline
 	\end{tabular}
 	
-	
- \begin{tabular}{|p{4cm}|p{4cm}|}
+\subsection{Explanation of how data output items are generated}
+
+  \begin{longtable}{|p{4cm}|p{6cm}|}
         \hline
-        	{Product Restock} & {If the total stock of a specific product has gotten lower than the minimum stock allowed.}\\ \hline
-	{Product Name} & {Employee inputs Information}\\ \hline
-	{Size} & {Employee inputs Information}\\ \hline
-	{Category} & {Employee inputs Information}\\ \hline
-	{Employee First Name} & {Employee inputs Information}\\ \hline
-	{Employee Last Name} & {Employee inputs Information}\\ \hline
-	{Employee Password} & {Employee inputs Information}\\ \hline
-	{Employee Email} & {Employee inputs Information}\\ \hline
-	{Date} & {Employee inputs Information}\\ \hline
-	{Time} & {Employee inputs Information}\\ \hline
-	{Title} & {Employee inputs Information}\\ \hline
-	{Member First Name} & {Employee inputs Information}\\ \hline
-	{Member Last Name} & {Employee inputs Information}\\ \hline
-	{House No} & {Employee inputs Information}\\ \hline
-	{Street} & {Employee inputs Information}\\ \hline
-	{Town} & {Employee inputs Information}\\ \hline
-	{City} & {Employee inputs Information}\\ \hline
-	{County} & {Employee inputs Information}\\ \hline
-	{Postcode} & {Employee inputs Information}\\ \hline
-	{Telephone Number} & {Employee inputs Information}\\ \hline
-	{Member Email} & {Employee inputs Information}\\ \hline
-	\end{tabular}
+	\textbf{Output} & \textbf{ How the Output is Generated}\\ \hline
+	{ Deleting or Editing Member} & {The User enters the MemberID of the product they want to Delete or Edit, The System then searches the Member Table in the Database for a matching MemberID. If the MemberID the user entered matches an existing MemberID , the corresponding Member information is output to the User where the information can then be changed.}\\ \hline
+	{Deleting or Editing Employee} & {The User enters the EmploeeID of the product they want to Delete or Edit, The System then searches the Employee Table in the Database for a matching EmployeeID. If the EmployeeID the user entered matches an existing EmployeeID , the corresponding Employee information is output to the User where the information can then be changed.}\\ \hline
+	{Order}&{ In The Order, The Employee who created the order is displayed at the top of the Order Invoice. The Order also contains the Product Name, Price, Size and Quantity of each product that the Customer purchased. The Total price and discount is also displayed on the Order Invoice.}\\ \hline
+	{Search Result}&{When using the Product Search interface, the Employee can enter specific information about a product and any Product that matches the search field will be output to the user. Here the user can choose to edit the product information or search for a different product.Every time the Employee changes the text in the search field, The system searches the Product Table within the database for any matching data with the search. If a match is found all corresponding data about that Product is output to the user.}\\ \hline
+	{ProductSearch Pop Up Window} & {Here, the user can search for any information within the database, a Product, a Member or an Employee. The user must know whether they are looking for a Member, Employee or Product as the system will ask the user to know which table to search. The system will display a drop down menu for the user with the option of Product, employee or Member. The User can select each of these options and the Table being displayed will change depending on which option from the drop down menu the user selects. By Default, The Product Table is displayed and All Products are displayed within the table. If the User Chooses The Member Option, The System should change the current table being displayed to the Members Table. Once the Appropriate table is displayed, The user can then Search The table using specific Keywords and if any data matches the keyword, The Table will display the entire Member or Employee or Product that corresponds to the matching data.} \\ \hline
+	\end{longtable}
 	
- \begin{tabular}{|p{4cm}|p{4cm}|}
+ \begin{tabular}{|p{4cm}|p{6cm}|}
         \hline	
 	{Location Name} & {Employee inputs Information}\\ \hline
 	{Product Stock in each Location} & {Employee inputs Information}\\ \hline
@@ -760,7 +882,11 @@ Below is an exmaple of a valid and a non valid postcode, if the postcode is vali
 
 My System only needs to be used on one computer. Therefore my system can be stored on a Hard Disk Drive (HDD). a HDD is a good storage method as they are reliable, do not require any maintenance and can store and can store upto about 10 Terra-bytes of data for an extremely low cost. Compared to storing the system on a server, where maintenance is required and would be far more expensive compared to a HDD. My client already has a HDD within their computer therefore, my new system can be stored on that. However, The system will have to be backed up on another storage device. \par
 
+<<<<<<< HEAD
+The back up storage device must have a reasonable storage size to store the system and a copy of all the product images. Assuming my client chooses to add 200 products, and each product image is 500Kb the storage space required to store all the product images would be (500Kb * 200 / 1000 = 100Mb) There are multiple solutions here, such as a External Hard Disk Drive, a CD-RW and a flash device such as a memory stick.  The most appropriate storage device would be the External Hard Disk Drive. This is because it can store a very large amount of data, is not easily breakable, and is easy lost. The reasons why i chose not to use a CD-RW is because they can be damaged easily, the surface of the CD can be scratched easily, exposure to extreme sunlight can cause the data on the CD to become corrupt and the disks are fairly fragile. The data on the CD may also accidently be written over as its a CD-RW. I decided against using a Flash memory stick because they are usually quite small in size and i feel that they can be lost quite easily. Depending on the storage capacity and the amount of product images the user wants to store, the memory stick may not have a large enough storage capacity to store all the images. External hard disk drives are usually physically a lot bigger then flash memory sticks so they will be a lot harder to loose and tend to have a larger storage capacity than both CD-RW and memory sticks.\par
+=======
 The back up storage device must have a reasonable storage size to store the system and a copy of all the product images. Assuming my client choosesw to add 200 products, and each product image is 500Kb the storage space required to store all the product images would be (500Kb * 200 / 1000 = 100Mb) There are multiple solutions here, such as a External Hard Disk Drive, a CD-RW and a flash device such as a memory stick.  The most appropriate storage device would be the External Hard Disk Drive. This is because it can store a very large amount of data, is not easily breakable, and is easy lost. The reasons why i chose not to use a CD-RW is because they can be damaged easily, the surface of the CD can be scratched easily, exposure to extreme sunlight can cause the data on the CD to become corrupt and the disks are fairly fragile. The data on the CD may also accidently be written over as its a CD-RW. I decided against using a Flash memory stick because they are usually quite small in size and i feel that they can be lost quite easily. Depending on the storage capacity and the amount of product images the user wants to store, the memory stick may not have a large enough storage capacity to store all the images. External hard disk drives are usually physically a lot bigger then flash memory sticks so they will be a lot harder to loose and tend to have a larger storage capacity than both CD-RW and memory sticks.\par
+>>>>>>> origin/master
 
 \section{Database Design}
 
@@ -892,7 +1018,6 @@ Member(\textbf{MemberID}, Title, First Name, Last Name, HouseNo., Street, town, 
     \end{tabular}
 \end{center}
 
-\begin{flushleft}
 \begin{center}
     \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{2cm}|}
         \hline
@@ -918,61 +1043,81 @@ Member(\textbf{MemberID}, Title, First Name, Last Name, HouseNo., Street, town, 
 	{Memebr Email} & {} & {} & {}\\ \hline
     \end{tabular}
 \end{center}
-\end{flushleft}
 
 \subsection{SQL Queries}
 
-I have used python to format the following SQL Statements:
-\begin{python}
+\begin{sql}
 """create ProductTable(
  ProductID INTEGER,
  ProductName TEXT,
  Category TEXT,
  Price INTEGER,
  PRIMARY KEY(ProductID))
-\end{python}
+\end{sql}
 
 This is the SQL Statement for creating a new product table. The attributes ProductName, Category and Price are entered by the user, and the ProductID is assigned to the product automatically. The next SQl statement then adds a product to the table.
-\begin{python}
+\begin{sql}
 """insert into
 Product(ProductName,Category,Price,Stock) values (product_name, category, price, stock)
-\end{python}
+\end{sql}
 
 the attributes product name, category, price and stock are entered by the user and passed into the product table created in the previous SQL statement. One the table has multiple products in it, finding products quickly may become an issue. The next SQL statement allows the user to search for a specific product.
-\begin{python}
+\begin{sql}
         	"""select *
         	 from Product
         	 where ProductName = ProductNameSearch
-\end{python}
+\end{sql}
 
 Once the user has found the product they want there are many different things the user can do with the data. If the user notices inaccuracy in the product data they can edit ti using the following SQL statement.
-\begin{python}
+\begin{sql}
 	"""update Product set
 	ProductName = NewProductName
 	 Category = NewCategory
  	Price = NewPrice
  	where ProductID = ProductIDSearch
-\end{python}
+\end{sql}
 If the user decides they want to remove the product entirely instead of editing the data they can use the following SQL statement. The user enters the ProductID of the Product in which they would like to remove form the table, The ProductID is assigned to the variable `ProductIDToDelete' This is then passed into the SQL statement and the product is deleted form the table and database.
-\begin{python}
+\begin{sql}
 	"""delete from Product
  where ProductID = ProductIDToDelete
-\end{python}
+\end{sql}
 If the user does not know the specific name of the product but they know what category the product comes under, the following SQL Statement allows the user to enter a category, and all the products that fall under that category are displayed in the table.
-\begin{python}
+\begin{sql}
 	"""select ProductName, Category
 	from Product
 	where Category = EnterCategory
-\end{python}
+\end{sql}
 
+During an Order, a current Member can get a discount on the products they buy. Employees will also get the same discount. Therefore, to find the Member or Employee, a search for the Member or Employee ID will have to searched both the MEployee and Member table. The SQL Query below searches for the ID in both the Employee and Member table
+\begin{sql}
+	***SELECT Employee.EmployeeID,  Employee.EmployeeFirstName,  Employee.EmployeeLastName,  Member.MemberID, Member.MemberFirstName, Member.MemberlastName  FROM   Employee, Member  WHERE EmployeeID = MemberID AND EmployeeID = ? ***
+\end{sql}
+  
+  For the SQL statement to work the ID of The customer is entered, i.e(0.3) and the SQL will return the Names of the Employee and Member That are associated with that ID for confirmation. The reason that the Querey searches the Employee Dtabase aswell, is because employees can also purchase products and get a discount, therefore if they searched for their EmployeeID in just the Member table, they would find the wrong Account associated to them. Therefore, The Query Searches both tables, which is most likely to return with both a Member and Employee with the ID the Customer Uses, and then the correct Member/ Employee is selected.
+
+  When Creating an Order, Various Pieces of information are needed from different tables. For example, the Product ID, Name, Size and Price are needed for the order, but also the First Name of the Employee who served the customer. To Query The database for information from both of these tables i used the following query:
+  
+\begin{sql}
+	***'SELECT Product.ProductID,   Product.ProductName,   Product.Size,  Product.Price, Employee.EmployeeFirstName FROM   Employee, Product  WHERE EmployeeID = ? AND ProductID = ? ***
+\end{sql}
+  
+  
+  
+  
+  
+  
 \section{Security and Integrity of the System and Data}
 
 \subsection{Security and Integrity of Data}
 
+<<<<<<< HEAD
+My system will store personal information about the members and also the employees. Therefore, my system must follow the Data Protection Act. This means that the Database should be kept up to date, removing any data that is older than roughly 5 or 6 years old. This can be done when the system first starts up. The system can check the date in which the data was added and if the data has been in the database for over 6 years it shall be removed from the database. Before any of the data in the system can be accessed, a user must must Log in to the system with a username and password combination. This allows only authorized users to handle the data. Inaccuracies in databases can sometimes be caused by erroneous data being entered by the user. For example is the user wanted to enter the word `Password' they may accidentally enter `Passwrod'. This sort of error can lead to data becoming inaccurate, to minimize the risk of this happening, as many drop down menus and choice buttons will be supplied as possible. I will also need to include Referral Integrity to my database. This will make sure that the user enters the correct data for product so it can be used as a foreign key in ProductOrder. Without regular expression, irregularities may occur between these two tables if for example a product is removed from the Product table, but is not removed from the ProductOrder table. To prevent this from happening i need to use cascading delete so that if a product is deleted from the Product table, it is also deleted from the ProductOrder table too. Referral Integrity will have to be applied between any table that contains a foreign key, and the table which is a foreign key to another table.
+=======
 My system will store personal information about the members and also the employees. Therefore, my system must follow the Data Protection Act. This means that the Database should be kept upto date, removing any data that is older than roughly 5 or 6 years old. This can be done when the system first starts up. The system can check the date in which the data was added and if the data has been in the database for over 6 years it shall be removed from the database. Before any of the data in the system can be accessed, a user must must Log in to the system with a username and password combination. This allows only authorized users to handle the data. Inaccuracies in databases can sometimes be caused by erroneous data being entered by the user. For example is the user wanted to enter the word `Password' they may accidentally enter `Paswsord'. This sort of error can lead to data becoming inaccurate, to minimize the risk of this happening, as many drop down menus and choice buttons will be supplied as possible. I will also need to include Referral Integrity to my database. This will make sure that the user enters the correct data for product so it can be used as a foreign key in ProductOrder. Without regular expression, irregularities may occur between these two tables if for example a product is removed from the Product table, but is not removed from the ProductOrder table. To prevent this from happening i need to use cascading delete so that if a product is deleted from the Product table, it is also deleted from the ProductOrder table too. Referal Integrity will have to be applied between any table that contains a foreign key, and the table which is a foreign key to another table.
+>>>>>>> origin/master
 
 \subsection{System Security}
-To access any data on the system, a correct employee username and password must be entered. To further secure the data, employee accounts can only be added and deleted through the admin account (my clients account). None of the system will be accessable until a correct username and password combination is entered. An additional Security step, could be to ensure all employee passwords are updated every 30 days. To ensure my system follows the Data Protection Act, my system must: \par \par
+To access any data on the system, a correct employee username and password must be entered. To further secure the data, employee accounts can only be added and deleted through the admin account (my clients account). None of the system will be accessible until a correct username and password combination is entered. An additional Security step, could be to ensure all employee passwords are updated every 30 days. To ensure my system follows the Data Protection Act, my system must: \par \par
 \begin{itemize}
 \item Must not be Transfered to Other Countries
 \item Must be stored securely, to ensure that it is only accessed by authorized people
@@ -1038,7 +1183,6 @@ To access any data on the system, a correct employee username and password must 
 \end{figure}
 
 
-
 \section{Testing}
 \begin{landscape}
 
@@ -1046,12 +1190,13 @@ To access any data on the system, a correct employee username and password must 
 \begin{center}
     \begin{tabular}{|p{2cm}|p{5cm}|p{5cm}|p{4cm}|}
         \hline
-        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \\ \hline
-	1. & Test the flow of control between the user interfaces & Top Down Testing &  \\ \hline
+
+        \textbf{Test Series} & \textbf{Purpose of Test Series} & \textbf{Testing Strategy} & \textbf{Strategy Rationale}\\ \hline
+	1. & Test the flow of control between the user interfaces & Top Down Testing & I Have chosen Top Down Testing Because the System begins with a main Interface then stems into different interfaces. \\ \hline
 	2. & Test validation of data inputs & Bottom Up testing Testing &  Each input and output will be tested when they're developed\\ \hline
-	3. & Test Data is stored in the correct location & Black-Box Testing & \\ \hline
-	4. & Test algorithms and SQL statements to ensure the output is correct & Black box testing &\\ \hline
-	5. & Test the system fulfills the specification & Acceptance testing & \\ \hline
+	3. & Test Data is stored in the correct location & White Box Testing & i am using White box testing because i will have to look into the database once the data is added \\ \hline
+	4. & Test algorithms and SQL statements to ensure the output is correct & Black box testing & I am using Black Box Testing because i can see whether the algorithms work without having to look at the code and SQL Queries. \\ \hline
+	5. & Test the system fulfills the specification & Acceptance testing & I have used acceptance testing because the test is to see if the system fulfils the specification. \\ \hline
 
     \end{tabular}
 \end{center}
@@ -1064,29 +1209,52 @@ To access any data on the system, a correct employee username and password must 
         \hline
         \textbf{Test Series} & \textbf{Purpose of Test} & \textbf{Test Description} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Evidence}\\ \hline
 	1.01 & Test the Arrow button to see if it works successfully & The Arrow Button Should change to the Product Search Interface if log in details are correct & Click the arrow button & Normal & The Product Search Interface should be displayed &&  \\ \hline
-	1.02 & Test the keyboard shortcut assigned to the arrow button works successfully & The Keyboard Shortcut Should change to the Product Search Interface if log in details are correct & Press the Keyboard Shortcut after legitimate log in details are entered &  Normal &The Product Search Interface should be displayed &&  \\ \hline
+	1.02 & Test the keyboard short-cut assigned to the arrow button works successfully & The Keyboard Shortcut Should change to the Product Search Interface if log in details are correct & Press the Keyboard Shortcut after legitimate log in details are entered &  Normal &The Product Search Interface should be displayed &&  \\ \hline
 	1.03 & Test the Reset Password Here Link & When clicked the Link should change to the reset password interface & Left mouse click on the Reset Password Link &  Normal & The Reset Password Interface should be displayed &&  \\ \hline
 	1.04 & Test the Log Off button to see if it works successfully & Left mouse clicking the log off button should return back to the log in interface & Left mouse click Log off button &  Normal & The Log in interface should be displayed && \\ \hline
 	1.05 & Test to see if the Add new product option works successfully & The user should left click on the product tab then left click on the Add new product Option. & Left click Add new product button &  Normal &  The interface should change to the Add new product interface&& \\ \hline
 	1.06 & Test to see if the Delete Product button works & Clicking on the product tab then clicking on the delete product option & Left mouse click Delete a product button &  Normal & Interface should change to Delete a product interface&& \\ \hline
 	1.07 & Test to see if the manage stock button works successfully & Clicking on the Manage Stock button to see what the outcome is & The Manage Product button, under the Stock tab should be left clicked &  Normal & The Stock Management interface should be displayed. && \\ \hline
 	1.08 & Test to see if the Product restock button works & Clicking the Product restock button to see the result & left clicking the Stock tab then left clicking the Product restock tab &  Normal & The Stock management interface should be displayed. && \\ \hline
-	1.09 & Test to see if the add a new member button works & The Add new member button should change to the Add new memebr interface & Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed&& \\ \hline
+	1.09 & Test to see if the add a new member button works & The Add new member button should change to the Add new member interface & Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed&& \\ \hline
 	1.10 & Testing to see what happens when remove member is clicked & left clicking the delete member button and recording outcome & Left clicking remove a member under the member tab & Normal & the Remove a member interface should be displayed && \\ \hline
 	1.11 & Test to see if the add a new employee button works & The Add new employee button should change to the Add new employee interface & Left clicking the add new employee button under the employee tab &  Normal & the Add new employee interface should be displayed&& \\ \hline
 	1.12 & Testing to see what happens when remove employee is clicked & left clicking the employee member button and recording outcome & Left clicking remove a employee under the employee tab & Normal & the Remove a employee interface should be displayed && \\ \hline
 	2.01 & Testing valid characters and range of Product Name & entering a range of different characters to see which ones are valid & Test123@+ & Normal & The string Test should be accepted however, the characters `123' and `@+' should not be accepted as they are integers and special characters && \\ \hline
 	2.02 & testing to see which file types are valid for Product Image & entering a range of file types to see which are valid & test.jpg, test.bnp, test.txt, test.png, test.gif, test.doc, test.pdf & Normal & The only accepted file types should be .jpg and .png. No other file extensions should be valid. && \\ \hline
-	2.03 & Testing to see which characters are valid in Price & entering a range of characters into price to see which are accepted & test123@+ & Normal & Only 123 should be accepted because  a price cannot contain letters or special characters && \\ \hline
-	2.04 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid & test123@+ & Normal & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers.&& \\ \hline
-	2.05 & Testing to see which characters are valid in Name & Entering a range of characters into name and seeing which ones are valid & Test123@+ & Normal & Only the letters `test' should be valid as a name cannot contain integers or special characters.&& \\ \hline
-	2.06 & seeing which characters are valid in email & seeing if a valid email is required to enter into this field & Bob.com, Bob@email, Bob@email.com & Normal & Only Bob@Email.com should be accepted. No string should be accepted unless it contains the `@' symbol followed by at least one `.' && \\ \hline
-	2.07 & testing for validation in telephone number & entering different numbers into the field to see which are valid & 999, 01234567890, 012345678987654 & Normal & Only 01234567890 should be valid as `999' is too short and 012345678987654 is too long. && \\ \hline
-	3.01 & Ensuring all product data is stored in the product table & Entering a product then ensuring all of its data is input into the Product table & Normal & Product: Dog Food & The ProductName should be Dog Food and the rest of the data should be stored in the Product Table && \\ \hline
-	3.02 & Ensuring all member data is stored in the member table & Entering a member then ensuring all of its data is input into the member table & Normal & Member: Bruce Wayne & The MemberName should be Bruce Wayne  and the rest of the data should be stored in the Member Table && \\ \hline
-	3.03 & Ensuring all Employee data is stored in the Employee table & Entering a employee then ensuring all of its data is input into the Employee table & Normal & Employee: Clark Kent & The EmployeeName should be Clark Kent and the rest of the data should be stored in the Employee Table && \\ \hline
-	4.01 & Ensuring the product table is created properly & Creating the product table and adding a product to ensure its working properly & adding product: Dog Food & normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column && \\ \hline
-	4.02 & Deleting a product from the database &  Entering a ProductID to delete then seeing if it was deleted successfully & ProductID = 2 & normal & The product database should be viewed, then a productID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database && \\ \hline
+	2.03 & testing to see which file types are valid for Product Image & entering an erroneous file type to see if its accepted & test.doc & Erroneous &  Should not be accepted as a valid image file && \\ \hline
+	2.04 & Testing to see which characters are valid in Price & entering a range of characters into price to see which are accepted & test@+ & Erroneous  &  None of the characters should be accepted because a price cannot contain letters or special characters && \\ \hline
+	2.05 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid & 11  & Normal & The Integers should be accepted by the system&& \\ \hline
+	2.06 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid & test@+ & Erroneous & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers.&& \\ \hline
+	2.07 & Testing to see which characters are valid in Name & Entering a range of characters into name and seeing which ones are valid & Matthew & Normal & Only the letters `test' should be valid as a name cannot contain integers or special characters.&& \\ \hline
+	2.08 & Testing to see which characters are valid in Name & Entering a range of characters into name and seeing which ones are valid & =John34 & Erroneous & The above text should not be valid as it contain number sand special characters, a name can only contain letters.&& \\ \hline
+	2.09 & seeing which characters are valid in email & Entering Erroneous data to see if it is accepted into the database &  Bob@ email  & Erroneous & This string should not be accepted as a legitimate email because it does not contain the ``.com''&& \\ \hline
+	2.10 & seeing which characters are valid in email & Entering Erroneous data to see if it is accepted into the database & Bob.com& Erroneous &  This string should not be accepted as a legitimate email because it does not contain the @'' && \\ \hline
+	2.11 & seeing which characters are valid in email & Entering a valid email to see if it is accepted & Bob@ email.com & Normal &  Bob@ Email.com should be accepted. This is because it contains both the @ symbol and is followed by .com && \\ \hline
+	2.12 & testing for validation in telephone number & Entering an 11 digit telephone number & 01234567890 & Normal & this telephone number contains exactly 11 digits therefore it should be valid && \\ \hline
+	2.13 & testing for validation in telephone number & Entering a 3 Digit telephone Number & 999& Erroneous &  `999' is too short and should not be accepted as a telephone number&& \\ \hline
+	2.14 & testing for validation in telephone number & Entering a telephone number thats longer than the boundary & 01234567 8987654 & Erroneous & This number should not be accepted because it is too long && \\ \hline
+	2.15 & testing for validation in telephone number &Entering an 11 digit number to see if it is outside the boundary  & 01234567890 & Boundary & this number should be accepted because it is 11 digits long && \\ \hline
+	2.16 & testing for validation in telephone number & Entering a 12 digit number to see if it is outside the boundary &012345678901 & Boundary & this number shoud not be accepted because it is 12 digits long && \\ \hline
+	3.01 & Product Name is added to the database successfully & Adding a Product to the database and make sure the product Name has been added successfully  & Pedigree Chum & Normal & The ProductName should be Pedigree Chum and the rest of the data should be stored in the Product Table && \\ \hline
+	3.02 & The correct Product image is assigned to the right Product & Adding a Product to the database and make sure the correct Product Image is assigned to the Product & DogFood.jpg & Normal  & The ProductImage entered should be assigned to the Product Entered. && \\ \hline
+	3.03 & Ensuring all product data is stored in the product table & Entering a product then ensuring all of its data is input into the Product table & Product: Dog Food & Normal & The ProductName should be Dog Food and the rest of the data should be stored in the Product Table && \\ \hline
+	3.04 & Ensuring The Postcode the User enters is stored in the correct format  & To prevent any errors when trying to search for the postcode later on & CB7 5LQ & Normal & The Postcode has three numbers and letters then the space, then four numbers and letters. && \\ \hline
+	3.05 & Ensuring The Postcode the User enters is stored in the correct format  & To prevent any errors when trying to search for the postcode later on & CB75LQ & Erroneous & The postcode does not contain a space between the two parts of the postcode, therefore it should not be accepted in the database. && \\ \hline
+	3.06 & Ensuring all member data is stored in the member table & Entering a member then ensuring all of its data is input into the member table & Member: Bruce Wayne & Normal & The MemberName should be Bruce Wayne  and the rest of the data should be stored in the Member Table && \\ \hline
+	3.07 & Ensuring the Employees password is set to `Password' When the account is first created & Adding an Employee then using the password `password' to enter the account. & `Password' & Normal & The password should be accepted and the employee should be taken to the change password screen&& \\ \hline
+	3.08 & Ensuring the reset password email is sent to the correct email address. & Changing the password for the employee and ensuring the password reset email goes to their email address. & 31477@ longroad.ac.uk & Normal & The employee should log on the email address associated with their Employee Account and the email should be in their inbox.&& \\ \hline
+	3.09 & Ensuring all Employee data is stored in the Employee table & Entering a employee then ensuring all of its data is input into the Employee table & Employee: Clark Kent & Normal & The EmployeeName should be Clark Kent and the rest of the data should be stored in the Employee Table && \\ \hline
+	4.01 & Ensuring the product table is created properly & Creating the product table and adding a product to ensure its working properly & adding product: Dog Food & Normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column && \\ \hline
+	4.02 & Editing a Product within the database &  change some data assigned to a specific product and see if the data has successfully changed within the database. & ProductName: Cat Nibbles & Normal &The Product Name of the product the user wants to edit should be changed to Cat Nibbles and the data should successfully update within the database. && \\ \hline
+	4.03 & Editing a Member within the database &  change some data assigned to a specific member and see if the data has successfully changed within the database.l &  MemberTitle: Sgt. & Normal &  The Member Title should be changed to ``sgt.'' and the data should successfully update within the database.  && \\ \hline
+	4.04 & Editing a Employee within the database &  changing the email address associated with a specific employee  & Email Address: 35422@ longroad.ac.uk  & Normal & The Employees email address should have changed and the data should successfully update within the database.&& \\ \hline
+	4.05 & Deleting a product from the database &  Entering a ProductID to delete then seeing if it was deleted successfully & ProductID = 2 & Normal & The product database should be viewed, then a productID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database && \\ \hline
+	4.06 & Deleting a Member from the database &  Entering a MemberID to delete then seeing if it was deleted successfully & MemberID = 3 & Normal & The Member with the MemberID entered by the user should now be removed from the Member Table within the database && \\ \hline
+	4.07 & Deleting an Employee from the database &  Entering an EmployeeID to delete then seeing if it was deleted successfully & EmployeeID = 5 & Normal & The Employee with the EmployeeID entered by the user should now be removed from the Employee Table within the database && \\ \hline
+	4.08 & Trying to delete the Administrator account  & Entering the EmployeeID of the My Client (The Administrator) and seeing if it can be removed from the system. & EmployeeID = 1 & Erroneous & The Account should not be allowed to be deleted from the system as the will leave no administrative account on the system && \\ \hline
+	5.01 & Verify the program fulfils the specification & Run the program, testing the different aspects to ensure it meets the specification & Add a sample of products, members and employees and test the order system.  & Normal &system fulfils the specification & & \\ \hline
+	
 
     \end{longtable}
 \end{flushleft}
