@@ -189,11 +189,129 @@ Since i created my original outline plan during the design phase, i have add two
 \end{longtable}
 \end{flushleft}
 
+\pagebreak
+
 \section{Test Data}
 
 \subsection{Original Test Data}
+	\begin{flushleft}
+    \begin{longtable}{|p{1.5cm}|p{2.5cm}|p{2cm}|p{4.5cm}|}
+        \hline
+        \textbf{Test Series} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} &  \textbf{Justification for Choice of test data}\\ \hline
+	1.01 & Click the arrow button & Normal & The Product Search Interface should be displayed  \\ \hline
+	1.02 & Press the Keyboard Short-cut after legitimate log in details are entered &  Normal & The Product Search Interface should be displayed \\ \hline
+	1.03 & Left mouse click on the Reset Password Link &  Normal & The Reset Password Interface should be displayed  \\ \hline
+	1.04 & Left mouse click Log off button &  Normal & The Log in interface should be displayed  \\ \hline
+	1.05 & Left click Add new product button &  Normal &  The interface should change to the Add new product interface \\ \hline
+	1.06 &  Left mouse click Delete a product button &  Normal & Interface should change to Delete a product interface \\ \hline
+	1.07 & The Manage Product button, under the Stock tab should be left clicked &  Normal & The Stock Management interface should be displayed.  \\ \hline
+	1.08 &  left clicking the Stock tab then left clicking the Product restock tab &  Normal & The Stock management interface should be displayed.  \\ \hline
+	1.09 &  Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed \\ \hline
+	1.10 & Left clicking remove a member under the member tab & Normal & the Remove a member interface should be displayed  \\ \hline
+	1.11 & Left clicking the add new employee button under the employee tab &  Normal & the Add new employee interface should be displayed \\ \hline
+	1.12 & Left clicking remove a employee under the employee tab & Normal & the Remove a employee interface should be displayed  \\ \hline
+	2.01 & Test123@+ & Normal & The string Test should be accepted however, the characters `123' and `@+' should not be accepted as they are integers and special characters  \\ \hline
+	2.02 &  test.jpg, test.bnp, test.txt, test.png, test.gif, test.doc, test.pdf & Normal & The only accepted file types should be .jpg and .png. No other file extensions should be valid.  \\ \hline
+	2.03 &  test.doc & Erroneous &  Should not be accepted as a valid image file  \\ \hline
+	2.04 &  test@+ & Erroneous  &  None of the characters should be accepted because a price cannot contain letters or special characters  \\ \hline
+	2.05 &  11  & Normal & The Integers should be accepted by the system \\ \hline
+	2.06 &  test@+ & Erroneous & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers. \\ \hline
+	2.07 &  Matthew & Normal & Only the letters `test' should be valid as a name cannot contain integers or special characters. \\ \hline
+	2.08 &  =John34 & Erroneous & The above text should not be valid as it contain number sand special characters, a name can only contain letters. \\ \hline
+	2.09 &   Bob@ email  & Erroneous & This string should not be accepted as a legitimate email because it does not contain the ``.com'' \\ \hline
+	2.10 &  Bob.com& Erroneous &  This string should not be accepted as a legitimate email because it does not contain the @'' \\ \hline
+	2.11 &  Bob@ email.com & Normal &  Bob@ Email.com should be accepted. This is because it contains both the @ symbol and is followed by .com \\ \hline
+	2.12 &  01234567890 & Normal & this telephone number contains exactly 11 digits therefore it should be valid \\ \hline
+	2.13 &  999& Erroneous &  `999' is too short and should not be accepted as a telephone number \\ \hline
+	2.14 &  01234567 8987654 & Erroneous & This number should not be accepted because it is too long \\ \hline
+	2.15 &  01234567890 & Boundary & this number should be accepted because it is 11 digits long \\ \hline
+	2.16 & 012345678901 & Boundary & this number shoud not be accepted because it is 12 digits long \\ \hline
+	3.01 &  Pedigree Chum & Normal & The ProductName should be Pedigree Chum and the rest of the data should be stored in the Product Table \\ \hline
+	3.02 &  DogFood.jpg & Normal  & The ProductImage entered should be assigned to the Product Entered. \\ \hline
+	3.03 &  Product: Dog Food & Normal & The ProductName should be Dog Food and the rest of the data should be stored in the Product Table. \\ \hline
+	3.04 &  CB7 5LQ & Normal & The Postcode has three numbers and letters then the space, then four numbers and letters. \\ \hline
+	3.05 &  CB75LQ & Erroneous & The postcode does not contain a space between the two parts of the postcode, therefore it should not be accepted in the database.\\ \hline
+	3.06 &  Member: Bruce Wayne & Normal & The MemberName should be Bruce Wayne  and the rest of the data should be stored in the Member Table \\ \hline
+	3.07 &  `Password' & Normal & The password should be accepted and the employee should be taken to the change password screen \\ \hline
+	3.08 &  31477@ longroad.ac.uk & Normal & The employee should log on the email address associated with their Employee Account and the email should be in their inbox \\ \hline
+	3.09 & Employee: Clark Kent & Normal & The EmployeeName should be Clark Kent and the rest of the data should be stored in the Employee Table \\ \hline
+	4.01 & adding product: Dog Food & Normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column \\ \hline
+	4.02 & ProductName: Cat Nibbles & Normal &The Product Name of the product the user wants to edit should be changed to Cat Nibbles and the data should successfully update within the database. \\ \hline
+	4.03 & MemberTitle: Sgt. & Normal &  The Member Title should be changed to ``sgt.'' and the data should successfully update within the database. \\ \hline
+	4.04 & Email Address: 35422@ longroad.ac.uk  & Normal & The Employees email address should have changed and the data should successfully update within the database. \\ \hline
+	4.05 & ProductID = 2 & Normal & The product database should be viewed, then a productID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database\\ \hline
+	4.06 & MemberID = 3 & Normal & The Member with the MemberID entered by the user should now be removed from the Member Table within the database \\ \hline
+	4.07 & EmployeeID = 5 & Normal & The Employee with the EmployeeID entered by the user should now be removed from the Employee Table within the database \\ \hline
+	4.08 &  EmployeeID = 1 & Erroneous & The Account should not be allowed to be deleted from the system as the will leave no administrative account on the system \\ \hline
+	5.01 &  Add a sample of products, members and employees and test the order system.  & Normal &system fulfils the specification \\ \hline
+    \end{longtable}
+\end{flushleft}
 
 \subsection{Changes to Test Data}
+	
+Because i have added two new test series in my new outline plan, i have added new test data for the new tests added. I have also included more erroneous and boundary as i only have one or two of each in my original test data. Some tests in the original test plan include entering many pieces of data in the same test. In the new test plan, i have removed any unnecessary tests and broken any tests containing multiple pieces of test data, up into their own individual tests. I have also updated the Justifications for a lot of the tests as they either were too brief or did not make sense. Any test data i have removed has been highlighted in dark grey and any new test data has been highlighted in light grey.
+
+	\begin{flushleft}
+    \begin{longtable}{|p{1.5cm}|p{2.5cm}|p{2cm}|p{4.5cm}|}
+        \hline
+        \textbf{Test Series} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} &  \textbf{Justification for Choice of test data}\\ \hline
+	\rowcolor{dark-grey}1.01 & Click the arrow button & Normal & The Product Search Interface should be displayed  \\ \hline
+	\rowcolor{light-grey}1.01 & Left Clicking the Enter button & Normal &  Left clicking the enter button should be the only way the button can be clicked \\ \hline
+	\rowcolor{light-grey}1.01 & Right Clicking the Enter button & Erroneous & To see if right clicking the button works or not. \\ \hline
+	\rowcolor{dark-grey}1.02 & Press the Keyboard Short-cut after legitimate log in details are entered &  Normal & The Product Search Interface should be displayed \\ \hline
+	\rowcolor{light-grey}1.02 & Left Clicking the Password reset Link &  Normal & Left clicking the link should take the user to the password reset page \\ \hline
+	\rowcolor{dark-grey}1.03 & Left mouse click on the Reset Password Link &  Normal & The Reset Password Interface should be displayed  \\ \hline
+	\rowcolor{light-grey}1.03 & Left Clicking The Log Off Button &  Normal & The user should be displayed with a confirmation window to log off  \\ \hline
+	\rowcolor{dark-grey}1.04 & Left mouse click Log off button &  Normal & The Log in interface should be displayed  \\ \hline
+	\rowcolor{light-grey}1.04 & Left Mouse clicking the Add Product Button &  Normal & Left clicking should be the only way the button can be clicked  \\ \hline
+	\rowcolor{dark-grey}1.05 & Left click Add new product button &  Normal &  The interface should change to the Add new product interface \\ \hline
+	\rowcolor{light-grey}1.05 & Left click Delete Product button &  Normal &  The interface should change to the Delete new product interface \\ \hline
+	1.06 &  Left mouse click Delete a product button &  Normal & Interface should change to Delete a product interface \\ \hline
+	1.07 & The Manage Product button, under the Stock tab should be left clicked &  Normal & The Stock Management interface should be displayed.  \\ \hline
+	1.08 &  left clicking the Stock tab then left clicking the Product restock tab &  Normal & The Stock management interface should be displayed.  \\ \hline
+	1.09 &  Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed \\ \hline
+	1.10 & Left clicking remove a member under the member tab & Normal & the Remove a member interface should be displayed  \\ \hline
+	1.11 & Left clicking the add new employee button under the employee tab &  Normal & the Add new employee interface should be displayed \\ \hline
+	1.12 & Left clicking remove a employee under the employee tab & Normal & the Remove a employee interface should be displayed  \\ \hline
+	\rowcolor{dark-grey}2.01 & Test123@+ & Normal & The string Test should be accepted however, the characters `123' and `@+' should not be accepted as they are integers and special characters  \\ \hline
+	\rowcolor{light-grey}2.01 & Example123 & Normal & the test data contains a combination of letters and numbers, the two types of accepted characters   \\ \hline
+	\rowcolor{light-grey}2.01 &  @]*£  & Erroneous & none of the characters in the test data should be accepted in the Product Name field   \\ \hline
+	\rowcolor{dark-grey}2.02 &  test.jpg, test.bnp, test.txt, test.png, test.gif, test.doc, test.pdf & Normal & The only accepted file types should be .jpg and .png. No other file extensions should be valid.  \\ \hline
+	2.03 &  test.doc & Erroneous &  Should not be accepted as a valid image file  \\ \hline
+	2.04 &  test@+ & Erroneous  &  None of the characters should be accepted because a price cannot contain letters or special characters  \\ \hline
+	2.05 &  11  & Normal & The Integers should be accepted by the system \\ \hline
+	2.06 &  test@+ & Erroneous & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers. \\ \hline
+	2.07 &  Matthew & Normal & Only the letters `test' should be valid as a name cannot contain integers or special characters. \\ \hline
+	2.08 &  =John34 & Erroneous & The above text should not be valid as it contain number sand special characters, a name can only contain letters. \\ \hline
+	2.09 &   Bob@ email  & Erroneous & This string should not be accepted as a legitimate email because it does not contain the ``.com'' \\ \hline
+	2.10 &  Bob.com& Erroneous &  This string should not be accepted as a legitimate email because it does not contain the @'' \\ \hline
+	2.11 &  Bob@ email.com & Normal &  Bob@ Email.com should be accepted. This is because it contains both the @ symbol and is followed by .com \\ \hline
+	2.12 &  01234567890 & Normal & this telephone number contains exactly 11 digits therefore it should be valid \\ \hline
+	2.13 &  999& Erroneous &  `999' is too short and should not be accepted as a telephone number \\ \hline
+	2.14 &  01234567 8987654 & Erroneous & This number should not be accepted because it is too long \\ \hline
+	2.15 &  01234567890 & Boundary & this number should be accepted because it is 11 digits long \\ \hline
+	2.16 & 012345678901 & Boundary & this number shoud not be accepted because it is 12 digits long \\ \hline
+	3.01 &  Pedigree Chum & Normal & The ProductName should be Pedigree Chum and the rest of the data should be stored in the Product Table \\ \hline
+	3.02 &  DogFood.jpg & Normal  & The ProductImage entered should be assigned to the Product Entered. \\ \hline
+	3.03 &  Product: Dog Food & Normal & The ProductName should be Dog Food and the rest of the data should be stored in the Product Table. \\ \hline
+	3.04 &  CB7 5LQ & Normal & The Postcode has three numbers and letters then the space, then four numbers and letters. \\ \hline
+	3.05 &  CB75LQ & Erroneous & The postcode does not contain a space between the two parts of the postcode, therefore it should not be accepted in the database.\\ \hline
+	3.06 &  Member: Bruce Wayne & Normal & The MemberName should be Bruce Wayne  and the rest of the data should be stored in the Member Table \\ \hline
+	3.07 &  `Password' & Normal & The password should be accepted and the employee should be taken to the change password screen \\ \hline
+	3.08 &  31477@ longroad.ac.uk & Normal & The employee should log on the email address associated with their Employee Account and the email should be in their inbox \\ \hline
+	3.09 & Employee: Clark Kent & Normal & The EmployeeName should be Clark Kent and the rest of the data should be stored in the Employee Table \\ \hline
+	4.01 & adding product: Dog Food & Normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column \\ \hline
+	4.02 & ProductName: Cat Nibbles & Normal &The Product Name of the product the user wants to edit should be changed to Cat Nibbles and the data should successfully update within the database. \\ \hline
+	4.03 & MemberTitle: Sgt. & Normal &  The Member Title should be changed to ``sgt.'' and the data should successfully update within the database. \\ \hline
+	4.04 & Email Address: 35422@ longroad.ac.uk  & Normal & The Employees email address should have changed and the data should successfully update within the database. \\ \hline
+	4.05 & ProductID = 2 & Normal & The product database should be viewed, then a productID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database\\ \hline
+	4.06 & MemberID = 3 & Normal & The Member with the MemberID entered by the user should now be removed from the Member Table within the database \\ \hline
+	4.07 & EmployeeID = 5 & Normal & The Employee with the EmployeeID entered by the user should now be removed from the Employee Table within the database \\ \hline
+	4.08 &  EmployeeID = 1 & Erroneous & The Account should not be allowed to be deleted from the system as the will leave no administrative account on the system \\ \hline
+	5.01 &  Add a sample of products, members and employees and test the order system.  & Normal &system fulfils the specification \\ \hline
+    \end{longtable}
+\end{flushleft}
+
 
 \section{Annotated Samples}
 
