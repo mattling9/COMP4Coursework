@@ -1,0 +1,87 @@
+\section{Evaluation}
+
+\subsection{Approach to Testing}
+
+\begin{flushleft}
+
+I have chosen to take a mixed level approach, in attempt to to test all areas of my system and find as many faults as possible. For example,  The tests in series 1 are examples of Top Down Testing, testing the flow of control between the user interfaces of my system so my client can get to the interface easily and quickly (One of the general objectives of the system).Series 2 uses Bottom Up testing to test the validation of the data inputs. This is a critical test for some data fields as data entered from the user is manipulated by the system and any invalid data entered will me the data may not be able to be manipulated. For example when a customer buys X amount of a product, the stock of the product needs to be changed. Here a calculation is made to work out the new stock of the product, if the stock was entered as a string by the user, this calculation cannot be made. Series 3 uses white box testing i have to look into the database to ensure the data has been stored successfully and correctly. Series 4, 5 and 6 use black box testing to ensure that any processes that happen within the system work successfully and correctly. Series 7 uses acceptance testing to ensure that the system meets the clients specification and has met the objectives made in the design phase.
+
+\subsection{Problems}
+
+during the Testing phase i exposed some problems within my system, these problems are specified below along with the measures i underwent to eliminate these issues. 
+
+Test Series 2.02
+
+In test series 2.02, any file type is accepted by the system. However, unless the file is an image file an image will not be displayed. If the user chooses a file which is not an image file, no message is displayed and the system doesn't display an image. The changes that need to be made in order for this test to work, is that if the file is not an image file, do not try to change the current image and display a message to the user saying they need to choose an image file. The system could also restrict the user from choosing and other file than an image file. This could be implemented in a future version of my system.
+
+Test Series 2.03
+
+Boundary data for the price.
+
+
+Test series 2.04
+
+In test series 2.04, the user can enter a price into the price field. I used i built in validator that only allows intergers from the keyboard to be entered. However this module allows the use of an exponential to be entered, which allows the user to enter the letter 'e'. This means that this test failed as it should only accept integers. To change this, i need to tell the validator which notation to use. At the moment it uses both standard and scientific notation. The scientific notation is what allows the user to enter the letter 'e'. To stop this from happening i need to set the notation to just the standard notation. This can be done easily by simply doing self.price_validator.standardNotation() where self.price_validator is a QDoubleValidator.
+
+Test Series 2.06
+
+In test series 2.06, the only acceptable characters in the memebrs name should be letters. special characters should not be accepted. At the moment, special characters are not accepeted however letters and numbers are. To change this, i need to change the regular expression so that integers should not be accepted.
+
+Test Series 2.08
+
+When the member enters their postcode, They have the ability to search for their address if they live im Cumbria. However, the postcodes stored in the CSV file have spaces in. The postcode field still validates the postcode even if there is no space in it. Therefore the user could enter their postcode and because it does not have a space in it, it won't be found. for example if 'CB7 5LQ' was stored in the CSV file and the user entered 'CB75LQ' it would not be found. To solve this problem i should change all of the postcodes in the CSV so they do not have spaces in. Then when the user enters their postcode, remove the space if there is one. This can be done by doing 'postcode_input.replace(" ",""). This would now allow the user to either enter the postcode with or without a space and it will still be able to be found in the CSV file.
+
+Test Series 2.09
+
+In Test series 2.09 i tested the range of characters that were acceptable for the house number. Originally i thought that only integers should be accepted in this field. Since the implementation stage, i have realsied that houses can also contain letters aswell. for exmaple there could be a 66A or a 66B or the house could have a house name instead of a number which the user could not specifiy in my current system. Therefore,  this test has failed. To improve this feature, i should change the the input method so that the user can also enter characters in the field aswell.
+
+Test Series 3.05
+
+Test series 3.05 relates to the test Series 2.09. Ideally i want every postcode to be stored without a space between them. Currently the user can choose to enter a space or not which will mean that some will be stored with a space between and some will not. This issue will be resolved if the changes to test series 2.09 are made.
+
+Test Series 7.01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{flushleft}
