@@ -23,7 +23,7 @@ Test series 2.04
 
 In test series 2.04, the user can enter a price into the price field. I used i built in validator that only allows intergers from the keyboard to be entered. However this module allows the use of an exponential to be entered, which allows the user to enter the letter 'e'. This means that this test failed as it should only accept integers. To change this, i need to tell the validator which notation to use. At the moment it uses both standard and scientific notation. The scientific notation is what allows the user to enter the letter 'e'. To stop this from happening i need to set the notation to just the standard notation. This can be done easily by simply doing self.price_validator.standardNotation() where self.price_validator is a QDoubleValidator.
 
-Test Series 2.06
+Test Series 2.05
 
 In test series 2.06, the only acceptable characters in the memebrs name should be letters. special characters should not be accepted. At the moment, special characters are not accepeted however letters and numbers are. To change this, i need to change the regular expression so that integers should not be accepted.
 
