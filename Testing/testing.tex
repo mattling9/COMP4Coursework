@@ -111,7 +111,7 @@ Since i created my original outline plan during the design phase, i have add two
         \hline
         \textbf{Test Series} & \textbf{Purpose of Test} & \textbf{Test Description} &  \textbf{Expected Result} & \textbf{Annotation Reference}\\ \hline
 	\rowcolor{dark-grey}1.01 & Test the Arrow button to see if it works successfully & The Arrow Button Should change to the Product Search Interface if log in details are correct & The Product Search Interface should be displayed &  \\ \hline
-	\rowcolor{light-grey}1.01 & Test to see if the Enter Button Functions as it should & Clicking the Enter button After Entering Log in Details & If the Log-in information matches an account in the system, the user should get taken to the create an order window, otherwise a message should be displayed saying that the details are not valid &  \\ \hline
+	\rowcolor{light-grey}1.01 & Test to see if the Enter Button Functions as it should & Clicking the Enter button After Entering Log in Details & If the Log-in information matches an account in the system, the user should get taken to the create an order window, otherwise a message should be displayed saying that the details are not valid &  Page:\pageref{fig:valid_log_in_details}  \newline Figure:\ref{fig:valid_log_in_details}  \newline  \newline Page:\pageref{fig:log_in_clicked}  \newline Figure:\ref{fig:log_in_clicked} \\ \hline
 	\rowcolor{dark-grey}1.02 & Test the keyboard short-cut assigned to the arrow button works successfully & The Keyboard Short-cut Should change to the Product Search Interface if log in details are correct &The Product Search Interface should be displayed &  \\ \hline
 	1.02 & Test the Reset Password Here Link & When clicked the Link should change to the reset password interface  & The Reset Password Interface should be displayed &  \\ \hline
 	1.03 & Test the Log Off button to see if it works successfully & Left mouse clicking the log off button should return back to the log in interface l & The Log in interface should be displayed &\\ \hline
@@ -257,7 +257,8 @@ Because i have added two new test series in my new outline plan, i have added ne
         \hline
         \textbf{Test Series} & \textbf{Test Data} & \textbf{Test Data Type (Normal/ Erroneous/ Boundary)} &  \textbf{Justification for Choice of test data}\\ \hline
 	\rowcolor{dark-grey}1.01 & Click the arrow button & Normal & The Product Search Interface should be displayed  \\ \hline
-	\rowcolor{light-grey}1.01 & Left Clicking the Enter button & Normal &  Left clicking the enter button should be the only way the button can be clicked \\ \hline
+	\rowcolor{light-grey}1.01 & Left Clicking the Enter button with valid log in details & Normal & The user should get taken to the create customer order interface \\ \hline
+	\rowcolor{light-grey}1.01 & Left Clicking the Enter button with invalid log in details & Erroneous & the user should be told the log in details are not valid. \\ \hline
 	\rowcolor{light-grey}1.01 & Right Clicking the Enter button & Erroneous & To see if right clicking the button works or not. \\ \hline
 	\rowcolor{dark-grey}1.02 & Press the Keyboard Short-cut after legitimate log in details are entered &  Normal & The Product Search Interface should be displayed \\ \hline
 	1.02 & Left mouse click on the Reset Password Link &  Normal & The Reset Password Interface should be displayed  \\ \hline
@@ -270,8 +271,10 @@ Because i have added two new test series in my new outline plan, i have added ne
 	\rowcolor{dark-grey}1.07 & Left clicking the Stock tab then left clicking the Product restock tab &  Normal & The Stock management interface should be displayed.  \\ \hline
 	1.07 &  Left clicking the add new member button under the member tab &  Normal & the Add new member interface should be displayed \\ \hline
 	1.08 & Left clicking remove a member under the member tab & Normal & the Remove a member interface should be displayed  \\ \hline
-	1.09 & Left clicking the add new employee button under the employee tab &  Normal & the Add new employee interface should be displayed \\ \hline
-	1.10 & Left clicking remove a employee under the employee tab & Normal & the Remove a employee interface should be displayed  \\ \hline
+	1.09 & Left clicking the add new employee button under the employee tab whilst logged in on the administrator account&  Normal & the Add new employee interface should be displayed \\ \hline
+	\rowcolor{light-grey}1.09 & Left clicking the add new employee button under the employee tab whilst not currently logged in on the administrator account& Erroneous & the User should not be able to click the button \\ \hline
+	1.10 & Left clicking remove a employee under the employee tab whilst logged in as an administrator & Normal & the Remove a employee interface should be displayed  \\ \hline
+	\rowcolor{light-grey}1.10 & Left clicking the remove an employee button under the employee tab whilst not currently logged in on the administrator account& Erroneous & the User should not be able to click the button \\ \hline
 	\rowcolor{dark-grey}2.01 & Test123@+ & Normal & The string Test should be accepted however, the characters `123' and `@+' should not be accepted as they are integers and special characters  \\ \hline
 	\rowcolor{light-grey}2.01 & Example123 & Normal & the test data contains a combination of letters and numbers, the only two types of accepted characters   \\ \hline
 	\rowcolor{light-grey}2.01 &  @]*£  & Erroneous & none of the characters in the test data should be accepted in the Product Name field   \\ \hline
@@ -283,6 +286,7 @@ Because i have added two new test series in my new outline plan, i have added ne
 	2.03 &  test@+ & Erroneous  &  None of the characters should be accepted because a price cannot contain letters or special characters  \\ \hline
 	\rowcolor{light-grey}2.03 & 4,326,397.99 & Boundary & This price is unrealistic and is outside the boundary of the price.  \\ \hline
 	\rowcolor{light-grey}2.03 & 999.99 & Boundary & This should be the largest price accepted by the system  \\ \hline
+	\rowcolor{light-grey}2.03 & 1000.00 & Boundary & This price should not be valid as it is outside the range. \\ \hline
 	2.04 &  11  & Normal & The Integers should be accepted by the system \\ \hline
 	\rowcolor{light-grey}2.04 &  test@+ & Erroneous & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers. \\ \hline
 	\rowcolor{light-grey}2.04 &  9245364  & Boundary & This is an unrealistic stock and is outside the accepted boundary \\ \hline
@@ -291,7 +295,8 @@ Because i have added two new test series in my new outline plan, i have added ne
 	\rowcolor{light-grey}2.05 &  12345  & Erroneous & numbers should not be accepted as a name \\ \hline
 	\rowcolor{light-grey}2.05 &  £@~?  & Erroneous & special characters should also not be accepted as a valid name. \\ \hline
 	\rowcolor{light-grey}2.05 &  Abcdefghijklmnopqrstuvwxyzyxwuv  & Boundary & This range of letters is far too long for a realistic name. This string should be outside the boundary \\ \hline
-	\rowcolor{light-grey}2.05 &  abcdefghijklmnopqr  & Boundary & The string entered here is exactly 18 characters long. I have decided for the upper boundary to be 18 characters and the lower boundary to be 2 characters\\ \hline
+	\rowcolor{light-grey}2.05 &  abcdefghijklmnopqr  & Boundary & The string entered here is exactly 17 characters long. I have decided for the upper boundary to be 18 characters and the lower boundary to be 2 characters\\ \hline
+	\rowcolor{light-grey}2.05 &  abcdefghijklmn opqrs& Boundary & This name is 18 characters long and should be outside the range for the name.\\ \hline
 	\rowcolor{dark-grey}2.06 &  =John34 & Erroneous & The above text should not be valid as it contain number sand special characters, a name can only contain letters. \\ \hline
 	2.06 &   Bob@ email  & Erroneous & This string should not be accepted as a legitimate email because it does not contain the ``.com'' \\ \hline
 	2.06 &  Bob.com & Erroneous &  This string should not be accepted as a legitimate email because it does not contain the @'' \\ \hline
@@ -304,10 +309,12 @@ Because i have added two new test series in my new outline plan, i have added ne
 	\rowcolor{light-grey}2.08 & CB7 5LQ  & Erroneous & This postcode is not in the CSV file so the user should be displayed with a message telling them so. \\ \hline
 	\rowcolor{light-grey}2.09 & 999999  & Boundary & This house number is unrealistic and is outside the boundary for the house number. \\ \hline
 	\rowcolor{light-grey}2.09 & 999  & Boundary & This is the largest house number that should be accepted by the system \\ \hline
+	\rowcolor{light-grey}2.09 & 1000  & Boundary & This house number should be outside the range of acceptable values  \\ \hline
 	\rowcolor{light-grey}2.09 & 58  & Normal & This is an example of a house number that should be valid. \\ \hline
 	\rowcolor{light-grey}2.09 & 12A  & Normal & This should be accepted as this is a realistic flat number. \\ \hline
 	\rowcolor{light-grey}2.10 & 12345  & Boundary & This is well above the upper boundary for the stock. \\ \hline
 	\rowcolor{light-grey}2.10 & 99  & Boundary & This is the largest stock that is allowed in the system when adding a new product. This limit can be exceeded once the product is added.\\ \hline
+	\rowcolor{light-grey}2.10 & 100 & Boundary & This data should be outside the boundary \\ \hline
 	\rowcolor{light-grey}2.10 & twelve  & Erroneous & This should not be accepted because the stock must be entered in integer form so that it can be used for calculations within the system.\\ \hline
 	\rowcolor{light-grey}2.10 & 14  & Normal & This should be an acceptable value for stock that is within the boundary. \\ \hline
 	2.11 &  01234567890 & Normal & this telephone number contains exactly 11 digits therefore it should be valid \\ \hline
@@ -334,12 +341,11 @@ Because i have added two new test series in my new outline plan, i have added ne
 	\rowcolor{light-grey}3.09 &  Stock Before Changing: `20', Stock After Changing `15'  & Normal & Once the user has changed the stock within the system it should have also changed in the database. \\ \hline
 	\rowcolor{dark-grey}4.01 & adding product: Dog Food & Normal & The Table should be created and the product Dog Food should be added successfully. Al the data should be in its corresponding column \\ \hline
 	\rowcolor{light-grey}4.01 & Automatically Create the Product Table by Running the Program for the First Time. & Normal & A new Table called `Product' should now be in the database with the column headings: ProductID, ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales, DailySales \\ \hline
-	\rowcolor{dark-grey}4.02 & ProductName: Cat Nibbles & Normal &The Product Name of the product the user wants to edit should be changed to Cat Nibbles and the data should successfully update within the database. \\ \hline
-	\rowcolor{light-grey}4.02 & ProductID: `1' ,  New Size:'500g', New Price: `£9.99',  New ImagePath: `optex.png' & Normal & The product with the ProductID of 1 should now have a size of `500g', price of `£9.99', and a new ImagePath `optex.png'.  \\ \hline
+	\rowcolor{dark-grey}4.02 & ProductName: Cat Nibbles & Normal & Testing the functionality of the Edit Product SQL statement \\ \hline
+	\rowcolor{light-grey}4.02 & ProductID: `1' ,  New Size:'500g', New Price: `£9.99',  New ImagePath: `optex.png' & Normal & Testing the functionality of the Edit Product SQL statement   \\ \hline
 	\rowcolor{dark-grey}4.03 & MemberTitle: Sgt. & Normal &  The Member Title should be changed to ``sgt.'' and the data should successfully update within the database. \\ \hline
-	\rowcolor{light-grey}4.03 & MemberID: 1, New Member Email: 31452@longroad.ac.uk & Normal &  The Member with the MemberID of 1, should now have the Member Email: `31452@longroad.ac.uk'  \\ \hline
-	\rowcolor{dark-grey}4.04 & Email Address: 35422@ longroad.ac.uk  & Normal & The Employees email address should have changed and the data should successfully update within the database. \\ \hline
-	\rowcolor{light-grey}4.04 & EmployeeID: 3, New Employee FirstName: John, New Member LastName: Smith  & Normal & The Employee With the EmployeeID of 3 should now have an Employee FirstName of `John' and Employee LastName of `Smith'. \\ \hline
+	\rowcolor{light-grey}4.03 & MemberID: 1, New Member Email: 31452@longroad.ac.uk & Normal &  Testing the functionality of the Edit Member SQL statement  \\ \hline
+	\rowcolor{dark-grey}4.04 & Email Address: 35422@ longroad.ac.uk  & Normal & Testing the functionality of the Edit Employee SQL statement \\ \hline
 	4.05 & ProductID = 2 & Normal & The product database should be viewed, then a productID from a Product should be taken from the database. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database\\ \hline
 	4.06 & MemberID = 3 & Normal & The Member with the MemberID entered by the user should now be removed from the Member Table within the database \\ \hline
 	4.07 & EmployeeID = 5 & Normal & The Employee with the EmployeeID entered by the user should now be removed from the Employee Table within the database \\ \hline
@@ -348,9 +354,9 @@ Because i have added two new test series in my new outline plan, i have added ne
 	\rowcolor{light-grey}5.01 &  signing into the gmail account `beaconvets@gmail.com' and attempting sending an invoice to Member with MemberID 1.  & Normal & If the email sent successfully then the email address and password are valid, otherwise the user should be displayed with a message saying the email address and password are not valid.  \\ \hline
 	\rowcolor{light-grey}5.02 & A User Logs Into Their account, clicks on the Options Menu in the Menubar and clicks the Change Password Option in the Menu.& Normal & Once they click the change password button an email should automatically sent to them. If they receive this email, this email functionality works correctly. \\ \hline
 	\rowcolor{light-grey}5.03 & An Employee Logs into their account, creates an invoice, enters an email address to sent it to, and clicks save invoice. & Normal & Clicking the save invoice button should save the current invoice to the email address entered. If the email address received the email then this email functionality works successfully\\ \hline
-	\rowcolor{light-grey}5.04 & The Subject for the Account Details email should be along the lines of  `Beacon Vets Account Details' &Normal & Clicking the Forgot Your Password button, and entering the employees email address will send an email to them. they should then check the email Subject to see if it is similar to the one in the Test Data.\\ \hline
-	\rowcolor{light-grey}5.04 & The Subject for the Invoice email should be along the lines of  `Beacon Vets Invoice & Clicking the save invoice button should send the current invoice to the email address entered. If the email address received the email then this email functionality works successfully\\ \hline
-	\rowcolor{light-grey}5.04 & The Subject for the Password Reset Code should be along the lines of  `Beacon Vets Password Reset Code & Normal & Clicking on the change password menu will automatically send an email to the user that is currently logged in. The subject of this email should be similar to the one in the test data.\\ \hline
+	\rowcolor{light-grey}5.04 & Checking the subject of the account details email &Normal & Clicking the Forgot Your Password button, and entering the employees email address will send an email to them. they should then check the email Subject to see if it is similar to the one in the Test Data.\\ \hline
+	\rowcolor{light-grey}5.04 & Checking the Subject for the Invoice email  & Normal & Clicking the save invoice button should send the current invoice to the email address entered. If the email address received the email then this email functionality works successfully\\ \hline
+	\rowcolor{light-grey}5.04 &Checking the Subject for the Password reset email & Normal & Clicking on the change password menu will automatically send an email to the user that is currently logged in. The subject of this email should be similar to the one in the test data.\\ \hline
 	\rowcolor{light-grey}6.01 & Pressing the `Esc' button whilst logged in & Normal & This should display a message to the user if they want to log out or not.\\ \hline
 	\rowcolor{light-grey}6.01 & Pressing the `Esc' button whilst not being logged in & Erroneous & Nothing should happen because nobody is currently logged in.\\ \hline
 	\rowcolor{light-grey}6.02 & Pressing the `Enter' button after entering a User-name and Password & Normal & This should search the database for the User-name and Password entered by the User and log them in if it matches an account\\ \hline
@@ -390,20 +396,404 @@ Because i have added two new test series in my new outline plan, i have added ne
 
 \section{Annotated Samples}
 
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./101-1.png}
+    \caption{Entering Valid Log In Details At The Log In Screen} \label{fig:valid_log_in_details}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./101-2.png}
+    \caption{Clicking Log In Button with Valid Details} \label{fig:log_in_clicked}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./101-3.png}
+    \caption{Trying to sign in with invalid details} \label{fig:invalid_log_in}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./102-1.png}
+    \caption{Clicking Forgot Username or Password Button} \label{fig:forgot_details}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./102-2.png}
+    \caption{After Clicking on the Forgot Password Button } \label{fig:forgot_password_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./103-1.png}
+    \caption{Clicking The Log Off button} \label{fig:log_off_click}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./103-2.png}
+    \caption{Log Off Confirmation Window} \label{fig:log_off_confirmation}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./103-3.png}
+    \caption{After Clicking Yes on the Log Off Decision} \label{fig:log_off_success}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./104-1.png}
+    \caption{Clicking The Add Product Button Under The Product Menu} \label{fig:click_add_product}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./104-2.png}
+    \caption{The Add Product Interface} \label{fig:add_product_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./105-1.png}
+    \caption{Clicking the Delete Product Button Under the Product Menu} \label{fig:click_delete_product}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./105-2.png}
+    \caption{Delete Product Interface} \label{fig:delete_product_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./106-1.png}
+    \caption{Clicking the Manage Stock Button Under the Stock Menu.} \label{fig:click_stock}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./106-2.png}
+    \caption{Manage Stock Interface} \label{fig:manage_stock}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./107-1.png}
+    \caption{Clicking the Adding Member Interface} \label{fig:click_add_member}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./107-2.png}
+    \caption{Adding Member Interface} \label{fig:add_member_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./108-1.png}
+    \caption{Clicking the Delete Member Option Under the Member Menu} \label{fig:click_delete_member}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./108-2.png}
+    \caption{The Delete Member Interface} \label{fig:delete_member_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./109-1.png}
+    \caption{Clicking Add Employee Button under Employee Menu} \label{fig:click_employee}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./109-2.png}
+    \caption{The Add Employee Interface} \label{fig:add_employee_interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./101-1.png}
+    \caption{Entering Valid Log In Details At The Log In Screen} \label{fig:valid_log_in_details}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./109-3.png}
+    \caption{Menu that is displayed When not Logged in on the Administrator Account} \label{fig:no_employee_menu}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./201-1.png}
+    \caption{Entering a Test into the Product Name field.} \label{fig: product_name}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./201-2.png}
+    \caption{Entering Special Characters into the Product Name field.} \label{fig: special_char_product_name}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./202-1.png}
+    \caption{using the exmaple.jpg image, and The Image being displayed in the image box.} \label{fig: image_example}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./202-2.png}
+    \caption{Changing the path to an invalid image type.} \label{fig: invalid_image}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./203-1.png}
+    \caption{Entering Test data into the Price field.} \label{fig: price_test}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./203-2.png}
+    \caption{Testing the Boundaries of the Price field.} \label{fig: price_boundary}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./203-3.png}
+    \caption{Entering example into the price field} \label{fig: character_in_price}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./204-1.png}
+    \caption{Entering Test data into the stock field.} \label{fig:stock_test}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./204-2.png}
+    \caption{Testing the boundaries of the Stock field} \label{fig:stock_boundary}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./204-3.png}
+    \caption{Entering 99 in the Stock field} \label{fig:stock_99}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./101-1.png}
+    \caption{Entering 100 into the Stock field.} \label{fig:stock_100}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./205-1.png}
+    \caption{Entering Letters and Numbers into the Member First Name field} \label{fig:let_num_member_name}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./205-2.png}
+    \caption{Entering special characters into the Members first Name Field} \label{fig:special_first_name}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./205-3.png}
+    \caption{Entering a name outside the boundary of the Member First Name} \label{fig:boundary_member_name}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./206-1.png}
+    \caption{Entering test Data into Member Email field.} \label{fig:test1_email}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./206-2.png}
+    \caption{Entering test Data into Member Email field.} \label{fig:test2_email}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./207-1.png}
+    \caption{Entering test data into the Members Postcode field.} \label{fig:postcode_test}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./207-2.png}
+    \caption{Entering an invalid postcode into the Member Postcode field} \label{fig:large_postcode}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./207-3.png}
+    \caption{Entering a legitimate postcode into the Postcode field} \label{fig:legit_postcode}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./208-1.png}
+    \caption{Finding a postcode in the CSV file} \label{fig:find_postcode}
+\end{figure}
+
+
+
+
+
+\pagebreak
+
 \subsection{Actual Results}
 
+\begin{flushleft}
+    \begin{longtable}{|p{1.0cm}|p{2.5cm}|p{3cm}|p{3.0cm}|p{2.5cm}|}
+        \hline
+        \textbf{Test Series} & \textbf{Test Data} & \textbf{Expected Result} &  \textbf{Actual Result} &  \textbf{Annotated Reference.}\\ \hline
+	1.01 & Left Clicking the Enter button with valid log in details & The user should be taken the the Creating Order interface& The user is taken to the create order page  & Page:\pageref{fig:valid_log_in_details}  \newline Figure:\ref{fig:valid_log_in_details}  \newline  \newline Page:\pageref{fig:log_in_clicked}  \newline Figure:\ref{fig:log_in_clicked} \\ \hline
+	1.01 & Left Clicking the Enter button with invalid log in details &The user should be displayed a message telling them that their log in details are incorrect. & The user is displayed with a message saying their log in details are incorrect & Page:\pageref{fig:invalid_log_in}  \newline Figure:\ref{fig:invalid_log_in}\\ \hline
+	1.01 & Right Clicking the Enter button & Nothing should happen & Nothing Happens &\\ \hline 
+	1.02 & Left mouse click on the Reset Password Link & The Reset Password Interface should be displayed & The user is taken to the reset password interface & Page:\pageref{fig:forgot_details}  \newline Figure:\ref{fig:forgot_details}  \newline  \newline Page:\pageref{fig:forgot_password_interface}  \newline Figure:\ref{fig:forgot_password_interface}\\ \hline
+	1.03 & Left Clicking The Log Off Button & The user should be presented with a Yes and No window where they're asked if they are sure they want to log off& The user is presented with the menu described in the Expected Results section.&\\ \hline
+	1.04 & Left Mouse clicking the Add Product Button & The user should be taken to the Add new Product interface& The user was presented with the Add New Product Interface & \\ \hline
+	1.05 &  Left mouse click Delete a product button& The user should be taken to the Delete a Product Interface & The user was taken to the Delete a Product Interface & \\ \hline
+	1.06 & The Manage Stock button, under the Stock tab should be left clicked & Then user should be taken to the Manage stock interface & The user was taken to the Manage Stock interface & \\ \hline
+	1.07 &  Left clicking the add new member button under the member tab & The user should be taken to the Add new member interface& The User was taken to the add new member interface & \\ \hline
+	1.08 & Left clicking remove a member under the member tab & The user should be taken to the Delete Member interface & The user was taken to the remove a member interface & \\ \hline
+	1.09 & Left clicking the add new employee button under the employee tab whilst logged in on the administrator account &  the Add new employee interface should be displayed & The administrator was taken to the Add Employee interface & \\ \hline
+	1.09 & Left clicking the add new employee button under the employee tab whilst not currently logged in on the administrator account & The user should not be able to click this button. & The user could not click this button and a new menu option was available. &\\ \hline
+	1.10 & Left clicking remove a employee under the employee tab whilst logged in as an administrator & the Remove a employee interface should be displayed  & The user was taken to the Delete an Employee interface & \\ \hline
+	1.10 & Left clicking the remove an employee button under the employee tab whilst not currently logged in on the administrator account & the User should not be able to click the button & The user could not click this option in the Employee Menu&\\ \hline
+	2.01 & Example123 & Only the letters should be valid, The numbers in the name should not be. & Both the letters and numbers are valid in the name field  & \\ \hline 
+	2.01 &  @]*£  & None of these characters should be accepted in the Product Name & These characters are accepted as valid characters in the Product Name field& \\ \hline 
+	2.02 & example.jpg & This file type should be accepted and the image should be displayed & The file example.jpg is found and the image is successfully displayed. & \\ \hline
+	2.02 & example.doc & This file type is not valid and an error message should be displayed & The file example.doc is found and no image is displayed. & \\ \hline
+	2.03 & 2.99 & This price should be accepted as it is a legitimate price & The price is accepted & \\ \hline
+	2.03 &  example@+ & None of the characters should be accepted in the price & All these characters we're not accepted into the field other than the letter `e' & \\ \hline
+	2.03 & 4,326,397.99 & This price should not be accepted because it is too long& the price is accepted as a valid price. & \\ \hline
+	2.03 & 999.99 & This price should be the largest price that is valid.& This price is accepted as being valid & \\ \hline
+	2.03 & 1000.00 & This price should not be valid as it is outside the range.& This price is accepted as being valid & \\ \hline
+	2.04 &  11  & This should be accepted as it is a valid example of stock & This is accepted as a valid stock &  \\ \hline
+	2.04 &  example@+ & None of these characters should be accepted in the stock field. & none of these characters were accepted in the field.  & \\ \hline
+	2.04 &  9245364 & This should not be accepted in the stock field as it is outside the boundary& This was not accepted because it was greater than 99 & \\ \hline
+	2.04 &  99  &This the largest stock that should be valid& This was accepted by the system (field was highlighted in green) & \\ \hline
+	2.04 &  100  & This is outside the boundary so it should not be accepted & This was not accepted by the system (field was not highlighted in green)& \\ \hline
+	2.05 &  Matthew &This should be accepted as a valid name& This name was accepted by the system  & \\ \hline
+	2.05 &  Matthew12345  & Numbers should not be accepted in the name field.& This name was accepted by the system. &  \\ \hline
+	2.05 &  £@~? & Special characters should also not be accepted in the stock field.,& These characters were not accepted &  \\ \hline 
+	2.05 &  Abcdefghijklmn opqrstuvwxyzyxwuv  &This string is too long to be a valid name so it should not be accepted. & This sting was not accepted by the system&  \\ \hline 
+	2.05 &  abcdefghijklmn op  &This name is 17 characters long which is just inside the boundary for the name length & The  string was accepted by the system (border colour changed to green) & \\ \hline
+	2.05 &  abcdefghijklmn opq  &This name is 18 characters long and should be outside the range for the name. & This name was not accepted by the system (the boarder was not green)& \\ \hline
+	2.06 &   Bob@ email  & This should be an invalid email address because it does not have a domain (.com, .co.uk, .net) & This email was invalid &  \\ \hline
+	2.06 &  Bob.com &This should not be accepted as it does not contain the @ symbol & This email was also invalid &  \\ \hline
+	2.06 &  Bob@ email.com &This should be accepted as a valid email address as it contains the @ symbol and has a domain& This email address was accepted &  \\ \hline
+	2.07 & CB7 5LQ  &This postcode should be accepted as a valid postcode.& This postcode was accepted & \\ \hline
+	2.07 & NAAB2215 ACC874  & This should not be accepted as it does not fit the regular expression.& This postcode was not accepted & \\ \hline
+	2.07 & CB75LQ  & This postcode should be accepted even though it does not contain a space between the two parts of the postcode. & This postcode was accepted. &  \\ \hline
+	2.08 & CA7 4QT  & This postcode should be found because it is in the CSV file& This postcode was found & \\ \hline
+	2.08 & CA74QT  & This postcode should also be found despite having no space between the two parts of the postcode.& This postcode was not found in the CSV file. & \\ \hline
+	2.08 & CB7 5LQ  & A message should be displayed telling the user that the postcode is not in the CSV file. & No message was displayed. &  \\ \hline
+	2.09 & 999999 & This should not be accepted as a valid house number as it is too long.& The spin-box only accepted a maximum of 99.& \\ \hline 
+	2.09 & 999  & This should be the largest accepted house number& the spin-box & \\ \hline
+	2.09 & 1000  & This house number should be outside the range of acceptable values & The highest number accepted by the spin-box was 99 & \\ \hline
+	2.09 & 58  & This should be accepted as this is between the range of 0 - 99.& This was in the range of the spin-box&  \\ \hline 
+	2.09 & 12A  & This should be accepted as it is a valid flat number.& the number 12 was accepted but the letters could not be entered into the spin-box.&  \\ \hline
+	2.09 & twelve  & This should be not be accepted because it is not an integer&  none of the letters were accepted in the spin-box &  \\ \hline
+	2.11 &  01234567890 & This should be a valid telephone number because it is 11 characters long& This telephone number was valid &  \\ \hline
+	2.11 &  999 & This should not be a valid telephone number because it is less than 11 characters long & This telephone number was not valid because it was only 3 digits long &  \\ \hline
+	2.11 &  01234567 8987654 & This should not be valid because it is outside the upper boundary. & This telephone number was not valid because it was 12 characters long& \\ \hline
+	2.11 & 012345678901 & This telephone is on the upper boundary as it is 12 characters long. it should not be accepted. & This number was just inside the boundary. &  \\ \hline
+	3.01 &  Pedigree Chum & The name Pedigree Chum should be stored under the ProductName column, in the Product table.& The Product was stored successfully within the database. & \\ \hline
+	3.02 &  DogFood.jpg & DogFood.jpg should stored under the ImagePath column within the Product table. & The path DogFood.jpg was stored under the ImagePath column within the Product table.&  \\ \hline
+	3.03 &  ProductName: Pedigree Jumbone, Size:250g, Price: £2.99, Category: Dog Food, Stock in Location 1: 11, Stock in Location 2: 8, ImagePath: pedigree jumbone.png & The data entered should be stored under their corresponding columns & All the data was stored under the correct column. & \\ \hline
+	3.04 & Postcode: ` CB75LQ' & the Postcode CB75LQ should be stored under the postcode column in the Member Table.& The postcode was stored under the correct column.&  \\ \hline
+	3.04 & Postcode: ` CB7 5LQ' &the Postcode CB7 5LQ should be stored as : `CB75LQ' under the postcode column in the Member Table.& The postcode was stored with the space between the two parts of the postcode.& \\ \hline
+	3.05 &  Title: `Mr.', First Name: `John', Last Name: `Wayne', HouseNo: `14', Street: `Market Street', Town: `Fordham', City: `Ely', County: `Cambridgeshire', Postcode: `CB75LQ', Telephone Number: `01638720267', Member Email: `31477@longroad.ac.uk' & All the data should be stored under its corresponding column in the Member table.& All the data was stored under the correct column within the Member Table.&  \\ \hline
+	3.06 &  Username: `THenderson1', Password: `password' & Logging in to the administrators account for the first time using the account details in the test data.  & The user was taken to the change password interface &  \\ \hline
+	3.07 & Employee First Name: `Matthew' , Employee Last Name: `Ling', Employee Email: `31477@longroad.ac.uk' & The data in the test data should be stored under its corresponding column within the Employee. A EmployeeUsername should also be generated from the First Name Last name and EmployeeID. & The following employee was stored successfully within the database&  \\ \hline
+	3.08 &  Stock Before Changing: `20', Stock After Changing `15'  & The stock should have changed to 15 within the database. This can be found under the location1 column in the Product Table.& The stock successfully changed from 20 to 15&  \\ \hline
+	4.01 & Automatically Create the Product Table by Running the Program for the First Time. & When the program is run for the first time, The database.db file should be created with the Product and all the other tables created. & The database is created after the program is run for the first time. &  \\ \hline
+	4.02 & ProductID: `1' ,  New Size:'500g', New Price: `£9.99',  New ImagePath: `optex.jpg' & The product with the ProductID of 1 should now have a size of 500g, price of £9.99 and and image path of optex.png& The product with the ProductID of 1 now has a size of 500g, price of £9.99 and and image path of optex.png&   \\ \hline
+	4.03 & MemberID: 1, New Member Email: 31452@longroad.ac.uk & Testing the functionality of the Edit Member SQL statement & The member with MemberID 1 now has 31452@longroad.ac.uk as their email &  \\ \hline
+	4.04 & EmployeeID: 3, New Employee FirstName: John, New Member LastName: Smith  & The Employee with EmployeeID of 3 will now have a first name of John, Last name of Smith.& The Employee with Employee ID of 3 now has the first name of John and the Last name of smith. &  \\ \hline 
+	4.05 & ProductID = 2 & The Product with ProductID of 2 should now be removed from the database.& The Product with the Product ID of 2, now has been removed from the database.& \\ \hline
+	4.06 & MemberID = 3 & The Member with MemberID of 3 should now be removed from the database.& The Member With Member ID of 3 has now been removed from the database.& \\ \hline
+	4.07 & EmployeeID = 5 & The Employee with the EmployeeID of 5 should now be removed from the database. & The Employee with the Employee ID of 5 has now been removed from the database.& \\ \hline
+	4.08 &  EmployeeID = 1 & This employee should not be able to be removed because it is the Administrator account.& I was presented with a message saying i could not edit or delete the Employee with the EmployeeID of 1 because it is the administrators account. &  \\ \hline
+	5.01 &  signing into the gmail account `beaconvets@gmail.com' and attempting sending an invoice to Member with MemberID 1.  & The email address the email was sent to, should receive an email from beaconvets@gmail.com containing an Invoice. & The email address received the email, meaning the gmail account details are valid. &  \\ \hline
+	5.02 & A User Logs Into Their account, clicks on the Options Menu in the Menubar and clicks the Change Password Option in the Menu.& The user should be taken to the change password page. & The change password interface is displayed&  \\ \hline
+	5.03 & An Employee Logs into their account, creates an invoice, enters an email address to sent it to, and clicks save invoice. & The email address the email was sent to, should receive an email from beaconvets@gmail.com containing an Invoice. &  The email address received the email containing an Invoice for a order. & \\ \hline
+	5.04 & Checking the subject of the account details email & The Subject for the Account Details email should be along the lines of  `Beacon Vets Account Details' & The subject of the account details email is: Beacon Vets Account Details. & \\ \hline
+	5.04 & Checking the Subject for the Invoice email &  The Subject for the Invoice email should be along the lines of  `Beacon Vets Invoice &The subject for the invoice email is: Beacon Vets Invoice from dd-mm-yyyy where the dd-mm-yyyy is the date the invoice was made. & \\ \hline
+	5.04 & Checking the Subject for the Password reset email &  The Subject for the Password Reset Code should be along the lines of  `Beacon Vets Password Reset Code' & The subject of the password reset email is: Password Reset Code & \\ \hline
+	6.01 & Pressing the `Esc' button whilst logged in & The user should be presented with a pop up window with a Yes or No decision whether they want to Log off.& A Message was displayed with a Yes or No decision whether or not the user wants to log off. & \\ \hline
+	6.01 & Pressing the `Esc' button whilst not being logged in &Nothing should happen & Nothing happened & \\ \hline
+	6.02 & Pressing the `Enter' button after entering a User-name and Password & The System should either log the user in or tell them their user-name/password is incorrect & Because i entered valid log in information, i was taken to the creating an order interface.& \\ \hline
+	6.02 & Pressing the `Enter' button After Logging in. & Unless a pop up window is open, the Enter button should not do anything once the user is logged in.& Nothing happened &  \\ \hline
+	6.03 & Pressing the CTRL and F button on the Keyboard after logging in. & The Search Window should open & The Search pop up window opened& \\ \hline
+	6.03 & Pressing the CTRL and F button on the Keyboard before logging in. & Nothing should happen because the user should have no access to the system before logging in& Nothing happened &  \\ \hline
+	6.03 & Pressing the F button on the Keyboard after logging in. & Nothing should happen because the user is required to press the CTRL button aswell.& Nothing happened&  \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when adding a Product & A Pop Up Window should display with a Yes and No decision as to whether they want to add the product & a Confirmation window displayed with Yes and No decision as to whether the user wants to add the product to the database.& \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when editing a Product & A Pop Up Window should display with a Yes and No decision as to whether they want to edit the product & a Confirmation window displayed with Yes and No decision as to whether the user wants to edit the product & \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when deleting a Product &A Pop Up Window should display with a Yes and No decision as to whether they want to delete the product & a Confirmation window displayed with Yes and No decision as to whether the user wants to delete the product & \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when adding a Member &A Pop Up Window should display with a Yes and No decision as to whether they want to add the member & a Confirmation window displayed with Yes and No decision as to whether the user wants to add the Member to the database.& \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when editing a Member &A Pop Up Window should display with a Yes and No decision as to whether they want to edit the member & a Confirmation window displayed with Yes and No decision as to whether the user wants to edit the Member.& \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when deleting a Member &A Pop Up Window should display with a Yes and No decision as to whether they want to delete the member & a Confirmation window displayed with Yes and No decision as to whether the user wants to delete the Member.&  \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when adding a Employee &A Pop Up Window should display with a Yes and No decision as to whether they want to add the employee & a Confirmation window displayed with Yes and No decision as to whether the user wants to add the Employee to the database.& \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when editing a Employee &A Pop Up Window should display with a Yes and No decision as to whether they want to edit the employee & a Confirmation window displayed with Yes and No decision as to whether the user wants to edit the Employee& \\ \hline
+	6.04 & Pressing CTRL and S button on the keyboard when deleting a Employee &A Pop Up Window should display with a Yes and No decision as to whether they want to delete the employee & a Confirmation window displayed with Yes and No decision as to whether the user wants to delete the Employee&  \\ \hline
+	6.04 & Pressing CTRL and S button before the user has logged in & Nothing should happen because the user has not logged in yet & Nothing happens& \\ \hline
+	6.05 &  Pressing the Enter button on the keyboard once a pop up window with a single ok button opens & This should close the window & The Pop up window closes assuming it is the window on top.& \\ \hline
+	6.05 &  Pressing the Enter button on the keyboard once a pop up window with a Yes and No decision opens. & This should automatically choose the yes option & The Yes option is chosen, which in most cases, creates another pop up window telling the user that the product, member, employee has been successfully added, edited or deleted.&  \\ \hline
+	6.06 & Right Clicking on a Product in the Search Window. & A Menu should display with Edit and Delete a Product & A Menu is displayed with the following options: Manage Stock, Edit Product Delete Product & \\ \hline
+	6.06 & Right Clicking on a Member in the Search Window.& A Menu should display with Edit and Delete a Member & A Menu is displayed with the following options: Edit Member, Delete Member.& \\ \hline
+	6.06 & Right Clicking on a Employee in the Search Window when signed in on the Administrator account. & A Menu should display with Edit and Delete a Employee & A Menu is displayed with the following options: Edit Employee Delete Employee& \\ \hline
+	6.06 & Right Clicking on a Employee in the Search Window when NOT signed in on the Administrator account. & Edit and Delete an Employee should not be click-able &A Menu is displayed with the following options: Edit Employee Delete Employee & \\ \hline
+	6.07 & Clicking CTRL and P on the keyboard simultaneously once logged in & The user should be taken to the Add Product Interface& the system changes to the Add Product interface& \\ \hline
+	6.07 & Clicking CTRL and P on the keyboard simultaneously before the user has logged in & Nothing should happen & Nothing happens & \\ \hline
+	6.08 & Clicking CTRL and M on the keyboard simultaneously after the user has logged in& The user should be taken to the Add Member interface & The system changes to the Add Member interface& \\ \hline
+	6.08 & Clicking CTRL and M on the keyboard simultaneously before the user has logged in & Nothing should happen&Nothing happens& \\ \hline
+	6.09 & Clicking CTRL and E on the keyboard simultaneously after the user has logged in as the administrator account & The User should be taken to the add Employee Interface & The user is taken to the Add Employee interface & \\ \hline
+	6.09 & Clicking CTRL and E on the keyboard simultaneously after the user has logged in. & Nothing should happen& Nothing happens&  \\ \hline
+	6.09 & Clicking CTRL and E on the keyboard simultaneously after the user has logged on an account other than the administrators account & The user should be told that they cannot add an employee because they are not logged in on the administrators account & Nothing happens & \\ \hline
+	6.10 & Clicking CTRL and O on the keyboard simultaneously after the user has logged in & The user should be taken to the create an Order interface & The user is taken to the Create Order interface. & \\ \hline
+	6.10 & Clicking CTRL and O on the keyboard simultaneously before the user has logged in & Nothing should happen& Nothing happens &  \\ \hline
+	7.01 & Adding Some Employees, Products, and Members, creating some orders and managing the stock of the products & The System should work without fault & I Was able to Add Edit and Remove Products, Members and Employees, Manage the Stock of the Products, and use the Sales prediction of each product to help decide how much i need to buy to restock. & \\ \hline
+       \end{longtable}
+\end{flushleft}
+        
+        
 \subsection{Evidence}
 
 \section{Evaluation}
 
 \subsection{Approach to Testing}
 
+I have chosen to take a mixed level approach, in attempt to to test all areas of my system and find as many faults as possible. For example,  The tests in series 1 are examples of Top Down Testing, testing the flow of control between the user interfaces of my system so my client can get to the interface easily and quickly (One of the general objectives of the system).Series 2 uses Bottom Up testing to test the validation of the data inputs. This is a critical test for some data fields as data entered from the user is manipulated by the system and any invalid data entered will me the data may not be able to be manipulated. For example when a customer buys X amount of a product, the stock of the product needs to be changed. Here a calculation is made to work out the new stock of the product, if the stock was entered as a string by the user, this calculation cannot be made. Series 3 uses white box testing i have to look into the database to ensure the data has been stored successfully and correctly. Series 4, 5 and 6 use black box testing to ensure that any processes that happen within the system work successfully and correctly. Series 7 uses acceptance testing to ensure that the system meets the clients specification and has met the objectives made in the design phase.
+
 \subsection{Problems Encountered}
+
+during the Testing phase i exposed some problems within my system, these problems are specified below along with the measures i underwent to eliminate these issues. 
+
+Test Series 2.01
+
+In Test series 2.01 i tested to see which characters were eligible for Product Name. Realistically only Letters should be accepted not numbers or special characters. To fix this problem i simply need to amend the regular expression, so that it only allows letters. 
+
+
+Test Series 2.02
+
+In test series 2.02, any file type is accepted by the system. However, unless the file is an image file an image will not be displayed. If the user chooses a file which is not an image file, no message is displayed and the system doesn't display an image. The changes that need to be made in order for this test to work, is that if the file is not an image file, do not try to change the current image and display a message to the user saying they need to choose an image file. The system could also restrict the user from choosing and other file than an image file. This could be implemented in a future version of my system.
+
+Test Series 2.03
+
+In Test Series 2.03, I tested to see the boundaries for a valid price. realistically this should have been between £0.00 and £999.99. However during the Implementation stage i did not set a boundary to the price. Because of this i was able to enter a huge price which should not be allowed. To solve this i need to simply put an if statement every time the user changes the text. To do this I can say: QLineEdit.textChanged.connect(self.check-length). Now to make sure the price is between the limits i need to add: IF self.price < 999.99 THEN: to the self.check-length method. if the price is less than 999.99 then i need to change the QLineEdit boarder to green. This can be done by applying a style-sheet to that specific QLineEdit.
+
+Also in test series 2.03, the user can enter a price into the price field. I used a built in validator that only allows integers from the keyboard to be entered. However this module allows the use of an exponential to be entered, which allows the user to enter the letter 'e'. This means that this test failed as it should only accept integers. To change this, i need to tell the validator which notation to use. At the moment it uses both standard and scientific notation. The scientific notation is what allows the user to enter the letter 'e'. To stop this from happening i need to set the notation to just the standard notation. This can be done easily by simply doing self.price-validator.standardNotation() where self.price-validator is a QDoubleValidator.
+
+Test Series 2.05
+
+In test series 2.05, the only acceptable characters in the members name should be letters. special characters should not be accepted. At the moment, special characters are not accepted however letters and numbers are. To change this, i need to change the regular expression so that integers should not be accepted.
+
+Test Series 2.08
+
+When the member enters their postcode, They have the ability to search for their address if they live im Cumbria. However, the postcodes stored in the CSV file have spaces in. The postcode field still validates the postcode even if there is no space in it. Therefore the user could enter their postcode and because it does not have a space in it, it won't be found. for example if 'CB7 5LQ' was stored in the CSV file and the user entered 'CB75LQ' it would not be found. To solve this problem i should change all of the postcodes in the CSV so they do not have spaces in. Then when the user enters their postcode, remove the space if there is one. This can be done by doing 'postcode-input.replace(" ",""). This would now allow the user to either enter the postcode with or without a space and it will still be able to be found in the CSV file.
+
+Test Series 2.09
+
+In Test series 2.09 i tested the range of characters that were acceptable for the house number. Originally i thought that only integers should be accepted in this field. Since the implementation stage, i have realised that houses can also contain letters as well. for example there could be a 66A or a 66B or the house could have a house name instead of a number which the user could not specify in my current system. Therefore,  this test has failed. To improve this feature, i should change the the input method so that the user can also enter characters in the field as well.
+
+Test Series 3.05
+
+Test series 3.05 relates to the test Series 2.09. Ideally i want every postcode to be stored without a space between them. Currently the user can choose to enter a space or not which will mean that some will be stored with a space between and some will not. This issue will be resolved if the changes to test series 2.09 are made.
+
+Test Series 6.06
+
+Test Series 6.06 tests the menu that is displayed when the user right clicks on an Employee in the search window. When logged in on an account that is not the Administrators, the user should not be able to access the Add Edit And Delete Employee. However, when the user right clicks on an Employee they are given the option to edit or delete an Employee. This should not happen, instead i want these options to be greyed out if the user is not signed in as the administrator. To do this, when the user right clicks on one of the Employees, a function is run to display the menu to the user. To solve this problem, i need to check whether the user is signed in as the administrator and then choose whether to display the edit and delete Employee options or grey them out. I already have a function that returns the EmployeeID of the currently logged in user, i can use this to check who is currently logged in. I can then use an if statement stating: IF EmployeeID != 1 THEN. Now i need to say what must happen if they are not signed in on the administrators account, in this case i want to grey out the menu options, which can be done by doing: QMenuItem.setDisabled(True)
+
+
+
 
 \subsection{Strengths of Testing}
 
+The main strengths of my testing is the rigorous testing of the data inputs and outputs of the system, ensuring the features of highest importance were working correctly. Another strength from my testing was the rigorous testing of the flow of control between the user interfaces, which showed that my system can be navigated quickly and easily. The rigorous testing of the data inputs and outputs of the system means i can conclude that this area of the system is effective. From the testing I managed to identify many problems and faults within my system. Knowing about these faults and knowing where they lie will be a good aid, in fixing the problems my client has with the system.
+
 \subsection{Weaknesses of Testing}
+
+The main weakness from my testing was due to the fact i did not have time to test every feature within my system. This could result in features not working properly. I Attempted to overcome this problem during Test series 7.01, where the program was used generically, i discovered no big problems during normal use of the system, all features work appropriately apart from a few small problems outlined during the testing and the, if any, undiscovered problems.
 
 \subsection{Reliability of Application}
 
+From my testing i have found my application to be considerably reliable. I tested most of data inputs of the system and all of them worked correctly, even though some of have some validation problems. All of the data inputs stored the data under the correct table column and all the data was stored in valid format, either just for storing and being output to the user, or being used for  calculations. I did not test all the Data inputs as there were too many for the time i had. To maximise the effectiveness of the testing I decided to make the abstract data inputs a first priority and made duplicate input types the lowest priority. This way if i do not have time to test all of the data inputs, I will  be testing the data inputs that will most likely to have problems, and the data inputs least likely to have problems will not be tested. 
+
 \subsection{Robustness of Application}
+
+My testing programme has also proved that my system is very robust. During the testing, my program never crashed or returned error messages when attempting to do something. One way in which the system could crash is if data is entered in the wrong format. This would be applicable for my system for the stock of the products, if they were entered as a string, the system could not work out how much of a product can be added to one order, the sales for each week / day. This is also applicable for any other data types that are required to be entered as a integer, due to that data being used for a calculation within the system. I found that this was a problem during the early stages of the Implementation, and ensured that i resolved the problem, as well as ensuring i did not encounter this problem later on in the Implementation stage. Therefore, during the testing phase, i did not encounter any problems with the format of data.
+
