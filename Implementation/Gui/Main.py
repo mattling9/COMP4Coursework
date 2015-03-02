@@ -810,13 +810,12 @@ class MainWindow(QMainWindow):
                   "",
                   ("Hello {0}, Here are your account details: \n \n Username:   {1} \n  Password:   {2}".format(first_name, username, password))])
 
-            #mail = smtplib.SMTP('smtp.gmail.com','587')
-            #mail.ehlo()
-            #mail.starttls()
-            #mail.login(send_from, decrypted_password)
-            #mail.sendmail(send_from, email_address, msg)
-            #mail.close()
-            print("email sent")
+            mail = smtplib.SMTP('smtp.gmail.com','587')
+            mail.ehlo()
+            mail.starttls()
+            mail.login(send_from, decrypted_password)
+            mail.sendmail(send_from, email_address, msg)
+            mail.close()
 
     def send_code_to_email(self, username):
         settings = getSettings()
@@ -831,12 +830,12 @@ class MainWindow(QMainWindow):
           "Subject: Password Reset Code",
           "",
           ("{0}{1}".format(message ,str(self.code)))])
-        #mail = smtplib.SMTP('smtp.gmail.com','587')
-        #mail.ehlo()
-        #mail.starttls()
-        #mail.login('{0}'.format(settings[0][10]) , decrypted_password)
-        #mail.sendmail('{0}'.format(settings[0][10]), str(employee_info[2]) , msg)
-        #mail.close()
+        mail = smtplib.SMTP('smtp.gmail.com','587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login('{0}'.format(settings[0][10]) , decrypted_password)
+        mail.sendmail('{0}'.format(settings[0][10]), str(employee_info[2]) , msg)
+        mail.close()
         
 def main():
     stock_control = QApplication(sys.argv) #creates new application   
