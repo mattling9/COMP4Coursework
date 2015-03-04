@@ -1,4 +1,4 @@
-\chapter{System Maintenance}
+he\chapter{System Maintenance}
 
 \section{Environment}
 
@@ -131,9 +131,6 @@ Below is the complete list of programs used when creating my system:
 
 \textbf{IDLE}
 \begin{itemize}
-	\item Is an object orientated programming language
-	\item Has a wide selection of built in functions and modules in which i could use, for example the random and time module.
-	\item Python 3 has some improved features compared to Python 2 such as not being able to compare between string and integers and floats.
 	\item Has syntax highlighting which means code is easier to read.
 	\item Has a `Run Module' feature which allows either the GUI to be previewed or you can view the CLI in the Python Shell.
 	\item has useful keyboard short-cuts (i.e F5 to Run the Module) which increases the ease of use of the software and allows you to do things a lot faster.
@@ -211,15 +208,132 @@ Below is the complete list of programs used when creating my system:
 
 \section{System Overview}
 
-%use as many subsections as necessary for the system components
-\subsection{System Component}
+\subsection{Log In}
+
+The Log in Screen prevents any unauthorized users from being able to access the system without logging in. When the user enters a user-name and password the system will then search the database for any users who match the credentials entered by the user.If the user-name and password the user enters match an account within the database, the user will be taken to the creating order interface as this will be the most used feature of the system. If the credentials do not match any of the accounts stored in the database, then the system will tell the user that their user-name or password is incorrect. If the user cannot remember either their user-name or password, they can click on the 'Forgot Username and Password button. Clicking this button will take the user to a screen where they must enter the email address associated to the account(This email address will have been added when the Employee was first created). The system will then search the database to see if the email address the user enters matches any of the employee accounts. If it does not, the user will be informed that the email address does not match any of the accounts, however, if it does, the User-name and Password of the Employee account will be sent to the email address also stored under the Employee account. If the user cannot access their email address to retrieve their Account details, the user will have to ask the administrator to change the email address associated to their account, to an email address that they can access.
+
+\subsection{The Search Window}
+
+The search window is a feautre of the system that allows the user to search for a product member or employee within the database. The user can access the search window by pressing CTRL+F on the keyboard simultaneously, or by clciking on the Search Window option under the Options meu in the menubar. In the search window the user has the ability to choose which table they would like to search, the product table, member table or the employee table. There is a search field that allows the user to enter any information and the table will dislpay any matching data. This is a very useful tool when wanting to find Products, Members or Employees.
+
+\subsection{Create Order}
+
+The Create Order interface allows an employee to create an order, from products currently being stored within the database. If the customer wants to purchase a product that is not currently being stored in the database, the employee will have to add the product to the database via the 'Add Product' interface before it can be added to an order. To add a product to the order, the user must find the product under the 'Find Product' table. To add the product to the order, the user can either click on the product then click then click the 'Add to Order' button or they can either double click on the product they want to add. If done succesfully the product should be added to the order and the subtotal, discount and total price should have changed. Once the Order is complete the user can then decide whether they want to print off the invoice, send it to an email address, or both. Once the Order has been created and the employee has decided whether to print or email the invoice, the employee can click the save invoice button which will send the invoice to the email specified or print off the invoice. If the customer is a member, the Employee can enter the customers MemberID and 10 percent of the price of the current order will be deducted.
+
+\subsection{Adding Editing and Removing Products}
+
+In order to be able to create an order, there must be products stored in the database. The Add Product interface allows the user to enter relevent information about the product along with an optional image of the product. The system validates the data the user enteres to ensure that the data is valid and is stored in a suitable format within the database. If the Employee wants to change the details about a product, for example the price, they must first find the productID of the product they want to edit or delete. This can be done easily using the search window which can be found under the Options Menu in the Menubar or by pressing CTRL+F when logged into an account. Once the user knows the ProductID of the product they want to edit, they can go to the Edit Product interface either by clicking on Edit Product under the Product Menu in the Menubar or by right clicking the product in the search window and clicking on the edit product option in the drop down menu. Likewise, if the user wants to delete a product, they can either go to the Delete Product option under the Product Menu in the Menubar or by right clicking on the product in the search window and selecting delete product from the dropdown menu.
+
+\subsection{Managing the Stock of a Product}
+
+If a product has been purchased in many orders, there may not but much stock left. If there are less the 5 of any specific product left in the shop, but many still left in storage, once a user logs on, the system displays a message telling them that the product needs to be restocked. If there are less than 5 in the shop and less than 5 in storage then the user is told that they should buy more stock. Once the user has bought more stock or has moved stock from storage to the shop, the must update this in the system. To do this, the employee must log into the system, then find the ProductID of the product they want to change the stock of. They enter the ProductID into the ProductID field in the Manage Stock interface. When the user clicks the find button, The Product Name, Image, Stock in Shop and Stock in storage will be displayed to the user. Here the user will be able to change the stock in each location. The suer will also be displayed a graph of the recent sales of that speciifc product, the data on this graph allows the system to be able to predict future sales of that product, this can aid the company in knowing how many of the product should be purchased when wanting to buy more stock.
+
+\subsection{Adding Editing and Removing Members}
+The company allows customers to join a membership scheme, which allows the customer to get 10 percent off all of their orders. To add a member to the system, the user can go to the 'Add Member' option under the Member Menu within the Menubar. Here, the employee must enter the details about the customer, such as their name, address, telephone number and email address. The employee can then save the member in the database. If the customer / member changes any of their information, they must inform the company so that they can change the information in their system. To edit a member, the employee must log into the system, then the employee must find the member by searching for any relevent information in the search window. To search for members in the search window the employee must choose the Member option from the Combobox, this should then display the Member table. Once the Employee has found the MemberID of the member, they can either right click on the member in the search window and click on the Edit Member from the drop down menu, or go to the 'Edit Member' option under the Member Menu in the Menubar. To delete a member from the system, the employee must find the Member in the search windwow, right click the Member and click on delete member, or enter their MemberID into the Remove a Member interface.
+
+\subsection{Adding Editing and Removing Employees}
+Realistically, the system will not be used by just one employee, therefore my system allows many employees to be able to use the system. When the system is first run, one Employee account is created which is the Admin account. The admin account will be able to access features of the system that a normal account will not. To add a new Employee account, the employee MUST sign in on the admin account, then the user can go to the 'Add Employee' option under the Employee Menu in the Menubar. Here the user can enter the name and email address of the new employee and then can save them to the database. Now the new account can be used to accessed the system. There is only one admin account, which cannot be removed from the system.
+To edit or delete an employee account the user must log into the admin account. Then, the user must go to the search window and find the employee they want to delete, they can then right click on an employee and click either edit or delete employee.
+
 
 \section{Code Structure}
 
 %use as many subsections as necessary for the code sections
-\subsection{Particular Code Section}
+
+\subsection{Decision Pop Up Window.}
+\begin{figure}[H]
+\pythonfile[firstline=5,lastline=7]{./Maintenance/PopUpMenuClass.py}
+\end{figure}
+
+Above shows a section of code that creates a Decison Pop up window where the user will be displayed a message and will have decision to make i.e (Yes or No, Ok or Cancel)
+Obviously, in my system i will need to have more than one Decision pop up window, therefore i decided to make the Pop up window a class. This means many different instances of the pop up window can be made without having to repeat code. The above snippet shows the constructor of the class and shows the information that must be passed into each instance. Passing This data into the constructor allows different pop up windows to be made from the same class. The three things that get passed into the constructor, are the message that is displayed on the Pop up Window and the two buttons that are on the Pop Up Window(i.e Ok, Cancel, Yes, No.)
+
+\subsection{Deleting Product Function}
+\begin{figure}[H]
+\pythonfile[firstline=33,lastline=39]{./Maintenance/AddingremovingData.py}
+\end{figure}
+ Above shows the function that is used to remove Products from the database. It is obvious that the user may want to delete many products from the system therefore, i decided to create a Function that allows the user to delete Products. I decided to make this a function as it will allow the user to be able to repeat the process of deleting a product over and over. The information that is passed into the function is the ProductID of the Product to delete, this allows the user to be able to use one function to be able to remove an infinate amount of products from the system wihtout having to repeat any code.
+
+\subsection{Table used for the Search Window}
+\begin{figure}[H]
+\pythonfile[firstline=192, lastline=222]{./Maintenance/FindingPopUpClass.py}
+\end{figure}
+
+The above snippet shows the method used to change the model of the table. I decided to use a QModel and a QTableView in order to display the data from the database because it allowed me to switch between tables in the database. In The search window, the user can either search for a product memeber or employee. To switch between the tables, the user tells the system what they want to search for by selecting one of the options from a combobox. The model of the QTableView is then changed depending on the currently selected item in the ComboBox. This allows me to switch between different Models and keep the same table. If i did not use models, i would have to create a unique table for product, memebr and employee achange which one is viewed. Using models and switching between them requires a lot less code and means i do not have to repeat any code.
+
+\subsection{Adding and Removing Data}
+\begin{figure}[H]
+\pythonfile[firstline=324,lastline=365]{./Maintenance/AddingRemovingData.py}
+\end{figure}
+
+The Above shows a small section of my AddingRemovingData file. This file contains all of the SQL statements that are used in the system. The reason that i have put all the SQl statements into one file is that it makes it much easier to find specific SQL statements when i need to because i know that they're all in the same file. If i put the SQL statements in the files where they are needed, it would make it harder to find the SQL statements i am looking for.
+
+\subsection{Organisation of Classes.}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./FilesExample.png}
+\end{figure}
+
+The Above does not show the structure of my code as such, however it shows that i have seperated each class into its own individual file. I have split each class into its own file as this made it a lot easier when trying to debug problems with my code. For example if i know there was something wrong with Editing a Product, i would instantly know that i would have to look at EditProductClass.py . This made finding problems in my code very easy compared to if i had grouped many classes into one file. It also helped to shorten the length of each file, which means the contents of each file can be organised a lot easier.
+
+\subsection{Table used for the Search Window}
+\begin{figure}[H]
+\pythonfile[firstline=66, lastline=71]{./Maintenance/AddingMemberClass.py}
+\end{figure}
+
+The above code shows how the County ComboBox is populated. During the Implementation stage i know it would be very long and tedious, hard coding each and every county in the UK into the ComboBox. Therefore, i created a text file containing all the counties, each separated with a comma. From here i could use python to extract each county from the text file and add it to a list. Line 70 from the code above shows a FOR loop, which places each item into the ComboBox. Using a For loop allowed me to reduce the amount of code compared down to 2 lines, compared to hard coding each county into the Combobox. 
+
+\subsection{Emailing Functionality}
+\begin{figure}[H]
+\pythonfile[firstline=650, lastline=674]{./Maintenance/Main.py}
+\end{figure}
+
+The above code shows the exception handling when trying to send an email. I have used exception handling for common errors that occurred during the implementation stage when trying to send emails. The two common errors i had when trying to send emails was the credentials used to send the email were not valid, and not being connected to the Internet. If either of these problems occur, the user is now displayed with an appropriate message telling them why the email could not be sent. I also included a third except statement that will cover any other problems that may occur when sending an email, however there is no way to specify to the user what the problem is. Putting these except statements in greatly reduced the chance of my system to break when being used.
+
+\subsection{Validation Function}
+\begin{figure}[H]
+\pythonfile[firstline=256, lastline=260]{./Maintenance/AddingMemberClass.py}
+\end{figure}
+
+The function above shows how the Members Postcode is validated. In order for the postcode to be valid, the text entered by the user must match the regular expression for the postcode. Using a regular expressions allows many different postcodes to be valid, without having to specify exactly which postcodes are valid. For example saying that the exact postcode 'CB7 5LQ' is avalid as apposed to saying : "if the postcode starts with 2 letters followed by a number then it is valid. This section of code is a Function because it reduces the repetition of code and gets called every single time the text in the postcode field is changed. 
 
 \section{Variable Listing}
+
+You can find my data dictionary on Page ... 
+
+    \begin{tabular}{|p{2cm}|p{5cm}|p{3cm}|p{5cm}|}
+        \hline
+        \textbf{Variable Name} & \textbf{Purpose} & \textbf{Section} & \textbf{Line Numbers}\\ \hline
+	self.title & The Text that is displayed at the top of each Interface & & \\ \hline
+	encrypted-password & stores the password after it has been encrypted & & \\ \hline
+	decrypted-password & stores the password after it has been retrived from the system and decrypted. & & \\ \hline
+	self.valid & is a boolean variable to say whether a method returns true or false. & & \\ \hline
+	subject & used to store the Subejct of the email that is sent to the customer / employee & & \\ \hline
+	send-from & used to store the email address the email is sent from & & \\ \hline
+	self.code & The random 4 digit code that is generated when an Employee wants to reset their password. & & \\ \hline
+	employee_info & stores the infomration about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & & \\ \hline
+	self.spacer & used to add spacing between widgets & & \\ \hline
+	first-name & used to store the first name entered by the user & & \\ \hline
+	last-name & used to store the last name entered by the user & & \\ \hline
+	full-name-list & Used to store the First letter of the First Name, The last name and the EmployeeID. & & \\ \hline
+	self.pattern & used as a variable for the regular expressions used in the validation & & \\ \hline
+	self.postcode-input & used to store a postcode to check if the postcode is i the CSV file. & & \\ \hline
+	self.county-list & A list used to  store all the counties in the UK & & \\ \hline
+	self.scaled-image & a a variable used to store a QPixmap that ahs been scaled to a specific width and height & & \\ \hline
+	path & used to store the path of the Product Image selected by the user & & \\ \hline
+	rows-in-table & used to store the amount of rows currently in a table & & \\ \hline
+	self.file-name & used to store the New ProductID of the image going to be stored. & & \\ \hline
+	self.temp & used to store a temporary value & & \\ \hline
+	self.category-string & used to turn the combobox selection bythe user into string. For example if the user selected Dog and Food from the combo-boxes, self.category-string would store the string 'Dog Food'.& & \\ \hline
+	Product & used to store a list of all the Product information & & \\ \hline
+	order_info & used to store a string of all the information related to an order & & \\ \hline
+	
+	data & variable used to turn individual variables into a tuple. & & \\ \hline
+	
+	
+	
+	
+	
+
 
 \section{System Evidence}
 
@@ -253,7 +367,6 @@ Below is the complete list of programs used when creating my system:
 
 
 \subsection{Main Program}
-\begin{landscape}
 
 \begin{figure}[H]
 \pythonfile{./Maintenance/Main.py}
@@ -388,5 +501,3 @@ Below is the complete list of programs used when creating my system:
 \begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/StyleSheet.py}
 \end{figure}
-
-\end{landscape}
