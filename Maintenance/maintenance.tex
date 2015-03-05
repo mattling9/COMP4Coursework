@@ -296,39 +296,57 @@ The above code shows the exception handling when trying to send an email. I have
 
 The function above shows how the Members Postcode is validated. In order for the postcode to be valid, the text entered by the user must match the regular expression for the postcode. Using a regular expressions allows many different postcodes to be valid, without having to specify exactly which postcodes are valid. For example saying that the exact postcode 'CB7 5LQ' is avalid as apposed to saying : "if the postcode starts with 2 letters followed by a number then it is valid. This section of code is a Function because it reduces the repetition of code and gets called every single time the text in the postcode field is changed. 
 
+\pagebreak
+
 \section{Variable Listing}
 
-You can find my data dictionary on Page ... 
+You can find my data dictionary on Page 104 
 
-    \begin{tabular}{|p{2cm}|p{5cm}|p{3cm}|p{5cm}|}
+    \begin{longtable}{|p{1.5cm}|p{4.5cm}|p{2cm}|p{2cm}|}
         \hline
         \textbf{Variable Name} & \textbf{Purpose} & \textbf{Section} & \textbf{Line Numbers}\\ \hline
 	self.title & The Text that is displayed at the top of each Interface & & \\ \hline
 	encrypted-password & stores the password after it has been encrypted & & \\ \hline
-	decrypted-password & stores the password after it has been retrived from the system and decrypted. & & \\ \hline
+	decrypted-password & stores the password after it has been retrieved from the system and decrypted. & & \\ \hline
 	self.valid & is a boolean variable to say whether a method returns true or false. & & \\ \hline
 	subject & used to store the Subejct of the email that is sent to the customer / employee & & \\ \hline
 	send-from & used to store the email address the email is sent from & & \\ \hline
 	self.code & The random 4 digit code that is generated when an Employee wants to reset their password. & & \\ \hline
-	employee_info & stores the infomration about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & & \\ \hline
+	employee-info & stores the information about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & & \\ \hline
 	self.spacer & used to add spacing between widgets & & \\ \hline
+	self.vertical-spacer& used to add vertical spacing between widgets & & \\ \hline
 	first-name & used to store the first name entered by the user & & \\ \hline
 	last-name & used to store the last name entered by the user & & \\ \hline
 	full-name-list & Used to store the First letter of the First Name, The last name and the EmployeeID. & & \\ \hline
-	self.pattern & used as a variable for the regular expressions used in the validation & & \\ \hline
-	self.postcode-input & used to store a postcode to check if the postcode is i the CSV file. & & \\ \hline
-	self.county-list & A list used to  store all the counties in the UK & & \\ \hline
-	self.scaled-image & a a variable used to store a QPixmap that ahs been scaled to a specific width and height & & \\ \hline
+	self. pattern & used as a variable for the regular expressions used in the validation & & \\ \hline
+	self. postcode-input & used to store a postcode to check if the postcode is i the CSV file. & & \\ \hline
+	self. county-list & A list used to  store all the counties in the UK & & \\ \hline
+	self. scaled-image & a a variable used to store a QPixmap that has been scaled to a specific width and height & & \\ \hline
 	path & used to store the path of the Product Image selected by the user & & \\ \hline
-	rows-in-table & used to store the amount of rows currently in a table & & \\ \hline
-	self.file-name & used to store the New ProductID of the image going to be stored. & & \\ \hline
-	self.temp & used to store a temporary value & & \\ \hline
-	self.category-string & used to turn the combobox selection bythe user into string. For example if the user selected Dog and Food from the combo-boxes, self.category-string would store the string 'Dog Food'.& & \\ \hline
+	rows- in-table & used to store the amount of rows currently in a table & & \\ \hline
+	self. file-name & used to store the New ProductID of the image going to be stored. & & \\ \hline
+	self. temp & used to store a temporary value & & \\ \hline
+	self. category-string & used to turn the combobox selection by the user into string. For example if the user selected Dog and Food from the combo-boxes, self. category-string would store the string 'Dog Food'.& & \\ \hline
 	Product & used to store a list of all the Product information & & \\ \hline
-	order_info & used to store a string of all the information related to an order & & \\ \hline
-	
+	order -info & used to store a string of all the information related to an order & & \\ \hline
 	data & variable used to turn individual variables into a tuple. & & \\ \hline
+	date -stored & variable used to store the last sales date from the settings table & & \\ \hline
+	date & used to  todays current date & & \\ \hline
+	date -time & stores the current time in hours and minutes & & \\ \hline
+	invoice -date & stores the date the invoice was created & & \\ \hline
+	new -date & stores the todays date + 7 days (1 week) & & \\ \hline
+	greatest -employee-id & stores the highest EmployeeID in the database & & \\ \hline
+	new -employee-id & adds 1 to the highest EmployeeId to create a new EmployeeID & & \\ \hline
+	move -list & stores the ProductID of all the products with a stock in Location 1 less than 5 & & \\ \hline
+	restock -list & stores the ProductID of all the products with a stock in Location 1 and Location 2 less than 5. & & \\ \hline
+	total -stock & adds the stock in Location 1 to the stock in location 2 and stores this value. & & \\ \hline
+	self. subtotal-price & adds the prices of all the Products currently in the order and stores this value.& & \\ \hline
+	self. total-price & stores the value from (self.subtotal-price - self.discount) & & \\ \hline
+	self. money-off & calculates (self .total-stock * 0.1) and stores the value & & \\ \hline
+	invoice -history & is an array that stores the date and time the invoice was made and the date and time the invoice was sent & & \\ \hline
+	html & used to store the HTML invoice that is either printer or emailed to a customer& & \\ \hline
 	
+	\end{longtable}
 	
 	
 	
@@ -363,11 +381,12 @@ You can find my data dictionary on Page ...
 
 \section{Acknowledgements}
 
+\pagebreak
+
 \section{Code Listing}
 
 
 \subsection{Main Program}
-
 \begin{figure}[H]
 \pythonfile{./Maintenance/Main.py}
 \end{figure}
@@ -426,6 +445,7 @@ You can find my data dictionary on Page ...
 \begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/PreferencesClass.py}
 \end{figure}
+
 \subsection{Stock Management Interface}
 \begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/StockManagementClass.py}
