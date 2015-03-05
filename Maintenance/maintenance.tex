@@ -345,7 +345,6 @@ You can find my data dictionary on Page 104
 	self. money-off & calculates (self .total-stock * 0.1) and stores the value & & \\ \hline
 	invoice -history & is an array that stores the date and time the invoice was made and the date and time the invoice was sent & & \\ \hline
 	html & used to store the HTML invoice that is either printer or emailed to a customer& & \\ \hline
-	
 	\end{longtable}
 	
 	
@@ -356,6 +355,86 @@ You can find my data dictionary on Page 104
 \section{System Evidence}
 
 \subsection{User Interface}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface1.png}
+    \caption{Logo In Interface} \label{fig:log-in-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface2.png}
+    \caption{Forgot Password Interface} \label{fig:forgot-password-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface3.png}
+    \caption{Creating Order Interface} \label{fig:creating-order-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface4.png}
+    \caption{Add Product Interface} \label{fig:add-product-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface5.png}
+    \caption{Edit Product Interface} \label{fig:edit-product-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface6.png}
+    \caption{Removing Product Interface} \label{fig:removing-product-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface7.png}
+    \caption{Manage Stock Interface} \label{fig:stock-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface8.png}
+    \caption{Add Member Interface} \label{fig:add-member-instance}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface9.png}
+    \caption{Edit Member Interface} \label{fig:edit-member-instance}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface10.png}
+    \caption{Removing Member Interface} \label{fig:removing-member-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface11.png}
+    \caption{Add Employee Interface} \label{fig:adding-employee-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface12.png}
+    \caption{Edit Employee Interface} \label{fig:edit-employee-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface13.png}
+    \caption{Remove Employee Interface} \label{fig:removing-employee-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface14.png}
+    \caption{Preferences Interface} \label{fig:preferences-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface15.png}
+    \caption{Search Interface} \label{fig:search-interface}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./interface16.png}
+    \caption{Change Password Interface} \label{fig:change-password-interface}
+\end{figure}
 
 \subsection{ER Diagram}
 
@@ -387,137 +466,129 @@ You can find my data dictionary on Page 104
 
 
 \subsection{Main Program}
-\begin{figure}[H]
 \pythonfile{./Maintenance/Main.py}
-\end{figure}
+\pagebreak
 
 \subsection{Adding Product}
-\begin{figure}[H]
 \pythonfile{./Maintenance/AddingProductClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Editing Product}
-\begin{figure}[H]
 \pythonfile{./Maintenance/EditProductClass.py}
-\end{figure}
+\pagebreak
 
 \subsection{Removing Product}
-\begin{figure}[H]
 \pythonfile{./Maintenance/DeleteProductClass.py}
-\end{figure}
+\pagebreak
 
 \subsection{Adding Member}
-\begin{figure}[H]
 \pythonfile{./Maintenance/AddingMemberClass.py}
-\end{figure}
+\pagebreak
 
 \subsection{Editing Member}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/EditMemberClass.py}
-\end{figure}
+\pagebreak
 
 \subsection{Deleting Member}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/DeleteMemberClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Adding Employee}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/AddingEmployeeClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Editing Employee}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/EditEmployeeClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Deleting Employee}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/DeleteEmployeeClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Log In Screen}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/LogInClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Preferences Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/PreferencesClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Stock Management Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/StockManagementClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{SQL Queries}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/AddingRemovingData.py}
-\end{figure}
+\pagebreak
 
 \subsection{Changing Password Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/ChangePasswordClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Creating Order Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/CreatingOrderClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Search Window}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/FindingPopUpClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Order Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/CreatingOrderClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Message with a single Ok button}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/ErrorMessageClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Message with Yes and No buttons}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/PopUpMenuClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Search Window}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/FindingPopUpClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Password Reset Interface}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/PasswordResetClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Custom Window Frame}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/CustomToolbarClass.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{SQL Connections}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/SQLConnection.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Clickable QLabel}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/ExtendedQLabel.py}
-\end{figure}
+\pagebreak
+
 
 \subsection{Creating the Tables in the database.}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/CreatingTable.py}
-\end{figure}
+\pagebreak
 
 
 \subsection{Style sheet for Main Window}
-\begin{figure}[H]
 \pythonfile[firstline=1]{./Maintenance/StyleSheet.py}
-\end{figure}
+\pagebreak
