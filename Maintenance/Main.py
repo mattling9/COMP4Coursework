@@ -16,7 +16,6 @@ from EditEmployeeClass import *
 from DeleteEmployeeClass import *
 from StockManagementClass import *
 from CreatingOrderClass import *
-from DatabaseClass import *
 from FindingPopUpClass import *
 from SQLConnection import *  
 from CreatingTable import *
@@ -28,8 +27,6 @@ from ErrorMessageClass import *
 from ChangePasswordClass import *
 from StyleSheet import *
 from CustomToolbarClass import *
-from SplashscreenClass import *
-
 class MainWindow(QMainWindow):
     """This class creates the Main window"""
 

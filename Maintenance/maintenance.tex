@@ -361,55 +361,92 @@ You can find my data dictionary on Page 104
     \caption{Logo In Interface} \label{fig:log-in-interface}
 \end{figure}
 
+Figure \ref{fig:log-in-interface} is my log in interface. The figure below shows the Widgets and Layouts used to create the log in interface. 
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./structure-log-in.pdf}
+    \caption{Structure of the Log In Interface} \label{fig:log-in-structure}
+\end{figure}
+
+The Log in Interface is built up from many widgets. The QPixmap is the logo of the company, The QLabels within the Grid layout tell the user what to enter into the QLineEdits. The QPushButton is the button in whihc the user presses once they have entered their log in details. If The user forgets their account details they can click on the Forgot Password Label which is the QLabel underneath the QGridLayout.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface2.png}
     \caption{Forgot Password Interface} \label{fig:forgot-password-interface}
 \end{figure}
+
+The forgot password interface has a QLabel with a unique style sheet that makes the text size larger and makes the text bold. This QLabel is the text that says: `Forgot Your Password.' This same style sheet has been used for all the other titles on each interface to tell the user what interface they are currently on. The forgot password interface then has a QLabel telling the user what to enter into QLineEdit. There is a QLineEdit in which the user can enter their email address and a QPushButton in which the user can click when they have entered their password. When the button has been clicked the database is searched for the email address the user entered. There is also a QPushButton in the Bottom left hand corner of the interface which the user can click to go back to the log in interface. This QPushButton was positioned in the bottom left corner using spacers which are just QWidgets that cannot be seen by the user.
+
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface3.png}
     \caption{Creating Order Interface} \label{fig:creating-order-interface}
 \end{figure}
 
+The create order interface was the most complex interface to design as it had to include many more widgets, compared to the other interfaces. below i have provided a diagram of all the widgets and layouts used to create the create order interface.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./structure-order.pdf}
+    \caption{Structure of the Order Interface} \label{fig:structure-order}
+\end{figure}
+
+The QLabel in bold at the top of the page is the title of the page. This QLabel has a unique stylesheet as explained before, which gives the text are larger font and is in bold. The QGroupBox on the left is for the user to find a product. the QTableView in this QGroupBox displays the Product Table from the database. If the user enters any any characters into the QLineEdit within this group box, the system searches the Product Table for whatever the user entered and will display it in the table. This allows the user to search for specific products. The QPushButton in the QGroupBox will allow the user to add a specific product to the order if they have selected one in the table. Alternatively, the user can double click on a product in the table. The QGroupBox on the right is for the current order. the QTableView displays all the products that are currently in the order. When a user adds an item from the Product Table to the order, that product should be displayed in the current order table. Members get a 10 percent discount, therefore, there is a field that allows the user to enter a member id and the system will deduct 10 percent of the total price from the subtotal. The QLabels and QLineEdits in the QGridLayout display to the user; the subtotal of the order, the amount of money the customer gets off due to discount and the final price of the order after discounts. At the bottom of the page is where the user can decide how they want to output the invoice. The QPushButton allows the user to preview the invoice to ensure all the products have been added successfully. The two QCheckBoxes allow the user to either print the invoice, send it to an email or both. The QLineEdit in this QVBoxLayout allows the user to enter the email address to send the email to. The QButtonBox contains the save button where the user can save the Order to the database and they invoice can be printed or emailed.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface4.png}
     \caption{Add Product Interface} \label{fig:add-product-interface}
 \end{figure}
+
+The Add Product interface contains 6 QLineEdits. 5 of the QLineEdits are for the Employee to enter the product information and one is for displaying the image path to the user. The QLineEdit for displaying the image path has been set to Read Only so that the user cannot edit the path. The QLineEdits for the data inputs allow the user to enter letters, numbers and special characters. After creating my system, i feel it would have been more sensible to use QSpinBoxes for the stock inputs as these only allow integers to be entered into the field. I have used some QLabels to tell the user what to enter into the field, however this is also done by the place holder text within the QLineEdits. I have used two QPushButtons, one allows the user to search for the image, the other updates the QPixmap so that it displays the image selected to the user. The QPushButton in the bottom right corner allows the user to save the product. Once they have entered data into all the fields they can click this button to add the product to the database.
+
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface5.png}
     \caption{Edit Product Interface} \label{fig:edit-product-interface}
 \end{figure}
 
+The Edit product interface is similar to the add product interface however there is an additional widget between the title and the main widget. The additional widget is a QLabel, QLineEdit and QPushButton in a QHBoxLayout. The QLabel tells the user what data needs to be entered into the QLineEdit (ProductID), and the QPushButton searches the database for the data the user enters. Until a Product has successfully been found, all the widgets inside the main widget have been disabled which means the user cannot enter data into them. The Edit Product push button has also been disabled.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface6.png}
     \caption{Removing Product Interface} \label{fig:removing-product-interface}
 \end{figure}
+
+Visually, the Edit and Delete Product interfaces look extremely similar. however there are some slight differences in their functionality. Once the user has found a product, in the Delete Product interface, the data fields are set to read only. This means the user cannot edit the data in the data fields. Also, when the user finds a product in the delete member field, no validation takes place because no data is being changed and the data should have been valid when it was input originally. When the user clicks the delete product push button, the system searches for the product id and removes it from the database.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface7.png}
     \caption{Manage Stock Interface} \label{fig:stock-interface}
 \end{figure}
 
+The Manage stock interface contains three widgets inside a QVBoxLayout. There is the Widget in which the user enters the ProductID of the Product they want to edit the stock of, The Current Stock groupbox which shows the current stock of the product in the database, along with displaying the product name and product image to ensure the user is editing the stock of the correct product. The Other GroupBox shows the sales of that product over a period of time. The graph displays the amount of sales made on a specific date. Inside this GroupBox there is a QComboBox that allows the user to change the graph to show either the sales made each day, or sales made each week. The graph also works out the predicted sales for the following week, which is output to the user in a QLineEdit that is set to Read Only. The save button in the QButtonBox allows the user to save the new stock if they changed it.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface8.png}
     \caption{Add Member Interface} \label{fig:add-member-instance}
 \end{figure}
+
+The Add Member interface has many QLineEdits, in which the user enters data about the Member. A QComboBox has been used for the Title (i.e Mr. or Mrs), and the county. The House Number field is a QSpinBox as the only allows the user to enter an integer. The state of the QCheckBox depends on whether a QPushButton is displayed. If the user does live in Cumbria, the user can click the checkbox which will cause a push button to appear. clicking this push button will search a CSV file containing all the postcodes and towns of all the postcodes in Cumbria. If the postcode is in the database the county and town field will be filled out automatically. This is to decrease the amount of time the user must spend to physically type information into the system.
+
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface9.png}
     \caption{Edit Member Interface} \label{fig:edit-member-instance}
 \end{figure}
 
+The Edit Member interface is very similar to the add member interface however it has a widget between the Title of the interface and the main widget. The new widget contains a QLabel that tells the user what to enter into the QLineEdit, a QLineEdit where the user enters the Member ID and a QPushButton, that when pressed, searches the database for a MemberID that matches the MemberID entered by the user. 
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface10.png}
     \caption{Removing Member Interface} \label{fig:removing-member-interface}
 \end{figure}
 
+The Delete Member interface is visually identical to the Edit Member interface, other than the text on the QPushButton in the bottom right hand corner of the interface. When the Delete Member button is clicked, the system searches the database for the MemberId entered by the user and is removed from the system.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface11.png}
     \caption{Add Employee Interface} \label{fig:adding-employee-interface}
 \end{figure}
+
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface12.png}
@@ -438,7 +475,55 @@ You can find my data dictionary on Page 104
 
 \subsection{ER Diagram}
 
+Since the Design stage i developed my database and added and removed some tables, that i felt needed to be changed. To see my original ER Diagram from my design, go to page \pageref{fig:ER Diagram}, figure \ref{fig:ER Diagram}. To be able to track the amount of sales made each week and each day for each product so that this data could be plotted onto a graph, i created two new entities.DailyProductSales and WeeklyProductSales, both entities take ProductID as a foreign key and i have also included a seperate table called Settings. The settings tables simple stores the preferences entered by the user and has no relationship with any of the other data. below is my new ER Diagram, i have removed Location and Product location as these entities were not needed.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./ERDiagramMaintenance.pdf}
+    \caption{New Entity Relationship Diagram} \label{fig:entity-relationship-maintenance}
+\end{figure}
+
 \subsection{Database Table Views}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView1.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView2.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView3.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-3}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView4.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-4}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView5.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-5}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView6.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-6}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView7.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-7}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TableView8.png}
+    \caption{New Entity Relationship Diagram} \label{fig:table-view-8}
+\end{figure}
+
 
 \subsection{Database SQL}
 
@@ -457,6 +542,11 @@ You can find my data dictionary on Page 104
 \subsection{Self-created Algorithms}
 
 \section{Settings}
+
+When managing the stock of the products, the user gets displayed a graph which shows the sales of the product either by week or by day. This graph was implemented into my system using the matplotlib library. The matplotlib library does not come with the installation in python. The easiest way to install matplotlib is by using PIP, a tool that does come with the python installation that installs the library you want, along with all the dependencies it requires to work. To install pip on Windows, the user can type `` python3 get-pip.py'' into the command prompt. Then to install matplotlib, the user can then type ``pip install matplotlib'' which should start to download and install matplotlib and all of its dependencies. If you do not want to install matplotlib using pip, it can be installed manually, however, you are required to install several other modules manually as well. Other than matplotlib, all of the other modules used in my system come pre-installed with either python, PyQt or SQLite 3.
+
+
+.
 
 \section{Acknowledgements}
 
