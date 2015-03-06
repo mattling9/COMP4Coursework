@@ -56,7 +56,7 @@ class ErrorMessageClass(QDialog):
         self.pop_up_layout.addWidget(self.buttonBox)
         self.pop_up_widget.setLayout(self.pop_up_layout)
         self.setLayout(self.pop_up_layout)
-        self.setStyleSheet(style_sheet)
+        #self.setStyleSheet(style_sheet)
         self.move(700,430)
         self.show()
         self.raise_()

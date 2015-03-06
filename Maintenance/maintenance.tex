@@ -473,9 +473,47 @@ The Delete Member interface is visually identical to the Edit Member interface, 
     \caption{Change Password Interface} \label{fig:change-password-interface}
 \end{figure}
 
+Another aspect of the system i felt was important was the visual design of the system. One of the Objectives in my system analysis was that the system had to have a clear layout. The objectives from my analyisis can be found on page \pageref{ref:objectives}. I felt that by changing the visual appearance of the system, i could improve upon the clarity of the layout and the ease of use of the system. Currently, my client has chosen to use a white and green colour scheme the the company website, interior and exterior of the veterinary center. I have provided a screen-shot below to give a better understanding of the colour scheme of the website, for a further understanding of the colour scheme of the website, you can visit it at www.beaconvets.co.uk.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./website.png}
+    \caption{Change Password Interface} \label{fig:website.}
+\end{figure}
+
+When creating the system, i wanted the system to match the colour scheme used for the other aspects of the company. Immediately, i increased the size of the font for all the text in the system as i felt that the default font size was too small to be able to read easily. I also changed the font to the 'Segoe UI' family' as i felt, this was easier for the user to read compared to the default font used for PyQt widgets. I also changed the colour of the text to a very dark gray compared to black as i felt the black text contrasted the white background too much. Below i have provided comparison between the Default font, colour and size of text in PyQt and the font, colour and text used in my system. The window on the top shows what the text would look like without changing the font and colour, the window on the bottom shows the text after the changes i made.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./text-comparison.png}
+    \caption{Comparison between the default text, and the changes i made to the text for my system.} \label{fig:text-comparison}
+\end{figure}
+
+I investigated how to make my system easier to navigate for the user and came across Fitts's Law. Fitts's law models human movement and predicts the time it will take for the user to move to a target area such as a button. Fitts's Law is ID = log2(2A/W), where ID is the difficulty index, A is the distance to move and W is the size of the target.Therefore, to increase the ease of use of my system i had to decrease the index difficulty for the Widgets within my system. Therefore i found that one way to decrease the index difficulty was to increase the size of the targets (for example the push buttons). For the Line Edits this was the case anyway, as i had previously increased the text size anyway, which meant the line edits had to increase in size in order for the new text size to fit inside them.\par
+
+I increased the size of the Push buttons to decrease the index difficulty, and also made the text inside the push buttons bold in order for the text to be read more easily. I decided to subtly colour code the push buttons within my system, because the colour green really stands out on the white background, i knew green push buttons would attract the users attention far better than gray push buttons. All the important push buttons within an interface were coloured green and any push buttons which were not as important, were coloured gray. Looking at figure \ref{fig:add-product-interface} on page \pageref{fig:add-product-interface}, you can see that the browse and upload image buttons have been coloured in grey and the Add product button has been coloured in green as this is the most important push button on the interface. \par
+
+Another way to reduce the Difficulty index of the system is to decrease the distance between the current mouse position and the target area. In general to decrease this, i must decrease the size of the interface without decreasing the size of the widgets. Aswell as having problems with the layout of the widgets when the size of the window changes, i decided to make window a fixed size. This means that the window cannot be resized and the maximise button in the window title bar became redundent.
+
+ I decided to create a custom title bar to remove the maximize button and increase the size of the minimise and close button to decrease their difficulty index too. When the minimise tool-bar is hovered it is highlighted grey, however when the close button is hovered it is highlighted bright red. This is to ensure the user does not accidentally click on the wrong button, naturally closing something is associated to the colour red, which explains my choice for this colour. During the testing stage, i definitely noticed an increase in ease of clicking the close button in the title bar before and after i implemented the custom title bar. I matched the text in the title bar to the text in the rest of the system. Below is a screenshot that shows the comparison between the title bar before and after i implemented the custom title bar. The title bar on the top is the default titlebar for PyQt widgets and the title bar on the bottom is the title bar in which i implemented into my system. 
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./title-bar-comparison.png}
+    \caption{Comparison between the default PyQt title bar and the Title i created for my system.} \label{fig:title-bar-comparison}
+\end{figure}
+
+I Changed the text of the menu bar to match the text of the rest of the system, when a menu or option is hovered, it is highlighted in grey, i decided to change this as it found it was hard too see which option was being hovered after i changed the background colour to white. When an option is clicked it is highlighted in green, simply to match the colour scheme of the system. Below i have provided a screenshot showing the Menubar before and after i implemented the style sheet for the menubar. The menubar on the top is the Default menubar style in PyQt and the bottom menubar is the style in which i implemented in my system.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./menu-comparison.png}
+    \caption{Comparison between the default PyQt menu bar and the menu bar i created for my system.} \label{fig:menu-comparison}
+\end{figure}
+
+
+
+
+
 \subsection{ER Diagram}
 
-Since the Design stage i developed my database and added and removed some tables, that i felt needed to be changed. To see my original ER Diagram from my design, go to page \pageref{fig:ER Diagram}, figure \ref{fig:ER Diagram}. To be able to track the amount of sales made each week and each day for each product so that this data could be plotted onto a graph, i created two new entities.DailyProductSales and WeeklyProductSales, both entities take ProductID as a foreign key and i have also included a seperate table called Settings. The settings tables simple stores the preferences entered by the user and has no relationship with any of the other data. below is my new ER Diagram, i have removed Location and Product location as these entities were not needed.
+Since the Design stage i developed my database and added and removed some tables, that i felt needed to be changed. To see my original ER Diagram from my design, go to page \pageref{fig:ER Diagram}, figure \ref{fig:ER Diagram}. To be able to track the amount of sales made each week and each day for each product so that this data could be plotted onto a graph, i created two new entities; DailyProductSales and WeeklyProductSales, both entities take ProductID as a foreign key and i have also included a seperate table called Settings. The settings tables simple stores the preferences entered by the user and has no relationship with any of the other data. below is my new ER Diagram, i have removed Location and Product location as these Tables were not used.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./ERDiagramMaintenance.pdf}
@@ -527,7 +565,141 @@ Since the Design stage i developed my database and added and removed some tables
 
 \subsection{Database SQL}
 
+\begin{figure}[H]
+	 \caption{SQL for Creating the Product Table} \label{fig:product-sql}
+	\begin{sql}
+	create table Product
+              (ProductID integer,
+              ProductName string,
+              Size string,
+              Price string,
+              Category string,
+              Location1 integer,
+              Location2 integer,
+              ImagePath string,
+              WeeklySales integer,
+              DailySales integer,
+              Primary Key(ProductID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for Creating the Weekly Sales Table} \label{fig:weekly-sql}
+	\begin{sql}
+	create table WeeklyProductSales
+          (ProductID integer,
+          Date string,
+          Sales string,
+          foreign key(ProductID) references Product(ProductID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for Creating the Daily Sales Table} \label{fig:daily-sql}
+	\begin{sql}
+	create table DailyProductSales
+          (ProductID integer,
+          Date string,
+          Sales string,
+          foreign key(ProductID) references Product(ProductID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for the Employee Table} \label{fig:employee-sql}
+	\begin{sql}
+	create table Employee
+              (EmployeeID integer,
+              EmployeeUserName text,
+              EmployeeFirstName text,
+              EmployeeLastName text,
+              EmployeeEmail text,
+              EmployeePassword text,
+              Primary Key(EmployeeID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for the Member Table} \label{fig:member-sql}
+	\begin{sql}
+	create table Member
+              (MemberID integer,
+              Title string,
+              MemberFirstName text,
+              MemberLastName text,
+              HouseNo interger,
+              Street text,
+              Town text,
+              City text,
+              County text,
+              Postcode text,
+              TelephoneNo integer,
+              MemberEmail text,
+              Primary Key(MemberID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for the Order Table} \label{fig:order-sql}
+	\begin{sql}
+	create table CustomerOrder
+            (OrderID integer,
+            MemberID integer,
+            EmployeeID integer,
+            DateTime text,
+            Primary Key(OrderID),
+            foreign key(MemberID) references Member(MemberID),
+            foreign key(EmployeeID) references Employee(EmployeeID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for the ProductOrder Table} \label{fig:product-order-sql}
+	\begin{sql}
+	create table ProductOrder
+            (ProductOrderID integer,
+            OrderID integer,
+            ProductID interger,
+            ProductName string,
+            Size interger,
+            Price interger,
+            Quantity integer,
+            Primary Key(ProductOrderID),
+            foreign key(ProductID) references Product(ProductID),
+            foreign key(OrderID) references CustomerOrder(OrderID))
+	\end{sql}
+\end{figure}
+
+\begin{figure}[H]
+	 \caption{SQL for the Settings Table} \label{fig:settings-sql}
+	\begin{sql}
+	create table Settings
+              (SettingsID,
+              Logo string,
+              CompanyName string,
+              Street string,
+              Town text,
+              City text,
+              County interger,
+              Postcode text,
+              Phone Number text,
+              EmailAddress text,
+              GmailAddress text,
+              GmailPassword text,
+              SalesDate text)
+	\end{sql}
+\end{figure}
+
 \subsection{SQL Queries}
+
+\begin{center}
+    \begin{longtable}{|p{3cm}|p{4cm}|p{4cm}|}
+        \hline
+        \textbf{SQL Query} & \textbf{Functionality} & \textbf{Additional Notes}\\ \hline
+	 insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales, DailySales) values(?,?,?,?,?,?,?,?,?) & this sql statement is used to add a Product to the database. & the values (?,?,?,?,?,?,?,?,?) are entered intot he SQL as a list. Doing this allows the user to enter different values each time as apposed to hard coding values to insert which would not work. A Value must be entered for every field otherwise the sql statement will not work. \\ \hline
+\end{longtable}
+\end{center}
+
 
 \section{Testing}
 
@@ -544,9 +716,6 @@ Since the Design stage i developed my database and added and removed some tables
 \section{Settings}
 
 When managing the stock of the products, the user gets displayed a graph which shows the sales of the product either by week or by day. This graph was implemented into my system using the matplotlib library. The matplotlib library does not come with the installation in python. The easiest way to install matplotlib is by using PIP, a tool that does come with the python installation that installs the library you want, along with all the dependencies it requires to work. To install pip on Windows, the user can type `` python3 get-pip.py'' into the command prompt. Then to install matplotlib, the user can then type ``pip install matplotlib'' which should start to download and install matplotlib and all of its dependencies. If you do not want to install matplotlib using pip, it can be installed manually, however, you are required to install several other modules manually as well. Other than matplotlib, all of the other modules used in my system come pre-installed with either python, PyQt or SQLite 3.
-
-
-.
 
 \section{Acknowledgements}
 
