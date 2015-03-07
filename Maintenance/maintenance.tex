@@ -627,7 +627,7 @@ Since the Design stage i developed my database and added and removed some tables
               Title string,
               MemberFirstName text,
               MemberLastName text,
-              HouseNo interger,
+              HouseNo integer,
               Street text,
               Town text,
               City text,
@@ -659,10 +659,10 @@ Since the Design stage i developed my database and added and removed some tables
 	create table ProductOrder
             (ProductOrderID integer,
             OrderID integer,
-            ProductID interger,
+            ProductID integer,
             ProductName string,
-            Size interger,
-            Price interger,
+            Size integer,
+            Price integer,
             Quantity integer,
             Primary Key(ProductOrderID),
             foreign key(ProductID) references Product(ProductID),
@@ -680,7 +680,7 @@ Since the Design stage i developed my database and added and removed some tables
               Street string,
               Town text,
               City text,
-              County interger,
+              County integer,
               Postcode text,
               Phone Number text,
               EmailAddress text,
@@ -690,34 +690,571 @@ Since the Design stage i developed my database and added and removed some tables
 	\end{sql}
 \end{figure}
 
+\pagebreak
 \subsection{SQL Queries}
 
-\begin{center}
-    \begin{longtable}{|p{3cm}|p{4cm}|p{4cm}|}
-        \hline
-        \textbf{SQL Query} & \textbf{Functionality} & \textbf{Additional Notes}\\ \hline
-	 insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales, DailySales) values(?,?,?,?,?,?,?,?,?) & this sql statement is used to add a Product to the database. & the values (?,?,?,?,?,?,?,?,?) are entered intot he SQL as a list. Doing this allows the user to enter different values each time as apposed to hard coding values to insert which would not work. A Value must be entered for every field otherwise the sql statement will not work. \\ \hline
-\end{longtable}
-\end{center}
+\begin{figure}[H]
+ \caption{SQL for Adding a Product to the database} \label{fig:add-product-sql}
+	\begin{sql}
+insert into Product (ProductName, Size, Price, Category, Location1, Location2, ImagePath, WeeklySales, DailySales) values(?,?,?,?,?,?,?,?,?)
+	\end{sql}
+\end{figure}
 
+Figure \ref{fig:add-product-sql} shows the SQL Query used to add a product to the database. The values(?,?,?,?,?,?,?,?,?) are entered by the user as a list. This allows the user to enter different values each time the query is used. This query can be found on page:
+
+\begin{figure}[H]
+	 \caption{SQL for Editing a Product} \label{fig:edit-product-sql}
+\begin{sql} 
+UPDATE Product SET ProductName= ?,  Size = ?,  Price = ?, Category= ?, ImagePath= ? WHERE ProductID = ?
+ \end{sql}
+\end{figure}
+Figure \ref{fig:edit-product-sql} shows the SQL Query used to edit a product in the database. The query only removes the data related to the product associated this query can be found on page: This query can be found on page: 
+
+\begin{figure}[H]
+	 \caption{SQL for Editing the stock of a product} \label{fig:stock-sql}
+\begin{sql} 
+UPDATE Product SET Location1 = ?, Location2 = ? WHERE ProductID = ? 
+\end{sql}
+\end{figure}
+Figure \ref{fig:stock-sql} shows the query used to edit the stock of a product. The stock that is changed depends on the ProductID entered by the user. This query can be found on page: 
+
+\begin{figure}[H]
+	 \caption{SQL for Deleting a Product from the database} \label{fig:delete-product-sql}
+\begin{sql} 
+delete from Product where ProductID = ?
+\end{sql}
+\end{figure}
+Figure \ref{fig:delete-product-sql} Shows the SQL query used to deleted a product form the database. The user enters the ProductID and the query will remove that product from the system. This query can be found on page: 
+
+\begin{figure}[H]
+	 \caption{SQL for Adding a Member to the database} \label{fig:add-member-sql}
+\begin{sql} 
+insert into Member (Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail) values(?,?,?,?,?,?,?,?,?,?,?)
+ \end{sql}
+\end{figure}
+Figure \ref{fig:add-member-sql} This query adds a new member to the database.The values entered by the user are entered as a list which means that data must be entered into every field otherwise the sql statement will not work. This query can be found on page:
+
+\begin{figure}[H]
+	 \caption{SQL for Editing a Member.} \label{fig:edit-member-sql}
+\begin{sql} 
+UPDATE Member SET Title = ?,
+                                   MemberFirstName = ?,
+                                   MemberLastName = ?,
+                                   HouseNo = ?,
+                                   Street = ?,
+                                   Town = ?,
+                                   City = ?,
+                                   County = ?,
+                                   Postcode = ?,
+                                   TelephoneNo = ?,
+                                   MemberEmail = ?
+                                   WHERE MemberID = ?
+\end{sql}
+\end{figure}
+Figure \ref{fig:edit-member-sql} This query edits a member in the database, in order for the query to work the user must provide the new information they want to store along with the product id of the member they want to change.  This query can be found on page: 
+
+
+\begin{figure}[H]
+	 \caption{SQL for Deleting a Member} \label{fig:delete-member-sql}
+\begin{sql}
+delete from Member where MemberID = ?
+\end{sql}
+\end{figure}
+Figure \ref{fig:delete-member-sql} This query removes a member from the database. the user enters the MemberID, and the query removes that member from the database. This query can be found on page:
+
+
+\begin{figure}[H]
+	 \caption{SQL for Adding an Employee} \label{fig:add-employee-sql}
+\begin{sql}
+insert into Employee (EmployeeUserName, EmployeeFirstName, EmployeeLastName, EmployeeEmail, EmployeePassword) values(?,?,?,?,?) 
+\end{sql}
+\end{figure}
+Figure \ref{fig:add-employee-sql} This query adds an employee to the database. The relevant data is entered into the query and the query adds it to the Employee table. This query can be found on page:
+
+\begin{figure}[H]
+	 \caption{SQL for Editing an Employee} \label{fig:edit-employee-sql}
+\begin{sql}
+Update Employee SET EmployeeUserName = ?,
+                                     EmployeeFirstName = ?,
+                                     EmployeeLastName = ?,
+                                     EmployeeEmail = ?
+                                     WHERE EmployeeID= ?
+                                     \end{sql}
+\end{figure}
+Figure \ref{fig:edit-employee-sql} This query edits the data of an employee. The user enters a EmployeeID and the new information adn the query changes the employee entered by the user. This query can be found on page: 
+
+\begin{figure}[H]
+	 \caption{SQL for Deleting an Employee} \label{fig:delete-employee-sql}
+\begin{sql}
+ delete from Employee where EmployeeID = ?
+  \end{sql}
+\end{figure}
+
+Figure \ref{fig:delete-employee-sql} This query removes the employee where the user enters the EmployeeID, and the query removes that Employee from the database. This query can be found on page: 
+
+\pagebreak 
 
 \section{Testing}
 
 \subsection{Summary of Results}
 
+My testing proved my system to be very robust and quite reliable, as almost all the results of the tests were as expected (Please go to page \pageref{fig:actual-results} to all the results from the testing)
+
+I found that the main weakness of the testing is that i was not able to test every component of my system. This means there may be problems in my system that my client encounters which i did not. Although i am confident with the robustness of my system, some problems may cause the system to crash however, i am confident that this will not happen as i have tested all the components that could cause the system to crash and all of them worked as expected.
+
+The strengths of my testing was the flow of control between the interfaces. The test proved the user will be able to easily access each interface using the menu bar without any problems occurring. Another strength of my testing was the rigorous testing of the data inputs. I decided that this was the most important area to test as this was where the most problems to occur. Undergoing testing allowed to to identify problems within my system, the problems found during the testing phase have been specified below.
+
 \subsection{Known Issues}
+
+\textbf{Testing the valid characters accepted into the Product Name field.}
+
+In this test, i tested to see which characters were eligible for Product Name. Realistically only Letters should be accepted not numbers or special characters. To fix this problem i simply need to amend the regular expression, so that it only allows letters. 
+
+
+\textbf{Testing the available file types allowed in the Product Image field.}
+
+In this test, any file type is accepted by the system. However, unless the file is an image file an image will not be displayed. If the user chooses a file which is not an image file, no message is displayed and the system doesn't display an image. The changes that need to be made in order for this test to work, is that if the file is not an image file, do not try to change the current image and display a message to the user saying they need to choose an image file. The system could also restrict the user from choosing and other file than an image file. This could be implemented in a future version of my system.
+
+\textbf{Testing the valid charatcers accepted in the price field.}
+
+In this test, I tested to see the boundaries for a valid price. realistically this should have been between £0.00 and £999.99. However during the Implementation stage i did not set a boundary to the price. Because of this i was able to enter a huge price which should not be allowed. To solve this i need to simply put an if statement every time the user changes the text. To do this I can say: QLineEdit.textChanged.connect(self.check-length). Now to make sure the price is between the limits i need to add: IF self.price < 999.99 THEN: to the self.check-length method. if the price is less than 999.99 then i need to change the QLineEdit boarder to green. This can be done by applying a style-sheet to that specific QLineEdit.
+
+Also, the user can enter a price into the price field. I used a built in validator that only allows integers from the keyboard to be entered. However this module allows the use of an exponential to be entered, which allows the user to enter the letter 'e'. This means that this test failed as it should only accept integers. To change this, i need to tell the validator which notation to use. At the moment it uses both standard and scientific notation. The scientific notation is what allows the user to enter the letter 'e'. To stop this from happening i need to set the notation to just the standard notation. This can be done easily by simply doing self.price-validator.standardNotation() where self.price-validator is a QDoubleValidator.
+
+\textbf{Testing to see which characters are available in the Member Name field}
+
+In this test, the only acceptable characters in the members name should be letters. special characters should not be accepted. At the moment, special characters are not accepted however letters and numbers are. To change this, i need to change the regular expression so that integers should not be accepted.
+
+\textbf{Testing the functionality of the find postcode button}
+
+When the member enters their postcode, They have the ability to search for their address if they live im Cumbria. However, the postcodes stored in the CSV file have spaces in. The postcode field still validates the postcode even if there is no space in it. Therefore the user could enter their postcode and because it does not have a space in it, it won't be found. for example if 'CB7 5LQ' was stored in the CSV file and the user entered 'CB75LQ' it would not be found. To solve this problem i should change all of the postcodes in the CSV so they do not have spaces in. Then when the user enters their postcode, remove the space if there is one. This can be done by doing 'postcode-input.replace(" ",""). This would now allow the user to either enter the postcode with or without a space and it will still be able to be found in the CSV file.
+
+\textbf{Testing the valid characters allowed in the house number field}
+
+In this test, i tested the range of characters that were acceptable for the house number. Originally i thought that only integers should be accepted in this field. Since the implementation stage, i have realised that houses can also contain letters as well. for example there could be a 66A or a 66B or the house could have a house name instead of a number which the user could not specify in my current system. Therefore,  this test has failed. To improve this feature, i should change the the input method so that the user can also enter characters in the field as well.
+
+\textbf{Ensuring all data is stored in the Member table in the correct format.}
+
+ Ideally i want every postcode to be stored without a space between them. Currently the user can choose to enter a space or not which will mean that some will be stored with a space between and some will not. This issue will be resolved if the changes to test series 2.09 are made.
+
+\textbf{Right Clicking on an employee when not signed in on the administrators account}
+
+in this test, the menu that is displayed when the user right clicks on an Employee in the search window. When logged in on an account that is not the Administrators, the user should not be able to access the Add Edit And Delete Employee. However, when the user right clicks on an Employee they are given the option to edit or delete an Employee. This should not happen, instead i want these options to be greyed out if the user is not signed in as the administrator. To do this, when the user right clicks on one of the Employees, a function is run to display the menu to the user. To solve this problem, i need to check whether the user is signed in as the administrator and then choose whether to display the edit and delete Employee options or grey them out. I already have a function that returns the EmployeeID of the currently logged in user, i can use this to check who is currently logged in. I can then use an if statement stating: IF EmployeeID != 1 THEN. Now i need to say what must happen if they are not signed in on the administrators account, in this case i want to grey out the menu options, which can be done by doing: QMenuItem.setDisabled(True)
+\pagebreak
 
 \section{Code Explanations}
 
 \subsection{Difficult Sections}
 
+\textbf{Creating the Custom TitleBar} The figure below shows line 1 to 32 from the CustomToolbarClass.py file. The full file can be found on page \pageref{fig:CustomToolbarClass}.
+
+\pythonfile[firstline=1, lastline=32]{./Maintenance/CustomToolbarClass.py}
+
+After learning how to make the titlebar, i learnt that the titlebar was just a widget. The titlebar widget contains a QLabel, and two QToolbuttons.
+
+\pythonfile[firstline=10, lastline=19]{./Maintenance/CustomToolbarClass.py}
+
+Here the close and minimise buttons are being created. each button is an instance of a QToolButton. 
+
+\begin{python}
+self.minimise.setIcon(QIcon(".\SystemImages\minimize.png"))
+\end{python}
+
+The line above assigns an image to the tool button. minimize.png is an image i created using Adobe Photoshop CS6.
+
+\pythonfile[firstline=24, lastline=30]{./Maintenance/CustomToolbarClass.py}
+
+The above section of code shows all of the widgets being added to a QHBoxLayout. Spacing and stretching is applied to the widget so that the label is on the other side of the screen to the Toolbuttons. I then added a style sheet to the toolbar so it matched the style of the rest of my system. To see the style sheet for the titlebar, please refer to page \pageref{fig:CustomToolbarClass} in the code listing section. \par
+
+i have provided a diagram below to help improve your understanding of the title bar.
+
+
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./titlebar-diagram.pdf}
+    \caption{Structure of Titlebar.} \label{fig:titlebar-diagram}
+\end{figure}
+
+Finally, to add the widget to the main window, an instance of the CustomTitleBar is created in the main program, and added to a QVBoxLayout. The QVBoxLayout also contains the QMenuBar and the QStackedLayout that allows the user to change between interfaces. The code below shows the default titlebar and window frame being hidden, (Allowing the user to use the titlebar. Methods are attached to the close and minimise buttons to close the window or minimise the window when they are clicked.
+
+\pythonfile[firstline=63, lastline=73]{./Maintenance/CustomToolbarClass.py}
+
+\textbf{Plotting sales on a graph and adding an average line to predict the future sales of the product}
+
+Below i have provided the full code that creates the graph. This code can also be found in the StockManagementClass.py file on page \pageref{fig:StockManagementClass} in the code listing section.
+
+\pythonfile[firstline=123, lastline=184]{./Maintenance/StockManagementClass.py}
+
+having the DailyProductSales and WeeklyProductSales tables in the database allowed me to plot data to the graph easily. When the user wants to display the graph of sales for a specific product they enter the ProductID into the ProductID field. Here the ProductID is searched to see if there has been any sales in the DailyProductSales or WeeklyProductSales tables. If any sales have been made the sales gets returned as a list. the sales made are stored in the `sales' list and the date the sales were made are stored in the `dates' list. This is show below.
+
+\pythonfile[firstline=126, lastline=133]{./Maintenance/StockManagementClass.py}
+
+\pagebreak
+
+\pythonfile[firstline=136, lastline=141]{./Maintenance/StockManagementClass.py}
+
+The code above prepares the x and y values ready to be plotted to the graph.
+
+\begin{python}
+if dates:
+\end{python}
+
+The code above is used to say that; only add the sales and dates the the x and y values if sales have been made, if no sales have been made, do not assign any values to x and y and do not plot any values.
+
+\pythonfile[firstline=137, lastline=141]{./Maintenance/StockManagementClass.py}
+
+The code above adds the sales dates to the x axis list and adds the amount of sales to the y axis list. The variable `value' puts the date and the sales made on that date together and stores them under a single variable. This variable is then added to a list of all the other dates and sales that are going to be plotted to the graph. this list is named `data'. Next, all the dates in which sales were made are added to the x axis list and all the sales made on that date are added to a y axis list. These lists are then use to plot the data onto the graph. The graph is plotted using the following code:
+
+\pythonfile[firstline=143, lastline=154]{./Maintenance/StockManagementClass.py}
+
+To calculate the future sales of the product i create a line of best fit for the data plotted. The code to create the line of best fit has been supplied below:
+
+\pythonfile[firstline=157, lastline=173]{./Maintenance/StockManagementClass.py}
+
+To predict the stock for the next week, i take the line of best fit from the graph, because the line of best fit is  a straight line, the gradient is constant, therefore the increase in sales between each week will be constant. If i work out the change in sales between each week, and add this to the sales made this week, that will provide me with a prediction for the sales made next week. 
+
+\begin{python}
+(m,c) = polyfit(x,y,1)
+\end{python}
+
+The gradient and the line of best fit are calculated for me using the polyfit module. I have assigned the gradient to the variable `m' and the y intercept to the variable `c'. I plot the line of best fit using the polyval module. The variable `yp' is assigned to a list of x and y values for the line of best fit. to calculate the change in the Y value each day or each week i simply take the sales made on a specific day and minus the sales made the day before. This will get the change in Y for each value of X. For example if 2 more sales were made each day after 10 days, 20 more sales would have been made. I assign the change in Y value to the variable `difference'. the difference was not always an integer, mostly it was a long decimal number there i rounded the difference to 2 decimal places and assigned this value to a new variable called `rounded-difference'
+
+\begin{python}
+yp = polyval([m,c],x)
+difference = yp[1] - yp[0]
+rounded_difference = round(difference, 2)
+\end{python}
+
+Now that i knew the difference between each day or week, i needed to know the last sale made. This was done by finding the length of the y values list and then using the length of the list to get the last item in the list. I assigned the last sale made to the variable `last-sale'.
+
+\begin{python}
+length_of_list = len(yp)
+last_sale = yp[length_of_list - 1]
+#PLEASE NOTE - i used length of list - 1 because list items in python start at 0 not 1.
+\end{python}
+
+now that i knew how many sales were last made, i simply need to add the difference between each day to the last sale made, to calculate the sales for next week.
+
+\begin{python}
+predicted_sale = last_sale + rounded_difference
+rounded_predicted_sale = int(round(predicted_sale, 0))
+self.prediction.setText(str(rounded_predicted_sale))
+\end{python}
+
+the predicted sale is then rounded, and assigned to the variable `rounded-predicted-sale' this is then set as the text to the stock prediction QLineEdit.
+
 \subsection{Self-created Algorithms}
+
+The following algorithm calculates how many of a specific product are currently in the order updates the quantity accordingly. For example if there are currently 5 in the order, adding another product will change the quantity to 6.
+
+\pythonfile[firstline=448, lastline=467]{./Maintenance/CreatingOrderClass.py}
+
+\begin{python}
+if product_info[0][0] == int(self.current_order.item(row,0).text()):
+\end{python}
+
+the line above checks to see whether the product in which the user has clicked on is already in the current order table or not.
+
+\begin{python}
+new_quantity = int(self.current_order.item(row,4).text()) + 1
+self.current_order.setItem(row,4, (QTableWidgetItem(str(new_quantity))))
+inTable  = True
+\end{python}
+
+the code above is only run if the product is already in the current order table. This takes the current quantity of the product and increases it by one. this is assigned to the variable `new-quantity'. this new quantity is then changed in the quantity field in the current order table. Then the system is told that the product is currently in the table.
+
+If the product is already in the table and once the quantity has been updated the total price for the products = (price of product * quantity) this is done in the code below:
+
+\begin{python}
+if inTable == False:
+            new_row = (self.current_order.rowCount())
+            self.current_order.insertRow(new_row)
+            count = 0
+            for item in product_info[0]:
+                self.current_order.setItem(new_row, count, (QTableWidgetItem(str(item))))
+                count += 1
+            self.current_order.setItem(new_row, 4, (QTableWidgetItem(str(1))))
+
+        self.price = 0.00
+        for row in range(0, self.current_order.rowCount()):
+            self.price += float(self.current_order.item(row,3).text()) * float(self.current_order.item(row,4).text())
+\end{python}
+
 
 \section{Settings}
 
 When managing the stock of the products, the user gets displayed a graph which shows the sales of the product either by week or by day. This graph was implemented into my system using the matplotlib library. The matplotlib library does not come with the installation in python. The easiest way to install matplotlib is by using PIP, a tool that does come with the python installation that installs the library you want, along with all the dependencies it requires to work. To install pip on Windows, the user can type `` python3 get-pip.py'' into the command prompt. Then to install matplotlib, the user can then type ``pip install matplotlib'' which should start to download and install matplotlib and all of its dependencies. If you do not want to install matplotlib using pip, it can be installed manually, however, you are required to install several other modules manually as well. Other than matplotlib, all of the other modules used in my system come pre-installed with either python, PyQt or SQLite 3.
 
 \section{Acknowledgements}
+
+\textbf{Custom TitleBar}
+
+
+I used the following code to help me create my own custom title-bar.
+
+\begin{python}
+#########################################################
+## customize Title bar
+## dotpy.ir
+## iraj.jelo@gmail.com
+#########################################################
+import sys
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+from PyQt4.QtCore import Qt
+
+
+class TitleBar(QtGui.QDialog):
+    def __init__(self, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+        self.setWindowFlags(Qt.FramelessWindowHint);
+        css = """
+
+QWidget
+{
+Background: #AA00AA;
+color:white;
+font:12px bold;
+font-weight:bold;
+border-radius: 1px;
+height: 11px;
+
+}
+QDialog{
+Background-image:url('img/titlebar bg.png');
+font-size:12px;
+color: black;
+
+}
+QToolButton{
+Background:#AA00AA;
+font-size:11px;
+}
+QToolButton:hover{
+Background:n #FF00FF;
+font-size:11px;
+}
+"""
+
+        self.setAutoFillBackground(True)
+        self.setBackgroundRole(QtGui.QPalette.Highlight)
+        self.setStyleSheet(css) 
+
+        self.minimize=QtGui.QToolButton(self);
+        self.minimize.setIcon(QtGui.QIcon('img/min.png'));
+
+        self.maximize=QtGui.QToolButton(self);
+        self.maximize.setIcon(QtGui.QIcon('img/max.png'));
+
+        close=QtGui.QToolButton(self);
+        close.setIcon(QtGui.QIcon('img/close.png'));
+
+        self.minimize.setMinimumHeight(10);
+        close.setMinimumHeight(10);
+        self.maximize.setMinimumHeight(10);
+
+        label=QtGui.QLabel(self);
+        label.setText("Window Title");
+        self.setWindowTitle("Window Title");
+        hbox=QtGui.QHBoxLayout(self);
+
+        hbox.addWidget(label);
+        hbox.addWidget(self.minimize);
+        hbox.addWidget(self.maximize);
+        hbox.addWidget(close);
+        hbox.insertStretch(1,500);
+        hbox.setSpacing(0);
+        self.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Fixed);
+        self.maxNormal=False;
+
+        close.clicked.connect(self.close);
+        self.minimize.clicked.connect(self.showSmall);
+        self.maximize.clicked.connect(self.showMaxRestore);
+
+
+    def showSmall(self):
+        box.showMinimized();
+
+    def showMaxRestore(self):
+        if(self.maxNormal):
+            box.showNormal();
+            self.maxNormal= False;
+            self.maximize.setIcon(QtGui.QIcon('img/max.png'));
+            print'1'
+
+        else:
+            box.showMaximized();
+            self.maxNormal=  True;
+            print '2'
+            self.maximize.setIcon(QtGui.QIcon('img/max2.png'));
+
+    def close(self):
+        box.close()
+
+    def mousePressEvent(self,event):
+
+        if event.button() == Qt.LeftButton:
+            box.moving = True; box.offset = event.pos()
+
+    def mouseMoveEvent(self,event):
+        if box.moving: box.move(event.globalPos()-box.offset)
+
+
+class Frame(QtGui.QFrame):
+    def __init__(self, parent=None):
+        QtGui.QFrame.__init__(self, parent)
+        self.m_mouse_down= False;
+        self.setFrameShape(QtGui.QFrame.StyledPanel)
+        css = """
+
+QFrame
+
+{
+Background:  #D700D7;
+
+
+color:white;
+font:13px ;
+font-weight:bold;
+
+}
+
+
+"""
+
+
+        self.setStyleSheet(css) 
+        self.setWindowFlags(Qt.FramelessWindowHint);
+        self.setMouseTracking(True);
+        self.m_titleBar= TitleBar(self);
+        self.m_content= QtGui.QWidget(self);
+
+        vbox=QtGui.QVBoxLayout(self);
+        vbox.addWidget(self.m_titleBar);
+        vbox.setMargin(0);
+        vbox.setSpacing(0);
+        layout=QtGui.QVBoxLayout(self);
+        layout.addWidget(self.m_content);
+        layout.setMargin(5);
+        layout.setSpacing(0);
+        vbox.addLayout(layout);
+        # Allows you to access the content area of the frame
+        # where widgets and layouts can be added
+    def contentWidget(self):
+        return self.m_content
+    def titleBar(self):
+        return self.m_titleBar
+
+    def mousePressEvent(self,event):
+        self.m_old_pos = event.pos();
+        self.m_mouse_down = event.button()== Qt.LeftButton;
+    def mouseMoveEvent(self,event):
+
+        x=event.x();
+        y=event.y();
+
+    def mouseReleaseEvent(self,event):
+        m_mouse_down=False;
+
+
+
+
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv);
+    box = Frame()
+    box.move(60,60);
+    l=QtGui.QVBoxLayout(box.contentWidget());
+    l.setMargin(0);
+    edit=QtGui.QLabel("""
+I would've did anything for you to show you how much I adored you
+But it's over now, it's too late to save our love
+Just promise me you'll think of me
+Every time you look up in the sky and see a star 'cuz I'm  your star.
+
+                          """);
+    l.addWidget(edit)
+    box.show()
+    app.exec_()
+
+\end{python}
+
+
+I Looked at the code to get an understanding of how the Custom Titlebar works, the only code in which i used from the program above has been listed below:
+
+\begin{python}
+
+def mousePressEvent(self,event):
+        self.m_old_pos = event.pos();
+        self.m_mouse_down = event.button()== Qt.LeftButton;
+   
+def mouseMoveEvent(self,event):
+        x=event.x();
+        y=event.y();
+        
+def mouseReleaseEvent(self,event):
+        m_mouse_down=False;
+
+\end{python}
+
+These pieces of code handle the mouse press events on the title bar. For example if the mouse is pressed and held down, then moved, the window should move with the cursor.
+
+\textbf{Password Encryption}
+
+Below is the code which in which i used to encrypt and decrypt the passwords being stored in the system. I have ammended the code so that it works within my system.
+
+\begin{python}
+# CSE 142 Python sessions
+# This program creates a secret message using a simple encryption algorithm
+# called a Caesar cipher, which shifts each letter ahead by 3 places.
+# The program can also decode an encoded message using the opposite algorithm.
+#
+# Sample log of execution:
+# Your message to encode? Attack the zombies at dawn!
+# The encoded message is: dwwdfn wkh crpelhv dw gdzq!
+
+# A helper that can perform either encryption or decryption, shifting every
+# letter by the given number of places, wrapping around as necessary.
+def helper(message, shift):
+	message = message.lower()
+	secret = ""
+	for c in message:
+		if c in "abcdefghijklmnopqrstuvwxyz":
+			num = ord(c)
+			num += shift
+			if num > ord("z"):     # wrap if necessary
+				num -= 26
+			elif num < ord("a"):
+				num += 26
+			secret = secret + chr(num)
+		else:
+			# don't modify any non-letters in the message; just add them as-is
+			secret = secret + c
+	return secret
+
+# Encrypts the given string using a Caesar cipher and returns the result.
+def encrypt(message):
+	return helper(message, 3)
+
+# Decrypts a string that was previously encrypted using a Caesar cipher and returns the result.
+def decrypt(message):
+	return helper(message, -3)
+
+
+# main program
+msg = input("Your message to encode? ")
+if len(msg) > 0:
+	# wants to encrypt
+	secret = encrypt(msg)
+	print("The encoded message is:", secret)
+else:
+	# empty message; wants to decrypt
+	secret = input("Your message to decode? ")
+	if len(secret) > 0:
+		msg = decrypt(secret)
+		print("The decoded message is:", msg)
+
+\end{python}
+
 
 \pagebreak
 
@@ -780,6 +1317,7 @@ When managing the stock of the products, the user gets displayed a graph which s
 
 
 \subsection{Stock Management Interface}
+\label{fig:StockManagementClass}
 \pythonfile[firstline=1]{./Maintenance/StockManagementClass.py}
 \pagebreak
 
@@ -829,6 +1367,7 @@ When managing the stock of the products, the user gets displayed a graph which s
 
 
 \subsection{Custom Window Frame}
+\label{fig:CustomToolbarClass}
 \pythonfile[firstline=1]{./Maintenance/CustomToolbarClass.py}
 \pagebreak
 
