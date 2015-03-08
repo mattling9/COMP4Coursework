@@ -156,7 +156,7 @@ class manageStockClass(QWidget):
             if len(dates) > 1:
                 #plotting the average
                 #the line below gets the gradient and y intercept from the line of best fit where
-                # m = gradient, c = y intercept. (c is not right because dates have been used!)
+                # m = gradient, c = y intercept. (c is not correct because dates have been used!)
                 (m,c) = polyfit(x,y,1)
                 yp = polyval([m,c],x)
                 difference = yp[1] - yp[0]
