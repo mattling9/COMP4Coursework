@@ -126,8 +126,8 @@ Since i created my original outline plan during the design phase, i have add two
 	2.01 & Testing valid characters and range of Product Name & entering a range of different characters to see which ones are valid & The Product name should allow a combination of letters and numbers, no special characters & \\ \hline
 	2.02 & testing to see which file types are valid for Product Image & entering a range of file types to see which are valid & The system should only accept .jpg or .png file types & \\ \hline
 	\rowcolor{dark-grey}2.03 & testing to see which file types are valid for Product Image & entering an erroneous file type to see if its accepted &  Should not be accepted as a valid image file & \\ \hline
-	2.03 & Testing to see which characters are valid in Price & entering a range of characters into price to see which are accepted &  None of the characters should be accepted because a price cannot contain letters or special characters & \\ \hline
-	2.04 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid  & The Integers should be accepted by the system &  \\ \hline
+	2.03 & Testing to see which characters are valid in Price & entering a range of characters into price to see which are accepted &  None of the characters should be accepted because a price cannot contain letters or special characters &  Page: \pageref{fig:test-203-1} \newline Figure: \ref{fig:test-203-1} \newline \newline  Page: \pageref{fig:test-203-2} \newline Figure: \ref{fig:test-203-2} \newline \newline Page: \pageref{fig:test-203-3} \newline Figure: \ref{fig:test-203-3}\\ \hline
+	2.04 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid  & The Integers should be accepted by the system &   Page: \pageref{fig:test-204-1} \newline Figure: \ref{fig:test-204-1} \newline \newline  Page: \pageref{fig:test-204-2} \newline Figure: \ref{fig:test-204-2} \newline \newline Page: \pageref{fig:test-204-3} \newline Figure: \ref{fig:test-204-3} \\ \hline
 	\rowcolor{dark-grey}2.06 & Testing to see which characters are valid in Stock & entering a range of characters into the stock field and seeing which are valid  & The letters `test' and special characters `@+' should be invalid because as the stock is only defined by integers. & \\ \hline
 	\rowcolor{dark-grey}2.07 & Testing to see which characters are valid in Name & Entering a range of characters into name and seeing which ones are valid  & Only the letters `test' should be valid as a name cannot contain integers or special characters.& \\ \hline
 	2.05 & Testing to see which characters are valid in Member Name & Entering a range of characters into name and seeing which ones are valid &  The text should Only accept letters. it should not accept numbers or special characters& \\ \hline
@@ -137,8 +137,8 @@ Since i created my original outline plan during the design phase, i have add two
 	\rowcolor{dark-grey}2.12 & testing for validation in telephone number & Entering an 11 digit telephone number & this telephone number contains exactly 11 digits therefore it should be valid &  \\ \hline
 	\rowcolor{dark-grey}2.14 & testing for validation in telephone number & Entering a telephone number that's longer than the boundary & This number should not be accepted because it is too long & \\ \hline
 	\rowcolor{light-grey}2.07 & testing for validation in the postcode & Entering a range of different characters into the postcode field & only letters and numbers should be allowed into this field, special characters should not.All letters should automatically be capitalized& \\ \hline
-	\rowcolor{light-grey}2.08 & Testing to see If the find postcode button works & Entering a postcode with and without a space between the two parts to see if it is found &The Postcode should be found even if the space between the two parts is or is not present.& \\ \hline
-	\rowcolor{light-grey}2.09 & testing which values can be entered into the house number field & Entering a range of different characters into the house number field & only numbers should be allowed in this field, letters and special characters should not be allowed &  \\ \hline
+	\rowcolor{light-grey}2.08 & Testing to see If the find postcode button works & Entering a postcode with and without a space between the two parts to see if it is found &The Postcode should be found even if the space between the two parts is or is not present & Page: \pageref{fig:test-208-1} \newline Figure: \ref{fig:test-208-1} \newline \newline  Page: \pageref{fig:test-208-2} \newline Figure: \ref{fig:test-208-2} \newline \newline Page: \pageref{fig:test-208-3} \newline Figure: \ref{fig:test-208-3} \newline \newline Page: \pageref{fig:test-208-4} \newline Figure: \ref{fig:test-208-4}\\ \hline
+	\rowcolor{light-grey}2.09 & testing which values can be entered into the house number field & Entering a range of different characters into the house number field & only numbers should be allowed in this field, letters and special characters should not be allowed &  Page: \pageref{fig:test-209-1} \newline Figure: \ref{fig:test-209-1} \newline \newline Page: \pageref{fig:test-209-2} \newline Figure: \ref{fig:test-209-2} \newline \newline Page: \pageref{fig:test-209-3} \newline Figure: \ref{fig:test-209-3}\\ \hline
 	\rowcolor{light-grey}2.10 & Testing to see which characters are able to be entered into the Telephone number field & Entering a range of different characters into the telephone number field & only numbers should be allowed in this field, letters and special characters should not be allowed & \\ \hline
 	\rowcolor{dark-grey}3.01 & Product Name is added to the database successfully & Adding a Product to the database and make sure the product Name has been added successfully & The ProductName should be Pedigree Chum and the rest of the data should be stored in the Product Table & \\ \hline
 	\rowcolor{light-grey}3.01 & Product Name is added to the database successfully & Typing a name into the ProductName field and then adding the product to the database & The product name stored in the database should be the same as the text in the Product Name field.& \\ \hline
@@ -166,7 +166,7 @@ Since i created my original outline plan during the design phase, i have add two
 	4.05 & Deleting a product from the database &  Entering a ProductID to delete then seeing if it was deleted successfully & The product database should be viewed, then a ProductID from a Product should be taken from the database should. this ProductID should be entered into the SQL statement. If the statement worked, the product should no longer be in the database &  \\ \hline
 	4.06 & Deleting a Member from the database &  Entering a MemberID to delete then seeing if it was deleted successfully & The Member with the MemberID entered by the user, should now be removed from the Member Table within the database. & \\ \hline
 	4.07 & Deleting an Employee from the database &  Entering an EmployeeID to delete then seeing if it was deleted successfully & The Employee with the EmployeeID entered by the user should now be removed from the Employee Table within the database & \\ \hline
-	4.08 & Trying to delete the Administrator account  & Entering the EmployeeID of the My Client (The Administrator) and seeing if it can be removed from the system. & The Account should not be allowed to be deleted from the system as this will leave no administrative account on the system & Page: \pageref{fig:test-408-1} \newline Figure: \ref{fig:test-408-1} \newline \newline \pageref{fig:test-408-2} \newline Figure: \ref{fig:test-408-2} \newline \newline \pageref{fig:test-408-3} \newline Figure: \ref{fig:test-408-3} \\ \hline
+	4.08 & Trying to delete the Administrator account  & Entering the EmployeeID of the My Client (The Administrator) and seeing if it can be removed from the system. & The Account should not be allowed to be deleted from the system as this will leave no administrative account on the system & Page: \pageref{fig:test-408-1} \newline Figure:\ref{fig:test-408-1} \newline \newline Page: \pageref{fig:test-408-2} \newline Figure: \ref{fig:test-408-2} \newline \newline Page: \pageref{fig:test-408-3} \newline Figure: \ref{fig:test-408-3} \\ \hline
 	\rowcolor{light-grey} 5.01 & Testing to see if the gmail account the emails being sent from are valid & Entering a gmail address and password and trying to send an email from the account. &If the account details are not correct, the system should return an error message to the user that the account details do not match. otherwise, the user should be told that the email has been sent. &  \\ \hline
 	\rowcolor{light-grey} 5.02 & If the user wants to change their password, a code is emailed to them, this test is to test the functionality of this email. & The user clicks on the Change password option under the options menu, once clicked the email is sent to the employees email address. & An email is sent to the email address associated to that employees account, The email should contain a 4 digit code and some text informing the employee what the code is for. &  \\ \hline
 	\rowcolor{light-grey} 5.03 & Testing to see if the Invoice email is sent in HTML and has an appropriate subject to the email & Once an order has been created, the employee can email the invoice to a customer. The Employee enters the customers email address and clicks the save invoice button. Here email email is automatically sent. & When opened, the invoice  be displayed as a HTML document. The invoice in the email should match the invoice that was sent to the email. &\\ \hline
@@ -508,6 +508,28 @@ Because i have added two new test series in my new outline plan, i have added ne
     \caption{Trying to add edit or delete an employee on this account}  \label{fig:test-110-2}
 \end{figure}
 
+\textbf{Test Series 2.08}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-1.pdf}
+    \caption{Navigating to the Add Member Interface}  \label{fig:test-208-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-2.pdf}
+    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-3.pdf}
+    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-3}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-4.pdf}
+    \caption{Searching for the postcode directly in the CSV file.}  \label{fig:test-208-4}
+\end{figure}
+
 \textbf{Test Seires 4.08}
 
 \begin{figure}[H]
@@ -517,12 +539,71 @@ Because i have added two new test series in my new outline plan, i have added ne
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./TestingImages/test-408-2.pdf}
-    \caption{Going to the Delete Employee Interface}  \label{fig:test-408-2}
+    \caption{Navigating to the Delete Employee Interface}  \label{fig:test-408-2}
 \end{figure}
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./TestingImages/test-408-3.pdf}
-    \caption{Going to the Delete Employee Interface}  \label{fig:test-408-3}
+    \caption{Attempting to Delete the Administrator account}  \label{fig:test-408-3}
+\end{figure}
+
+\pagebreak
+
+\subsection{Boundary Test Annotations}
+
+\textbf{Test Series 2.03}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-1.pdf}
+    \caption{Navigating to the Add Product interface and locating the price field.}  \label{fig:test-203-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-2.pdf}
+    \caption{Entering test data into the price field.}  \label{fig:test-203-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-3.pdf}
+    \caption{Entering test data that is outside the boundary into the data field.}  \label{fig:test-203-3}
+\end{figure}
+
+\pagebreak
+
+\textbf{Test Series 2.04}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-1.pdf}
+    \caption{Navigating to the Add Product interface}  \label{fig:test-204-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-2.pdf}
+    \caption{Changing the stock of the new product and seeing if it is valid.}  \label{fig:test-204-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-3.pdf}
+    \caption{Changing the stock to a value outside the boundary and seeing if it is valid}  \label{fig:test-204-3}
+\end{figure}
+
+\pagebreak
+
+\textbf{Test Series 2.09}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-1.pdf}
+    \caption{Navigating to the Adding Member Interface}  \label{fig:test-209-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-2.pdf}
+    \caption{Entering test data into the house no field.}  \label{fig:test-209-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-3.pdf}
+    \caption{Trying to incease the house number outside the boundary.}  \label{fig:test-209-3}
 \end{figure}
 
 \pagebreak
