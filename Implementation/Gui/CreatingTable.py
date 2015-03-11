@@ -5,21 +5,9 @@ def create_table(db_name,table_name, sql):
         cursor = db.cursor()
         cursor.execute("select name from sqlite_master where name=?",(table_name,))
         result = cursor.fetchall()
-        keep_table = True
-        if len(result) == 1:
-            response = input("The table {0} already exists, do you wish to re-create it (y/n):".format(table_name))
-            if response == 'y':
-                keep_table = False
-                print("The {0} table will be recreated - all existing data will be deleted".format(table_name))
-                cursor.execute("drop table if exists {0}".format(table_name))
-                db.commit()
-            else:
-                print("The existing table was kept")
-        else:
-            keep_table = False
-        if not keep_table:
-            cursor.execute(sql)
-            db.commit()
+        cursor.execute("drop table if exists {0}".format(table_name))
+        cursor.execute(sql)
+        db.commit()
 
 def create_product_table():
     sql = """create table Product
@@ -34,7 +22,7 @@ def create_product_table():
               WeeklySales integer,
               DailySales integer,
               Primary Key(ProductID))"""
-    create_table(db_name, "Product", sql)
+    create_table("ProductDatabase.db", "Product", sql)
 
 def create_weekly_product_sales_table():
     sql = """create table WeeklyProductSales
@@ -42,7 +30,7 @@ def create_weekly_product_sales_table():
           Date string,
           Sales string,
           foreign key(ProductID) references Product(ProductID))"""
-    create_table(db_name, "WeeklyProductSales", sql)
+    create_table("ProductDatabase.db", "WeeklyProductSales", sql)
 
 def create_daily_product_sales_table():
     sql = """create table DailyProductSales
@@ -50,7 +38,7 @@ def create_daily_product_sales_table():
           Date string,
           Sales string,
           foreign key(ProductID) references Product(ProductID))"""
-    create_table(db_name, "DailyProductSales", sql) 
+    create_table("ProductDatabase.db", "DailyProductSales", sql) 
 
 
 def create_employee_table():
@@ -62,7 +50,7 @@ def create_employee_table():
               EmployeeEmail text,
               EmployeePassword text,
               Primary Key(EmployeeID))"""
-    create_table(db_name, "Employee", sql)
+    create_table("ProductDatabase.db", "Employee", sql)
 
 def create_member_table():
     sql = """create table Member
@@ -79,7 +67,7 @@ def create_member_table():
               TelephoneNo integer,
               MemberEmail text,
               Primary Key(MemberID))"""
-    create_table(db_name, "Member", sql)
+    create_table("ProductDatabase.db", "Member", sql)
 
 def create_order_table():
     sql = """create table CustomerOrder
@@ -90,7 +78,7 @@ def create_order_table():
             Primary Key(OrderID),
             foreign key(MemberID) references Member(MemberID),
             foreign key(EmployeeID) references Employee(EmployeeID))"""        
-    create_table(db_name,"CustomerOrder", sql)
+    create_table("ProductDatabase.db","CustomerOrder", sql)
 
 def create_product_order_table():
     sql = """create table ProductOrder
@@ -104,14 +92,14 @@ def create_product_order_table():
             Primary Key(ProductOrderID),
             foreign key(ProductID) references Product(ProductID),
             foreign key(OrderID) references CustomerOrder(OrderID))"""        
-    create_table(db_name,"ProductOrder", sql)
+    create_table("ProductDatabase.db","ProductOrder", sql)
 
 def create_location_table():
     sql = """create table Location
             (LocationID integer,
             LocationName string,
             Primary Key(LocationID))"""        
-    create_table(db_name,"Location", sql)
+    create_table("ProductDatabase.db","Location", sql)
 
 def create_product_location_table():
     sql = """create table ProductLocation
@@ -119,7 +107,7 @@ def create_product_location_table():
             LocationID integer,
             Primary Key(ProductID),
             Foreign Key(LocationID) references Location(LocationID))"""        
-    create_table(db_name,"ProductLocation", sql)
+    create_table("ProductDatabase.db","ProductLocation", sql)
 
 def create_settings_table():
     sql = """create table Settings
@@ -136,9 +124,9 @@ def create_settings_table():
               GmailAddress text,
               GmailPassword text,
               SalesDate text)"""
-    create_table(db_name, "Settings", sql)   
+    create_table("ProductDatabase.db", "Settings", sql)   
 
-if __name__ == "__main__":
+def create_database():
     db_name = "ProductDatabase.db"
     create_product_table()
     create_weekly_product_sales_table()

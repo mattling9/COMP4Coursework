@@ -2,6 +2,8 @@ import sqlite3, sys, datetime, calendar
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
+
+from CreatingTable import *
 from ErrorMessageClass import *
 #-----------------------------------------Product-----------------------------------------
 
@@ -317,7 +319,11 @@ def get_date_stored():
         with sqlite3.connect("ProductDatabase.db") as db:
             cursor = db.cursor()
             sql = "SELECT SalesDate from Settings"
-            cursor.execute(sql)
+            try:
+                cursor.execute(sql)
+            except:
+                create_database()
+                cursor.execute(sql)
             date_stored = cursor.fetchall()
         return date_stored
 

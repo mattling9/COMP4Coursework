@@ -18,6 +18,7 @@
     \end{tabular}
 \end{center}
 \end{landscape}
+
 \subsection{Changes to Outline Plan}
 	Some of my test series were quite brief and only tested for one variable. For example test series 3, ' Test Data is stored in the correct location' only tests whether the data is stored in the correct location. Because i am storing encrypted passwords, and data that must be in a specific format, such as dates, i have change this test series to: 'Test data is stored in the correct format and is in the correct storage location'. \par
 
@@ -45,6 +46,9 @@ Below is a table to show the changes i have made to the original outline plan cr
     \end{tabular}
 \end{center}
 \end{landscape}
+
+\pagebreak
+
 \subsection{Original Detailed Plan}
 
 the table below shows my original test plan made during the design phase. Since the design phase i have implemented my system and made alterations to the features described during the design phase. Because of these changes made, i have removed some tests from my original test plan as they have become redundant due to the changes made during the implementation stage. Some tests have been removed because they require a few modifications to suit my system after the implementation stage, both the removed and modified tests are described in the 'Changes to Detailed Plan' section. 
@@ -101,6 +105,8 @@ the table below shows my original test plan made during the design phase. Since 
 	5.01 & Verify the program fulfils the specification & Run the program, testing the different aspects to ensure it meets the specification  &system fulfils the specification & \\ \hline
 \end{longtable}
 \end{flushleft}
+
+\pagebreak
 
 \subsection{Changes to Detailed Plan}
 
@@ -387,224 +393,6 @@ Because i have added two new test series in my new outline plan, i have added ne
 
 \section{Annotated Samples}
 
-\subsection{Normal Test Annotations}
-
-\textbf{Test Series 1.01}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-101-1.pdf}
-    \caption{The interface that is displayed when the system is first run} \label{fig:test-101-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-101-2.pdf}
-    \caption{Entering log in credentials into the the data fields} \label{fig:test-101-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-101-3.pdf}
-    \caption{Clicking on the log in button and seeing the outcome of the test.} \label{fig:test-101-3}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-101-4.pdf}
-    \caption{Showing what happens when the user enters invalid log in details and clicks the log in button} \label{fig:test-101-4}
-\end{figure}
-
-
-\textbf{Test Series 1.03}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-103-1.pdf}
-    \caption{Clicking the log off button in the options menu whilst logged into the system.} \label{fig:test-103-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-103-2.pdf}
-    \caption{Making a decision when the log off pop up windows open.} \label{fig:test-103-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-103-3.pdf}
-    \caption{Clicking the Yes option at the Log Off decision window.} \label{fig:test-103-3}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-103-4.pdf}
-    \caption{The result of clicking the No option on the log off decision window} \label{fig:test-103-4}
-\end{figure}
-
-\textbf{Test Series 3.07}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-307-1.pdf}
-    \caption{Adding a new Employee to the Database.} \label{fig:test-307-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-307-2.pdf}
-    \caption{Confirming that the employee has successfully been added to the system.} \label{fig:test-307-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-307-3.pdf}
-    \caption{Proving the account has successfully been stored in the database and finding the encrypted password} \label{fig:test-307-3}
-\end{figure}
-
-\begin{figure}[H]
-    \caption{Decrypting the password from the new employee account in the database.} \label{fig:test-307-3}
-
-\vspace{5mm}
-  i decided to encrypt the passwords for the accounts before they are stored so that people cannot just use to database inspector to find out the passwords for all the accounts. I used a simple Caesar Cypher code to encrypt and decrypt the passwords within the system. Each letter in the password is changed to the letter three places up in the alphabet. For example and A is changed to a D. The table below shows the transformation for all the characters. The rows highlighted in light grey are the rows that will be needed to decrypt the password: `sdvvzrug'.
-
-\vspace{5mm}
-\begin{center}
-\begin{tabular}{|p{3.5cm}|p{3.5cm}|}
-        \hline
-        \textbf{Before Encryption} & \textbf{After Encryption} \\ \hline
-       \rowcolor{light-grey} a & d \\ \hline
-        b & e\\ \hline
-        c & f\\ \hline
-       \rowcolor{light-grey} d & g\\ \hline
-        e & h\\ \hline
-        f & i\\ \hline
-        g & j\\ \hline
-        h & k\\ \hline
-        i & l\\ \hline
-        j & m\\ \hline
-        k & n\\ \hline
-        l & o\\ \hline
-        m & p\\ \hline
-        n & q\\ \hline
-       \rowcolor{light-grey} o & r\\ \hline
-       \rowcolor{light-grey}p & s\\ \hline
-       q & t\\ \hline
-      \rowcolor{light-grey}  r & u\\ \hline
-      \rowcolor{light-grey}  s & v\\ \hline
-        t & w\\ \hline
-        u & x\\ \hline
-        v & y\\ \hline
-      \rowcolor{light-grey}  w & z\\ \hline
-        x & a\\ \hline
-        y & b\\ \hline
-        z & c\\ \hline
- \end{tabular}
- \end{center}
- \vspace{5mm}
- Looking at the the After Encryption column in the table and changing the letters to the letters in the before encryption table,  we can see that S decrypts to P, D decrypts to A, V decrypts to S, Z decrypts to W, R decrypts to O, U decrypts to R and G decrypts to D. By changing the password `sdvvzrug' to its decrypted form, we can see that the password before encryption was `password' this is the result that we wanted from the test.
-\end{figure}
-
-\subsection{Erroneous Test Annotations}
-
-\textbf{Test Series 1.10}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-110-1.pdf}
-    \caption{Logging in using on a Non Administrator account.}  \label{fig:test-110-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-110-2.pdf}
-    \caption{Trying to add edit or delete an employee on this account}  \label{fig:test-110-2}
-\end{figure}
-
-\textbf{Test Series 2.08}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-208-1.pdf}
-    \caption{Navigating to the Add Member Interface}  \label{fig:test-208-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-208-2.pdf}
-    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-208-3.pdf}
-    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-3}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-208-4.pdf}
-    \caption{Searching for the postcode directly in the CSV file.}  \label{fig:test-208-4}
-\end{figure}
-
-\textbf{Test Seires 4.08}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-408-1.pdf}
-    \caption{Logging in on the administrator account.}  \label{fig:test-408-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-408-2.pdf}
-    \caption{Navigating to the Delete Employee Interface}  \label{fig:test-408-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-408-3.pdf}
-    \caption{Attempting to Delete the Administrator account}  \label{fig:test-408-3}
-\end{figure}
-
-\pagebreak
-
-\subsection{Boundary Test Annotations}
-
-\textbf{Test Series 2.03}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-203-1.pdf}
-    \caption{Navigating to the Add Product interface and locating the price field.}  \label{fig:test-203-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-203-2.pdf}
-    \caption{Entering test data into the price field.}  \label{fig:test-203-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-203-3.pdf}
-    \caption{Entering test data that is outside the boundary into the data field.}  \label{fig:test-203-3}
-\end{figure}
-
-\pagebreak
-
-\textbf{Test Series 2.04}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-204-1.pdf}
-    \caption{Navigating to the Add Product interface}  \label{fig:test-204-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-204-2.pdf}
-    \caption{Changing the stock of the new product and seeing if it is valid.}  \label{fig:test-204-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-204-3.pdf}
-    \caption{Changing the stock to a value outside the boundary and seeing if it is valid}  \label{fig:test-204-3}
-\end{figure}
-
-\pagebreak
-
-\textbf{Test Series 2.09}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-209-1.pdf}
-    \caption{Navigating to the Adding Member Interface}  \label{fig:test-209-1}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-209-2.pdf}
-    \caption{Entering test data into the house no field.}  \label{fig:test-209-2}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{./TestingImages/test-209-3.pdf}
-    \caption{Trying to incease the house number outside the boundary.}  \label{fig:test-209-3}
-\end{figure}
 
 \pagebreak
 
@@ -729,6 +517,225 @@ Because i have added two new test series in my new outline plan, i have added ne
         
         
 \subsection{Evidence}
+
+\subsubsection{Normal Test Annotations}
+
+\textbf{Test Series 1.01}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-101-1.pdf}
+    \caption{The interface that is displayed when the system is first run} \label{fig:test-101-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-101-2.pdf}
+    \caption{Entering log in credentials into the the data fields} \label{fig:test-101-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-101-3.pdf}
+    \caption{Clicking on the log in button and seeing the outcome of the test.} \label{fig:test-101-3}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-101-4.pdf}
+    \caption{Showing what happens when the user enters invalid log in details and clicks the log in button} \label{fig:test-101-4}
+\end{figure}
+
+
+\textbf{Test Series 1.03}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-103-1.pdf}
+    \caption{Clicking the log off button in the options menu whilst logged into the system.} \label{fig:test-103-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-103-2.pdf}
+    \caption{Making a decision when the log off pop up windows open.} \label{fig:test-103-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-103-3.pdf}
+    \caption{Clicking the Yes option at the Log Off decision window.} \label{fig:test-103-3}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-103-4.pdf}
+    \caption{The result of clicking the No option on the log off decision window} \label{fig:test-103-4}
+\end{figure}
+
+\textbf{Test Series 3.07}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-307-1.pdf}
+    \caption{Adding a new Employee to the Database.} \label{fig:test-307-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-307-2.pdf}
+    \caption{Confirming that the employee has successfully been added to the system.} \label{fig:test-307-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-307-3.pdf}
+    \caption{Proving the account has successfully been stored in the database and finding the encrypted password} \label{fig:test-307-3}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Decrypting the password from the new employee account in the database.} \label{fig:test-307-3}
+
+\vspace{5mm}
+  i decided to encrypt the passwords for the accounts before they are stored so that people cannot just use to database inspector to find out the passwords for all the accounts. I used a simple Caesar Cypher code to encrypt and decrypt the passwords within the system. Each letter in the password is changed to the letter three places up in the alphabet. For example and A is changed to a D. The table below shows the transformation for all the characters. The rows highlighted in light grey are the rows that will be needed to decrypt the password: `sdvvzrug'.
+
+\vspace{5mm}
+\begin{center}
+\begin{tabular}{|p{3.5cm}|p{3.5cm}|}
+        \hline
+        \textbf{Before Encryption} & \textbf{After Encryption} \\ \hline
+       \rowcolor{light-grey} a & d \\ \hline
+        b & e\\ \hline
+        c & f\\ \hline
+       \rowcolor{light-grey} d & g\\ \hline
+        e & h\\ \hline
+        f & i\\ \hline
+        g & j\\ \hline
+        h & k\\ \hline
+        i & l\\ \hline
+        j & m\\ \hline
+        k & n\\ \hline
+        l & o\\ \hline
+        m & p\\ \hline
+        n & q\\ \hline
+       \rowcolor{light-grey} o & r\\ \hline
+       \rowcolor{light-grey}p & s\\ \hline
+       q & t\\ \hline
+      \rowcolor{light-grey}  r & u\\ \hline
+      \rowcolor{light-grey}  s & v\\ \hline
+        t & w\\ \hline
+        u & x\\ \hline
+        v & y\\ \hline
+      \rowcolor{light-grey}  w & z\\ \hline
+        x & a\\ \hline
+        y & b\\ \hline
+        z & c\\ \hline
+ \end{tabular}
+ \end{center}
+ \vspace{5mm}
+ Looking at the the After Encryption column in the table and changing the letters to the letters in the before encryption table,  we can see that S decrypts to P, D decrypts to A, V decrypts to S, Z decrypts to W, R decrypts to O, U decrypts to R and G decrypts to D. By changing the password `sdvvzrug' to its decrypted form, we can see that the password before encryption was `password' this is the result that we wanted from the test.
+\end{figure}
+
+\subsubsection{Erroneous Test Annotations}
+
+\textbf{Test Series 1.10}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-110-1.pdf}
+    \caption{Logging in using on a Non Administrator account.}  \label{fig:test-110-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-110-2.pdf}
+    \caption{Trying to add edit or delete an employee on this account}  \label{fig:test-110-2}
+\end{figure}
+
+\textbf{Test Series 2.08}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-1.pdf}
+    \caption{Navigating to the Add Member Interface}  \label{fig:test-208-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-2.pdf}
+    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-3.pdf}
+    \caption{Entering th epostocde into the data field.}  \label{fig:test-208-3}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-208-4.pdf}
+    \caption{Searching for the postcode directly in the CSV file.}  \label{fig:test-208-4}
+\end{figure}
+
+\textbf{Test Seires 4.08}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-408-1.pdf}
+    \caption{Logging in on the administrator account.}  \label{fig:test-408-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-408-2.pdf}
+    \caption{Navigating to the Delete Employee Interface}  \label{fig:test-408-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-408-3.pdf}
+    \caption{Attempting to Delete the Administrator account}  \label{fig:test-408-3}
+\end{figure}
+
+\pagebreak
+
+\subsubsection{Boundary Test Annotations}
+
+\textbf{Test Series 2.03}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-1.pdf}
+    \caption{Navigating to the Add Product interface and locating the price field.}  \label{fig:test-203-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-2.pdf}
+    \caption{Entering test data into the price field.}  \label{fig:test-203-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-203-3.pdf}
+    \caption{Entering test data that is outside the boundary into the data field.}  \label{fig:test-203-3}
+\end{figure}
+
+\pagebreak
+
+\textbf{Test Series 2.04}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-1.pdf}
+    \caption{Navigating to the Add Product interface}  \label{fig:test-204-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-2.pdf}
+    \caption{Changing the stock of the new product and seeing if it is valid.}  \label{fig:test-204-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-204-3.pdf}
+    \caption{Changing the stock to a value outside the boundary and seeing if it is valid}  \label{fig:test-204-3}
+\end{figure}
+
+\pagebreak
+
+\textbf{Test Series 2.09}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-1.pdf}
+    \caption{Navigating to the Adding Member Interface}  \label{fig:test-209-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-2.pdf}
+    \caption{Entering test data into the house no field.}  \label{fig:test-209-2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-209-3.pdf}
+    \caption{Trying to incease the house number outside the boundary.}  \label{fig:test-209-3}
+\end{figure}
 
 
 \section{Evaluation}
