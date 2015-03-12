@@ -293,16 +293,92 @@ An alternative to step 1 and step 2, is by pressing the `CTRL' and `E' button on
 \subsubsection{Editing a Product in the system}
 \label{fig:Editing a Product in the system}
 
+\textbf{1.} On any interface, click on the Product option in the menu bar.
+
+\textbf{2.} Click on 'Edit a Product' in the dropdown menu.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-product-1.pdf}
+
+\textbf{3.} Enter the ProductID into the ProductID field. 
+
+\textbf{4.} Press the 'Find' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-product-2.pdf}
+
+if you do not know the ProductID of the product you want to edit, find it using the Search window. For a tutorial on using the search window, go to page: . 
+
+\textbf{5.} Edit the data for the product.
+
+Note that the stock cannot be changed at this interface, for a tutorial on how to change the stock, go to page .
+
+\textbf{6.} Click the 'Edit Product' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-product-3.pdf}
+
+\textbf{7.} Click the 'Yes' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-product-4.pdf}
+
+\textbf{8.} Click the 'Ok' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-product-5.pdf}
+
+You have now successfully edited a product.
+
 
 \pagebreak
 \subsubsection{Editing a Member currently in the system}
 \label{fig:Editing a Member currently in the system}
 
+\textbf{1.} On any interface, click on the Member button in the Menu bar.
+
+\textbf{2.} In the drop down menu, click on the 'Edit a Member' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-member-1.pdf}
+
+\textbf{3.} Enter the MemberID into the MemberID field. 
+
+\textbf{4.} Press the 'Find' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-member-2.pdf}
+
+if you do not know the MemberID of the member you want to edit, find it using the Search window. For a tutorial on using the search window, go to page: . 
+
+\textbf{5.} Make the changes to the member information.
+
+\textbf{6.}  Click the 'Edit Member' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-member-3.pdf}
+
+\textbf{7.}  Click the 'Yes' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-member-4.pdf}
+
+\textbf{8.} Click the 'Ok' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-member-5.pdf}
+
+You have now successfully edited a member.
 
 \pagebreak
 \subsubsection{Editing an Employee in the system}
 \label{fig:Editing an Employee in the system}
 
+\textbf{1.} On any interface, click on the employee button in the Menu bar.
+
+\textbf{2.} From the drop down menu, click on the 'Edit an Employee' button.
+
+If you cannot click on the 'Edit Employee' button, because the system will not let you, it is because you must be signed into the administrator account in order to edit an employee.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-employee-1.pdf}
+
+\textbf{3.} Enter the EmployeeID into the EmployeeID field.
+
+\textbf{4.} Click on the 'Find' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-employee-2.pdf}
+
+\textbf{5.} enter the new data into the data fields.
 
 \pagebreak
 \subsubsection{Removing a Product from the system}
@@ -393,22 +469,66 @@ An alternative to step 1 and step 2, is by pressing the `CTRL' and `E' button on
 \subsubsection{Accessing the search window}
 \label{fig:Accessing the search window}
 
+\pagebreak
+\subsubsection{Using the search window}
+\label{fig:Using the search window}
+
 
 
 
 \subsection{Saving}
 
+All the saving in the system is done internally and is automatically handled by the system. The system automatically saves the database file after each query that is executed within the database. This helps prevent any data loss in the event of the system crahsing.
+
 \subsection{Limitations}
 
 \section{Error Recovery}
 
-%include as many subsections as necessary for each error
-\subsection{Error 1}
+\subsection{Sorry the Username and Password are incorrect.}
 
-\subsection{Error 2}
+This error will occur when trying to log into the system and the username and password in which you have entered do not match any of the accounts stored in the system.
+
+To resolve this problem, you can try to re-enter your username and password, to ensure that you have entered the correct details. If the problem still persists, then go to page \pageref{fig:Forgetting Your User-name or Password}, for a tutorial on how to retrieve your account details.
+
+\subsection{The Gmail Account Details are not valid.}
+
+This error is caused when trying to send an email from the system. the error occurs because the email address and password used to send the email from is not valid.
+
+To change the email and password, click on the 'Options' button in the menu bar and then click on 'Preferences' from the drop down menu.
+
+Under the 'Email Account' section, you will find an email and password field. By default, the email address and password are 'example@gmail.com' and 'password'.
+
+Change the email address and password to ones of a working gmail account. Please note that it will only work with an '@gmail.com' account.
+
+Once the email address and password have been changed, click on the 'Save button in the bottom right hand corner of the Preferences interface. This will now save the new email address and password to the system. If the new email address and password are valid, the error message should no longer be displayed and the system should successfully send the email.
+
+\subsection{Sorry the Email address does not match any of the Accounts.}
+
+This error will occur when trying to reset your password. It occurs because the email address in which you have entered does not match any of the email addresses associated to the employee accounts within the system.
+
+To resolve this issue, ensure that the email address you have entered is spelt correctly and if the problem still persists, another user can sign into the system and use the search window to find the email address associated to your account. For a more detailed explaination on how to do this, go to page \pageref{fig:Using the search window}.
+
+\subsection{No Product with ProductID:}
+
+This error occurs on either the edit or delete product interface. This issue is caused when the user enteres the ProductID of a product that is not in the database.This issue is resolved simply by entering the ProductID of a valid product. The search window can be used to find the ProductID of each product. if you require assistance on using the search window, go to page \pageref{fig:Accessing the search window} for a tutorial on how to open the search window, or go to page \pageref{fig:Using the search window} for tutorial on how to use the search window.
+
+\subsection{No User found with MemberID:}
+
+This error occurs on either the edit or delete member interface. This issue is caused when the user enteres the MemberID of a member that is not in the database.This issue is resolved simply by entering the MemberID of a valid member. The search window can be used to find the MemberID of each member. if you require assistance on using the search window, go to page \pageref{fig:Accessing the search window} for a tutorial on how to open the search window, or go to page \pageref{fig:Using the search window} for tutorial on how to use the search window.
+
+\subsection{No employee found with EmployeeID:}
+
+This error occurs on either the edit or delete employee interface. This issue is caused when the user enteres the EmployeeID of an employee that is not in the database.This issue is resolved simply by entering the EmployeeID of a valid employee. The search window can be used to find the EmployeeID of each employee. if you require assistance on using the search window, go to page \pageref{fig:Accessing the search window} for a tutorial on how to open the search window, or go to page \pageref{fig:Using the search window} for tutorial on how to use the search window.
+
+
 
 \section{System Recovery}
 
 \subsection{Backing-up Data}
 
 \subsection{Restoring Data}
+
+
+
+
+
