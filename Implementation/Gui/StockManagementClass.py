@@ -71,7 +71,7 @@ class manageStockClass(QWidget):
         self.current_stock_layout.addWidget(self.product_info_widget)
         self.current_stock_groupbox.setLayout(self.current_stock_layout)
 
-        self.stock_prediction_groupbox = QGroupBox("Change Stock")
+        self.stock_prediction_groupbox = QGroupBox("Stock Prediction")
         self.stock_prediction_layout = QHBoxLayout()
 
         #ADDING THE GRAPH TO THE WINDOW
