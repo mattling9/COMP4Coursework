@@ -192,26 +192,22 @@ The following sections are a step by step guide for each section of the system. 
 	How do i add a product to the system? &  \pageref{fig:Adding a Product to the system} \\ \hline
 	How do i edit a product that is currently in the system?&  \pageref{fig:Editing a Product in the system} \\ \hline
 	How do i remove a product from the system?&  \pageref{fig:Removing a Product from the system} \\ \hline
-	How do i find a Product in the system?&  \pageref{fig:Finding a Product within the system} \\ \hline
 	How do i change the stock of a product?&  \pageref{fig:Changing the stock of a Product} \\ \hline
 	How do i view the predicted sales of a product?&  \pageref{fig:Product Stock Prediction} \\ \hline
 	How do i add a Member to the system?&  \pageref{fig:Adding a Member to the system} \\ \hline
-	How do i find a Member in the system?&  \pageref{fig:Finding a Member in the system} \\ \hline
 	How do i edit the information about a Member?&  \pageref{fig:Editing a Member currently in the system} \\ \hline
 	How do i remove a Member from the system?&  \pageref{fig:Removing a Member from the system} \\ \hline
 	How do i add an Employee to the system?&  \pageref{fig:Adding an Employee to the system} \\ \hline
 	How do i edit the information about an Employee in the system?&  \pageref{fig:Editing an Employee in the system} \\ \hline
 	How do i remove an employee from the system?&  \pageref{fig:Removing an Employee for the system.} \\ \hline
-	How do i find an Employee in the system?&  \pageref{fig:Finding an Employee in the system} \\ \hline
-	How do i get to the Order interface?&  \pageref{fig:Creating an Order} \\ \hline
 	How do i add products to an order?&  \pageref{fig:Adding products to an order} \\ \hline
 	How do i give a discount on the order? &  \pageref{fig:Applying a Discount to an Order} \\ \hline
 	How to i preview an order once its finished?&  \pageref{fig:Previewing the invoice} \\ \hline
 	How do i print off an invoice?&  \pageref{fig:Printing an invoice} \\ \hline
 	How do send an invoice to an email?&  \pageref{fig:Emailing an invoice} \\ \hline
 	How do i change the company information on the invoice? &  \pageref{fig:Changing information on the invoice} \\ \hline
-	How do i change my password?&  \pageref{fig:Changing your Password} \\ \hline
 	How do i access the search window?&  \pageref{fig:Accessing the search window} \\ \hline
+	How do i use the search window?&  \pageref{fig:Using the search window} \\ \hline
 	\end{longtable}
 \end{center}
 \pagebreak
@@ -578,19 +574,27 @@ You have now successfully removed the member from the system.
 
 \textbf{2.} Click on the 'Delete Employee' button in the drop down menu.
 
+\includegraphics[width=\textwidth]{./ManualImages/delete-employee-1.pdf}
+
 \textbf{3.} Enter the EmployeeID of the Employee into the EmployeeID field.
 
 if you do not know a specific employee's EmployeeID, you can use the search window to find it. For a tutorial on using the search window, go to page \pageref{fig:Using the search window}.
 
 \textbf{4.} click on the 'Find' button.
 
+\includegraphics[width=\textwidth]{./ManualImages/delete-employee-2.pdf}
+
 The employee information should be displayed. You will not be able to edit any of the information displayed here. For a tutorial on how to edit the employee information, go to page \pageref{fig:Editing an Employee in the system}.
 
 \textbf{5.} Click on the 'Delete Employee' button in the bottom right hand corner of the system.
 
+\includegraphics[width=\textwidth]{./ManualImages/delete-employee-3.pdf}
+
 \textbf{6.} Click the 'Yes' button in the pop up window. This is cause another pop up window to open.
 
-\textbf{7.}Click the 'Ok' button in this interface and both the pop up windows will close. You have successfully removed the employee from the system.
+\textbf{7.}Click the 'Ok' button in the second pop up window and both the pop up windows will close. You have successfully removed the employee from the system.
+
+\includegraphics[width=\textwidth]{./ManualImages/delete-employee-4.pdf}
 
 \pagebreak
 \subsubsection{Changing the stock of a Product}
@@ -602,15 +606,28 @@ The employee information should be displayed. You will not be able to edit any o
 
 \textbf{3.} Now click on the Manage Stock option from the drop down menu. This is the only option in the menu.
 
+\includegraphics[width=\textwidth]{./ManualImages/edit-stock-1.pdf}
+
 \textbf{4.} Enter the ProductID of the product you want to change the stock for. If you do not know the ProductID of the product, you can find it using the search window. For a tutorial on using the search window, go to page \pageref{fig:Using the search window}.
 
 \textbf{5.} Click on the find button after you have entered the ProductID.
 
+\includegraphics[width=\textwidth]{./ManualImages/edit-stock-2.pdf}
+
 \textbf{6.} Click the up or down arrows on the spin box to change the stock or enter the number into the field.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-stock-3.pdf}
 
 \textbf{7.} once you have changed the stock of the product, click on the 'Save' button in the bottom right hand corner of the system.
 
-\textbf{8.} On the pop up window, click the 'Ok' button. You have now successfully changed the stock of the product.
+\includegraphics[width=\textwidth]{./ManualImages/edit-stock-4.pdf}
+
+\textbf{8.} On the pop up window, click the 'Ok' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/edit-stock-5.pdf}
+
+You have now successfully changed the stock of the product.
+
 
 \pagebreak
 \subsubsection{Product Stock Prediction}
@@ -620,73 +637,210 @@ The employee information should be displayed. You will not be able to edit any o
 
 In the 'Stock Prediction' section, There is a graph that displays the sales of the product. If there are no lines plotted on the graph, there have not been any sales of the product.
 
-To the left of the graph there is a label that says "Predicted Sales Next Week". To the right of this should be a number which will represent the predicted sales of that product next week.
+To the right of the graph there is a label that says "Predicted Sales Next Week". To the right of this should be a number which will represent the predicted sales of that product next week.
 
 An unrealistic value of the stock prediction is usually due to lack of sales data in the graph. A more accurate predicted sales can be made by changing the graph to display the sales per day. To do this follow the following steps:
 
-\textbf{1.} locate the drop down menu to the right of the 'View Sales per' text.
+\textbf{2.} locate the drop down menu to the right of the 'View Sales per' text.
 
-\textbf{2.} Left click on the drop down menu and there should be two options, 'Day' and 'Week'
+\includegraphics[width=\textwidth]{./ManualImages/change-stock-1.pdf}
 
-\textbf{3.} To view the sales per week, click on the 'Week' button.
+\textbf{3.} Left click on the drop down menu and there should be two options, 'Day' and 'Week'
 
-\textbf{4.} To view the sales per day, click on the 'Day' button.
+\includegraphics[width=\textwidth]{./ManualImages/change-stock-2.pdf}
 
-\pagebreak
-\subsubsection{Creating an Order}
-\label{fig:Creating an Order}
+\textbf{4.} To view the sales per week, click on the 'Week' button.
 
+\textbf{5.} To view the sales per day, click on the 'Day' button.
 
 \pagebreak
 \subsubsection{Adding products to an order}
 \label{fig:Adding products to an order}
 
+\textbf{1.} Navigate to the `Create Order' interface. This can be done by clicking on `Order' in the menu bar, then click on `Create New Order' from the drop down menu.
+
+\includegraphics[width=\textwidth]{./ManualImages/product-order-1.pdf}
+
+\textbf{2.} Left click on a product in the `Find Product' table. This will cause it to be highlighted in green.
+
+\includegraphics[width=\textwidth]{./ManualImages/product-order-2.pdf}
+
+\textbf{3.} Click on the `Add to Order' button, ensuring the product is still selected.
+
+\includegraphics[width=\textwidth]{./ManualImages/product-order-3.pdf}
+
+The product should now appear in the `Current Order' table.
+
+\includegraphics[width=\textwidth]{./ManualImages/product-order-4.pdf}
+
+You have now successfully added a product to the order.
+
+An alternative method to adding a product to the order, is by double left clicking on the product in the `Finding Product' table.
 
 \pagebreak
 \subsubsection{Applying a Discount to an Order}
 \label{fig:Applying a Discount to an Order}
 
+\textbf{1.} To apply a discount to the order, you must enter a MemberID into the MemberID field.
+
+\includegraphics[width=\textwidth]{./ManualImages/discount-1.pdf}
+
+\textbf{2.} Once you have entered the MemberID, click the `Enter' button
+
+\includegraphics[width=\textwidth]{./ManualImages/discount-2.pdf}
+
+\pagebreak
+
+if the MemberID is valid when the `Enter' button is pressed, a 10 percent discount should be applied.
+
+\includegraphics[width=\textwidth]{./ManualImages/discount-3.pdf}
 
 \pagebreak
 \subsubsection{Previewing the invoice}
 \label{fig:Previewing the invoice}
 
+\textbf{1.} Once you have created an invoice and would like to preview it, click on the `Preview' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/preview-1.pdf}
 
 \pagebreak
 \subsubsection{Printing an invoice}
 \label{fig:Printing an invoice}
 
+\textbf{1.} To print an invoice, you must first create one. Go to page \pageref{fig:Adding products to an order} for a tutorial on adding products to an order.
+
+\textbf{2.} Once you have created the invoice you must click the check box named `Print Invoice'.
+
+\includegraphics[width=\textwidth]{./ManualImages/print-1.pdf}
+
+\pagebreak
+
+\textbf{3.} Click the `Save' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/print-2.pdf}
+
+\pagebreak
+
+\textbf{4.} Before the invoice is saved, it will present you with the window below. Here you can select the printer and printer options to print the invoice.
+
+\includegraphics[width=\textwidth]{./ManualImages/print-3.pdf}
+
+\pagebreak
+
+\textbf{5.} Once you have chosen the correct printer, click the `Print' button. This will then begin to print off the invoice.
+
+\includegraphics[width=\textwidth]{./ManualImages/print-4.pdf}
 
 \pagebreak
 \subsubsection{Emailing an invoice}
 \label{fig:Emailing an invoice}
 
+\textbf{1.} To send the invoice via email, click the `Send Invoice to Email' check box.
+
+\includegraphics[width=\textwidth]{./ManualImages/email-1.pdf}
+
+\textbf{2.} You must next enter an email address to send the invoice to. This needs to be entered in the email address field highlighted below.
+
+\includegraphics[width=\textwidth]{./ManualImages/email-2.pdf}
+
+\pagebreak
+
+\textbf{3.} Click the `Save' button.
+
+\includegraphics[width=\textwidth]{./ManualImages/print-2.pdf}
+
+\textbf{4.} Once the pop up window below displays, the system will have successfully sent the invoice to the email entered and saved the invoice.
+
+\includegraphics[width=\textwidth]{./ManualImages/email-3.pdf}
 
 \pagebreak
 \subsubsection{Changing information on the invoice}
 \label{fig:Changing information on the invoice}
 
+The information highlighted in the invoice below can be changed in the preferences interface.
+
+\includegraphics[width=\textwidth]{./ManualImages/change-info-1.pdf}
 
 \pagebreak
-\subsubsection{Problems with sending emails}
-\label{fig:Problems with sending emails}
 
+\textbf{1.} Click on `Options' in the menu bar.
+
+\textbf{2.} Click on `Preferences' from the drop down menu.
+
+\includegraphics[width=\textwidth]{./ManualImages/change-info-2.pdf}
 
 \pagebreak
-\subsubsection{Changing your Password}
-\label{fig:Changing your Password}
 
+\textbf{3.} Change the information under the `Company Info' section. The data fields have been highlighted in the screen shot below.
+
+\includegraphics[width=\textwidth]{./ManualImages/change-info-3.pdf}
+
+For a tutorial on changing the logo, see Step 6-9 of the Adding Product tutorial on page \pageref{fig:Adding a Product to the system}
+
+\pagebreak
+
+\textbf{4.} Once you have changed the company details, click on the `Save' button in the bottom right hand corner of the Preferences interface.
+
+\includegraphics[width=\textwidth]{./ManualImages/change-info-4.pdf}
+
+\pagebreak
+
+\textbf{5.} You have now saved the preferences. Click the `Ok' button on the pop up window to close it.
+
+\includegraphics[width=\textwidth]{./ManualImages/change-info-5.pdf}
 
 \pagebreak
 \subsubsection{Accessing the search window}
 \label{fig:Accessing the search window}
 
+\textbf{1.} Click on the `Options' button in the menu bar.
+
+\textbf{2.} Click on the `Search Window' option in the drop down menu.
+
+\includegraphics[width=\textwidth]{./ManualImages/access-search-1.pdf}
+
+\pagebreak
+
+\textbf{3.} You have successfully opened the search window. To close the search window, click on the `X' in the top right hand corner of the window.
+
+\includegraphics[width=\textwidth]{./ManualImages/access-search-2.pdf}
+
+For a tutorial on how to use the Search window, go to page \pageref{fig:Using the search window}.
+
+
 \pagebreak
 \subsubsection{Using the search window}
 \label{fig:Using the search window}
 
+\textbf{1.} Open the search window. For a tutorial on how to open the search window, go to page \pageref{fig:Accessing the search window}.
 
+A short-cut for opening the Search window is by pressing the `CTRL' and `F' buttons on the keyboard simultaneously.
 
+\includegraphics[width=\textwidth]{./ManualImages/shortcut-search.pdf}
+
+\textbf{2.} To find a specific product within the system, enter a keyword into the search field.
+
+\includegraphics[width=\textwidth]{./ManualImages/search-1.pdf}
+
+\textbf{3.} By Default, the search window searches for products. To search for a member or an employee, follow steps 4- .
+
+\textbf{4.} To change the table that is displayed and to search for either a product, member or employee, left click on the text that says `Product'.
+
+\includegraphics[width=\textwidth]{./ManualImages/search-2.pdf}
+
+\textbf{5.} A drop down menu will be displayed, select the option you want to search for (product, member or employee).
+
+\includegraphics[width=\textwidth]{./ManualImages/search-3.pdf}
+
+\textbf{6.} Click a column heading to sort the results from A-Z, Z-A, 1-9, 9-1, ect...
+
+\includegraphics[width=\textwidth]{./ManualImages/search-4.pdf}
+
+\textbf{7.} Right click on an item within the table. A drop down menu will be displayed. The drop down menu that is displayed, depends on what you are searching for, whether it be a product, member or an employee.
+
+\includegraphics[width=\textwidth]{./ManualImages/search-5.pdf}
+
+\textbf{8.} Clicking on one of the options in the drop down menu will take you to the associated interface. For example clicking on edit product will take you to the edit product interface.
 
 \subsection{Saving}
 
@@ -738,7 +892,26 @@ This error occurs on either the edit or delete employee interface. This issue is
 
 \subsection{Backing-up Data}
 
+\textbf{1.} Go to the `Stock Control System' folder created during the System Installation section.
+
+\textbf{2.} Double click on the folder and locate the `ProductDatabase.db file.
+
+\textbf{3.} Right click on the file and click on `Copy' from the drop down menu.
+
+\textbf{4.} Move the copy of the `ProductDatabse.db' file onto a removable storage media such as a USB Flash drive.
+
+You have now successfully backed up the database. go to page \pageref{fig:Restoring Data} for a tutorial on how to back up data.
+
 \subsection{Restoring Data}
+\label{fig:Restoring Data}
+
+\textbf{1.} connect the removable media storage to the computer.
+
+\textbf{2.} Locate the `ProductDatabase.db' file on the removable media storage device.
+
+\textbf{3.} Delete the `ProductDatabase.db' file currently in the Stock Control System folder and drag and drop the `ProductDatabase.db' file from the removable media storage device into the folder.
+
+\textbf{4.} Run the system and the database from the back up should now be working with the system.
 
 
 

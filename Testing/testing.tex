@@ -426,7 +426,7 @@ Because i have added two new test series in my new outline plan, i have added ne
 	2.04 &  example@+ & None of these characters should be accepted in the stock field. & none of these characters were accepted in the field.  & \\ \hline
 	2.04 &  9245364 & This should not be accepted in the stock field as it is outside the boundary& This was not accepted because it was greater than 99 &  \\ \hline
 	2.04 &  99  &This the largest stock that should be valid& This was accepted by the system (field was highlighted in green) & Page: \pageref{fig:test-204-2}  \newline Figure: \ref{fig:test-204-2}\\ \hline
-	2.04 &  100  & This is outside the boundary so it should not be accepted & This was not accepted by the system (field was not highlighted in green) &  Page: \pageref{fig:test-204-3}  \newline \newline Figure: \ref{fig:test-204-3}\\ \hline
+	2.04 &  100  & This is outside the boundary so it should not be accepted & This was not accepted by the system (field was not highlighted in green) &  Page: \pageref{fig:test-204-3} \newline Figure: \ref{fig:test-204-3}\\ \hline
 	2.05 &  Matthew &This should be accepted as a valid name& This name was accepted by the system  & \\ \hline
 	2.05 &  Matthew12345  & Numbers should not be accepted in the name field.& This name was accepted by the system. &  Page: \pageref{fig:test-205-1}  \newline Figure: \ref{fig:test-205-1} \newline \newline   Page: \pageref{fig:test-205-2}  \newline Figure: \ref{fig:test-205-2} \\ \hline
 	2.05 &  £@~? & Special characters should also not be accepted in the name field.,& These characters were not accepted &  \\ \hline 
@@ -470,16 +470,16 @@ Because i have added two new test series in my new outline plan, i have added ne
 	4.07 & EmployeeID = 3 & The Employee with the EmployeeID of 5 should now be removed from the database. & The Employee with the Employee ID of 3 has now been removed from the database.&  \\ \hline
 	4.08 &  EmployeeID = 1 & This employee should not be able to be removed because it is the Administrator account.& I was presented with a message saying i could not edit or delete the Employee with the EmployeeID of 1 because it is the administrators account. & Page:\pageref{fig:test-408-1}  \newline Figure:\ref{fig:test-408-1} \newline \newline Page:\pageref{fig:test-408-2}  \newline Figure:\ref{fig:test-408-2} \newline \newline Page:\pageref{fig:test-408-3}  \newline Figure:\ref{fig:test-408-3}\\ \hline
 	5.01 &  signing into the gmail account `beaconvets@gmail.com' and attempting sending an invoice to Member with MemberID 1.  & The email address the email was sent to, should receive an email from beaconvets@gmail.com containing an Invoice. & The email address received the email, meaning the gmail account details are valid. & \\ \hline
-	5.02 & A User Logs Into Their account, clicks on the Options Menu in the Menubar and clicks the Change Password Option in the Menu.& The user should be taken to the change password page. & The change password interface is displayed& \\ \hline
+	5.02 & A User Logs Into Their account, clicks on the Options Menu in the Menubar and clicks the Change Password Option in the Menu.& The user should be taken to the change password page. & The change password interface is displayed&  Page: \pageref{fig:test-502-1} \newline Figure: \ref{fig:test-502-1} \newline \newline  Page: \pageref{fig:test-502-2} \newline Figure: \ref{fig:test-502-2}\\ \hline
 	5.03 & An Employee Logs into their account, creates an invoice, enters an email address to sent it to, and clicks save invoice. & The email address the email was sent to, should receive an email from beaconvets@gmail.com containing an Invoice. &  The email address received the email containing an Invoice for a order. & \\ \hline
 	5.04 & Checking the subject of the account details email & The Subject for the Account Details email should be along the lines of  `Beacon Vets Account Details' & The subject of the account details email is: Beacon Vets Account Details. & \\ \hline
-	5.04 & Checking the Subject for the Invoice email &  The Subject for the Invoice email should be along the lines of  `Beacon Vets Invoice &The subject for the invoice email is: Beacon Vets Invoice from dd-mm-yyyy where the dd-mm-yyyy is the date the invoice was made. & \\ \hline
+	5.04 & Checking the Subject for the Invoice email &  The Subject for the Invoice email should be along the lines of  `Beacon Vets Invoice &The subject for the invoice email is: Beacon Vets Invoice from dd-mm-yyyy where the dd-mm-yyyy is the date the invoice was made. & Page: \pageref{fig:test-504-1} \newline Figure: \ref{fig:test-504-1}\\ \hline
 	5.04 & Checking the Subject for the Password reset email &  The Subject for the Password Reset Code should be along the lines of  `Beacon Vets Password Reset Code' & The subject of the password reset email is: Password Reset Code & \\ \hline
-	6.01 & Pressing the `Esc' button whilst logged in & The user should be presented with a pop up window with a Yes or No decision whether they want to Log off.& A Message was displayed with a Yes or No decision whether or not the user wants to log off. & \\ \hline
+	6.01 & Pressing the `Esc' button whilst logged in & The user should be presented with a pop up window with a Yes or No decision whether they want to Log off.& A Message was displayed with a Yes or No decision whether or not the user wants to log off. & Page:\pageref{fig:test-601-1}  \newline Figure:\ref{fig:test-601-1} \\ \hline
 	6.01 & Pressing the `Esc' button whilst not being logged in &Nothing should happen & Nothing happened & \\ \hline
 	6.02 & Pressing the `Enter' button after entering a User-name and Password & The System should either log the user in or tell them their user-name/password is incorrect & Because i entered valid log in information, i was taken to the creating an order interface.& \\ \hline
 	6.02 & Pressing the `Enter' button After Logging in. & Unless a pop up window is open, the Enter button should not do anything once the user is logged in.& Nothing happened &  \\ \hline
-	6.03 & Pressing the CTRL and F button on the Keyboard after logging in. & The Search Window should open & The Search pop up window opened& \\ \hline
+	6.03 & Pressing the CTRL and F button on the Keyboard after logging in. & The Search Window should open & The Search pop up window opened& Page:\pageref{fig:test-603-1}  \newline Figure:\ref{fig:test-603-1} \newline \newline Page:\pageref{fig:test-603-2}  \newline Figure:\ref{fig:test-603-2} \\ \hline
 	6.03 & Pressing the CTRL and F button on the Keyboard before logging in. & Nothing should happen because the user should have no access to the system before logging in& Nothing happened &  \\ \hline
 	6.03 & Pressing the F button on the Keyboard after logging in. & Nothing should happen because the user is required to press the CTRL button aswell.& Nothing happened&  \\ \hline
 	6.04 & Pressing CTRL and S button on the keyboard when adding a Product & A Pop Up Window should display with a Yes and No decision as to whether they want to add the product & a Confirmation window displayed with Yes and No decision as to whether the user wants to add the product to the database.& \\ \hline
@@ -494,7 +494,7 @@ Because i have added two new test series in my new outline plan, i have added ne
 	6.04 & Pressing CTRL and S button before the user has logged in & Nothing should happen because the user has not logged in yet & Nothing happens& \\ \hline
 	6.05 &  Pressing the Enter button on the keyboard once a pop up window with a single ok button opens & This should close the window & The Pop up window closes assuming it is the window on top.& \\ \hline
 	6.05 &  Pressing the Enter button on the keyboard once a pop up window with a Yes and No decision opens. & This should automatically choose the yes option & The Yes option is chosen, which in most cases, creates another pop up window telling the user that the product, member, employee has been successfully added, edited or deleted.& \\ \hline
-	6.06 & Right Clicking on a Product in the Search Window. & A Menu should display with Edit and Delete a Product & A Menu is displayed with the following options: Manage Stock, Edit Product Delete Product &  \\ \hline
+	6.06 & Right Clicking on a Product in the Search Window. & A Menu should display with Edit and Delete a Product & A Menu is displayed with the following options: Manage Stock, Edit Product Delete Product &   Page:\pageref{fig:test-606-1}  \newline Figure:\ref{fig:test-606-1} \newline \newline Page:\pageref{fig:test-606-2}  \newline Figure:\ref{fig:test-606-2}\\ \hline
 	6.06 & Right Clicking on a Member in the Search Window.& A Menu should display with Edit and Delete a Member & A Menu is displayed with the following options: Edit Member, Delete Member.& \\ \hline
 	6.06 & Right Clicking on a Employee in the Search Window when signed in on the Administrator account. & A Menu should display with Edit and Delete a Employee & A Menu is displayed with the following options: Edit Employee Delete Employee& \\ \hline
 	6.06 & Right Clicking on a Employee in the Search Window when NOT signed in on the Administrator account. & Edit and Delete an Employee should not be click-able &A Menu is displayed with the following options: Edit Employee Delete Employee & \\ \hline
@@ -633,6 +633,58 @@ Because i have added two new test series in my new outline plan, i have added ne
  \vspace{5mm}
  Looking at the the After Encryption column in the table and changing the letters to the letters in the before encryption table,  we can see that S decrypts to P, D decrypts to A, V decrypts to S, Z decrypts to W, R decrypts to O, U decrypts to R and G decrypts to D. By changing the password `sdvvzrug' to its decrypted form, we can see that the password before encryption was `password' this is the result that we wanted from the test.
 \end{figure}
+
+\textbf{Test Series 5.02}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-502-1.pdf}
+    \caption{Clicking change password button} \label{fig:test-502-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-502-2.pdf}
+    \caption{Result from clicking change password button} \label{fig:test-502-2}
+\end{figure}
+
+\textbf{Test Series 5.04}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-504-1.pdf}
+    \caption{subject for email invoice.} \label{fig:test-504-1}
+\end{figure}
+
+\textbf{Test Series 6.01}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-601-1.pdf}
+    \caption{Testing log off shortcut} \label{fig:test-601-1}
+\end{figure}
+
+
+\textbf{Test Series 6.03}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-603-1.pdf}
+    \caption{Testing the search window shortcut} \label{fig:test-603-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-603-2.pdf}
+    \caption{Testing the out come of the search window shortcut test} \label{fig:test-603-2}
+\end{figure}
+
+\textbf{Test Series 6.06}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-606-1.pdf}
+    \caption{Testing the right click option on search window} \label{fig:test-606-1}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./TestingImages/test-606-2.pdf}
+    \caption{Testing the out come of the search window shortcut test} \label{fig:test-606-2}
+\end{figure}
+
 
 \subsubsection{Erroneous Test Annotations}
 
