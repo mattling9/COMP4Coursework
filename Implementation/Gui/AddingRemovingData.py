@@ -36,7 +36,7 @@ def deletingProduct(product_id):
     data = (product_id,)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "delete from Product where ProductID = ?"
+        sql = "Delete from Product where ProductID = ?"
         cursor.execute(sql,data)
         db.commit()
 
@@ -410,12 +410,12 @@ def check_date():
         product_id_list = get_all_product_id()
         for product_id in product_id_list:
                 weekly_sales = get_current_week_sales(str(product_id))
-                #daily_sales = get_current_daily_sales(str(product_id))
+                daily_sales = get_current_daily_sales(str(product_id))
                 update_weekly_sales(product_id, weekly_sales[0])
-                #update_daily_sales(product_id, daily_sales[0])
+                update_daily_sales(product_id, daily_sales[0])
                 #######PLOT WEEKLY SALES TO GRAPH######
                 reset_weekly_sales(product_id)
-                #reset_daily_sales(product_id)
+                reset_daily_sales(product_id)
                 update_date(datetime.date.today().strftime("%d-%m-%Y"))
 
 def add_default_settings():

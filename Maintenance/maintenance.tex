@@ -948,6 +948,8 @@ the predicted sale is then rounded, and assigned to the variable `rounded-predic
 
 \subsection{Self-created Algorithms}
 
+\subsubsection{Calculating New Quantity}
+
 The following algorithm calculates how many of a specific product are currently in the order updates the quantity accordingly. For example if there are currently 5 in the order, adding another product will change the quantity to 6.
 
 \pythonfile[firstline=448, lastline=467]{./Maintenance/CreatingOrderClass.py}
@@ -983,6 +985,102 @@ if inTable == False:
             self.price += float(self.current_order.item(row,3).text()) * float(self.current_order.item(row,4).text())
 \end{python}
 
+\pagebreak
+
+\subsubsection{Calculating Whether a product needs to be restocked.}
+
+The following algorithm, takes the current stock of a product and calculates whether the product need to be restocked.
+
+\pythonfile[firstline=575, lastline=610]{./Maintenance/AddingRemovingData.py}
+
+\begin{python}
+restock_list = []
+move_list = []
+\end{python}
+
+The following code is very simple, it creates the list of all the products that need to be restocked and the list for the products that require stock to be moved form one location to the other. Eventually, the restock-list will contain the ProductID of all the products that need to be restocked and move-list will contain the ProductID of all the products that need to have stock moved form one location to another.
+
+
+\begin{python}
+product_cursor = db.cursor()
+product_cursor.execute( "Select ProductName from Product WHERE 1=1")
+product_id_list = product_cursor.fetchall()
+\end{python}
+
+The code above creates a cursor to execute the SQL query. The SQL query simply selects every ProductName in the Product table. Each Product Name is then added to a list named product-id-list. 
+
+\begin{python}
+for item in product_id_list:
+            stock_cursor = db.cursor()
+            sql = "Select Location1, Location2 from Product WHERE ProductName = ?"
+            stock_cursor.execute(sql, (item))
+            stock_list = stock_cursor.fetchall()
+            total_stock = int(stock_list[0][0]) + int(stock_list[0][1])
+            if total_stock < 5:
+                restock_list.append(item)
+            if int(stock_list[0][0]) < 5:
+                move_list.append(item)
+\end{python}
+
+The code above is run for each product in the database. This is done by line 1 in the code section above. The stock in Location1 and the stock in Location2 are retrieved from the database using the SQL query in line 3. The variable ``total-stock'' is assigned to the product of the stock in each location. If the total stock of the product is less than 5, then the product name of that specific product is added to the restock list because the client will need to buy more stock if there are 5 or less left in total. Line 9 and line 10 add the Product Name of the current product to the move-list if the stock in Location1 is less than 5. If the stock in Location1(the Shop) is less than 5 then stock needs to be moved from Location2(The storage room) to the shop.
+
+Once the the algorithm has checked every product in the database and has populated the two lists with the product names of the products that need to be restocked and stock that needs to be moved between locations, this information needs to be displayed to the user.
+
+\begin{python}
+if restock_list:
+            message = "Warning! \n \n The following products need to be restocked: \n \n "
+            for product_name in restock_list:
+                message += "-{0} \n".format(product_name[0])
+            self.error_message_instance = ErrorMessageClass(message)
+            self.error_message_instance.move(750,400)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+\end{python}
+
+Line 1 in the code above will only run the following code if there are actually any products in the restock-list. If there are no products that need to be restocked, then there is no need to run the code above. This will prevent my system running any code unnecessarily. The variable ``message'' will eventually be a string that will tell the user that products need to be restocked and will then list all of the products below. the string message is then inserted into an instance of an Error Message. An Error Message is simply a pop up window, with a QLabel that displays a message to the user and an `Ok' button so the user can tell the system they have read the message.The string `message' is the text that shall be displayed in the QLabel. The image below gives a better understanding of the window that is displayed.
+
+\includegraphics[width=\textwidth]{./error.jpg}
+\label{fig:move-stock-message}
+
+\begin{python}
+elif move_list:
+            message = "Warning! \n \n The following products need to have stock moved to the shop: \n \n"
+            for product_name in move_list:
+                message += "-{0} \n".format(product_name[0])
+            self.error_message_instance = ErrorMessageClass(message)
+            self.error_message_instance.move(750,400)
+            self.error_message_instance.show()
+            self.error_message_instance.raise_()
+\end{python}
+
+The code above is very similar to the previous code however, this will create an Error message that tells the user which products need to be moved from one location to another. The string message is created saying: ``Warning! \n \n The following products need to have stock moved to the shop:''. Then every ProductName in the move-list is added to the string. This string is then used on a QLabel in a Error Message Instance.
+
+\subsubsection{Sending a 4 digit code to an email address.}
+
+As a security measure, if an employee is logged in and they want to change their password, they must enter a 4 digit code sent to their email address. This is so that if they are logged in to the system, someone cannot come along and simply change the employees password. The code below generates the code and sends it to the users email address. It can also be found on line 820 in the Main Program section of the Code Listing on page \pageref{X}
+
+\begin{python}
+def send_code_to_email(self, username):
+        settings = getSettings()
+        self.code = random.randint(1000,9999)
+        decrypted_password = change_password(settings[0][11], -3)
+        employee_info = find_employee_by_username(username)
+        message = "Hello {0}, \n \n Your Reset Password Code is:  ".format(employee_info[0])
+        msg = "\r\n".join([
+          "From: beaconvets@gmail.com",
+          "To: {0}".format(employee_info[2]),
+          "Subject: Password Reset Code",
+          "",
+          ("{0}{1}".format(message ,str(self.code)))])
+        mail = smtplib.SMTP('smtp.gmail.com','587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login('{0}'.format(settings[0][10]) , decrypted_password)
+        mail.sendmail('{0}'.format(settings[0][10]), str(employee_info[2]) , msg)
+        mail.close()
+\end{python}
+
+The actually 4 digit code is generated on line 3. I used the random function in python to generate the number. Because the code needed to be four digits, I set the range of the random number between 1000 and 9999. Line 4
 
 \section{Settings}
 
