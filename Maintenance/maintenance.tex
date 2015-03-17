@@ -1080,7 +1080,7 @@ def send_code_to_email(self, username):
         mail.close()
 \end{python}
 
-The actually 4 digit code is generated on line 3. I used the random function in python to generate the number. Because the code needed to be four digits, I set the range of the random number between 1000 and 9999. Line 4
+The actually 4 digit code is generated on line 3. I used the random function in python to generate the number. Because the code needed to be four digits, I set the range of the random number between 1000 and 9999. Line 4 decrypts the password used to send the emails so the system can log intot he email account and send them code from the email address. 
 
 \section{Settings}
 
