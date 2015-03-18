@@ -215,7 +215,7 @@ The Log in Screen prevents any unauthorized users from being able to access the 
 
 \subsection{The Search Window}
 
-The search window is a feature of the system that allows the user to search for a product member or employee within the database. The Search Window, is an instance of a QWidget that is not displayed inside the QMainWindow. The Search window consists of a QLineEdit in which the user can enter the keywords they want to search for, a QSQLTableModel, which allowed my to switch between the Product. member and Employee table but also allowed me to execute SQL Queries on the data. An example of an  SQL Query used on the QSQLTableModel was "Select * FROM Product WHERE "ProductID like '{0}' or ProductName like '{0}' or Size like '{0}' or Price like '{0}' or Category like '{0}'" This query will display any product that matches the string entered by the user. For example if the user enters the letter 'A' into the QLineEdit, the table will display any product that contains the letter 'A'. The user can access the search window by pressing CTRL+F on the keyboard simultaneously, or by clicking on the Search Window option under the Options menu in the QMenuBar. Adding the keyboard shortcut to the Search Window was relatively simple; the 'Search Window' option in the QMenuBar is a QAction. To attach the shortcut i simply did QAction.setShortcut(CTRL+F).This means if the user presses CTRL and F simultaneously on the keyboard, it runs the same method than when the user clicks on the search window action in the QMenuBar. In the search window the user has the ability to choose which table they would like to search, the product table, member table or the employee table. To change between the table that is displayed, i could have created three different tables and then added them to a QStackedWidget. However, the QTableView allows you to change the Table that is displayed by changing the model of the table. To set the model, you simply do QTableView.setModel(model). I used a different model for the Product, Member and Employee table. This decision was far more code efficient than using a QStackedWidget containing three different tables.
+The search window is a feature of the system that allows the user to search for a product member or employee within the database. The Search Window, is an instance of a QWidget that is not displayed inside the QMainWindow. The Search window consists of a QLineEdit in which the user can enter the keywords they want to search for, a QSQLTableModel, which allowed my to switch between the Product. member and Employee table but also allowed me to execute SQL Queries on the data that is displayed in the table. An example of an  SQL Query used on the QSQLTableModel was "Select * FROM Product WHERE "ProductID like '{0}' or ProductName like '{0}' or Size like '{0}' or Price like '{0}' or Category like '{0}'" This query will display any product that matches the string entered by the user. For example if the user enters the letter 'A' into the QLineEdit, the table will display any product that contains the letter 'A'. The user can access the search window by pressing CTRL+F on the keyboard simultaneously, or by clicking on the Search Window option under the Options menu in the QMenuBar. Adding the keyboard shortcut to the Search Window was relatively simple; the 'Search Window' option in the QMenuBar is a QAction. To attach the shortcut i simply did QAction.setShortcut(CTRL+F).This means if the user presses CTRL and F simultaneously on the keyboard, it runs the same method than when the user clicks on the search window action in the QMenuBar. In the search window the user has the ability to choose which table they would like to search, the product table, member table or the employee table. To change between the table that is displayed, i could have created three different tables and then added them to a QStackedWidget. However, the QTableView allows you to change the Table that is displayed by changing the model of the table. To set the model, you simply do QTableView.setModel(model). I used a different model for the Product, Member and Employee table. This decision was far more code efficient than using a QStackedWidget containing three different tables.
 
 \subsection{Create Order}
 
@@ -227,10 +227,10 @@ In order to be able to create an order, there must be products stored in the dat
 
 \subsection{Managing the Stock of a Product}
 
-If a product has been purchased in many orders, there may not but much stock left. If there are less the 5 of any specific product left in the shop, but many still left in storage, once a user logs on, the system displays a message telling them that the product needs to be restocked. This message is an instance of my Pop Up Window class. The message tells the user that the following products need to be restocked then displays a list of all the products that need to be restocked. If there are less than 5 in the shop and less than 5 in storage then the user is told that they should buy more stock. Once the user has bought more stock or has moved stock from storage to the shop, they must update this in the system. To do this, the employee must log into the system, then find the ProductID of the product they want to change the stock of. They enter the ProductID into the ProductID field in the Manage Stock interface. When the user clicks the find button, The Product Name, Image, Stock in Shop and Stock in storage will be displayed to the user. Here the user will be able to change the stock in each location. The suer will also be displayed a graph of the recent sales of that specific product, the data on this graph allows the system to be able to predict future sales of that product, this can aid the company in knowing how many of the product should be purchased when wanting to buy more stock.
+If a product has been purchased in many orders, there may not but much stock left. If there are less the 5 of any specific product left in the shop, but many still left in storage, once a user logs on, the system displays a message telling them that the product needs to be restocked. This message is an instance of my Pop Up Window class. The message tells the user that the following products need to be restocked then displays a list of all the products that need to be restocked. If there are less than 5 in the shop and less than 5 in storage then the user is told that they should buy more stock. Once the user has bought more stock or has moved stock from storage to the shop, they must update this in the system. To do this, the employee must log into the system, then find the ProductID of the product they want to change the stock of. They enter the ProductID into the ProductID field in the Manage Stock interface. The ProductID field is a QLineEdit, once the user has entered the ProductID, there is a QPushButton in which they must pressed which has the text 'Find' on it. When the user clicks the find button, The Product Name, Image, Stock in Shop and Stock in storage will be displayed to the user. Here the user will be able to change the stock in each location.To do this they can either click the up and down arrows on the QSpinBox or enter a new value in. The user will also be displayed a graph of the recent sales of that specific product, the data on this graph allows the system to be able to predict future sales of that product, this can aid the company in knowing how many of the product should be purchased when wanting to buy more stock.
 
 \subsection{Adding Editing and Removing Members}
-The company allows customers to join a membership scheme, which allows the customer to get 10 percent off all of their orders. To add a member to the system, the user can go to the 'Add Member' option under the Member Menu within the Menubar. Here, the employee must enter the details about the customer, such as their name, address, telephone number and email address. The Adding Member interface mainly consists of QLineEdits to enter the data, however, a QComboBox is used to get the county in which the member lives and a QSpinBox is used to get the House number of the Member. The employee can then save the member in the database. If the customer / member changes any of their information, they must inform the company so that they can change the information in their system. To edit a member, the employee must log into the system, then the employee must find the member by searching for any relevant information in the search window. To search for members in the search window the employee must choose the Member option from the QCombobox, this should then display the Member table. Once the Employee has found the MemberID of the member, they can either right click on the member in the search window and click on the Edit Member from the drop down menu, or go to the 'Edit Member' option under the Member Menu in the Menubar. To delete a member from the system, the employee must find the Member in the search windwow, right click the Member and click on delete member, or enter their MemberID into the Remove a Member interface.
+The company allows customers to join a membership scheme, which allows the customer to get 10 percent off all of their orders. To add a member to the system, the user can go to the 'Add Member' option under the Member Menu within the QMenubar. Here, the employee must enter the details about the customer, such as their name, address, telephone number and email address. The Adding Member interface mainly consists of QLineEdits to enter the data, however, a QComboBox is used to get the county in which the member lives and a QSpinBox is used to get the House number of the Member. The employee can then save the member in the database. If the customer / member changes any of their information, they must inform the company so that they can change the information in their system. To edit a member, the employee must log into the system, then the employee must find the member by searching for any relevant information in the search window. To search for members in the search window the employee must choose the Member option from the QCombobox, this should then display the Member table. Once the Employee has found the MemberID of the member, they can either right click on the member in the search window and click on the Edit Member from the drop down menu, or go to the 'Edit Member' option under the Member Menu in the Menubar. To delete a member from the system, the employee must find the Member in the search windwow, right click the Member and click on delete member, or enter their MemberID into the Remove a Member interface.
 
 \subsection{Adding Editing and Removing Employees}
 Realistically, the system will not be used by just one employee, therefore my system allows many employees to be able to use the system. When the system is first run, one Employee account is created which is the Admin account. The admin account will be able to access features of the system that a normal account will not. To add a new Employee account, the employee MUST sign in on the admin account, then the user can go to the 'Add Employee' option under the Employee Menu in the Menubar. Here the user can enter the name and email address of the new employee and then can save them to the database. Now the new account can be used to accessed the system. There is only one admin account, which cannot be removed from the system.
@@ -849,7 +849,9 @@ in this test, the menu that is displayed when the user right clicks on an Employ
 
 \subsection{Difficult Sections}
 
-\textbf{Creating the Custom TitleBar} The figure below shows line 1 to 32 from the CustomToolbarClass.py file. The full file can be found on page \pageref{fig:CustomToolbarClass}.
+\subsubsection{Creating the Custom TitleBar} 
+
+The figure below shows line 1 to 32 from the CustomToolbarClass.py file. The full file can be found on page \pageref{fig:CustomToolbarClass}.
 
 \pythonfile[firstline=1, lastline=32]{./Maintenance/CustomToolbarClass.py}
 
@@ -945,6 +947,84 @@ self.prediction.setText(str(rounded_predicted_sale))
 \end{python}
 
 the predicted sale is then rounded, and assigned to the variable `rounded-predicted-sale' this is then set as the text to the stock prediction QLineEdit.
+
+\pagebreak
+
+\subsubsection{Emitting a signal when a QLabel is clicked.}
+
+Unlike a QPushButton, a QLabel does not have a pre-existing .clicked.connect() signal. Therefore i had to create a new QLabel that will emit a signal when it is clicked. The code below is the class i made for the new QLabel.
+
+\begin{python}
+class ExtendedQLabel(QLabel):
+ 
+    def __init(self, parent):
+        QLabel.__init__(self, parent)
+ 
+    def mouseReleaseEvent(self, ev):
+        self.emit(SIGNAL('clicked()'))
+\end{python}
+
+in the constructor on line 3, i stated that the class, ExtendedQLabel, is a child/sub class of QLabel which inherits all of its attributes. This was done by passing parent into the constructor. I then included a new method for the ExtendedQLabel on line 6 called "mouseReleaseEvent". Looking at line 6 and 7, this will emitt the clicked() signal once the mouse has been left clicked and released. Now that the ExtendedQLabel emits a signal when it is clicked, i need to attach a method to be run when this signal is emitted. The image below shows the ExtendedQLabel in use:
+
+\includegraphics[width=\textwidth]{./ExtendedQLabelImage.pdf}
+
+The code below shows how i connected a method when the clicked() signal is emitted. Line 1 shows how a QPushButton is connected to a method through its built in signal and Line 2 shows how to connect a method when the 'clicked()' signal is emited from the QLabel.
+
+\begin{python}
+self.log_in_instance.enter_button.clicked.connect(self.find_account)
+self.log_in_instance.connect(self.log_in_instance.forgot_password, SIGNAL('clicked()'), self.reset_password)
+\end{python}
+
+In Line 2, "self.log-in-instance.forgot-password" is the variable assigned to the ExtendedQLabel, the SIGNAL('clicked()') is the signal that is emitted when the label is clicked and the self.reset-password is the method that is run when the signal is emitted. The self.reset-password method simply changes the index of the stacked layout to the index of the forgot password interface.
+
+\subsubsection{Adding a right click menu to items in a table.}
+
+To improve the ease of use of the system i wanted the suer to be able to right click on a product and be able to go straight to the edit product interface, delete product interface or manage stock interface directly. This is a far better option than using the search window to find the ProductID of the product, click on the product menu go to the edit product interface, enter the ProductID and click on the find button. I First created the individual menus that will be displayed when the user right clicks either a product member or employee, the code for this is shown below.
+
+\begin{python}
+
+self.search_instance = SearchClass()
+        
+self.search_instance.product_right_click_menu.addAction("Manage Stock" , self.EditStock)
+self.search_instance.product_right_click_menu.addAction("Edit Product" , self.EditProduct)
+self.search_instance.product_right_click_menu.addAction("Delete Product" , self.DeleteProduct)
+
+self.search_instance.member_right_click_menu.addAction("Edit Member" , self.EditMember)
+self.search_instance.member_right_click_menu.addAction("Delete Member" , self.DeleteMember)
+
+self.search_instance.employee_right_click_menu.addAction("Edit Employee" , self.EditEmployee)
+self.search_instance.employee_right_click_menu.addAction("Delete Employee" , self.DeleteEmployee)
+
+These menus were not created inside the SearchClass class because i needed to connect methods that were visible in the main program but were not visible in the SearchClass. Examples of these methods are self.EditProduct and self.EditStock which take the user to the edit product and edit stock interface. Which menu is displayed, depends on which table is currently being displayed. For example if the user is currently finding a Member in the Member table, when they right click on one of the Members i want member-right-click-menu to be displayed not the one for the product or the employee. To record which table is currently being viewed i simply took the current index of the combo box, in which the user chooses which table they want to display.The following code decides which right click menu to use depending on the current index of the combo box.
+
+\begin{python}
+ if self.table_combo_box.currentIndex() == 0:
+	 self.product_right_click_menu.exec_(self.mapToGlobal(position))
+ elif self.table_combo_box.currentIndex() == 1:
+	self.member_right_click_menu.exec_(self.mapToGlobal(position))
+elif self.table_combo_box.currentIndex() == 2:
+	self.employee_right_click_menu.exec_(self.mapToGlobal(position))
+\end{python}
+
+Lines 2,4 and 6 will display the appropriate menu when right clicked by the user. When the user right clicks, for example, on a product in the Finding Product table, and clicks on edit rpoduct from the drop down menu, the user is taken automatically to the edit product interface with the ProductID already entered and found. To retrieve the ProductID from the item in which the user has clicked on is shown below.
+
+\begin{python}
+self.indexes = self.display_table.selectionModel().selection().indexes()
+rows = []
+for selected_row in self.indexes:
+	row_number = selected_row.row()
+	if row_number not in rows:
+		rows.append(row_number)      
+no_of_rows_selected = len(rows)
+if no_of_rows_selected == 1:
+            #gets the product_id of product selected
+            self.product_id = self.model.record(rows[0]).field(0).value()
+\end{python}
+
+'self.indexes' is a list that stores the index of the row and column that the user selects. For example if the user selects rows 3 column 4 and row 5column 6 at the same time, 'self.indexes = [(3,4),(5,6)]' Usually the user will only select one row, which will mean self.indexes will only contain one index. The row of the selected index is extracted using 'selected-row.row()' on line 4 in the code above. each row is selected is then added to a list called 'rows' on line 6. To get the Product, Member or Employee ID of the row selected, only one row must be selected otherwise an error occurs. to prevent the error from occurring, i just included an IF statement saying if 'len(rows) != 1' where rows is a list of the currently selected rows. This can be found on line 8 where i have just assigned a variable to the length of the list 'rows'. If the length of the list does equal one, then the system gets the ID from the table on line 10 and assigns it to the variable 'self.product-id'. This ID is then used to if the user does decide to edit the product for example, because it is automatically entered by the system.
+
+
+\pagebreak
 
 \subsection{Self-created Algorithms}
 
@@ -1053,7 +1133,9 @@ elif move_list:
             self.error_message_instance.raise_()
 \end{python}
 
-The code above is very similar to the previous code however, this will create an Error message that tells the user which products need to be moved from one location to another. The string message is created saying: ``Warning! \n \n The following products need to have stock moved to the shop:''. Then every ProductName in the move-list is added to the string. This string is then used on a QLabel in a Error Message Instance.
+The code above is very similar to the previous code however, this will create an Error message that tells the user which products need to be moved from one location to another. The string message is created saying: ``Warning! The following products need to have stock moved to the shop:''. Then every ProductName in the move-list is added to the string. This string is then used on a QLabel in a Error Message Instance.
+
+\pagebreak
 
 \subsubsection{Sending a 4 digit code to an email address.}
 
@@ -1080,7 +1162,116 @@ def send_code_to_email(self, username):
         mail.close()
 \end{python}
 
-The actually 4 digit code is generated on line 3. I used the random function in python to generate the number. Because the code needed to be four digits, I set the range of the random number between 1000 and 9999. Line 4 decrypts the password used to send the emails so the system can log intot he email account and send them code from the email address. 
+The actual 4 digit code is generated on line 3. I used the random function in python to generate the number. Because the code needed to be four digits, I set the range of the random number between 1000 and 9999. Line 4 decrypts the password used to send the emails so the system can log into the email account and send the code from the email address. 
+
+The variable 'message' is assigned to a string that will represent the contents of the email. The string will be greet the user and will give them the four digit. I used an SQL query to take the EmployeeFirstName associated with the account, so that the email will say "Hello John, your password reset code is ..... or Hello Sarah, your password reset code is ......". Lines 8-10 tell will say the email address the email was sent from, the subject of the email, and the email address the email was sent to. In this case, the To: section is assigned to the employee email address stored within the system. Lines 13-18 logs into the email account and sends the email to the email address.
+
+\pagebreak
+
+\subsubsection{Entering data from a CSV file.}
+When the user searches for their postcode using the find button on the Add Member interface, if the postcode is in the CumbriaPostcodes.csv file, the system takes the county and town from the CSV file and enters the data into the data fields of the system. The screenshot below shows the user entering a postcode from the CSV file into the postcode field, before they click the find button.
+
+\begin{figure}[H]
+\caption{Screenshot before the user clicks the find button.} \label{fig:find-postcode}
+\includegraphics[width=\textwidth]{./208-2.png}
+\end{figure}
+
+The screenshot below then shows the result from the user clicking the find button. you can see that the County and Town fields have automatically been changed by the system.
+
+\begin{figure}[H]
+\caption{Screenshot after the user clicks the find button.} \label{fig:found-postcode}
+\includegraphics[width=\textwidth]{./208-1.png}
+\end{figure}
+
+In order to manipulate the data from the CSV file it needed to be changed so that python can use the data. The following code, opens the CSV file, and adds each address to the list 'self.county-list" . Now the data is in a list, python can use the data from the CSV file. 
+
+When the 'Find' button is clicked in figure \ref{fig:find-postcode}, the system searches to see if the postcode matches any of the postcode in the address list. Each address is a list containing the postcode, the county then the town. To code below shows how i searched for the postcode.
+
+\begin{python}
+self.postcode_input = self.postcode.text()
+self.postcode_input = self.postcode_input.upper()
+for count in range(0, len(self.address_list)):
+	if self.postcode_input in self.address_list[count]:
+\end{python}
+
+self.postcode-input is assigned to the postcode entered into the postcode QLineEdit. this is done using self.postcode-input = QLineEdit.text(). Line 2 simply changes the postcode into all upper case before it is searched for. A FOR loop is then run for each item in the postcode list, and an IF statement is used to match the postcode entered by the user and the postcode stored under each address. If the postcode does not match the system will move onto the next address until it has been searched under every address in the list. If the postcode entered by the use does match the postcode stored in one of the addresses then The following code is run.
+
+\begin{python}
+self.postcode.setText(self.address_list[count][0])
+self.index = self.county.findText(self.address_list[count][2])
+self.county.setCurrentIndex(self.index)
+self.town.setText(self.address_list[count][1])
+self.validate_town
+\end{python}
+
+The town was easy to change as the town data field is a QLineEdit. Entering a string into this field is easy, using QLineEdit.setText(string). The town was set on Line 4 in the code sample above, where self.address-list[count][1] is the town of the matching address. Changing the County prooved to be more difficult because the data field was a QComboBox not a QLineEdit. A QComboBox requires the user to select an option from the list provided and does not support the ".setText" feature. Instead, the QComboBox has to be searched for the County from the CSV file. if the county is in the file the '.findText' method will return the index of the county in the QComboBox. 'QComboBox.setCurrentIndex(index)' can then be used to change the index to the index of the county that matches the address. This was done on lines 2 and 3 from the code snippet above.
+
+\subsubsection{Populating a QComboBox from a text file.}
+
+When adding a Member to the system the user needs to enter the County in which the Member lives. I used a QComboBox for the counties as using a QComboBox does not require the field to be validated. I know that hard coding all of the postcodes into the system would be a very long and tedious process so i decided to use a text file containing the counties and used this to populate the Combo box.
+
+The code below opens the text file named 'Counties.txt' and adds each county from the file into the list 'self.county-list'.
+
+\begin{python}
+with open("Counties.txt",mode="r",encoding="utf-8") as myFile:
+                    for line in myFile:
+                        self.county_list.append(line.rstrip("\n"))
+\end{python}
+
+Now that self.county-list is populated with each county, i can use this list to populate the combo box.
+
+\begin{python}
+for item in self.county_list:
+                        self.county.addItem(item)
+\end{python}
+
+The code above adds each county in the self.county-list to the ComboBox. This is done using a FOR loop for each item in the list. The item is added to the combo box using QComboBox.addItem(county)
+
+This method off adding the counties to the QComboBox was far simplier and far more code efficient than other methods.
+
+\pagebreak
+
+\subsubsection{Preventing users from being able to click the add, edit and delete member if they are not signed in on the administratory account.}
+
+I had to prevent users from ebing able to add edit or delete employees if they are not logged in on the administraor account. In order to check this, i decided to check the EmployeeID of the currently logged in use. If the EmployeeID is 1 then the user is logged in on the administrator account, otherwise they are not. This is checked, once the Employee's Log in details have been verified upon log in, but before they are presented with the creating order interface. To get the EmployeeID, i used an SQL statement to return the EmployeeID where the EmployeeUsername is the Username entered by the user. The code below is only run if the user has successfully logged in.
+
+\begin{python}
+self.menu.show()
+username = find_employee_by_username(self.log_in_instance.username.text())
+EmployeeID = username[3]
+if int(EmployeeID) != 1:
+	self.add_an_employee_action.setDisabled(True)
+	self.edit_employee_action.setDisabled(True)
+	self.remove_an_employee_action.setDisabled(True)
+	self.explanation_action.setVisible(True)
+else:
+	self.add_an_employee_action.setEnabled(True)
+	self.edit_employee_action.setEnabled(True)
+	self.remove_an_employee_action.setEnabled(True)
+	self.explanation_action.setVisible(False)
+	check_for_stock_updates(self)
+
+\end{python}
+
+
+The code above varies the visibility and clcikablility of each option in the Employee menu. Looking at line 4, this runs an IF function as to whether or not the employee currently logged in is an administrator(if their EmployeeID = 1 or not) If the user is currently logged into the Administrator account, then the Add Edit and Delete Employee should be visible and clickable and the Option telling the user why they cannot click the Add Edit and Delete Employee buttons should not be visible. This is done on lines 10 to 14. If the user is not currently logged in the administrators account, then the Add Edit and Delete buttons should be visible but not clickable and the Option telling the user why they cannot click on the add edit and delete employee options should be visible and clickable. This is done on lines 5-8. Figure \ref{fig:admin-employee-menu} shows the Employee menu that is displayed when logged in on the admin account and figure \ref{fig:non-admin-employee-menu} shows the Employee menu that is displayed when the user is not logged in on the admin account.
+
+
+
+\begin{figure}[H]
+\caption{Employee menu when logged in on the administrator account} \label{fig:admin-employee-menu}
+\includegraphics[width=\textwidth]{./208-1.png}
+\end{figure}
+
+
+\begin{figure}[H]
+\caption{Employee menu when not logged in on the administrator account} \label{fig:non-admin-employee-menu}
+\includegraphics[width=\textwidth]{./non-admin-employee-menu.png}
+\end{figure}
+
+
+
+
 
 \section{Settings}
 

@@ -251,6 +251,7 @@ class addMemberClass(QWidget):
                 with open("Counties.txt",mode="r",encoding="utf-8") as myFile:
                     for line in myFile:
                         self.county_list.append(line.rstrip("\n"))
+                
 
         #VALIDATION
         def ValidatePostcode(self):
