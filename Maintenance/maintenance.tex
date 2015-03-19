@@ -302,21 +302,22 @@ The function above shows how the Members Postcode is validated. In order for the
 \section{Variable Listing}
 
 You can find my data dictionary on Page 104 
-
-    \begin{longtable}{|p{1.5cm}|p{4.5cm}|p{2cm}|p{2cm}|}
+\begin{center}
+    \begin{tabular}{|p{1.5cm}|p{4.5cm}|p{1.5cm}|p{3cm}|}
         \hline
         \textbf{Variable Name} & \textbf{Purpose} & \textbf{Section} & \textbf{Line Numbers}\\ \hline
-	self.title & The Text that is displayed at the top of each Interface & & \\ \hline
-	encrypted-password & stores the password after it has been encrypted & & \\ \hline
-	decrypted-password & stores the password after it has been retrieved from the system and decrypted. & & \\ \hline
-	self.valid & is a boolean variable to say whether a method returns true or false. & & \\ \hline
-	subject & used to store the Subejct of the email that is sent to the customer / employee & & \\ \hline
-	send-from & used to store the email address the email is sent from & & \\ \hline
-	self.code & The random 4 digit code that is generated when an Employee wants to reset their password. & & \\ \hline
-	employee-info & stores the information about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & & \\ \hline
+	self.title & The Text that is displayed at the top of each Interface & Main Program & 108, 115, 129, 145, 159, 172, 186, 202, 214, 226, 238, 251 \\ \hline
+	\multirow{3}{*}{encrypted-password} & \multirow{3}{*}{stores the password after it has been encrypted} & Main Program & 678, 719, 762 \\ 
+	& & SQL Queries & 233, 242, 244, 535 \\
+	& & Preferences & 166 \\ 
+	self.valid & is a boolean variable to say whether a method returns true or false. & Main Program &  774 \\ \hline
+	subject & used to store the Subejct of the email that is sent to the customer / employee & Main Program & 797 \\ \hline
+	send-from & used to store the email address the email is sent from & Main Program & 799, 820 \\ \hline
+	self.code & The random 4 digit code that is generated when an Employee wants to reset their password. & Main Program & 818 \\ \hline
+	employee-info & stores the information about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & Main Program & 822 \\ \hline
 	self.spacer & used to add spacing between widgets & & \\ \hline
 	self.vertical-spacer& used to add vertical spacing between widgets & & \\ \hline
-	first-name & used to store the first name entered by the user & & \\ \hline
+	first-name & used to store the first name entered by the user & Main Program & 778 \\ \hline
 	last-name & used to store the last name entered by the user & & \\ \hline
 	full-name-list & Used to store the First letter of the First Name, The last name and the EmployeeID. & & \\ \hline
 	self. pattern & used as a variable for the regular expressions used in the validation & & \\ \hline
@@ -347,7 +348,7 @@ You can find my data dictionary on Page 104
 	invoice -history & is an array that stores the date and time the invoice was made and the date and time the invoice was sent & & \\ \hline
 	html & used to store the HTML invoice that is either printer or emailed to a customer& & \\ \hline
 	\end{longtable}
-	
+\end{center}
 	
 	
 	
@@ -1603,7 +1604,7 @@ else:
 \pagebreak
 
 
-\subsection{Preferences Interface}
+\subsection{Preferences}
 \pythonfile[firstline=1]{./Maintenance/PreferencesClass.py}
 \pagebreak
 
