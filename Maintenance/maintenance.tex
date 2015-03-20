@@ -303,50 +303,88 @@ The function above shows how the Members Postcode is validated. In order for the
 
 You can find my data dictionary on Page 104 
 \begin{center}
-    \begin{tabular}{|p{1.5cm}|p{4.5cm}|p{1.5cm}|p{3cm}|}
+    \begin{longtable}{|p{1.5cm}|p{4.5cm}|p{1.5cm}|p{3cm}|}
         \hline
         \textbf{Variable Name} & \textbf{Purpose} & \textbf{Section} & \textbf{Line Numbers}\\ \hline
 	self.title & The Text that is displayed at the top of each Interface & Main Program & 108, 115, 129, 145, 159, 172, 186, 202, 214, 226, 238, 251 \\ \hline
-	\multirow{3}{*}{encrypted-password} & \multirow{3}{*}{stores the password after it has been encrypted} & Main Program & 678, 719, 762 \\ 
-	& & SQL Queries & 233, 242, 244, 535 \\
-	& & Preferences & 166 \\ 
+	\multirow{3}{1.5cm}{encrypted\_ password} & \multirow{3}{4.5cm}{stores the password after it has been encrypted} & Main Program & 678, 719, 762 \\ \cline{3-4}
+	& & SQL Queries & 233, 242, 244, 535 \\ \cline{3-4}
+	& & Preferences & 166 \\ \hline
 	self.valid & is a boolean variable to say whether a method returns true or false. & Main Program &  774 \\ \hline
-	subject & used to store the Subejct of the email that is sent to the customer / employee & Main Program & 797 \\ \hline
+	subject & used to store the Subject of the email that is sent to the customer / employee & Main Program & 797 \\ \hline
 	send-from & used to store the email address the email is sent from & Main Program & 799, 820 \\ \hline
 	self.code & The random 4 digit code that is generated when an Employee wants to reset their password. & Main Program & 818 \\ \hline
 	employee-info & stores the information about an employee so that it can be used in an email. I.e the password reset email says: Hello ... where ... is the name of the employee. & Main Program & 822 \\ \hline
-	self.spacer & used to add spacing between widgets & & \\ \hline
-	self.vertical-spacer& used to add vertical spacing between widgets & & \\ \hline
-	first-name & used to store the first name entered by the user & Main Program & 778 \\ \hline
-	last-name & used to store the last name entered by the user & & \\ \hline
-	full-name-list & Used to store the First letter of the First Name, The last name and the EmployeeID. & & \\ \hline
-	self. pattern & used as a variable for the regular expressions used in the validation & & \\ \hline
-	self. postcode-input & used to store a postcode to check if the postcode is i the CSV file. & & \\ \hline
-	self. county-list & A list used to  store all the counties in the UK & & \\ \hline
-	self. scaled-image & a a variable used to store a QPixmap that has been scaled to a specific width and height & & \\ \hline
-	path & used to store the path of the Product Image selected by the user & & \\ \hline
-	rows- in-table & used to store the amount of rows currently in a table & & \\ \hline
-	self. file-name & used to store the New ProductID of the image going to be stored. & & \\ \hline
-	self. temp & used to store a temporary value & & \\ \hline
-	self. category-string & used to turn the combobox selection by the user into string. For example if the user selected Dog and Food from the combo-boxes, self. category-string would store the string 'Dog Food'.& & \\ \hline
-	Product & used to store a list of all the Product information & & \\ \hline
-	order -info & used to store a string of all the information related to an order & & \\ \hline
-	data & variable used to turn individual variables into a tuple. & & \\ \hline
-	date -stored & variable used to store the last sales date from the settings table & & \\ \hline
-	date & used to  todays current date & & \\ \hline
-	date -time & stores the current time in hours and minutes & & \\ \hline
-	invoice -date & stores the date the invoice was created & & \\ \hline
-	new -date & stores the todays date + 7 days (1 week) & & \\ \hline
-	greatest -employee-id & stores the highest EmployeeID in the database & & \\ \hline
-	new -employee-id & adds 1 to the highest EmployeeId to create a new EmployeeID & & \\ \hline
-	move -list & stores the ProductID of all the products with a stock in Location 1 less than 5 & & \\ \hline
-	restock -list & stores the ProductID of all the products with a stock in Location 1 and Location 2 less than 5. & & \\ \hline
-	total -stock & adds the stock in Location 1 to the stock in location 2 and stores this value. & & \\ \hline
-	self. subtotal-price & adds the prices of all the Products currently in the order and stores this value.& & \\ \hline
-	self. total-price & stores the value from (self.subtotal-price - self.discount) & & \\ \hline
-	self. money-off & calculates (self .total-stock * 0.1) and stores the value & & \\ \hline
-	invoice -history & is an array that stores the date and time the invoice was made and the date and time the invoice was sent & & \\ \hline
-	html & used to store the HTML invoice that is either printer or emailed to a customer& & \\ \hline
+	\multirow{11}{1.5cm}{self.spacer} & \multirow{11}{4.5cm}{used to add spacing between widgets} & Adding Employee &  81 \\ \cline{3-4}
+	& & Adding Member & 164 \\ \cline{3-4}
+	& & Adding Product & 176 \\ \cline{3-4}
+	& & Changing Password & 40 \\ \cline{3-4}
+	& & Deleting Employee & 90 \\ \cline{3-4}
+	& & Deleting Member & 172 \\ \cline{3-4}
+	& & Deleting Product & 184 \\ \cline{3-4}
+	& & Edit Product & 185 \\ \cline{3-4}
+	& & Edit Member & 185 \\ \cline{3-4}
+	& & Edit Employee & 93 \\ \cline{3-4}
+	& & Log In Screen & 54 \\ \cline{3-4}
+	& & Password Reset Interface & 23 \\ \hline
+	\multirow{2}{1.5cm}{self. vertical- spacer} & \multirow{2}{4.5cm}{used to add vertical spacing between widgets} & Changing Password &  51 \\ \cline{3-4}
+	& & Password Reset Interface &  49 \\ \hline
+	\multirow{4}{1.5cm}{first-name} & \multirow{4}{4.5cm}{used to store the first name entered by the user} & Adding Employee &  110 \\ \cline{3-4}
+	& & Edit Employee & 133 \\ \cline{3-4}
+	& & SQL Queries &  545 \\ \cline{3-4}
+	& & Main Program &  778 \\ \hline
+	\multirow{3}{1.5cm}{last-name} & \multirow{3}{4.5cm}{used to store the last name entered by the user} & Adding Employee &  111 \\ \cline{3-4}
+	& & Edit Employee & 134 \\ \cline{3-4}
+	& & Delete Employee & 131 \\ \hline
+	\multirow{3}{1.5cm}{full-name-list} & \multirow{3}{4.5cm}{Used to store the First letter of the First Name, The last name and the EmployeeID.} & Adding Employee &  113 \\ \cline{3-4}
+	& & Edit Employee & 136 \\ \cline{3-4}
+	& & Delete Employee & 133 \\ \hline
+	\multirow{6}{1.5cm}{self. pattern} & \multirow{6}{4.5cm}{used as a variable to store the regular expressions used in the validation} & Adding Employee &  152, 169,  186 \\ \cline{3-4}
+	& & Edit Employee & 204, 221, 238\\ \cline{3-4}
+	& & Adding Product & 273, 290, 306, 322 \\ \cline{3-4}
+	& & Editing Product & 294, 311 \\ \cline{3-4}
+	& & Adding Member &  276, 293, 312, 330, 348, 366, 383\\ \cline{3-4}
+	& & Editing Member & 337, 354, 373, 391, 409, 427, 444 \\ \hline
+	\multirow{3}{1.5cm}{self. postcode-input} & \multirow{3}{4.5cm}{used to store a postcode to check if the postcode is in the CSV file.} & Adding Member &  240 \\ \cline{3-4}
+	& & Edit Member & 261 \\ \cline{3-4}
+	& & Delete Member & 244 \\ \hline
+	\multirow{3}{1.5cm}{self. county-list} & \multirow{3}{4.5cm}{A list used to  store all the counties in the UK} & Adding Member &  66, 253 \\ \cline{3-4}
+	& & Edit Member & 79, 274 \\ \cline{3-4}
+	& & Delete Member & 79, 257 \\ \hline
+	\multirow{4}{1.5cm}{self. scaled-image} & \multirow{4}{4.5cm}{a variable used to store a QPixmap that has been scaled to a specific width and height} & Adding Product &  108, 214 \\ \cline{3-4}
+	& & Edit Product & 118, 219, 245, 256 \\ \cline{3-4}
+	& & Delete Product & 115, 217, 242, 261 \\ \cline{3-4}
+	& & Stock Management Interface. & 41, 201, 214 \\ \hline
+	\multirow{4}{1.5cm}{path} & \multirow{4}{4.5cm}{used to store the path of the Product Image selected by the user} & Adding Product & 113 \\ \cline{3-4}
+	& & Edit Product & 123, 213 \\ \cline{3-4}
+	& & Delete Product & 120, 212  \\ \cline{3-4}
+	& & Preferences &  30, 32 \\ \hline
+	rows- in-table & used to store the amount of rows currently in a table & Adding Product & 208 \\ \hline
+	self. file-name & used to store the New ProductID of the image going to be stored. & Adding Product & 209 \\ \hline
+	\multirow{3}{1.5cm}{self. temp} & \multirow{3}{4.5cm}{used to temporarily store a value} & Adding Product &  219 \\ \cline{3-4}
+	& & Edit Product & 224 \\ \cline{3-4}
+	& & Delete Product & 222 \\ \hline
+	\multirow{3}{1.5cm}{self. category-string} & \multirow{3}{4.5cm}{used to turn the combo box selection by the user into string.} & Adding Product &  220 \\ \cline{3-4}
+	& & Edit Product & 225 \\ \cline{3-4}
+	& & Delete Product & 223 \\ \hline
+	product-info & used to store a list of all the Product information & SQL Queries & 163, 249, 259, 305, 312, 326, 333, 346,426, 434, 441, 451, 461, 471, 441, 517, 530 \\ \hline
+	order -info & used to store a string of all the information related to an order & SQL Queries & 152\\ \hline
+	data & variable used to turn individual variables into a tuple. & SQL Queries & 34, 72, 103, 125, 561\\ \hline
+	date -stored & variable used to store the last sales date from the settings table & SQL Queries & 321, 370\\ \hline
+	current-date & used to store today's current date & SQL Queries & 372 \\ \hline
+	date -time & stores the current time in hours and minutes & Creating Order Interface & 206, 244 \\ \hline
+	invoice -date & stores the date the invoice was created & Creating Order Interface & 250 \\ \hline
+	new -date & stores the todays date + 7 days (1 week) & SQL Queries & 385, 388, 390 \\ \hline
+	greatest -employee-id & stores the highest EmployeeID in the database & SQL Queries & 490 \\ \hline
+	new -employee-id & adds 1 to the highest EmployeeId to create a new EmployeeID & SQL Queries & 491 \\ \hline
+	move -list & stores the ProductID of all the products with a stock in Location 1 less than 5 & SQL Queries & 578, 591 \\ \hline
+	restock -list & stores the ProductID of all the products with a stock in Location 1 and Location 2 less than 5. & SQL Queries & 577, 589 \\ \hline
+	total -stock & adds the stock in Location 1 to the stock in location 2 and stores this value. & SQL Queries & 587 \\ \hline
+	self. subtotal-price & adds the prices of all the Products currently in the order and stores this value.& Creating Order Interface & 26, 470, 483 \\ \hline
+	self. total-price & stores the value from (self.subtotal-price - self.discount) & Creating Order Interface & 472, 473, 486 \\ \hline
+	self. money-off & calculates (self .total-stock * 0.1) and stores the value & Creating Order Interface & 474, 475, 489 \\ \hline
+	invoice -history & is an array that stores the date and time the invoice was made and the date and time the invoice was sent & Creating Order Interface & 259 \\ \hline
+	html & used to store the HTML invoice that is either printer or emailed to a customer& Creating Order Interface & 223, 261, 262, 275, 276, 279, 280, 283, 284, 291, 294, 295, 296, 300, 301, 314, 315, 316, 317, 318, 319, 320, 321, 323, 324, 330, 337, 344, 358, 362, 378, 398 \\ \hline
 	\end{longtable}
 \end{center}
 	
@@ -794,6 +832,30 @@ Figure \ref{fig:edit-employee-sql} This query edits the data of an employee. The
 
 Figure \ref{fig:delete-employee-sql} This query removes the employee where the user enters the EmployeeID, and the query removes that Employee from the database. This query can be found on page: 
 
+During the System Maintenance stage, i noticed that my system does not include any Relational SQL Queries. If there were to be a future version of my system, there are many possibilities in which relational SQL Queries could be used. If my client would like the system to be able to track the invoices, to be able to know whos successfully paid for the invoice. The system could have an interface which will display the MemberID of each member, and a list of the invoices they have made. This would require the MemberID to be displayed from the Member Table and the OrderID and the Date and Time from the Customer Order table. to Query the database to retrieve data from two tables i can use the `INNER JOIN' feature in SQLite 3 because MemberID is a foreign key in the CustomerOrder Table. An example of what the SQL could look like would be:
+\begin{sql}
+SELECT Member.MemberID, Member.MemberFirstName, Member.MemberLastName, CustomerOrder.OrderID, CustomerOrder.DateTime
+FROM Member
+INNER JOIN CustomerOrder
+On Member.MemberID = CustomerOrder.MemberID
+\end{sql}
+
+The SQL statement above will display the MemberID from the member table, the first and last name of the member so that the user can identify the member easily, the OrderID from the CustomerOrder table and the DateTime for the CustomerOrder table to identify invoices.
+
+Another situation in which the system could implement relational SQL queries is if my client wanted to be able to see the current weeks / daily sales of each product. In this query, i would use the ProductID and ProductName from the Product table and the Sales from the Daily or Weekly ProductSales table. The query to do this would look like the example below.
+\begin{sql}
+SELECT Product.ProductID, Product.ProductName, DailyProductSales.Sales
+FROM Product
+INNER JOIN DailyProductSales
+On Product.ProductID = DailyProductSales.ProductID
+\end{sql}
+
+This would then display the ProductID and ProductName for every product in the Product table, and will also display the Daily sales of the product. Equally, if i wanted to display the weekly product sales, i could create new SQL statement almost identical to the sample above, however, just change Line 1 from the sample above to:
+
+\begin{sql}
+SELECT Product.ProductID, Product.ProductName,WeeklyProductSales.Sales
+\end{sql}
+
 \pagebreak 
 
 \section{Testing}
@@ -995,6 +1057,8 @@ self.search_instance.member_right_click_menu.addAction("Delete Member" , self.De
 
 self.search_instance.employee_right_click_menu.addAction("Edit Employee" , self.EditEmployee)
 self.search_instance.employee_right_click_menu.addAction("Delete Employee" , self.DeleteEmployee)
+
+\end{python}
 
 These menus were not created inside the SearchClass class because i needed to connect methods that were visible in the main program but were not visible in the SearchClass. Examples of these methods are self.EditProduct and self.EditStock which take the user to the edit product and edit stock interface. Which menu is displayed, depends on which table is currently being displayed. For example if the user is currently finding a Member in the Member table, when they right click on one of the Members i want member-right-click-menu to be displayed not the one for the product or the employee. To record which table is currently being viewed i simply took the current index of the combo box, in which the user chooses which table they want to display.The following code decides which right click menu to use depending on the current index of the combo box.
 
@@ -1619,7 +1683,7 @@ else:
 \pythonfile[firstline=1]{./Maintenance/AddingRemovingData.py}
 \pagebreak
 
-\subsection{Changing Password Interface}
+\subsection{Changing Password}
 \pythonfile[firstline=1]{./Maintenance/ChangePasswordClass.py}
 \pagebreak
 
