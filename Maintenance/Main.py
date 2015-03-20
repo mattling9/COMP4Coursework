@@ -516,7 +516,6 @@ class MainWindow(QMainWindow):
         self.stacked_layout.setCurrentIndex(4)
         self.setFixedSize(1200, 770)
         self.create_order_instance.model.select()
-        self.move(300,1)
 
     def add_new_member_function(self):
         self.stacked_layout.setCurrentIndex(5)
