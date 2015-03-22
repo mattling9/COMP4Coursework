@@ -201,13 +201,17 @@ class editProductClass(QWidget):
         
     def CreatePopUpWindow(self):
         self.pop_up_instance = PopUpWindow("Are you sure you want to Edit The Product?", QDialogButtonBox.Yes, QDialogButtonBox.No)
-        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-        self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+        self.pop_up_instance.buttonBox.button(
+            QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.pop_up_instance.buttonBox.button(
+            QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddProductSucess(self):
         self.add_product_instance = PopUpWindow("Product Sucessfully Edited!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
-        self.add_product_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.add_product_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+        self.add_product_instance.buttonBox.button(
+            QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.add_product_instance.buttonBox.button(
+            QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
     def get_image_path(self):
         path = QFileDialog.getOpenFileName()

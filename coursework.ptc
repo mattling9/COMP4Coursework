@@ -1,0 +1,262 @@
+\contentsline {chapter}{\numberline {1}Analysis}{6}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introduction}{6}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Client Identification}{6}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Define the current system}{7}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Describe the problems}{9}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}Section appendix}{10}{subsection.1.1.4}
+\contentsline {section}{\numberline {1.2}Investigation}{12}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}The current system}{12}{subsection.1.2.1}
+\contentsline {subsubsection}{Data sources and destinations}{12}{section*.2}
+\contentsline {subsubsection}{Algorithms}{13}{section*.3}
+\contentsline {subsubsection}{Data flow diagrams}{16}{section*.4}
+\contentsline {subsubsection}{Input Forms, Output Forms, Report Formats}{18}{section*.5}
+\contentsline {subsection}{\numberline {1.2.2}The proposed system}{19}{subsection.1.2.2}
+\contentsline {subsubsection}{Data sources and destinations}{19}{section*.6}
+\contentsline {subsubsection}{Data flow diagram}{20}{section*.7}
+\contentsline {subsubsection}{Data dictionary}{21}{section*.8}
+\contentsline {subsubsection}{Volumetrics}{23}{section*.9}
+\contentsline {section}{\numberline {1.3}Objectives}{24}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}General Objectives}{24}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Specific Objectives}{25}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Core Objectives}{25}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Other Objectives}{26}{subsection.1.3.4}
+\contentsline {section}{\numberline {1.4}ER Diagrams and Descriptions}{26}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}ER Diagram}{26}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Entity Descriptions}{26}{subsection.1.4.2}
+\contentsline {section}{\numberline {1.5}Object Analysis}{27}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Object Listing}{27}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}Relationship diagrams}{28}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}Class definitions}{29}{subsection.1.5.3}
+\contentsline {section}{\numberline {1.6}Other Abstractions and Graphs}{29}{section.1.6}
+\contentsline {section}{\numberline {1.7}Constraints}{29}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Hardware}{29}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2}Software}{30}{subsection.1.7.2}
+\contentsline {subsection}{\numberline {1.7.3}Time}{30}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {1.7.4}User Knowledge}{30}{subsection.1.7.4}
+\contentsline {subsection}{\numberline {1.7.5}Access restrictions}{31}{subsection.1.7.5}
+\contentsline {section}{\numberline {1.8}Limitations}{31}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}Areas which will not be included in computerisation}{31}{subsection.1.8.1}
+\contentsline {subsection}{\numberline {1.8.2}Areas considered for future computerisation}{32}{subsection.1.8.2}
+\contentsline {section}{\numberline {1.9}Solutions}{32}{section.1.9}
+\contentsline {subsection}{\numberline {1.9.1}Alternative solutions}{32}{subsection.1.9.1}
+\contentsline {subsection}{\numberline {1.9.2}Justification of chosen solution}{34}{subsection.1.9.2}
+\contentsline {chapter}{\numberline {2}Design}{35}{chapter.2}
+\contentsline {section}{\numberline {2.1}Overall System Design}{35}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Short description of the main parts of the system}{35}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}System flowcharts showing an overview of the complete system}{40}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}User Interface Designs}{55}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Hardware Specification}{69}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}Program Structure}{70}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Top-down design structure charts}{70}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Algorithms in pseudo-code for each data transformation process}{74}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Object Diagrams}{76}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Class Definitions}{77}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Prototyping}{79}{section.2.4}
+\contentsline {section}{\numberline {2.5}Definition of Data Requirements}{98}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Identification of all data input items}{98}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Identification of all data output items}{99}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Explanation of how data output items are generated}{100}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Explanation of how data output items are generated}{102}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}Data Dictionary}{104}{subsection.2.5.5}
+\contentsline {subsection}{\numberline {2.5.6}Identification of appropriate storage media}{104}{subsection.2.5.6}
+\contentsline {section}{\numberline {2.6}Database Design}{106}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Normalisation}{106}{subsection.2.6.1}
+\contentsline {subsubsection}{ER Diagrams}{106}{section*.10}
+\contentsline {subsubsection}{Entity Descriptions}{106}{section*.11}
+\contentsline {subsubsection}{1NF to 3NF}{108}{section*.12}
+\contentsline {subsection}{\numberline {2.6.2}SQL Queries}{111}{subsection.2.6.2}
+\contentsline {section}{\numberline {2.7}Security and Integrity of the System and Data}{113}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Security and Integrity of Data}{113}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}System Security}{114}{subsection.2.7.2}
+\contentsline {section}{\numberline {2.8}Validation}{116}{section.2.8}
+\contentsline {section}{\numberline {2.9}Testing}{118}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}Outline Plan}{119}{subsection.2.9.1}
+\contentsline {subsection}{\numberline {2.9.2}Detailed Plan}{119}{subsection.2.9.2}
+\contentsline {chapter}{\numberline {3}Testing}{139}{chapter.3}
+\contentsline {section}{\numberline {3.1}Test Plan}{139}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Original Outline Plan}{140}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Changes to Outline Plan}{141}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Original Detailed Plan}{144}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Changes to Detailed Plan}{155}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Test Data}{175}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Original Test Data}{175}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Changes to Test Data}{179}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Annotated Samples}{195}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Actual Results}{195}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Evidence}{212}{subsection.3.3.2}
+\contentsline {subsubsection}{Normal Test Annotations}{212}{section*.13}
+\contentsline {subsubsection}{Erroneous Test Annotations}{230}{section*.14}
+\contentsline {subsubsection}{Boundary Test Annotations}{247}{section*.15}
+\contentsline {section}{\numberline {3.4}Evaluation}{255}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Approach to Testing}{255}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Problems Encountered}{256}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Strengths of Testing}{258}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Weaknesses of Testing}{258}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}Reliability of Application}{259}{subsection.3.4.5}
+\contentsline {subsection}{\numberline {3.4.6}Robustness of Application}{259}{subsection.3.4.6}
+\contentsline {chapter}{\numberline {4}System Maintenance}{261}{chapter.4}
+\contentsline {section}{\numberline {4.1}Environment}{261}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Software}{261}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Usage Explanation}{262}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Features Used}{264}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}System Overview}{267}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Log In}{267}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}The Search Window}{268}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Create Order}{269}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Adding Editing and Removing Products}{270}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Managing the Stock of a Product}{271}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}Adding Editing and Removing Members}{272}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.7}Adding Editing and Removing Employees}{272}{subsection.4.2.7}
+\contentsline {section}{\numberline {4.3}Code Structure}{273}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Decision Pop Up Window.}{273}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Deleting Product Function}{273}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Table used for the Search Window}{274}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Adding and Removing Data}{277}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.5}Organisation of Classes.}{279}{subsection.4.3.5}
+\contentsline {subsection}{\numberline {4.3.6}Table used for the Search Window}{280}{subsection.4.3.6}
+\contentsline {subsection}{\numberline {4.3.7}Emailing Functionality}{281}{subsection.4.3.7}
+\contentsline {subsection}{\numberline {4.3.8}Validation Function}{282}{subsection.4.3.8}
+\contentsline {section}{\numberline {4.4}Variable Listing}{283}{section.4.4}
+\contentsline {section}{\numberline {4.5}System Evidence}{288}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}User Interface}{288}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}ER Diagram}{311}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Database Table Views}{312}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Database SQL}{317}{subsection.4.5.4}
+\contentsline {subsection}{\numberline {4.5.5}SQL Queries}{320}{subsection.4.5.5}
+\contentsline {section}{\numberline {4.6}Testing}{325}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Summary of Results}{325}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Known Issues}{325}{subsection.4.6.2}
+\contentsline {section}{\numberline {4.7}Code Explanations}{328}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Difficult Sections}{328}{subsection.4.7.1}
+\contentsline {subsubsection}{Creating the Custom TitleBar}{328}{section*.16}
+\contentsline {subsubsection}{Emitting a signal when a QLabel is clicked.}{336}{section*.17}
+\contentsline {subsubsection}{Adding a right click menu to items in a table.}{338}{section*.18}
+\contentsline {subsection}{\numberline {4.7.2}Self-created Algorithms}{341}{subsection.4.7.2}
+\contentsline {subsubsection}{Calculating New Quantity}{341}{section*.19}
+\contentsline {subsubsection}{Calculating Whether a product needs to be restocked.}{343}{section*.20}
+\contentsline {subsubsection}{Sending a 4 digit code to an email address.}{347}{section*.21}
+\contentsline {subsubsection}{Entering data from a CSV file.}{349}{section*.22}
+\contentsline {subsubsection}{Populating a QComboBox from a text file.}{351}{section*.23}
+\contentsline {subsubsection}{Preventing users from being able to click the add, edit and delete member if they are not signed in on the administratory account.}{353}{section*.24}
+\contentsline {section}{\numberline {4.8}Settings}{355}{section.4.8}
+\contentsline {section}{\numberline {4.9}Acknowledgements}{355}{section.4.9}
+\contentsline {section}{\numberline {4.10}Code Listing}{360}{section.4.10}
+\contentsline {subsection}{\numberline {4.10.1}Main Program}{360}{subsection.4.10.1}
+\contentsline {subsection}{\numberline {4.10.2}Adding Product}{374}{subsection.4.10.2}
+\contentsline {subsection}{\numberline {4.10.3}Editing Product}{380}{subsection.4.10.3}
+\contentsline {subsection}{\numberline {4.10.4}Removing Product}{386}{subsection.4.10.4}
+\contentsline {subsection}{\numberline {4.10.5}Adding Member}{391}{subsection.4.10.5}
+\contentsline {subsection}{\numberline {4.10.6}Editing Member}{398}{subsection.4.10.6}
+\contentsline {subsection}{\numberline {4.10.7}Deleting Member}{406}{subsection.4.10.7}
+\contentsline {subsection}{\numberline {4.10.8}Adding Employee}{411}{subsection.4.10.8}
+\contentsline {subsection}{\numberline {4.10.9}Editing Employee}{415}{subsection.4.10.9}
+\contentsline {subsection}{\numberline {4.10.10}Deleting Employee}{419}{subsection.4.10.10}
+\contentsline {subsection}{\numberline {4.10.11}Log In Screen}{423}{subsection.4.10.11}
+\contentsline {subsection}{\numberline {4.10.12}Preferences}{425}{subsection.4.10.12}
+\contentsline {subsection}{\numberline {4.10.13}Stock Management Interface}{428}{subsection.4.10.13}
+\contentsline {subsection}{\numberline {4.10.14}SQL Queries}{432}{subsection.4.10.14}
+\contentsline {subsection}{\numberline {4.10.15}Changing Password}{442}{subsection.4.10.15}
+\contentsline {subsection}{\numberline {4.10.16}Creating Order Interface}{443}{subsection.4.10.16}
+\contentsline {subsection}{\numberline {4.10.17}Search Window}{453}{subsection.4.10.17}
+\contentsline {subsection}{\numberline {4.10.18}Order Interface}{458}{subsection.4.10.18}
+\contentsline {subsection}{\numberline {4.10.19}Message with a single Ok button}{468}{subsection.4.10.19}
+\contentsline {subsection}{\numberline {4.10.20}Message with Yes and No buttons}{470}{subsection.4.10.20}
+\contentsline {subsection}{\numberline {4.10.21}Search Window}{472}{subsection.4.10.21}
+\contentsline {subsection}{\numberline {4.10.22}Password Reset Interface}{477}{subsection.4.10.22}
+\contentsline {subsection}{\numberline {4.10.23}Custom Window Frame}{478}{subsection.4.10.23}
+\contentsline {subsection}{\numberline {4.10.24}SQL Connections}{479}{subsection.4.10.24}
+\contentsline {subsection}{\numberline {4.10.25}Clickable QLabel}{482}{subsection.4.10.25}
+\contentsline {subsection}{\numberline {4.10.26}Creating the Tables in the database.}{483}{subsection.4.10.26}
+\contentsline {subsection}{\numberline {4.10.27}Style sheet for Main Window}{486}{subsection.4.10.27}
+\contentsline {chapter}{\numberline {5}User Manual}{489}{chapter.5}
+\ttl@starttoc {default@1}
+\contentsline {section}{\numberline {5.1}Introduction}{491}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Purpose}{491}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Intended Audience}{491}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}Installation}{492}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Prerequisite Installation}{492}{subsection.5.2.1}
+\contentsline {subsubsection}{Software}{492}{section*.25}
+\contentsline {subsubsection}{Hardware}{492}{section*.26}
+\contentsline {subsection}{\numberline {5.2.2}System Installation}{493}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Running the System}{504}{subsection.5.2.3}
+\contentsline {subsubsection}{Creating a Desktop Icon}{508}{section*.27}
+\contentsline {subsubsection}{Pinning the system to the taskbar}{510}{section*.28}
+\contentsline {section}{\numberline {5.3}Tutorial}{511}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Introduction}{511}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Assumptions}{511}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Tutorial Questions}{511}{subsection.5.3.3}
+\contentsline {subsubsection}{Contents}{512}{section*.29}
+\contentsline {subsubsection}{Logging into the system}{513}{section*.30}
+\contentsline {subsubsection}{Logging out of the system}{514}{section*.31}
+\contentsline {subsubsection}{Forgetting Your User-name or Password}{516}{section*.32}
+\contentsline {subsubsection}{Unable to access your email address}{518}{section*.33}
+\contentsline {subsubsection}{Adding a Product to the system}{519}{section*.34}
+\contentsline {subsubsection}{Adding a Member to the system}{525}{section*.35}
+\contentsline {subsubsection}{Adding an Employee to the system}{531}{section*.36}
+\contentsline {subsubsection}{Editing a Product in the system}{532}{section*.37}
+\contentsline {subsubsection}{Editing a Member currently in the system}{537}{section*.38}
+\contentsline {subsubsection}{Editing an Employee in the system}{542}{section*.39}
+\contentsline {subsubsection}{Removing a Product from the system}{544}{section*.40}
+\contentsline {subsubsection}{Removing a Member from the system}{548}{section*.41}
+\contentsline {subsubsection}{Removing an Employee for the system.}{552}{section*.42}
+\contentsline {subsubsection}{Changing the stock of a Product}{556}{section*.43}
+\contentsline {subsubsection}{Product Stock Prediction}{561}{section*.44}
+\contentsline {subsubsection}{Adding products to an order}{563}{section*.45}
+\contentsline {subsubsection}{Applying a Discount to an Order}{566}{section*.46}
+\contentsline {subsubsection}{Previewing the invoice}{568}{section*.47}
+\contentsline {subsubsection}{Printing an invoice}{569}{section*.48}
+\contentsline {subsubsection}{Emailing an invoice}{573}{section*.49}
+\contentsline {subsubsection}{Changing information on the invoice}{575}{section*.50}
+\contentsline {subsubsection}{Accessing the search window}{580}{section*.51}
+\contentsline {subsubsection}{Using the search window}{582}{section*.52}
+\contentsline {subsection}{\numberline {5.3.4}Saving}{585}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Limitations}{585}{subsection.5.3.5}
+\contentsline {section}{\numberline {5.4}Error Recovery}{585}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Sorry the Username and Password are incorrect.}{585}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}The Gmail Account Details are not valid.}{585}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}Sorry the Email address does not match any of the Accounts.}{586}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.4}No Product with ProductID:}{586}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.5}No User found with MemberID:}{586}{subsection.5.4.5}
+\contentsline {subsection}{\numberline {5.4.6}No employee found with EmployeeID:}{586}{subsection.5.4.6}
+\contentsline {section}{\numberline {5.5}System Recovery}{587}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Backing-up Data}{587}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Restoring Data}{587}{subsection.5.5.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{588}{chapter.6}
+\contentsline {section}{\numberline {6.1}Customer Requirements}{588}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}General Objective Evaluation}{588}{subsection.6.1.1}
+\contentsline {subsubsection}{Data can added to the database easily}{588}{section*.53}
+\contentsline {subsubsection}{Data can be edited within the system easily.}{588}{section*.54}
+\contentsline {subsubsection}{Easy to understand the layout of the information.}{589}{section*.55}
+\contentsline {subsubsection}{Easy to locate a product within the system.}{589}{section*.56}
+\contentsline {subsubsection}{The system as a whole, should be clear and easy to use.}{589}{section*.57}
+\contentsline {subsection}{\numberline {6.1.2}Specific Objective Evaluation}{589}{subsection.6.1.2}
+\contentsline {subsubsection}{For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{589}{section*.58}
+\contentsline {subsubsection}{For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{590}{section*.59}
+\contentsline {subsubsection}{For the new process of selling products to be quicker, to minimize the time for people queuing.}{590}{section*.60}
+\contentsline {subsubsection}{For the current stock to automatically update when the products are bought}{590}{section*.61}
+\contentsline {subsubsection}{For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{590}{section*.62}
+\contentsline {subsubsection}{For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{590}{section*.63}
+\contentsline {subsubsection}{To calculate how much stock will be required for next month.}{591}{section*.64}
+\contentsline {subsubsection}{For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{591}{section*.65}
+\contentsline {subsubsection}{For Keyboard Shortcuts to be availble for the system to be acessed faster.}{591}{section*.66}
+\contentsline {subsubsection}{To Format a well structured receipt that is easy for the customer to read and to understand}{591}{section*.67}
+\contentsline {subsubsection}{Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{591}{section*.68}
+\contentsline {subsection}{\numberline {6.1.3}Core Objective Evaluation}{592}{subsection.6.1.3}
+\contentsline {subsubsection}{For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{592}{section*.69}
+\contentsline {subsubsection}{For the Stock to automatically update itself.}{592}{section*.70}
+\contentsline {subsubsection}{To calculate how much stock will be required for next month.}{592}{section*.71}
+\contentsline {subsection}{\numberline {6.1.4}Other Objective Evaluation}{592}{subsection.6.1.4}
+\contentsline {subsubsection}{allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z etc \dots )}{592}{section*.72}
+\contentsline {subsubsection}{For Keyboard Shortcuts to be available for the system to be accessed faster.}{592}{section*.73}
+\contentsline {subsubsection}{To Format a well structured receipt that is easy for the customer to read and to understand}{593}{section*.74}
+\contentsline {section}{\numberline {6.2}Effectiveness}{593}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Objective Evaluation}{593}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Learnability}{593}{section.6.3}
+\contentsline {section}{\numberline {6.4}Usability}{593}{section.6.4}
+\contentsline {section}{\numberline {6.5}Maintainability}{593}{section.6.5}
+\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{593}{section.6.6}
+\contentsline {section}{\numberline {6.7}End User Evidence}{593}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{593}{subsection.6.7.1}
+\contentsline {subsection}{\numberline {6.7.2}Graphs}{593}{subsection.6.7.2}
+\contentsline {subsection}{\numberline {6.7.3}Written Statements}{593}{subsection.6.7.3}
+\contentsfinish 

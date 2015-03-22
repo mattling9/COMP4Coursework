@@ -206,35 +206,87 @@ Below is the complete list of programs used when creating my system:
 	\item The bookmark feature allowed me to save my invoice as a bookmark and be able to view it whenever i am on google chrome. (Does not require Notepad ++ to be open).
 \end{itemize}
 
+\pagebreak
+
 \section{System Overview}
 
 \subsection{Log In}
 
-The Log in Screen prevents any unauthorized users from being able to access the system without logging in. The user is not able to see the Menubar that is displayed once the user is logged in. This is done by saying QMenuBar.setVisible(False). When the user enters a user-name and password the system will then search the database for any users who match the credentials entered by the user.The SQL statement to do search for the username and password is "SELECT EmployeePassword FROM Employee WHERE EmployeeUsername = ?" If the user-name and password the user enters match an account within the database, the user will be taken to the creating order interface as this will be the most used feature of the system. To change the interface of the system, I placed a QStackedLayout in the QMainWindow Widget. Using a QStackedLayout allowed me to place different layouts into the same widget and switch between them depending on which one the user selects. When the system is first run, The Log In Layout is selected in the QStackedLayout. Once the user successfully logs into the system, The index of the QStackedLayout changes to the Creating order layout. If the credentials do not match any of the accounts stored in the database, then the system will tell the user that their user-name or password is incorrect. The user is informed by a Pop Up Window. The pop up window is an instance of a Pop Up Window class in which i created. The Pop Up Window contains a QLabel, which displays text to the user telling them information. The Pop Up Window also contains QPushButton in which the user can press to tell the system they have read the message. The QPushButton is connected to a method that will close the pop up window. If the user cannot remember either their user-name or password, they can click on the 'Forgot Username and Password button. The ''Forgot Username and Password' button is actually in fact a QLabel. However, i created a new class to create an instance of a QLabel that runs a function when the QLabel is clicked. This was done by telling the QLabel to emit a signal when the mouse is pressed and released over it. I connected The mouse click to a function that changes the QStackedLayout index to the ''Forgot Username and Password' layout. Clicking this button will take the user to a screen where they must enter the email address associated to the account(This email address will have been added when the Employee was first created). The User enters the email address into a QLineEdit. This allows the system to extract the email address the user enters into that field using QLineEdit.text(). The system will then search the database to see if the email address the user enters matches any of the employee accounts.The query used to do this is "SELECT EmployeeUsername, EmployeePassword FROM Employee WHERE EmployeeEmailAddress = ?". The question mark in the SQL Query is assigned to the string entered in QLineEdit.text(). If the email address entered into the QLineEdit does not match any of the accounts stored in the Employee table, then another instance of the Pop Up window will be created and will tell the user that the email they entered does not match any of the accounts. Again, if the user wishes to close the Pop Up window, they just have to click on the QPushButton within the pop up window. However, if the email address does match an account, the Username and Password of the account in which it matches are sent to that email address.I used the Simple Mail Transfer Protocol (SMTP) to send the email to the user. This was done by using the smtp library which comes with the installation with python. The requirements needed to send the email are a gmail account to send the email from, The contents of the email, the port number (in my case i used port 581) and the subject of the email. I store the username and password for the gmail account the email is sent from in my database. This requires the password to be encrypted, otherwise anyone with a database inspector can get the password of the account. I used a simple ceaser cypher encryption method to encrypt the password as this allows the password to be decrypted when it needs to be retrieved from the database, which more advanced encryption methods do not allow.
+The Log in Screen prevents any unauthorized users from being able to access the system without logging in. The user is not able to see the Menubar that is displayed once the user is logged in. This is done by saying QMenuBar.setVisible(False). When the user enters a user-name and password the system will then search the database for any users who match the credentials entered by the user.The SQL statement to do search for the username and password is "SELECT EmployeePassword FROM Employee WHERE EmployeeUsername = ?" If the user-name and password the user enters match an account within the database, the user will be taken to the creating order interface as this will be the most used feature of the system.\par
+
+To change the interface of the system, I placed a QStackedLayout in the QMainWindow Widget. Using a QStackedLayout allowed me to place different layouts into the same widget and switch between them depending on which one the user selects. When the system is first run, The Log In Layout is selected in the QStackedLayout. Once the user successfully logs into the system, The index of the QStackedLayout changes to the Creating order layout. If the credentials do not match any of the accounts stored in the database, then the system will tell the user that their user-name or password is incorrect. The user is informed by a Pop Up Window.
+
+The pop up window is an instance of a Pop Up Window class in which i created. The Pop Up Window contains a QLabel, which displays text to the user telling them information. The Pop Up Window also contains QPushButton in which the user can press to tell the system they have read the message. The QPushButton is connected to a method that will close the pop up window. If the user cannot remember either their user-name or password, they can click on the 'Forgot Username and Password button. 
+
+The ''Forgot Username and Password' button is actually in fact a QLabel. However, i created a new class to create an instance of a QLabel that runs a function when the QLabel is clicked. This was done by telling the QLabel to emit a signal when the mouse is pressed and released over it. I connected The mouse click to a function that changes the QStackedLayout index to the ''Forgot Username and Password' layout. Clicking this button will take the user to a screen where they must enter the email address associated to the account(This email address will have been added when the Employee was first created). The User enters the email address into a QLineEdit. This allows the system to extract the email address the user enters into that field using QLineEdit.text(). The system will then search the database to see if the email address the user enters matches any of the employee accounts.The query used to do this is "SELECT EmployeeUsername, EmployeePassword FROM Employee WHERE EmployeeEmailAddress = ?". The question mark in the SQL Query is assigned to the string entered in QLineEdit.text(). If the email address entered into the QLineEdit does not match any of the accounts stored in the Employee table, then another instance of the Pop Up window will be created and will tell the user that the email they entered does not match any of the accounts. Again, if the user wishes to close the Pop Up window, they just have to click on the QPushButton within the pop up window. However, if the email address does match an account, the Username and Password of the account in which it matches are sent to that email address.
+
+I used the Simple Mail Transfer Protocol (SMTP) to send the email to the user. This was done by using the smtp library which comes with the installation with python. The requirements needed to send the email are a gmail account to send the email from, The contents of the email, the port number (in my case i used port 581) and the subject of the email. I store the username and password for the gmail account the email is sent from in my database. This requires the password to be encrypted, otherwise anyone with a database inspector can get the password of the account. I used a simple ceaser cypher encryption method to encrypt the password as this allows the password to be decrypted when it needs to be retrieved from the database, which more advanced encryption methods do not allow.
 
 
 \subsection{The Search Window}
 
-The search window is a feature of the system that allows the user to search for a product member or employee within the database. The Search Window, is an instance of a QWidget that is not displayed inside the QMainWindow. The Search window consists of a QLineEdit in which the user can enter the keywords they want to search for, a QSQLTableModel, which allowed my to switch between the Product. member and Employee table but also allowed me to execute SQL Queries on the data that is displayed in the table. An example of an  SQL Query used on the QSQLTableModel was "Select * FROM Product WHERE "ProductID like '{0}' or ProductName like '{0}' or Size like '{0}' or Price like '{0}' or Category like '{0}'" This query will display any product that matches the string entered by the user. For example if the user enters the letter 'A' into the QLineEdit, the table will display any product that contains the letter 'A'. The user can access the search window by pressing CTRL+F on the keyboard simultaneously, or by clicking on the Search Window option under the Options menu in the QMenuBar. Adding the keyboard shortcut to the Search Window was relatively simple; the 'Search Window' option in the QMenuBar is a QAction. To attach the shortcut i simply did QAction.setShortcut(CTRL+F).This means if the user presses CTRL and F simultaneously on the keyboard, it runs the same method than when the user clicks on the search window action in the QMenuBar. In the search window the user has the ability to choose which table they would like to search, the product table, member table or the employee table. To change between the table that is displayed, i could have created three different tables and then added them to a QStackedWidget. However, the QTableView allows you to change the Table that is displayed by changing the model of the table. To set the model, you simply do QTableView.setModel(model). I used a different model for the Product, Member and Employee table. This decision was far more code efficient than using a QStackedWidget containing three different tables.
+The search window is a feature of the system that allows the user to search for a product member or employee within the database. The Search Window, is an instance of a QWidget that is not displayed inside the QMainWindow. The Search window consists of a QLineEdit in which the user can enter the keywords they want to search for, a QSQLTableModel, which allowed my to switch between the Product. member and Employee table but also allowed me to execute SQL Queries on the data that is displayed in the table. 
+
+An example of an  SQL Query used on the QSQLTableModel was "Select * FROM Product WHERE "ProductID like '{0}' or ProductName like '{0}' or Size like '{0}' or Price like '{0}' or Category like '{0}'" This query will display any product that matches the string entered by the user. For example if the user enters the letter 'A' into the QLineEdit, the table will display any product that contains the letter 'A'. 
+
+The user can access the search window by pressing CTRL+F on the keyboard simultaneously, or by clicking on the Search Window option under the Options menu in the QMenuBar. 
+
+Adding the keyboard shortcut to the Search Window was relatively simple; the 'Search Window' option in the QMenuBar is a QAction. To attach the shortcut i simply did QAction.setShortcut(CTRL+F).This means if the user presses CTRL and F simultaneously on the keyboard, it runs the same method than when the user clicks on the search window action in the QMenuBar. 
+
+In the search window the user has the ability to choose which table they would like to search, the product table, member table or the employee table. To change between the table that is displayed, i could have created three different tables and then added them to a QStackedWidget. However, the QTableView allows you to change the Table that is displayed by changing the model of the table. To set the model, you simply do QTableView.setModel(model). I used a different model for the Product, Member and Employee table. This decision was far more code efficient than using a QStackedWidget containing three different tables.
 
 \subsection{Create Order}
 
-The Create Order interface allows an employee to create an order, from products currently being stored within the database. If the customer wants to purchase a product that is not currently being stored in the database, the employee will have to add the product to the database via the 'Add Product' interface before it can be added to an order. This is because the Table in the Create Order interface selects the products from the Product table in the database. The Find Product Table is a QTableView with the Model set to the Product Table this was done using 'QModel.setTable(Product). Some of the rows are not relevant such as the image path, therefore they are hidden in the table using QTableView.hideColumn(X) where X is the column number. If the product is not stored in the Product table, it will not be displayed in the Table in the Current Order interface. To add a product to the order, the user must find the product under the 'Find Product' table. To add the product to the order, the user can either click on the product then click then click the Green 'Add to Order' QPushBUttonbutton or they can either double click on the product they want to add. The QPushButton was made green by setting a unique object name to the QPushButton and using QPushButton\# ObjectName. Here i then just applied the HTML to change the colour of the text using "background-color: rgb(0,240,0)". To see the full style sheet for my system, go to the Style Sheet section in the Code Listing on page \pageref{fig:style}. When the user has a product highlighted by left clicking on a Row in the QTablewView, if done successfully the product should be added to the order and the subtotal, discount and total price should have changed. The subtotal, discount and total price are displayed to the user in a QLineEdit. However, the user is not able to change the value of the price directly, because it is done automatically by the system. To give QLineEdits the ability to not be changed, i set the QLineEdit to read only. this was done using "QLineEdit.setReadOnly(True)".To change the subtotal, discount and total price, the system records the row in the table the user has clicked. The system then finds the ProductID of the row in which the user has clicked in the 'Find Product' table and then searches the database for all the information stored under this ProductID. An SQL Query is used to search the database, the Query used is: "SELECT ProductID, ProductName, Size, Price FROM Product WHERE ProductID = ?". This SQL query can be found on line 516 in the Creating Order Interface Section in the code listing.The relevant information, such as the ProductID, ProductName, Size and Price is stored in a list and is then added to the current order table. Once the Order is complete the user can then decide whether they want to print off the invoice, send it to an email address, or both. To do this the user can click on either of the two QTickBoxes. The QTickBox has either a ticked and no ticked state in which the Widget can be in. I Used IF statements to detect whethe to email the invoice, print it or both. An example of how this was done in plain english would be: "IF PrintTickbox is Ticked, Then Run the Print Invoice Function". The invoice is generated using HTML. This is because HTML is a format that can be sent over email and also can be printed onto a page. To print off the invoice, i had to create a text document, this was done by saying "document = QTextDocument()" i assigned the HTML invoice to the document by saying "document.setHtml(html)". HTML was a string that contained the relevant HTML to create the invoice.The final HTML generate for the invoice can be found on lines 261 to 371 of the Style Sheet Section in the Code Listing. To then print the document i had to create a QPrinter and tell python to print the document. This was done by saying document.print(QPrinter).Once the Order has been created and the employee has decided whether to print or email the invoice, the employee can click the save invoice button which will send the invoice to the email specified or print off the invoice. If the customer is a member, the Employee can enter the customers MemberID and 10 percent of the price of the current order will be deducted.
+The Create Order interface allows an employee to create an order, from products currently being stored within the database. If the customer wants to purchase a product that is not currently being stored in the database, the employee will have to add the product to the database via the 'Add Product' interface before it can be added to an order. This is because the Table in the Create Order interface selects the products from the Product table in the database. The Find Product Table is a QTableView with the Model set to the Product Table this was done using 'QModel.setTable(Product). Some of the rows are not relevant such as the image path, therefore they are hidden in the table using QTableView.hideColumn(X) where X is the column number. 
+
+If the product is not stored in the Product table, it will not be displayed in the Table in the Current Order interface. To add a product to the order, the user must find the product under the 'Find Product' table. To add the product to the order, the user can either click on the product then click then click the Green 'Add to Order' QPushBUttonbutton or they can either double click on the product they want to add. 
+
+The QPushButton was made green by setting a unique object name to the QPushButton and using QPushButton\# ObjectName. Here i then just applied the HTML to change the colour of the text using "background-color: rgb(0,240,0)". To see the full style sheet for my system, go to the Style Sheet section in the Code Listing on page \pageref{fig:style}. 
+
+When the user has a product highlighted by left clicking on a Row in the QTablewView, if done successfully the product should be added to the order and the subtotal, discount and total price should have changed. The subtotal, discount and total price are displayed to the user in a QLineEdit. However, the user is not able to change the value of the price directly, because it is done automatically by the system. To give QLineEdits the ability to not be changed, i set the QLineEdit to read only. this was done using "QLineEdit.setReadOnly(True)".
+
+To change the subtotal, discount and total price, the system records the row in the table the user has clicked. The system then finds the ProductID of the row in which the user has clicked in the 'Find Product' table and then searches the database for all the information stored under this ProductID. An SQL Query is used to search the database, the Query used is: "SELECT ProductID, ProductName, Size, Price FROM Product WHERE ProductID = ?". This SQL query can be found on line 516 in the Creating Order Interface Section in the code listing.The relevant information, such as the ProductID, ProductName, Size and Price is stored in a list and is then added to the current order table. 
+
+Once the Order is complete the user can then decide whether they want to print off the invoice, send it to an email address, or both. To do this the user can click on either of the two QTickBoxes. The QTickBox has either a ticked and no ticked state in which the Widget can be in. I Used IF statements to detect whether to email the invoice, print it or both. An example of how this was done in plain English would be: "IF PrintTickbox is Ticked, Then Run the Print Invoice Function". The invoice is generated using HTML. This is because HTML is a format that can be sent over email and also can be printed onto a page. 
+
+To print off the invoice, i had to create a text document, this was done by saying "document = QTextDocument()" i assigned the HTML invoice to the document by saying "document.setHtml(html)". HTML was a string that contained the relevant HTML to create the invoice.The final HTML generate for the invoice can be found on lines 261 to 371 of the Style Sheet Section in the Code Listing. To then print the document i had to create a QPrinter and tell python to print the document. This was done by saying document.print(QPrinter).
+
+Once the Order has been created and the employee has decided whether to print or email the invoice, the employee can click the save invoice button which will send the invoice to the email specified or print off the invoice. If the customer is a member, the Employee can enter the customers MemberID and 10 percent of the price of the current order will be deducted.
 
 \subsection{Adding Editing and Removing Products}
 
-In order to be able to create an order, there must be products stored in the database. The Add Product interface allows the user to enter relevant information about the product along with an optional image of the product. Some of the data is entered into a QLineEdit if the data needs to be a string, a QComboBox if the user needs a list of options to choose, or a QSpinBox if the user needs to enter an integer. The system validates the data the user enters to ensure that the data is valid and is stored in a suitable format within the database. A QLineEdit allows the user to enter letters numbers and special characters into the field. To filter the characters, i used a QDoubleValdiator. This meant that the QLineEdit only accepted integers into the field. If the Employee wants to change the details about a product, for example the price, they must first find the ProductID of the product they want to edit or delete. This can be done easily using the search window which can be found under the Options Menu in the QMenuBar or by pressing CTRL+F simultaneously on the keyboard when logged into an account. The keyboard shortcut can be used because the Options Menu in the QMenuBar is a QAction. Keyobard shortcuts can easily be assigned to QAction using QAction.setShortcut(CTRL+F). Once the user knows the ProductID of the product they want to edit, they can go to the Edit Product interface either by clicking on Edit Product under the Product Menu in the QMenuBar or by right clicking the product in the search window and clicking on the edit product option in the drop down menu. Likewise, if the user wants to delete a product, they can either go to the Delete Product option under the Product Menu in the QMenuBar or by right clicking on the product in the search window and selecting delete product from the drop down menu. Once they are on the correct interface, they must enter theProductID into the QLineEdit. Once they have entered the ProductID they must click on the 'Find' button which is a QPushButton that searches the database for the ProductID entered by the user. Unless the system has successfully found a product, the user will be able to see the other data fields, but will not be able to use them. Making the Widget Visible is done by saying:QWidget.setVisible(True), and setting the Widget so that it cannot be clicked is done by:  QWidget.setDisabled(True).
+In order to be able to create an order, there must be products stored in the database. The Add Product interface allows the user to enter relevant information about the product along with an optional image of the product. Some of the data is entered into a QLineEdit if the data needs to be a string, a QComboBox if the user needs a list of options to choose, or a QSpinBox if the user needs to enter an integer. 
+
+The system validates the data the user enters to ensure that the data is valid and is stored in a suitable format within the database. A QLineEdit allows the user to enter letters numbers and special characters into the field. To filter the characters, i used a QDoubleValdiator. This meant that the QLineEdit only accepted integers into the field. If the Employee wants to change the details about a product, for example the price, they must first find the ProductID of the product they want to edit or delete. This can be done easily using the search window which can be found under the Options Menu in the QMenuBar or by pressing CTRL+F simultaneously on the keyboard when logged into an account. 
+
+The keyboard shortcut can be used because the Options Menu in the QMenuBar is a QAction. Keyobard shortcuts can easily be assigned to QAction using QAction.setShortcut(CTRL+F). Once the user knows the ProductID of the product they want to edit, they can go to the Edit Product interface either by clicking on Edit Product under the Product Menu in the QMenuBar or by right clicking the product in the search window and clicking on the edit product option in the drop down menu. Likewise, if the user wants to delete a product, they can either go to the Delete Product option under the Product Menu in the QMenuBar or by right clicking on the product in the search window and selecting delete product from the drop down menu. Once they are on the correct interface, they must enter theProductID into the QLineEdit.
+
+Once they have entered the ProductID they must click on the 'Find' button which is a QPushButton that searches the database for the ProductID entered by the user. Unless the system has successfully found a product, the user will be able to see the other data fields, but will not be able to use them. Making the Widget Visible is done by saying:QWidget.setVisible(True), and setting the Widget so that it cannot be clicked is done by:  QWidget.setDisabled(True).
 
 \subsection{Managing the Stock of a Product}
 
-If a product has been purchased in many orders, there may not but much stock left. If there are less the 5 of any specific product left in the shop, but many still left in storage, once a user logs on, the system displays a message telling them that the product needs to be restocked. This message is an instance of my Pop Up Window class. The message tells the user that the following products need to be restocked then displays a list of all the products that need to be restocked. If there are less than 5 in the shop and less than 5 in storage then the user is told that they should buy more stock. Once the user has bought more stock or has moved stock from storage to the shop, they must update this in the system. To do this, the employee must log into the system, then find the ProductID of the product they want to change the stock of. They enter the ProductID into the ProductID field in the Manage Stock interface. The ProductID field is a QLineEdit, once the user has entered the ProductID, there is a QPushButton in which they must pressed which has the text 'Find' on it. When the user clicks the find button, The Product Name, Image, Stock in Shop and Stock in storage will be displayed to the user. Here the user will be able to change the stock in each location.To do this they can either click the up and down arrows on the QSpinBox or enter a new value in. The user will also be displayed a graph of the recent sales of that specific product, the data on this graph allows the system to be able to predict future sales of that product, this can aid the company in knowing how many of the product should be purchased when wanting to buy more stock.
+If a product has been purchased in many orders, there may not but much stock left. If there are less the 5 of any specific product left in the shop, but many still left in storage, once a user logs on, the system displays a message telling them that the product needs to be restocked. This message is an instance of my Pop Up Window class. The message tells the user that the following products need to be restocked then displays a list of all the products that need to be restocked. If there are less than 5 in the shop and less than 5 in storage then the user is told that they should buy more stock. 
+
+Once the user has bought more stock or has moved stock from storage to the shop, they must update this in the system. To do this, the employee must log into the system, then find the ProductID of the product they want to change the stock of. They enter the ProductID into the ProductID field in the Manage Stock interface. The ProductID field is a QLineEdit, once the user has entered the ProductID, there is a QPushButton in which they must pressed which has the text 'Find' on it. 
+
+When the user clicks the find button, The Product Name, Image, Stock in Shop and Stock in storage will be displayed to the user. Here the user will be able to change the stock in each location.To do this they can either click the up and down arrows on the QSpinBox or enter a new value in. The user will also be displayed a graph of the recent sales of that specific product, the data on this graph allows the system to be able to predict future sales of that product, this can aid the company in knowing how many of the product should be purchased when wanting to buy more stock.
 
 \subsection{Adding Editing and Removing Members}
 
-The company allows customers to join a membership scheme, which allows the customer to get 10 percent off all of their orders. To add a member to the system, the user can go to the 'Add Member' option under the Member Menu within the QMenubar. Here, the employee must enter the details about the customer, such as their name, address, telephone number and email address. The Adding Member interface mainly consists of QLineEdits to enter the data, however, a QComboBox is used to get the county in which the member lives and a QSpinBox is used to get the House number of the Member. The employee can then save the member in the database. If the customer / member changes any of their information, they must inform the company so that they can change the information in their system. To edit a member, the employee must log into the system, then the employee must find the member by searching for any relevant information in the search window. To search for members in the search window the employee must choose the Member option from the QCombobox, this should then display the Member table. Once the Employee has found the MemberID of the member, they can either right click on the member in the search window and click on the Edit Member from the drop down menu, or go to the 'Edit Member' option under the Member Menu in the QMenuBar. To delete a member from the system, the employee must find the Member in the search window, right click the Member and click on delete member, or enter their MemberID into the Remove a Member interface.
+The company allows customers to join a membership scheme, which allows the customer to get 10 percent off all of their orders. To add a member to the system, the user can go to the 'Add Member' option under the Member Menu within the QMenubar. Here, the employee must enter the details about the customer, such as their name, address, telephone number and email address. 
+
+The Adding Member interface mainly consists of QLineEdits to enter the data, however, a QComboBox is used to get the county in which the member lives and a QSpinBox is used to get the House number of the Member. The employee can then save the member in the database. If the customer / member changes any of their information, they must inform the company so that they can change the information in their system. 
+
+To edit a member, the employee must log into the system, then the employee must find the member by searching for any relevant information in the search window. To search for members in the search window the employee must choose the Member option from the QCombobox, this should then display the Member table. Once the Employee has found the MemberID of the member, they can either right click on the member in the search window and click on the Edit Member from the drop down menu, or go to the 'Edit Member' option under the Member Menu in the QMenuBar. 
+
+To delete a member from the system, the employee must find the Member in the search window, right click the Member and click on delete member, or enter their MemberID into the Remove a Member interface.
 
 \subsection{Adding Editing and Removing Employees}
-Realistically, the system will not be used by just one employee, therefore my system allows many employees to be able to use the system. When the system is first run, one Employee account is created which is the Admin account. The Admin account will be able to access features of the system that a normal account will not. To add a new Employee account, the employee MUST sign in on the admin account, then the user can go to the 'Add Employee' option under the Employee Menu in the Menubar. Here the user can enter the name and email address of the new employee and then can save them to the database. Now the new account can be used to accessed the system. There is only one Admin account, which cannot be removed from the system.
+Realistically, the system will not be used by just one employee, therefore my system allows many employees to be able to use the system. When the system is first run, one Employee account is created which is the Admin account. The Admin account will be able to access features of the system that a normal account will not. 
+
+To add a new Employee account, the employee MUST sign in on the admin account, then the user can go to the 'Add Employee' option under the Employee Menu in the Menubar. Here the user can enter the name and email address of the new employee and then can save them to the database. Now the new account can be used to accessed the system.
+
+There is only one Admin account, which cannot be removed from the system.
 To edit or delete an employee account the user must log into the admin account. Then, the user must go to the search window and find the employee they want to delete, they can then right click on an employee and click either edit or delete employee.
 
 
@@ -321,7 +373,7 @@ You can find my data dictionary on Page 104
 	& & Adding Product & 176 \\ \cline{3-4}
 	& & Changing Password & 40 \\ \cline{3-4}
 	& & Deleting Employee & 90 \\ \cline{3-4}
-	& & Deleting Member & 172 \\ \cline{3-4}
+	& & Deleting Member & 172 \\ 
 	& & Deleting Product & 184 \\ \cline{3-4}
 	& & Edit Product & 185 \\ \cline{3-4}
 	& & Edit Member & 185 \\ \cline{3-4}
@@ -342,7 +394,7 @@ You can find my data dictionary on Page 104
 	& & Delete Employee & 133 \\ \hline
 	\multirow{6}{1.5cm}{self. pattern} & \multirow{6}{4.5cm}{used as a variable to store the regular expressions used in the validation} & Adding Employee &  152, 169,  186 \\ \cline{3-4}
 	& & Edit Employee & 204, 221, 238\\ \cline{3-4}
-	& & Adding Product & 273, 290, 306, 322 \\ \cline{3-4}
+	& & Adding Product & 273, 290, 306, 322 \\
 	& & Editing Product & 294, 311 \\ \cline{3-4}
 	& & Adding Member &  276, 293, 312, 330, 348, 366, 383\\ \cline{3-4}
 	& & Editing Member & 337, 354, 373, 391, 409, 427, 444 \\ \hline
@@ -363,7 +415,7 @@ You can find my data dictionary on Page 104
 	rows- in-table & used to store the amount of rows currently in a table & Adding Product & 208 \\ \hline
 	self. file-name & used to store the New ProductID of the image going to be stored. & Adding Product & 209 \\ \hline
 	\multirow{3}{1.5cm}{self. temp} & \multirow{3}{4.5cm}{used to temporarily store a value} & Adding Product &  219 \\ \cline{3-4}
-	& & Edit Product & 224 \\ \cline{3-4}
+	& & Edit Product & 224 \\ 
 	& & Delete Product & 222 \\ \hline
 	\multirow{3}{1.5cm}{self. category-string} & \multirow{3}{4.5cm}{used to turn the combo box selection by the user into string.} & Adding Product &  220 \\ \cline{3-4}
 	& & Edit Product & 225 \\ \cline{3-4}
@@ -481,12 +533,18 @@ The Edit Member interface is very similar to the add member interface however it
     \caption{Removing Member Interface} \label{fig:removing-member-interface}
 \end{figure}
 
-The Delete Member interface is visually identical to the Edit Member interface, other than the text on the QPushButton in the bottom right hand corner of the interface. When the Delete Member button is clicked, the system searches the database for the MemberId entered by the user and is removed from the system.
+The Delete Member interface is visually identical to the Edit Member interface, other than the text on the QPushButton in the bottom right hand corner of the interface. When the Delete Member button is clicked, the system searches the database for the MemberID entered by the user and is removed from the system.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface11.png}
     \caption{Add Employee Interface} \label{fig:adding-employee-interface}
 \end{figure}
+
+The add employee interface is built up of two main areas. The first area, in which the user enters the new employee first name, last name and the employees email address. All three of these data inputs are QLineEdits. Below these three QLineEdits is a QPushButton with the text `Submit' on. This button will copy th text entered to the user into the second main area of the Add Employee interface.
+
+The second main area of the add employee interface is the review section. Here the information is displayed to the user before it is added to the database. This is because it is important that the employee information is valid and up to date. The Add Product interface also contains a Green QPushButton in which the user can click once they have entered information into the data fields and ensured that the data is valid. For reasoning as to why the QPushButton is green, go to page \pageref{fig:style} for more information.
+
+Clicking the Green QPushButton will add the employee to the system and will make the employee password `password'. Upon creation, the user will be displayed with an instance of my ErrorMessage class that tells the user the new Username and Password for the account they just created. 
 
 
 \begin{figure}[H]
@@ -494,26 +552,46 @@ The Delete Member interface is visually identical to the Edit Member interface, 
     \caption{Edit Employee Interface} \label{fig:edit-employee-interface}
 \end{figure}
 
+The edit employee interface is very similar to the adding employee interface. it consists of 3 QLineEdits in which the user enters the data, a QPushButton in which the user presses when they want to submit the employee data. The Edit employee interface also contains 4 QLabels to tell the user the data in which each of the 4 QLineEdits in the review section are. The data input QLineEdits in the first section of the edit member interface are validated so that the user cannot enter erroneous data. To validate the data in each field i used a regular expression. The digram below shows the difference between the three data input QLineEdits and the 4 data review QLineEdits.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{./edit-employee.pdf}
+    \caption{Showing which QLineEdits are the data input and which ones are for data output} \label{fig:edit-employee-diagram}
+\end{figure}
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface13.png}
     \caption{Remove Employee Interface} \label{fig:removing-employee-interface}
 \end{figure}
+
+The remove employee interface is very similar to the edit employee interface. However, the user is not able to edit the data in the Delete Employee Interface. this is done by setting them to read only using QLineEdit.setReadOnly(True). Therefore, because data cannot be changed within the Delete Employee interface, there is no validation on the data fields. If the user clicks the green `Delete Employee' QPushButton in the bottom right hand corner of the interface, then the employee will be removed from the system.
+
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface14.png}
     \caption{Preferences Interface} \label{fig:preferences-interface}
 \end{figure}
 
+The preferences interface is the interface in which the user can customise that data that is displayed on the invoice. It also allows the user the change the email address in which the system emails are sent from. The Preferences interface is made up of 10 QLabels and QLinedEdits. The QLabels tell the user what to enter into its corresponding QLineEdit. The Preferences contains an instance of my custom QLabel. For more information on my custom QLabel, go to page \pageref{fig:custom-label}. 
+
+When the user clicks on the QLabel an instance of my Error Message class displays to the user telling them the information that needs to be entered and what the information does. In this case the user is told the information is used to send the system emails from and that the email address must be a gmail account.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface15.png}
     \caption{Search Interface} \label{fig:search-interface}
 \end{figure}
+
+The search window is used to find products members or employees within the system. The main components of the search window are a QLineEdit in which the user can enter the information they want to search for, a QTableView to display the results of the search and a QComboBox so the user can choose the table they want to search. The QTableView changes the model depending on the table the user would like to search.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{./interface16.png}
     \caption{Change Password Interface} \label{fig:change-password-interface}
 \end{figure}
 
+The change password interface consists of 3 QLineEdits and 3 Labels. The first label tells the user which interface they are currently on. This QLabel has a much larger font and is in bold, compared to the other QLabels in the system. The second QLabel is used to tell the user what to enter into the two password data fields. The first two QLineEdits are for the user to enter their new password and then repeat it for confirmation. The Last QLineEdit is for the user to enter the 4 digit code sent to them through email. If the 4 digit code matches the one sent in the email and the two new passwords match, then when the user clicks the Green QPushButton in the bottom right hand corner of the interface, then the password will successfully change.
+
+\pagebreak
+\label{fig:style}
 Another aspect of the system i felt was important was the visual design of the system. One of the Objectives in my system analysis was that the system had to have a clear layout. The objectives from my analyisis can be found on page \pageref{ref:objectives}. I felt that by changing the visual appearance of the system, i could improve upon the clarity of the layout and the ease of use of the system. Currently, my client has chosen to use a white and green colour scheme the the company website, interior and exterior of the veterinary center. I have provided a screen-shot below to give a better understanding of the colour scheme of the website, for a further understanding of the colour scheme of the website, you can visit it at www.beaconvets.co.uk.
 
 \begin{figure}[H]
@@ -551,6 +629,7 @@ I Changed the text of the menu bar to match the text of the rest of the system, 
 
 
 
+\pagebreak
 
 \subsection{ER Diagram}
 
@@ -560,6 +639,8 @@ Since the Design stage i developed my database and added and removed some tables
     \includegraphics[width=\textwidth]{./ERDiagramMaintenance.pdf}
     \caption{New Entity Relationship Diagram} \label{fig:entity-relationship-maintenance}
 \end{figure}
+
+\pagebreak
 
 \subsection{Database Table Views}
 
@@ -603,7 +684,7 @@ Since the Design stage i developed my database and added and removed some tables
     \caption{New Entity Relationship Diagram} \label{fig:table-view-8}
 \end{figure}
 
-
+\pagebreak
 \subsection{Database SQL}
 
 \begin{figure}[H]
@@ -749,7 +830,7 @@ Figure \ref{fig:add-product-sql} shows the SQL Query used to add a product to th
 UPDATE Product SET ProductName= ?,  Size = ?,  Price = ?, Category= ?, ImagePath= ? WHERE ProductID = ?
  \end{sql}
 \end{figure}
-Figure \ref{fig:edit-product-sql} shows the SQL Query used to edit a product in the database. The query only removes the data related to the product associated this query can be found on page: This query can be found on line 22 in the SQL Queries section in the Code Listing.
+Figure \ref{fig:edit-product-sql} shows the SQL Query used to edit a product in the database. The query only removes the data related to the product associated with the ProductID entered. This query can be found on line 22 in the SQL Queries section in the Code Listing.
 
 
 \begin{figure}[H]
@@ -834,6 +915,10 @@ Figure \ref{fig:edit-employee-sql} This query edits the data of an employee. The
 
 Figure \ref{fig:delete-employee-sql} This query removes the employee where the user enters the EmployeeID, and the query removes that Employee from the database. This query can be found on line 108 in the SQL Queries section in the Code Listing.
 
+\pagebreak
+
+
+\label{fig:improvements-sql}
 During the System Maintenance stage, i noticed that my system does not include any Relational SQL Queries. If there were to be a future version of my system, there are many possibilities in which relational SQL Queries could be used. If my client would like the system to be able to track the invoices, to be able to know whos successfully paid for the invoice. The system could have an interface which will display the MemberID of each member, and a list of the invoices they have made. This would require the MemberID to be displayed from the Member Table and the OrderID and the Date and Time from the Customer Order table. to Query the database to retrieve data from two tables i can use the `INNER JOIN' feature in SQLite 3 because MemberID is a foreign key in the CustomerOrder Table. An example of what the SQL could look like would be:
 \begin{sql}
 SELECT Member.MemberID, Member.MemberFirstName, Member.MemberLastName, CustomerOrder.OrderID, CustomerOrder.DateTime
@@ -857,6 +942,19 @@ This would then display the ProductID and ProductName for every product in the P
 \begin{sql}
 SELECT Product.ProductID, Product.ProductName,WeeklyProductSales.Sales
 \end{sql}
+
+Currently, my clients business only has two storage locations for the products. One is in the shop are and the other is in a storage area. Because of this, i felt it would be easier to just store the stock of each product under the Product Table directly, compared to using the Location and Product Location tables. If my system were to be modified so that it could be used for a much larger company, the larger company may have many more storage locations or may have different areas in the storage location. Here it would be far wiser to then implement the use of the Location and ProductLocation tables within my system. 
+
+If the user wanted to check the stock of the Products, they would want to see the ProductID and the ProductName to identify the product, the LocationID and the LocationName. I can gather all this data in the same SQL query due to ProductID from the Product Table, being a foreign key in the ProductLocation and LocationID being a foreign key from the Location table. Here i decided to use `JOIN' as opposed to `INNER JOIN' as i was connecting three tables together as opposed to two. Alternatively i could have used one INNER JOIN and one OUTER JOIN, however, OUTER JOIN or FULL JOIN are not currently supported in SQLite3. The SQL statement that could be used to get the ProductID, ProductName, LocationID and Location name has been provided below.
+
+\begin{sql}
+SELECT Product.ProductID, Product.ProductName, Location.LocationID, Location.LocationName
+From Product 
+JOIN ProductLocation ON Product.ProductID = ProductLocation.ProductID
+JOIN Location ON ProductLocation.LocationID = Location.LocationID
+\end{sql}
+
+The SQL statements mentioned from page \pageref{fig:improvements-sql}and onwards are not currently in my system and were not created during the Implementation stage. These are ideas for relational queries that could be used in future versions of my system.
 
 \pagebreak 
 
@@ -1016,7 +1114,7 @@ the predicted sale is then rounded, and assigned to the variable `rounded-predic
 \pagebreak
 
 \subsubsection{Emitting a signal when a QLabel is clicked.}
-
+\label{fig:custom-label}
 Unlike a QPushButton, a QLabel does not have a pre-existing .clicked.connect() signal. Therefore i had to create a new QLabel that will emit a signal when it is clicked. The code below is the class i made for the new QLabel.
 
 \begin{python}
@@ -1206,7 +1304,7 @@ The code above is very similar to the previous code however, this will create an
 
 \subsubsection{Sending a 4 digit code to an email address.}
 
-As a security measure, if an employee is logged in and they want to change their password, they must enter a 4 digit code sent to their email address. This is so that if they are logged in to the system, someone cannot come along and simply change the employees password. The code below generates the code and sends it to the users email address. It can also be found on line 820 in the Main Program section of the Code Listing on page \pageref{X}
+As a security measure, if an employee is logged in and they want to change their password, they must enter a 4 digit code sent to their email address. This is so that if they are logged in to the system, someone cannot come along and simply change the employees password. The code below generates the code and sends it to the users email address. It can also be found on line 820 in the Main Program section of the Code Listing.
 
 \begin{python}
 def send_code_to_email(self, username):
@@ -1351,6 +1449,7 @@ When managing the stock of the products, the user gets displayed a graph which s
 
 I used the following code to help me create my own custom title-bar.
 
+{\scriptsize
 \begin{python}
 #########################################################
 ## customize Title bar
@@ -1536,10 +1635,11 @@ Every time you look up in the sky and see a star 'cuz I'm  your star.
     app.exec_()
 
 \end{python}
-
+}
 
 I Looked at the code to get an understanding of how the Custom Titlebar works, the only code in which i used from the program above has been listed below:
 
+{\scriptsize
 \begin{python}
 
 def mousePressEvent(self,event):
@@ -1554,6 +1654,7 @@ def mouseReleaseEvent(self,event):
         m_mouse_down=False;
 
 \end{python}
+}
 
 These pieces of code handle the mouse press events on the title bar. For example if the mouse is pressed and held down, then moved, the window should move with the cursor.
 
@@ -1561,6 +1662,7 @@ These pieces of code handle the mouse press events on the title bar. For example
 
 Below is the code which in which i used to encrypt and decrypt the passwords being stored in the system. I have ammended the code so that it works within my system.
 
+{\scriptsize
 \begin{python}
 # CSE 142 Python sessions
 # This program creates a secret message using a simple encryption algorithm
@@ -1613,13 +1715,13 @@ else:
 		print("The decoded message is:", msg)
 
 \end{python}
-
+}
 
 \pagebreak
 
 \section{Code Listing}
 
-
+{\scriptsize
 \subsection{Main Program}
 \pythonfile{./Maintenance/Main.py}
 \pagebreak
@@ -1748,5 +1850,5 @@ else:
 
 \subsection{Style sheet for Main Window}
 \label{fig:style}
-\pythonfile[firstline=1]{./Maintenance/StyleSheet.py}
+\pythonfile[firstline=1]{./Maintenance/StyleSheet.py}}
 \pagebreak

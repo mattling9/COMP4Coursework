@@ -198,13 +198,17 @@ class addMemberClass(QWidget):
 
         def CreatePopUpWindow(self):
                 self.pop_up_instance = PopUpWindow("Are You Sure You Want To Add The Member?", QDialogButtonBox.Yes, QDialogButtonBox.No)
-                self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-                self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+                self.pop_up_instance.buttonBox.button(
+                        QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+                self.pop_up_instance.buttonBox.button(
+                        QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
         def AddMemberSucess(self):
                 self.add_member_instance = PopUpWindow("Member Sucessfully Added!", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
-                self.add_member_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-                self.add_member_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+                self.add_member_instance.buttonBox.button(
+                        QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+                self.add_member_instance.buttonBox.button(
+                        QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
 
         def clicked_yes(self):
                 print("before")

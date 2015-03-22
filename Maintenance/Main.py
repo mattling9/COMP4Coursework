@@ -280,7 +280,8 @@ class MainWindow(QMainWindow):
 
     def EditStock(self):
         self.stacked_layout.setCurrentIndex(3)
-        self.manage_stock_instance.product_id.setText(str(self.search_instance.product_id))
+        self.manage_stock_instance.product_id.setText(
+            str(self.search_instance.product_id))
         self.manage_stock_instance.find_product_by_id()
         self.search_instance.close()
 
@@ -288,7 +289,8 @@ class MainWindow(QMainWindow):
 
     def EditProduct(self):
         self.stacked_layout.setCurrentIndex(1)
-        self.edit_product_instance.find_product_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_product_instance.find_product_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.edit_product_instance.find_product_by_id()
         self.search_instance.close()
 
@@ -296,7 +298,8 @@ class MainWindow(QMainWindow):
         
     def DeleteProduct(self):
         self.stacked_layout.setCurrentIndex(2)
-        self.delete_product_instance.find_product_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_product_instance.find_product_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.delete_product_instance.find_product_by_id()
         self.search_instance.close()
 
@@ -304,7 +307,8 @@ class MainWindow(QMainWindow):
         
     def EditMember(self):
         self.stacked_layout.setCurrentIndex(6)
-        self.edit_member_instance.find_member_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_member_instance.find_member_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.edit_member_instance.find_member_by_id()
 
         self.search_instance.close()
@@ -312,7 +316,8 @@ class MainWindow(QMainWindow):
 
     def DeleteMember(self):
         self.stacked_layout.setCurrentIndex(7)
-        self.delete_member_instance.find_member_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_member_instance.find_member_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.delete_member_instance.find_member_by_id()
 
         self.search_instance.close()
@@ -320,14 +325,16 @@ class MainWindow(QMainWindow):
 
     def EditEmployee(self):
         self.stacked_layout.setCurrentIndex(9)
-        self.edit_employee_instance.find_employee_id_line_edit.setText(str(self.search_instance.product_id))
+        self.edit_employee_instance.find_employee_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.edit_employee_instance.find_employee_by_id()
         self.search_instance.close()
         self.setFixedSize(700, 650)
 
     def DeleteEmployee(self):
         self.stacked_layout.setCurrentIndex(10)
-        self.delete_employee_instance.find_employee_id_line_edit.setText(str(self.search_instance.product_id))
+        self.delete_employee_instance.find_employee_id_line_edit.setText(
+            str(self.search_instance.product_id))
         self.delete_employee_instance.find_employee_by_id()
         self.search_instance.close()
         self.setFixedSize(700, 650)
@@ -335,13 +342,15 @@ class MainWindow(QMainWindow):
 
     def preferences(self):
         self.preferences_instance = preferencesClass()
-        self.preferences_instance.connect(self.preferences_instance.question, SIGNAL('clicked()'), self.email_question)
+        self.preferences_instance.connect(self.preferences_instance.question,
+                                          SIGNAL('clicked()'), self.email_question)
         self.stacked_layout.addWidget(self.preferences_instance)
 
     def log_in(self):
         self.log_in_instance = logInClass()
         self.log_in_instance.enter_button.clicked.connect(self.find_account)
-        self.log_in_instance.connect(self.log_in_instance.forgot_password, SIGNAL('clicked()'), self.reset_password)
+        self.log_in_instance.connect(self.log_in_instance.forgot_password,
+                                     SIGNAL('clicked()'), self.reset_password)
         self.stacked_layout.addWidget(self.log_in_instance)
 
     def keyPressEvent(self, qKeyEvent):
@@ -356,10 +365,12 @@ class MainWindow(QMainWindow):
         self.stacked_layout.addWidget(self.password_reset_instance)
 
     def change_password(self):
-        self.change_password_instance = ChangePasswordClass("Please Enter a new password, then re-enter it below.", 0)
+        self.change_password_instance = ChangePasswordClass(
+            "Please Enter a new password, then re-enter it below.", 0)
         self.change_password_instance.button.clicked.connect(self.match_passwords)
         self.stacked_layout.addWidget(self.change_password_instance)
-        self.change_password_instance2 = ChangePasswordClass("Please enter a new password below. The Code has been sent to your email address.", 1)
+        self.change_password_instance2 = ChangePasswordClass(
+            "Please enter a new password below. The Code has been sent to your email address.", 1)
         self.change_password_instance2.button.clicked.connect(self.match_codes)
         self.stacked_layout.addWidget(self.change_password_instance2)
                 
@@ -449,7 +460,8 @@ class MainWindow(QMainWindow):
         self.add_product_instance.location2.setText("")
         self.add_product_instance.product_name.setText("")
         self.add_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
-        self.add_product_instance.scaled_image = self.add_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.add_product_instance.scaled_image = self.add_product_instance.image_pixmap.scaled(
+            300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.add_product_instance.image.setPixmap(self.add_product_instance.scaled_image)
         self.edit_product_instance.path.setText("")
         
@@ -467,7 +479,8 @@ class MainWindow(QMainWindow):
         self.edit_product_instance.location2.setText("")
         self.edit_product_instance.product_name.setText("")
         self.edit_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
-        self.edit_product_instance.scaled_image = self.edit_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.edit_product_instance.scaled_image = self.edit_product_instance.image_pixmap.scaled(
+            300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.edit_product_instance.image.setPixmap(self.edit_product_instance.scaled_image)
         self.edit_product_instance.path.setText("")
         
@@ -484,7 +497,8 @@ class MainWindow(QMainWindow):
         self.delete_product_instance.location2.setText("")
         self.delete_product_instance.product_name.setText("")
         self.delete_product_instance.image_pixmap = QPixmap(".\ProductImages\Default.jpg")
-        self.delete_product_instance.scaled_image = self.delete_product_instance.image_pixmap.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.delete_product_instance.scaled_image = self.delete_product_instance.image_pixmap.scaled(
+            300, 300, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.delete_product_instance.image.setPixmap(self.delete_product_instance.scaled_image)
         self.delete_product_instance.path.setText("")
         self.setFixedSize(700, 700)
@@ -500,7 +514,8 @@ class MainWindow(QMainWindow):
         self.manage_stock_instance.stock_prediction_groupbox.setDisabled(True)
         self.manage_stock_instance.path = (".\images\Default.png")
         self.manage_stock_instance.image_pixmap = QPixmap(self.manage_stock_instance.path)
-        self.manage_stock_instance.scaled_image = self.manage_stock_instance.image_pixmap.scaled(180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.manage_stock_instance.scaled_image = self.manage_stock_instance.image_pixmap.scaled(
+            180, 180, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.manage_stock_instance.image.setPixmap(self.manage_stock_instance.scaled_image)
         plt.clf()
         self.setFixedSize(900, 850)
@@ -601,7 +616,9 @@ class MainWindow(QMainWindow):
         self.setFixedSize(700, 650)
 
     def explanation_function(self):
-        self.error_message_instance = ErrorMessageClass("The Reason you cannot access the above options is because you \n must be logged into the master account to access them.")
+        self.error_message_instance = ErrorMessageClass(
+            """The Reason you cannot access the above options is because you
+            \n must be logged into the master account to access them.""")
         self.error_message_instance.move(750,500)
         self.error_message_instance.show()
         self.error_message_instance.raise_()
@@ -613,9 +630,12 @@ class MainWindow(QMainWindow):
         self.setFixedSize(900, 850)
 
     def log_off_function(self):
-        self.decision = PopUpWindow("Are you sure you want to log off?", QDialogButtonBox.Yes, QDialogButtonBox.No)
-        self.decision.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.log_off_true)
-        self.decision.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.log_off_false)
+        self.decision = PopUpWindow("Are you sure you want to log off?",
+                                    QDialogButtonBox.Yes, QDialogButtonBox.No)
+        self.decision.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(
+            self.log_off_true)
+        self.decision.buttonBox.button(QDialogButtonBox.No).clicked.connect(
+            self.log_off_false)
 
     def log_off_true(self):
         self.log_in_function()
@@ -652,19 +672,23 @@ class MainWindow(QMainWindow):
                 self.change_password_instance2.code.setText("")
 
             except smtplib.SMTPAuthenticationError:
-                self.error_message_instance = ErrorMessageClass("Error: The Gmail account details are not valid.")
+                self.error_message_instance = ErrorMessageClass(
+                    """Error: The Gmail account details are not valid.""")
                 self.error_message_instance.move(750,500)
                 self.error_message_instance.show()
                 self.error_message_instance.raise_()
 
             except TimeoutError:
-                self.error_message_instance = ErrorMessageClass("A connection attempt failed because the connected party did not properly respond after a period of time.")
+                self.error_message_instance = ErrorMessageClass(
+                    """A connection attempt failed because the connected
+                       party did not properly respond after a period of time.""")
                 self.error_message_instance.move(750,500)
                 self.error_message_instance.show()
                 self.error_message_instance.raise_()
 
             except:
-                self.error_message_instance = ErrorMessageClass("An error occured and the email could not be sent.")
+                self.error_message_instance = ErrorMessageClass(
+                    """An error occured and the email could not be sent.""")
                 self.error_message_instance.move(750,500)
                 self.error_message_instance.show()
                 self.error_message_instance.raise_()
@@ -674,10 +698,13 @@ class MainWindow(QMainWindow):
         
     def find_account(self):
         settings = getSettings()
-        encrypted_password_entered = change_password(self.log_in_instance.password.text(), 3)
-        self.return_signal = find_username_and_password(self.log_in_instance.username.text(), encrypted_password_entered)
+        encrypted_password_entered = change_password(
+            self.log_in_instance.password.text(), 3)
+        self.return_signal = find_username_and_password(
+            self.log_in_instance.username.text(), encrypted_password_entered)
         if self.return_signal == 1:
-            self.error_message_instance = ErrorMessageClass("Sorry the Username and Password you entered are incorrect")
+            self.error_message_instance = ErrorMessageClass(
+                """Sorry the Username and Password you entered are incorrect""")
             self.error_message_instance.move(750,500)
             self.error_message_instance.show()
             self.error_message_instance.raise_()
@@ -708,7 +735,10 @@ class MainWindow(QMainWindow):
         self.password_reset_function()
 
     def email_question(self):
-        self.error_message_instance = ErrorMessageClass("This is the email address and password used to send the: \n - Invoice Form \n - Password Reset Code \n - Account Reminder \n  \n This must be a Gmail account.")
+        self.error_message_instance = ErrorMessageClass(
+            """This is the email address and password used to send the: \n -
+               Invoice Form \n - Password Reset Code \n - Account Reminder
+               \n  \n This must be a Gmail account.""")
         self.error_message_instance.move(750,500)
         self.error_message_instance.show()
         self.error_message_instance.raise_()
@@ -746,7 +776,8 @@ class MainWindow(QMainWindow):
     def match_codes(self):
         
         if int(self.code) != int(self.change_password_instance2.code.text()):
-            self.error_message_instance = ErrorMessageClass("The Code you entered does not match the one emailed to you.")
+            self.error_message_instance = ErrorMessageClass(
+                """The Code you entered does not match the one emailed to you.""")
             self.error_message_instance.move(750,500)
             self.error_message_instance.show()
             self.error_message_instance.raise_()
@@ -757,7 +788,8 @@ class MainWindow(QMainWindow):
             self.error_message_instance.show()
             self.error_message_instance.raise_()
         
-        elif (self.change_password_instance2.password1.text() == self.change_password_instance2.password2.text() and int(self.code) == int(self.change_password_instance2.code.text())):
+        elif (self.change_password_instance2.password1.text() == self.change_password_instance2.password2.text(
+            ) and int(self.code) == int(self.change_password_instance2.code.text())):
             encrypted_password = change_password(self.change_password_instance2.password1.text(), 3)
             change_employee_password(self.log_in_instance.username.text(), encrypted_password)
             self.error_message_instance = ErrorMessageClass("Your Password has Sucessfully been changed!")
@@ -776,9 +808,11 @@ class MainWindow(QMainWindow):
             password = get_employee_password(self.password_reset_instance.email_address.text())
             first_name = get_employee_first_name(self.password_reset_instance.email_address.text())
             try:
-                self.send_password_reset_email(self.password_reset_instance.email_address.text(), username, password, first_name)
+                self.send_password_reset_email(self.password_reset_instance.email_address.text(),
+                                               username, password, first_name)
                 self.log_in_function()
-                self.error_message_instance = ErrorMessageClass("Your Username and Password have been sent to your email address.")
+                self.error_message_instance = ErrorMessageClass(
+                    """Your Username and Password have been sent to your email address.""")
                 self.error_message_instance.move(750,500)
                 self.error_message_instance.show()
                 self.error_message_instance.raise_()
@@ -789,7 +823,8 @@ class MainWindow(QMainWindow):
                 self.error_message_instance.raise_()
 
         else:
-            self.error_message_instance = ErrorMessageClass("Sorry the Email address does not match any of the Accounts.")
+            self.error_message_instance = ErrorMessageClass(
+                "Sorry the Email address does not match any of the Accounts.")
 
     def send_password_reset_email(self, email_address, username, password, first_name):
             settings = getSettings()
@@ -803,7 +838,9 @@ class MainWindow(QMainWindow):
                     "To: {0}".format(email_address),
                     "Subject: Beacon Vets Account Details",
                   "",
-                  ("Hello {0}, Here are your account details: \n \n Username:   {1} \n  Password:   {2}".format(first_name, username, password))])
+                  ("""Hello {0}, Here are your account details: \n
+                    \n Username:   {1} \n  Password:   {2}""".format(
+                        first_name, username, password))])
 
             mail = smtplib.SMTP('smtp.gmail.com','587')
             mail.ehlo()

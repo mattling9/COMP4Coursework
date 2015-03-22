@@ -120,13 +120,17 @@ class addEmployeeClass(QWidget):
 
     def CreatePopUpWindow(self):
         self.pop_up_instance = PopUpWindow("Are You Sure You Want To Add The Employee?", QDialogButtonBox.Yes, QDialogButtonBox.No)
-        self.pop_up_instance.buttonBox.button(QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
-        self.pop_up_instance.buttonBox.button(QDialogButtonBox.No).clicked.connect(self.clicked_no)
+        self.pop_up_instance.buttonBox.button(
+            QDialogButtonBox.Yes).clicked.connect(self.clicked_yes)
+        self.pop_up_instance.buttonBox.button(
+            QDialogButtonBox.No).clicked.connect(self.clicked_no)
 
     def AddEmployeeSucess(self):
         self.add_employee_instance = PopUpWindow("Employee Sucessfully Added! \n \n You can now log in with the following log in details: \n \n Username: {0} \n Password: password".format(self.user_name_output.text()), QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
-        self.add_employee_instance.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
-        self.add_employee_instance.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
+        self.add_employee_instance.buttonBox.button(
+            QDialogButtonBox.Ok).clicked.connect(self.close_pop_ups)
+        self.add_employee_instance.buttonBox.button(
+            QDialogButtonBox.Cancel).clicked.connect(self.close_pop_ups)
         self.add_employee_instance.setFixedSize(400,300)
 
     def clicked_yes(self):

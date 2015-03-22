@@ -41,16 +41,18 @@ def deletingProduct(product_id):
 #-----------------------------------------Member-----------------------------------------
 
 
-def addingMember(Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail):
-    Member = (Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail)
+def addingMember(Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail):
+    Member = (Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
-        sql = "insert into Member (Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail) values(?,?,?,?,?,?,?,?,?,?,?)"
+        sql = """insert into Member (Title, MemberFirstName, MemberLastName, HouseNo,
+                 Street, Town, City, County, Postcode, TelephoneNo, MemberEmail)
+                 values(?,?,?,?,?,?,?,?,?,?,?)"""
         cursor.execute(sql,Member)
         db.commit()
 
-def editMember(Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail, MemberID):
-    Member = (Title,MemberFirstName,MemberLastName,HouseNo,Street,Town,City,County,Postcode,TelephoneNo, MemberEmail, MemberID)
+def editMember(Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail, MemberID):
+    Member = (Title, MemberFirstName, MemberLastName, HouseNo, Street, Town, City, County, Postcode, TelephoneNo, MemberEmail, MemberID)
     with sqlite3.connect("ProductDatabase.db") as db:
         cursor = db.cursor()
         sql = """UPDATE Member SET Title = ?,
@@ -227,7 +229,7 @@ def getSettings():
         settings = cursor.fetchall()
     return settings
 
-############################################################ MUST SAY WHERE I GOT THIS CODE FROM... #####################################################
+############### MUST SAY WHERE I GOT THIS CODE FROM... ###########
 def change_password(password, shift):
 	password = password.lower()
 	encrypted_password = ""
@@ -243,7 +245,7 @@ def change_password(password, shift):
 		else:
 			encrypted_password += c
 	return encrypted_password
-#########################################################################################################################################################
+########################
 
 def getStock(product_id):
     product_info = (product_id,)
