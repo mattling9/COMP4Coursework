@@ -21,7 +21,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 || |
 
-##Introduction
+##Introduction - **complete**
 
 |**Strengths**||
 |-|-|
@@ -29,7 +29,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 ||Section contents page?|
 
-##Installation Instructions
+##Installation Instructions - **incomplete**
 
 |**Strengths**||
 |-|-|
@@ -41,7 +41,7 @@ Detailed description of how to use the system with installation instructions and
 
 ##Tutorial
 
-###Application Walk-through
+###Application Walk-through - **complete**
 
 |**Strengths**||
 |-|-|
@@ -51,7 +51,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 || |
 
-###Error Messages
+###Error Messages - **complete**
 
 |**Strengths**||
 |-|-|
@@ -59,7 +59,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 ||Can't refer to sections outside the manual here|
 
-###Saving
+###Saving - **complete**
 
 |**Strengths**||
 |-|-|
@@ -67,7 +67,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 || |
 
-##Limitations
+##Limitations - **complete**
 
 |**Strengths**||
 |-|-|
@@ -75,7 +75,7 @@ Detailed description of how to use the system with installation instructions and
 |**Weaknesses**||
 ||section not included|
 
-##Back-up
+##Back-up **Incomplete**
 
 |**Strengths**||
 |-|-|
