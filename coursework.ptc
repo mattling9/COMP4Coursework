@@ -173,91 +173,108 @@
 \contentsline {section}{\numberline {5.1}Introduction}{490}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Purpose}{490}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}Intended Audience}{490}{subsection.5.1.2}
-\contentsline {section}{\numberline {5.2}Installation}{490}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Prerequisite Installation}{490}{subsection.5.2.1}
-\contentsline {subsubsection}{Software}{490}{section*.25}
-\contentsline {subsubsection}{Hardware}{490}{section*.26}
+\contentsline {section}{\numberline {5.2}Installation}{491}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Prerequisite Installation}{491}{subsection.5.2.1}
+\contentsline {subsubsection}{Software}{491}{section*.25}
+\contentsline {subsubsection}{Hardware}{491}{section*.26}
 \contentsline {subsection}{\numberline {5.2.2}System Installation}{494}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Running the System}{508}{subsection.5.2.3}
-\contentsline {subsubsection}{Creating a Desktop Icon}{512}{section*.27}
-\contentsline {subsubsection}{Pinning the system to the taskbar}{514}{section*.28}
-\contentsline {section}{\numberline {5.3}Tutorial}{515}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Introduction}{515}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Assumptions}{515}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Tutorial Questions}{515}{subsection.5.3.3}
-\contentsline {subsubsection}{Contents}{516}{section*.29}
-\contentsline {subsubsection}{Logging into the system}{517}{section*.30}
-\contentsline {subsubsection}{Logging out of the system}{518}{section*.31}
-\contentsline {subsubsection}{Forgetting Your User-name or Password}{520}{section*.32}
-\contentsline {subsubsection}{Unable to access your email address}{522}{section*.33}
-\contentsline {subsubsection}{Adding a Product to the system}{523}{section*.34}
-\contentsline {subsubsection}{Adding a Member to the system}{529}{section*.35}
-\contentsline {subsubsection}{Adding an Employee to the system}{535}{section*.36}
-\contentsline {subsubsection}{Editing a Product in the system}{536}{section*.37}
-\contentsline {subsubsection}{Editing a Member currently in the system}{541}{section*.38}
-\contentsline {subsubsection}{Editing an Employee in the system}{546}{section*.39}
-\contentsline {subsubsection}{Removing a Product from the system}{548}{section*.40}
-\contentsline {subsubsection}{Removing a Member from the system}{552}{section*.41}
-\contentsline {subsubsection}{Removing an Employee for the system.}{556}{section*.42}
-\contentsline {subsubsection}{Changing the stock of a Product}{560}{section*.43}
-\contentsline {subsubsection}{Product Stock Prediction}{565}{section*.44}
-\contentsline {subsubsection}{Adding products to an order}{567}{section*.45}
-\contentsline {subsubsection}{Applying a Discount to an Order}{570}{section*.46}
-\contentsline {subsubsection}{Previewing the invoice}{572}{section*.47}
-\contentsline {subsubsection}{Printing an invoice}{573}{section*.48}
-\contentsline {subsubsection}{Emailing an invoice}{577}{section*.49}
-\contentsline {subsubsection}{Changing information on the invoice}{579}{section*.50}
-\contentsline {subsubsection}{Accessing the search window}{584}{section*.51}
-\contentsline {subsubsection}{Using the search window}{586}{section*.52}
-\contentsline {subsection}{\numberline {5.3.4}Saving}{589}{subsection.5.3.4}
-\contentsline {subsection}{\numberline {5.3.5}Limitations}{589}{subsection.5.3.5}
-\contentsline {section}{\numberline {5.4}Error Recovery}{589}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Sorry the Username and Password are incorrect.}{589}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}The Gmail Account Details are not valid.}{589}{subsection.5.4.2}
-\contentsline {subsection}{\numberline {5.4.3}Sorry the Email address does not match any of the Accounts.}{590}{subsection.5.4.3}
-\contentsline {subsection}{\numberline {5.4.4}No Product with ProductID:}{590}{subsection.5.4.4}
-\contentsline {subsection}{\numberline {5.4.5}No User found with MemberID:}{590}{subsection.5.4.5}
-\contentsline {subsection}{\numberline {5.4.6}No employee found with EmployeeID:}{590}{subsection.5.4.6}
-\contentsline {section}{\numberline {5.5}System Recovery}{591}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}Backing-up Data}{591}{subsection.5.5.1}
-\contentsline {subsection}{\numberline {5.5.2}Restoring Data}{591}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.2.3}Running the System}{509}{subsection.5.2.3}
+\contentsline {subsubsection}{Creating a Desktop Icon}{513}{section*.27}
+\contentsline {subsubsection}{Pinning the system to the taskbar}{515}{section*.28}
+\contentsline {section}{\numberline {5.3}Tutorial}{516}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Introduction}{516}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Assumptions}{516}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Tutorial Questions}{516}{subsection.5.3.3}
+\contentsline {subsubsection}{Contents}{517}{section*.29}
+\contentsline {subsubsection}{Logging into the system}{518}{section*.30}
+\contentsline {subsubsection}{Logging out of the system}{519}{section*.31}
+\contentsline {subsubsection}{Forgetting Your User-name or Password}{521}{section*.32}
+\contentsline {subsubsection}{Unable to access your email address}{523}{section*.33}
+\contentsline {subsubsection}{Adding a Product to the system}{524}{section*.34}
+\contentsline {subsubsection}{Adding a Member to the system}{530}{section*.35}
+\contentsline {subsubsection}{Adding an Employee to the system}{536}{section*.36}
+\contentsline {subsubsection}{Editing a Product in the system}{537}{section*.37}
+\contentsline {subsubsection}{Editing a Member currently in the system}{542}{section*.38}
+\contentsline {subsubsection}{Editing an Employee in the system}{547}{section*.39}
+\contentsline {subsubsection}{Removing a Product from the system}{549}{section*.40}
+\contentsline {subsubsection}{Removing a Member from the system}{553}{section*.41}
+\contentsline {subsubsection}{Removing an Employee for the system.}{557}{section*.42}
+\contentsline {subsubsection}{Changing the stock of a Product}{561}{section*.43}
+\contentsline {subsubsection}{Product Stock Prediction}{566}{section*.44}
+\contentsline {subsubsection}{Adding products to an order}{568}{section*.45}
+\contentsline {subsubsection}{Applying a Discount to an Order}{571}{section*.46}
+\contentsline {subsubsection}{Previewing the invoice}{573}{section*.47}
+\contentsline {subsubsection}{Printing an invoice}{574}{section*.48}
+\contentsline {subsubsection}{Emailing an invoice}{578}{section*.49}
+\contentsline {subsubsection}{Changing information on the invoice}{580}{section*.50}
+\contentsline {subsubsection}{Accessing the search window}{585}{section*.51}
+\contentsline {subsubsection}{Using the search window}{587}{section*.52}
+\contentsline {subsection}{\numberline {5.3.4}Saving}{590}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Limitations}{590}{subsection.5.3.5}
+\contentsline {section}{\numberline {5.4}Error Recovery}{590}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Sorry the Username and Password are incorrect.}{590}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}The Gmail Account Details are not valid.}{590}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}Sorry the Email address does not match any of the Accounts.}{591}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.4}No Product with ProductID:}{591}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.5}No User found with MemberID:}{591}{subsection.5.4.5}
+\contentsline {subsection}{\numberline {5.4.6}No employee found with EmployeeID:}{591}{subsection.5.4.6}
+\contentsline {section}{\numberline {5.5}System Recovery}{592}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Backing-up Data}{592}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Restoring Data}{592}{subsection.5.5.2}
 \ttl@stoptoc {chapters@1}
-\contentsline {chapter}{\numberline {6}Evaluation}{592}{chapter.6}
-\contentsline {section}{\numberline {6.1}Customer Requirements}{592}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}General Objective Evaluation}{592}{subsection.6.1.1}
-\contentsline {subsubsection}{-Data can added to the database easily}{592}{section*.53}
-\contentsline {subsubsection}{-Data can be edited within the system easily.}{592}{section*.54}
-\contentsline {subsubsection}{-Easy to understand the layout of the information.}{593}{section*.55}
-\contentsline {subsubsection}{-Easy to locate a product within the system.}{593}{section*.56}
-\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{593}{section*.57}
-\contentsline {subsection}{\numberline {6.1.2}Specific Objective Evaluation}{593}{subsection.6.1.2}
-\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{593}{section*.58}
-\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{594}{section*.59}
-\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{594}{section*.60}
-\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{594}{section*.61}
-\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{595}{section*.62}
-\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{595}{section*.63}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{595}{section*.64}
-\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{595}{section*.65}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be availble for the system to be acessed faster.}{595}{section*.66}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{596}{section*.67}
-\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{596}{section*.68}
-\contentsline {subsection}{\numberline {6.1.3}Core Objective Evaluation}{596}{subsection.6.1.3}
-\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{596}{section*.69}
-\contentsline {subsubsection}{-For the Stock to automatically update itself.}{596}{section*.70}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{597}{section*.71}
-\contentsline {subsection}{\numberline {6.1.4}Other Objective Evaluation}{597}{subsection.6.1.4}
-\contentsline {subsubsection}{-allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z etc \dots )}{597}{section*.72}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{597}{section*.73}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{597}{section*.74}
-\contentsline {section}{\numberline {6.2}Effectiveness}{598}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Objective Evaluation}{598}{subsection.6.2.1}
-\contentsline {section}{\numberline {6.3}Learnability}{598}{section.6.3}
-\contentsline {section}{\numberline {6.4}Usability}{598}{section.6.4}
-\contentsline {section}{\numberline {6.5}Maintainability}{598}{section.6.5}
-\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{598}{section.6.6}
-\contentsline {section}{\numberline {6.7}End User Evidence}{598}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{598}{subsection.6.7.1}
-\contentsline {subsection}{\numberline {6.7.2}Graphs}{598}{subsection.6.7.2}
-\contentsline {subsection}{\numberline {6.7.3}Written Statements}{598}{subsection.6.7.3}
+\contentsline {chapter}{\numberline {6}Evaluation}{593}{chapter.6}
+\contentsline {section}{\numberline {6.1}Customer Requirements}{593}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}General Objective Evaluation}{593}{subsection.6.1.1}
+\contentsline {subsubsection}{-Data can added to the database easily}{593}{section*.53}
+\contentsline {subsubsection}{-Data can be edited within the system easily.}{594}{section*.54}
+\contentsline {subsubsection}{-Easy to understand the layout of the information.}{594}{section*.55}
+\contentsline {subsubsection}{-Easy to locate a product within the system.}{594}{section*.56}
+\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{595}{section*.57}
+\contentsline {subsection}{\numberline {6.1.2}Specific Objective Evaluation}{595}{subsection.6.1.2}
+\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{595}{section*.58}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{595}{section*.59}
+\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{595}{section*.60}
+\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{596}{section*.61}
+\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{596}{section*.62}
+\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{596}{section*.63}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{597}{section*.64}
+\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{597}{section*.65}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be availble for the system to be accessed faster.}{597}{section*.66}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{598}{section*.67}
+\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{598}{section*.68}
+\contentsline {subsection}{\numberline {6.1.3}Core Objective Evaluation}{598}{subsection.6.1.3}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{598}{section*.69}
+\contentsline {subsubsection}{-For the Stock to automatically update itself.}{598}{section*.70}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{599}{section*.71}
+\contentsline {subsection}{\numberline {6.1.4}Other Objective Evaluation}{599}{subsection.6.1.4}
+\contentsline {subsubsection}{-allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z etc \dots )}{599}{section*.72}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{599}{section*.73}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{599}{section*.74}
+\contentsline {section}{\numberline {6.2}Effectiveness}{600}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Effectiveness of General Objectives}{600}{subsection.6.2.1}
+\contentsline {subsubsection}{-Data can added to the database easily}{600}{section*.75}
+\contentsline {subsubsection}{-Data can be edited within the system easily.}{600}{section*.76}
+\contentsline {subsubsection}{-Easy to understand the layout of the information.}{600}{section*.77}
+\contentsline {subsubsection}{-Easy to locate a product within the system.}{601}{section*.78}
+\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{601}{section*.79}
+\contentsline {subsection}{\numberline {6.2.2}Effectiveness of Specific Objectives}{601}{subsection.6.2.2}
+\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{601}{section*.80}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{602}{section*.81}
+\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{602}{section*.82}
+\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{602}{section*.83}
+\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{603}{section*.84}
+\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{603}{section*.85}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{603}{section*.86}
+\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{603}{section*.87}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{604}{section*.88}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{604}{section*.89}
+\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{604}{section*.90}
+\contentsline {section}{\numberline {6.3}Learnability}{605}{section.6.3}
+\contentsline {section}{\numberline {6.4}Usability}{605}{section.6.4}
+\contentsline {section}{\numberline {6.5}Maintainability}{605}{section.6.5}
+\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{605}{section.6.6}
+\contentsline {section}{\numberline {6.7}End User Evidence}{605}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{605}{subsection.6.7.1}
+\contentsline {subsection}{\numberline {6.7.2}Graphs}{605}{subsection.6.7.2}
+\contentsline {subsection}{\numberline {6.7.3}Written Statements}{605}{subsection.6.7.3}
 \contentsfinish 
