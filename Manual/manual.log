@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.24)  24 MAR 2015 09:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.15)  25 MAR 2015 10:12
 entering extended mode
-**U:/git/COMP4Coursework/Manual/manual.tex
-(U:/git/COMP4Coursework/Manual/manual.tex
+**C:/Users/Matt/Desktop/GitHub/COMP4Coursework/Manual/manual.tex
+(C:/Users/Matt/Desktop/GitHub/COMP4Coursework/Manual/manual.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -25,10 +25,10 @@ End of file on the terminal!
  
 Here is how much of TeX's memory you used:
  7 strings out of 493921
- 172 string characters out of 3144876
+ 238 string characters out of 3144879
  49031 words of memory out of 3000000
  3400 multiletter control sequences out of 15000+200000
  3640 words of font info for 14 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 5i,0n,1p,65b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 5i,0n,1p,87b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!
