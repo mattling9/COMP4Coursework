@@ -965,7 +965,7 @@ All the saving in the system is done internally and is automatically handled by 
 
 \subsection{Limitations}
 
-The only feature specified in my analysis and design that was not implemented into the final program was that an image of the product is not displayed in the search window. This does not cause any problems in the system, other than products can not be located based on what they look like.
+The only feature specified in my analysis and design that was not implemented into the final program was that an image of the product is not displayed in the search window. This does not cause any problems in the system, other than products can not be located based on what they look like. The reason this feature was not implemented into the system, was due to system instability when displaying large amounts of products at once in the search window. When they system tried to display around 15+ products along with their images at once, the system would stop responding for a few seconds before displaying the images. The amount of time the system would become unresponsive for was proportional to the amount of images trying to be displayed in the table. Realistically, the system will be managing over 100+ products, which would cause the system to become unresponsive for a very long time. Therefore, i decided to remove this feature form the system.
 
 \section{Error Recovery}
 

@@ -217,64 +217,64 @@
 \contentsline {subsection}{\numberline {5.4.3}Sorry the Email address does not match any of the Accounts.}{592}{subsection.5.4.3}
 \contentsline {subsection}{\numberline {5.4.4}No Product with ProductID:}{592}{subsection.5.4.4}
 \contentsline {subsection}{\numberline {5.4.5}No User found with MemberID:}{592}{subsection.5.4.5}
-\contentsline {subsection}{\numberline {5.4.6}No employee found with EmployeeID:}{592}{subsection.5.4.6}
+\contentsline {subsection}{\numberline {5.4.6}No employee found with EmployeeID:}{593}{subsection.5.4.6}
 \contentsline {section}{\numberline {5.5}System Recovery}{593}{section.5.5}
 \contentsline {subsection}{\numberline {5.5.1}Backing-up Data}{593}{subsection.5.5.1}
-\contentsline {subsection}{\numberline {5.5.2}Restoring Data}{595}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.2}Restoring Data}{596}{subsection.5.5.2}
 \ttl@stoptoc {chapters@1}
-\contentsline {chapter}{\numberline {6}Evaluation}{597}{chapter.6}
-\contentsline {section}{\numberline {6.1}Customer Requirements}{597}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}General Objective Evaluation}{597}{subsection.6.1.1}
-\contentsline {subsubsection}{-Data can added to the database easily}{597}{section*.53}
-\contentsline {subsubsection}{-Data can be edited within the system easily.}{598}{section*.54}
-\contentsline {subsubsection}{-Easy to understand the layout of the information.}{598}{section*.55}
-\contentsline {subsubsection}{-Easy to locate a product within the system.}{598}{section*.56}
-\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{599}{section*.57}
-\contentsline {subsection}{\numberline {6.1.2}Specific Objective Evaluation}{599}{subsection.6.1.2}
-\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{599}{section*.58}
-\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{599}{section*.59}
-\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{599}{section*.60}
-\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{600}{section*.61}
-\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{600}{section*.62}
-\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{600}{section*.63}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{601}{section*.64}
-\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{601}{section*.65}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be availble for the system to be accessed faster.}{601}{section*.66}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{602}{section*.67}
-\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{602}{section*.68}
-\contentsline {subsection}{\numberline {6.1.3}Core Objective Evaluation}{602}{subsection.6.1.3}
-\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{602}{section*.69}
-\contentsline {subsubsection}{-For the Stock to automatically update itself.}{602}{section*.70}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{603}{section*.71}
-\contentsline {subsection}{\numberline {6.1.4}Other Objective Evaluation}{603}{subsection.6.1.4}
-\contentsline {subsubsection}{-allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z etc \dots )}{603}{section*.72}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{603}{section*.73}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{603}{section*.74}
-\contentsline {section}{\numberline {6.2}Effectiveness}{604}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Effectiveness of General Objectives}{604}{subsection.6.2.1}
-\contentsline {subsubsection}{-Data can added to the database easily}{604}{section*.75}
-\contentsline {subsubsection}{-Data can be edited within the system easily.}{604}{section*.76}
-\contentsline {subsubsection}{-Easy to understand the layout of the information.}{604}{section*.77}
-\contentsline {subsubsection}{-Easy to locate a product within the system.}{605}{section*.78}
-\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{605}{section*.79}
-\contentsline {subsection}{\numberline {6.2.2}Effectiveness of Specific Objectives}{605}{subsection.6.2.2}
-\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{605}{section*.80}
-\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{606}{section*.81}
-\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{606}{section*.82}
-\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{606}{section*.83}
-\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{607}{section*.84}
-\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{607}{section*.85}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{607}{section*.86}
-\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{607}{section*.87}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{608}{section*.88}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{608}{section*.89}
-\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{608}{section*.90}
-\contentsline {section}{\numberline {6.3}Learnability}{609}{section.6.3}
-\contentsline {section}{\numberline {6.4}Usability}{609}{section.6.4}
-\contentsline {section}{\numberline {6.5}Maintainability}{609}{section.6.5}
-\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{609}{section.6.6}
-\contentsline {section}{\numberline {6.7}End User Evidence}{609}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{609}{subsection.6.7.1}
-\contentsline {subsection}{\numberline {6.7.2}Graphs}{609}{subsection.6.7.2}
-\contentsline {subsection}{\numberline {6.7.3}Written Statements}{609}{subsection.6.7.3}
+\contentsline {chapter}{\numberline {6}Evaluation}{598}{chapter.6}
+\contentsline {section}{\numberline {6.1}Customer Requirements}{598}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}General Objective Evaluation}{598}{subsection.6.1.1}
+\contentsline {subsubsection}{-Data can added to the database easily}{598}{section*.53}
+\contentsline {subsubsection}{-Data can be edited within the system easily.}{599}{section*.54}
+\contentsline {subsubsection}{-Easy to understand the layout of the information.}{599}{section*.55}
+\contentsline {subsubsection}{-Easy to locate a product within the system.}{599}{section*.56}
+\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{600}{section*.57}
+\contentsline {subsection}{\numberline {6.1.2}Specific Objective Evaluation}{600}{subsection.6.1.2}
+\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{600}{section*.58}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{600}{section*.59}
+\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{600}{section*.60}
+\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{601}{section*.61}
+\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{601}{section*.62}
+\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{601}{section*.63}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{602}{section*.64}
+\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{602}{section*.65}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be availble for the system to be accessed faster.}{602}{section*.66}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{603}{section*.67}
+\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{603}{section*.68}
+\contentsline {subsection}{\numberline {6.1.3}Core Objective Evaluation}{603}{subsection.6.1.3}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{603}{section*.69}
+\contentsline {subsubsection}{-For the Stock to automatically update itself.}{603}{section*.70}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{604}{section*.71}
+\contentsline {subsection}{\numberline {6.1.4}Other Objective Evaluation}{604}{subsection.6.1.4}
+\contentsline {subsubsection}{-allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z etc \dots )}{604}{section*.72}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{604}{section*.73}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{604}{section*.74}
+\contentsline {section}{\numberline {6.2}Effectiveness}{605}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Effectiveness of General Objectives}{605}{subsection.6.2.1}
+\contentsline {subsubsection}{-Data can added to the database easily}{605}{section*.75}
+\contentsline {subsubsection}{-Data can be edited within the system easily.}{605}{section*.76}
+\contentsline {subsubsection}{-Easy to understand the layout of the information.}{605}{section*.77}
+\contentsline {subsubsection}{-Easy to locate a product within the system.}{606}{section*.78}
+\contentsline {subsubsection}{-The system as a whole, should be clear and easy to use.}{606}{section*.79}
+\contentsline {subsection}{\numberline {6.2.2}Effectiveness of Specific Objectives}{606}{subsection.6.2.2}
+\contentsline {subsubsection}{-For an image to be displayed when an item is searched for (identifying a product if the Product information is unknown}{606}{section*.80}
+\contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{607}{section*.81}
+\contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{607}{section*.82}
+\contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{607}{section*.83}
+\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{608}{section*.84}
+\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{608}{section*.85}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{608}{section*.86}
+\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{608}{section*.87}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{609}{section*.88}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{609}{section*.89}
+\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{609}{section*.90}
+\contentsline {section}{\numberline {6.3}Learnability}{610}{section.6.3}
+\contentsline {section}{\numberline {6.4}Usability}{610}{section.6.4}
+\contentsline {section}{\numberline {6.5}Maintainability}{610}{section.6.5}
+\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{610}{section.6.6}
+\contentsline {section}{\numberline {6.7}End User Evidence}{610}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{611}{subsection.6.7.1}
+\contentsline {subsection}{\numberline {6.7.2}Graphs}{636}{subsection.6.7.2}
+\contentsline {subsection}{\numberline {6.7.3}Written Statements}{636}{subsection.6.7.3}
 \contentsfinish 
