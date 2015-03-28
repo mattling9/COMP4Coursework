@@ -200,7 +200,12 @@ class createOrderClass(QWidget):
         self.change_weekly_sales()
         self.change_daily_sales()
         self.save_sucess()
-
+        
+        daily_sales = get_current_daily_sales(str(product_id))
+        update_daily_sales(product_id, daily_sales[0])
+        reset_daily_sales(product_id)
+        update_date(datetime.date.today().strftime("%d-%m-%Y"))
+        
     def createCustomerOrder(self):
         date = datetime.datetime.today()
         date_time = date.strftime("%d-%m-%Y %H:%M")
@@ -549,6 +554,14 @@ class createOrderClass(QWidget):
 
     def save_invoice(self):
         createCustomerOrder(self)
+        weekly_sales = get_current_week_sales(str(product_id))
+                #daily_sales = get_current_daily_sales(str(product_id))
+                update_weekly_sales(product_id, weekly_sales[0])
+                update_daily_sales(product_id, daily_sales[0])
+                #######PLOT WEEKLY SALES TO GRAPH######
+                reset_weekly_sales(product_id)
+                #reset_daily_sales(product_id)
+                update_date(datetime.date.today().strftime("%d-%m-%Y"))
 
     def save_sucess(self):
         self.order_instance = PopUpWindow("Order Sucessfully Saved", QDialogButtonBox.Ok, QDialogButtonBox.Cancel)
