@@ -254,39 +254,50 @@
 \contentsline {subsubsection}{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}{652}{section*.75}
 \contentsline {subsubsection}{-For the new process of selling products to be quicker, to minimize the time for people queuing.}{656}{section*.76}
 \contentsline {subsubsection}{-For the current stock to automatically update when the products are bought}{659}{section*.77}
-\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{660}{section*.78}
-\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{661}{section*.79}
-\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{662}{section*.80}
-\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{663}{section*.81}
-\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{664}{section*.82}
-\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{665}{section*.83}
-\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{666}{section*.84}
-\contentsline {section}{\numberline {6.3}Learnability}{666}{section.6.3}
-\contentsline {section}{\numberline {6.4}Usability}{669}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}Target Acquisition Time}{669}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}Latency}{671}{subsection.6.4.2}
-\contentsline {subsection}{\numberline {6.4.3}Readability}{672}{subsection.6.4.3}
-\contentsline {subsection}{\numberline {6.4.4}Use of metaphors}{672}{subsection.6.4.4}
-\contentsline {subsection}{\numberline {6.4.5}Navigability}{672}{subsection.6.4.5}
-\contentsline {section}{\numberline {6.5}Maintainability}{675}{section.6.5}
-\contentsline {subsection}{\numberline {6.5.1}Changing Parameters}{675}{subsection.6.5.1}
-\contentsline {subsection}{\numberline {6.5.2}Responding to new Requirements.}{675}{subsection.6.5.2}
-\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{676}{section.6.6}
-\contentsline {section}{\numberline {6.7}End User Evidence}{677}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{678}{subsection.6.7.1}
-\contentsline {subsubsection}{Questionnaire 1 (Client)}{678}{section*.85}
-\contentsline {subsubsection}{Questionaire 2}{685}{section*.86}
-\contentsline {subsubsection}{Questionaire 3}{690}{section*.87}
-\contentsline {subsubsection}{Questionaire 4}{695}{section*.88}
-\contentsline {subsubsection}{Questionaire 5}{700}{section*.89}
-\contentsline {subsubsection}{Questionaire 6}{705}{section*.90}
-\contentsline {subsubsection}{Questionaire 7}{710}{section*.91}
-\contentsline {subsection}{\numberline {6.7.2}Graphs}{715}{subsection.6.7.2}
-\contentsline {subsection}{\numberline {6.7.3}Written Statements}{716}{subsection.6.7.3}
-\contentsline {subsection}{\numberline {6.7.4}Questionnaire 1}{716}{subsection.6.7.4}
-\contentsline {subsection}{\numberline {6.7.5}Questionnaire 2}{716}{subsection.6.7.5}
-\contentsline {subsection}{\numberline {6.7.6}Questionnaire 3}{716}{subsection.6.7.6}
-\contentsline {subsection}{\numberline {6.7.7}Questionnaire 4}{716}{subsection.6.7.7}
-\contentsline {subsection}{\numberline {6.7.8}Questionnaire 5}{716}{subsection.6.7.8}
-\contentsline {subsection}{\numberline {6.7.9}Questionnaire 6}{717}{subsection.6.7.9}
+\contentsline {subsubsection}{-For a reminder message to pop up when stock needs to be moved from storage to the front of the vets. }{663}{section*.78}
+\contentsline {subsubsection}{-For each and every product to be categorised for easy identification is the Product Name and ID is unknown.}{665}{section*.79}
+\contentsline {subsubsection}{-To calculate how much stock will be required for next month.}{666}{section*.80}
+\contentsline {subsubsection}{-For the MemberID to be entered and the identity of the client is confirmed to make sure they are a member.}{668}{section*.81}
+\contentsline {subsubsection}{-For Keyboard Shortcuts to be available for the system to be accessed faster.}{669}{section*.82}
+\contentsline {subsubsection}{-To Format a well structured receipt that is easy for the customer to read and to understand}{671}{section*.83}
+\contentsline {subsubsection}{-Allowing the Order of the products in the database to be changed.(i.e. Max - Min Price, A-Z ect \dots )}{673}{section*.84}
+\contentsline {section}{\numberline {6.3}Learnability}{673}{section.6.3}
+\contentsline {section}{\numberline {6.4}Usability}{677}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Target Acquisition Time}{677}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Latency}{679}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Readability}{680}{subsection.6.4.3}
+\contentsline {subsection}{\numberline {6.4.4}Use of metaphors}{680}{subsection.6.4.4}
+\contentsline {subsection}{\numberline {6.4.5}Navigability}{680}{subsection.6.4.5}
+\contentsline {section}{\numberline {6.5}Maintainability}{683}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Changing Parameters}{683}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Responding to new Requirements.}{683}{subsection.6.5.2}
+\contentsline {section}{\numberline {6.6}Suggestions for Improvement}{685}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Colour Scheme}{685}{subsection.6.6.1}
+\contentsline {subsection}{\numberline {6.6.2}Add more Keyboard Shortcuts}{685}{subsection.6.6.2}
+\contentsline {subsection}{\numberline {6.6.3}Keyboard Shortcut Key}{685}{subsection.6.6.3}
+\contentsline {subsection}{\numberline {6.6.4}Display the sales of a specific week or day}{685}{subsection.6.6.4}
+\contentsline {subsection}{\numberline {6.6.5}Tracking invoices}{686}{subsection.6.6.5}
+\contentsline {subsection}{\numberline {6.6.6}Sales Prediction}{686}{subsection.6.6.6}
+\contentsline {subsection}{\numberline {6.6.7}Overlapping dates on the sales graph}{686}{subsection.6.6.7}
+\contentsline {subsection}{\numberline {6.6.8}Invoice Structure}{686}{subsection.6.6.8}
+\contentsline {subsection}{\numberline {6.6.9}Integration with a bar code scanner}{686}{subsection.6.6.9}
+\contentsline {subsection}{\numberline {6.6.10}Adding Prescriptions to the system}{687}{subsection.6.6.10}
+\contentsline {section}{\numberline {6.7}End User Evidence}{688}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Questionnaires}{689}{subsection.6.7.1}
+\contentsline {subsubsection}{Questionnaire 1 (Client)}{689}{section*.85}
+\contentsline {subsubsection}{Questionaire 2}{696}{section*.86}
+\contentsline {subsubsection}{Questionaire 3}{701}{section*.87}
+\contentsline {subsubsection}{Questionaire 4}{706}{section*.88}
+\contentsline {subsubsection}{Questionaire 5}{711}{section*.89}
+\contentsline {subsubsection}{Questionaire 6}{716}{section*.90}
+\contentsline {subsubsection}{Questionaire 7}{721}{section*.91}
+\contentsline {subsection}{\numberline {6.7.2}Graphs}{726}{subsection.6.7.2}
+\contentsline {subsection}{\numberline {6.7.3}Written Statements}{730}{subsection.6.7.3}
+\contentsline {subsubsection}{Questionnaire 1}{730}{section*.92}
+\contentsline {subsubsection}{Questionnaire 2}{731}{section*.93}
+\contentsline {subsubsection}{Questionnaire 3}{731}{section*.94}
+\contentsline {subsubsection}{Questionnaire 4}{731}{section*.95}
+\contentsline {subsubsection}{Questionnaire 5}{732}{section*.96}
+\contentsline {subsubsection}{Questionnaire 6}{732}{section*.97}
+\contentsline {subsubsection}{Questionnaire 7}{732}{section*.98}
 \contentsfinish 
