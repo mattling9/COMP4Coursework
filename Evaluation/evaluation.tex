@@ -749,16 +749,47 @@ I decided to remove this functionality from the system as I caused system instab
 \pagebreak
 \subsubsection{-For the Stock control system to be integrated with the process of selling items. This is so that the stock is automatically updated when a product is sold.}
 \label{stock-change-effectiveness}
+
 \textbf{Effectiveness Criteria:}\newline
 \begin{itemize}
 	\item{The system should change the stock of each product once an order has been created.}
+	\item{The correct amount of stock should be subtracted when products are bouight. I.e if 8 are bought, the stock should reduce by 8 not 9}
+	\item {the user should be reminded when they need to restock a product or products}
+	\item{The stock of a product should not be able to fall below 0}
 \end{itemize}
 
 \textbf{Judgement and Evidence:} \newline
 
 \textbf{\large{My solution has been effective}}
 
-Evidence to show that this objective has been fulfilled can be found in figure \ref{fig:evaluation-9-1}, figure \ref{fig:evaluation-9-2} and figure \ref{fig:evaluation-9-3}. Referring to Question 5 of my Questionnaire feedback, 100\% of the users who created orders, found this feature helpful. Therefore, i can conclude that this objective has been met fully.
+Evidence to show that the criteria of "The system should change the stock of each product once an order has been created." has been met, can be found in figure \ref{fig:evaluation-9-1} page \pageref{fig:evaluation-9-1}, figure \ref{fig:evaluation-9-2} page \pageref{fig:evaluation-9-2} and figure \ref{fig:evaluation-9-3} page \pageref{fig:evaluation-9-3}. 
+
+The criteria of "The correct amount of stock should be subtracted when products are bought" has been met in figure \ref{fig:evaluation-9-1} page \pageref{fig:evaluation-9-1}, figure \ref{fig:evaluation-9-2} page \pageref{fig:evaluation-9-2} and figure \ref{fig:evaluation-9-3} page \pageref{fig:evaluation-9-3}.  I ensured this criteria was fulfilled during the implementation when creating the algorithm that changes the stock of the product according the the amount purchased during a transaction. The final algorithm used to change the stock of each product after a transaction has been made, can be found on line 571-577 in the code listing for my Creating Order Interface, found on page \pageref{order}.
+
+Evidence that the user is reminded that a specific product needs to be restocked, has been provided below:
+
+\begin{figure}[H]
+\caption{Showing the stock in the shop and the total stock of a product in the system}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-1.pdf}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Logging into the system}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-2.pdf}
+\end{figure}
+
+\begin{figure}[H]
+\caption{The Windows that were displayed upon log in}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-3.pdf}
+\end{figure}
+
+From the evidence above, i can conclude that the system meets the criteria of "the user should be reminded when they need to restock a product or products".
+
+
+
+
+
+
 
 
 
