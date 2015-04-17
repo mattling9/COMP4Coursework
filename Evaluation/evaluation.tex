@@ -755,7 +755,6 @@ I decided to remove this functionality from the system as I caused system instab
 	\item{The system should change the stock of each product once an order has been created.}
 	\item{The correct amount of stock should be subtracted when products are bouight. I.e if 8 are bought, the stock should reduce by 8 not 9}
 	\item {the user should be reminded when they need to restock a product or products}
-	\item{The stock of a product should not be able to fall below 0}
 \end{itemize}
 
 \textbf{Judgement and Evidence:} \newline
@@ -783,7 +782,7 @@ Evidence that the user is reminded that a specific product needs to be restocked
 \hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-3.pdf}
 \end{figure}
 
-From the evidence above, i can conclude that the system meets the criteria of "the user should be reminded when they need to restock a product or products".
+From the evidence above, i can conclude that the system meets the criteria of "the user should be reminded when they need to restock a product or products". I have cpncluded that all of the criteria for this objective has been met, therefore, i can conclude that my solution has been effective.
 
 
 
@@ -807,14 +806,48 @@ From the evidence above, i can conclude that the system meets the criteria of "t
 
 \textbf{Judgement and Evidence:} \newline
 
-\textbf{\large{My solution is effective}}
+\textbf{\large{My solution is partially effective}}
 
-Referring to Question 6 from my Questionnaire, the users did not say they had any problems when creating an order. This suggests that there are no major problems with the creating order interface. The system calculates the price of the order automatically, this is shown in figure \ref{fig:effectiveness-1}. Products being easily found within the system has already been evaluated on page \pageref{fig:search-evidence} and has proven that this objective has been fulfilled. Referring to Question 11 of the questionnaire, the users of the system said that the invoice was well structured. One common comment from the feedback was that the text size of the invoice could be larger and that I could also a different font, such that, the text is easier to read. Therefore, i would say that i have partially met this objective, where improvements to the structure of the invoice could be made to fully meet the objective.
+Referring to Question 6 from my Questionnaire, the users did not say they had any problems when creating an order. This suggests that there are no major problems with the creating order interface. The system calculates the price of the order automatically, this is shown in figure \ref{fig:effectiveness-1} below:
 
 \begin{figure}[H]
-\caption{Evidence that the system automatically calculates the price of the order.} \label{fig:effectiveness-1}
+\caption{Evidence that searching for data within the system can be done easily.} \label{fig:effectiveness-1}
 \hfill\includegraphics[width = \textwidth]{./Evaluationimages/effectiveness-1.pdf}
 \end{figure}
+
+Products being easily found within the system has already been evaluated on page \pageref{fig:search-evidence} and has proven that the criteria of "for the products to be found easily in the system" has been met. This statement can be backed up with the eveidence provided by the user feedback. The feedback has been displayed in a bar graph displayed below:
+
+\begin{figure}[H]
+\caption{Evidence that searching for data within the system can be done easily.} \label{graph3}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/graph3.pdf}
+\end{figure}
+
+This graph shows that all 7 of the users found the process of finding data within the system either easy or very easy. This strongly enforces that the criteria of "for the products to be found easily in the system" has been met.
+
+Referring to Question 11 of the questionnaire, the users of the system said that the invoice was well structured. This statement can be backed up using the evidence of my user feedback. Question 11 of my questionnaire asked the users of the system to comment on the structure of the invoice. The bar graph below shows the 7 responses from the users.
+
+ \begin{figure}[H]
+\caption{A Graph to show the users opinion on the structure of my invoice} \label{graph5}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/graph5.pdf}
+\end{figure}
+
+One common comment from the feedback was that the text size of the invoice could be larger and that I could also use a different font, such that, the text is easier to read. In the questionnaire given to my client, i asked to what extent do they feel that the invoice is well structured. Their response can be found on Question 11 on page \pageref{Client-Q1}, however, a word processed version of the response has been provided below:
+
+\begin{figure}[H]
+\caption{Word Processed version of my clients response to question 11 in the questionnaire}
+\vspace{3mm}
+\textit{\large{"I Partially agree as i can clearly understand the information on the invoice, however, i do not like the colour scheme and the font should be changed so thatit is easier to read."}}
+\vspace{3mm}
+\end{figure}
+
+This written evidence provided by my client shows that the criteria of "The system must produce a well structured invoice for each order" has only partially been met. Therefore, i can conclude that my solution to this objective has been partially effective, with improvements that need to be made to the structure of the invoice, in order to produce a fully effective solution.
+
+
+
+
+
+
+
 
 
 
@@ -825,13 +858,42 @@ Referring to Question 6 from my Questionnaire, the users did not say they had an
 
 \textbf{Effectiveness Criteria:}\newline
 \begin{itemize}
-	\item{When a certain quantity of a product is bought, this deducted from the stock of the product when the order is created.}
+	\item{The system should change the stock of each product once an order has been created.}
+	\item{The correct amount of stock should be subtracted when products are bouight. I.e if 8 are bought, the stock should reduce by 8 not 9}
+	\item {the user should be reminded when they need to restock a product or products}
 \end{itemize}
+
 \textbf{Judgement and Evidence:} \newline
 
-\textbf{\large{My solution is effective}}
+\textbf{\large{My solution has been effective}}
 
-This objective has already been evaluated for its effectiveness on page \pageref{stock-change-effectiveness}. It was concluded that this objective had been fulfilled fully.
+Evidence to show that the criteria of "The system should change the stock of each product once an order has been created." has been met, can be found in figure \ref{fig:evaluation-9-1} page \pageref{fig:evaluation-9-1}, figure \ref{fig:evaluation-9-2} page \pageref{fig:evaluation-9-2} and figure \ref{fig:evaluation-9-3} page \pageref{fig:evaluation-9-3}. 
+
+The criteria of "The correct amount of stock should be subtracted when products are bought" has been met in figure \ref{fig:evaluation-9-1} page \pageref{fig:evaluation-9-1}, figure \ref{fig:evaluation-9-2} page \pageref{fig:evaluation-9-2} and figure \ref{fig:evaluation-9-3} page \pageref{fig:evaluation-9-3}.  I ensured this criteria was fulfilled during the implementation when creating the algorithm that changes the stock of the product according the the amount purchased during a transaction. The final algorithm used to change the stock of each product after a transaction has been made, can be found on line 571-577 in the code listing for my Creating Order Interface, found on page \pageref{order}.
+
+Evidence that the user is reminded that a specific product needs to be restocked, has been provided below:
+
+\begin{figure}[H]
+\caption{Showing the stock in the shop and the total stock of a product in the system}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-1.pdf}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Logging into the system}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-2.pdf}
+\end{figure}
+
+\begin{figure}[H]
+\caption{The Windows that were displayed upon log in}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/restock-3.pdf}
+\end{figure}
+
+From the evidence above, i can conclude that the system meets the criteria of "the user should be reminded when they need to restock a product or products". I have cpncluded that all of the criteria for this objective has been met, therefore, i can conclude that my solution has been effective.
+
+
+
+
+
 
 
 
@@ -846,7 +908,23 @@ This objective has already been evaluated for its effectiveness on page \pageref
 
 \textbf{Judgement and Evidence:} \newline
 
-\textbf{\large{My solution is partially effective}}
+\textbf{\large{My solution is effective}}
+
+Referring the the user feedback from question 7, i can conclude that the criteria of "The message should display if the stock of a product falls below a certain amount" and "A message should display if stock needs to be moved between locations." has been met.
+
+Evidence that the criteria has been met, can be used from the user feedback on Question 7 of my questionnaire. Question 7 asks whether or not the appropriate message was displayed, giving the users the option to say whether the appropriate message was displayed, or whether they used this functionality at all. The graph below shows the response from the 7 users in Question 7 of my questionnaire.
+
+\begin{figure}[H]
+\caption{Resposne from the 7 users to Question}
+\hfill\includegraphics[width = \textwidth]{./Evaluationimages/graph7.pdf}
+\end{figure}
+
+
+
+
+
+
+
 
 Referring to question 7 of the questionnaire the users of my client said that this feature functioned properly. I solution has been partially effective and has a large margin for improvement. This was not highlighted from user feedback in the Questionnaire, as i did not ask the user any improvements that could be made to this area of the system. I feel that an issue with my solution is that the user only gets told once they log into the system and cannot check once they have dismissed the pop up window. The only way to check would be to log out and back into the system again. An improvement could be to create a new interface in the system that displays a table of all the products that need to be restocked. Another improvement i feel could be made to my solution is to be able to change the stock required to display the message. For example, currently the system will tell the user that a product needs to be restocked if its total stock falls below 5. Some products may be sold very often in large quantities and the user may want to be warned when the stock falls below 40/50 for example.
 
